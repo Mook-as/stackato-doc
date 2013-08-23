@@ -29,7 +29,7 @@ User Guide
 .. toctree::
   :maxdepth: 2
   
-  stackato-user-guide/index
+  user-guide/index
 
 
 Admin Guide
@@ -38,6 +38,6 @@ Admin Guide
 .. toctree::
   :maxdepth: 2
   
-  stackato-admin-guide/index
+  admin-guide/index
 
 
