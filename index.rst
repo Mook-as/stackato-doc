@@ -23,14 +23,6 @@ audiences:
 * Stackato Admins: System operators in charge of setting up,
   configuring, and maintaining the PaaS
 
-User Guide
-----------
-
-.. toctree::
-  :maxdepth: 2
-  
-  user-guide/index
-
 
 Admin Guide
 -----------
@@ -38,6 +30,13 @@ Admin Guide
 .. toctree::
   :maxdepth: 2
   
-  admin-guide/index
+  admin/index
 
 
+User Guide
+----------
+
+.. toctree::
+  :maxdepth: 2
+  
+  user/index
