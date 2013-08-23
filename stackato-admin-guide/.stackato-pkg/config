@@ -1,0 +1,15 @@
+# Package configuration for stackato-doc
+
+# Values here will override environment variables and will be overridden
+# by command options.  This is a shell file so you can use it to perform
+# arbitrary actions.  The main intent is to set up various PKG_*
+# variables used to configure and generate the package.
+
+PKG_NAME="stackato-admin-guide"
+PKG_VERSION="auto"
+PKG_ARCH="all"
+PKG_DESCR_SHORT="stackato-admin-guide"
+PKG_DESCR_LONG="Documentation for Stackato Administrators"
+PKG_GITDESCRIBE="GITDESCRIBE-PKG"
+PKG_DEPENDS=""
+PKG_BUILD_DEPENDS="python, python-sphinx, ruby1.9.3"

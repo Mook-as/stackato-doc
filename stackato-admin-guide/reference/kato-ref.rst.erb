@@ -1,0 +1,88 @@
+%
+%# To render kato-ref.rst run
+%# RUBYLIB=kato/lib ruby -e 'require "kato/docs/sphinx"; render_kato_ref'
+%
+.. index:: Kato Commands
+
+.. _kato-command-ref:
+
+Kato Command Reference
+======================
+
+Stackato administration utility
+
+Usage
+-----
+
+**kato** *command* [**-h**] [**--help**] [*arguments*] [*command-options*] 
+
+.. _kato-command-ref-list:
+
+Commands
+--------
+
+%# List top-level commands with links to docs
+% cmds.each do |cmd|
+%   if cmd[:level] == 1
+%     # calculate ref_cmd, which is the first leaf-node child, which we will link to
+%     ref_cmd = cmd
+%     ref_cmd = cmd[:children][0] while ref_cmd[:has_children]
+* :ref:`<%= cmd[:name] %> <kato-command-ref-<%= ref_cmd[:argv].join("-") %>>` <%= cmd[:one_liner] %>
+%   end
+% end
+%
+%
+%# Command usage details
+% cmds.each do |cmd|
+%   next if cmd[:has_children]
+
+----
+
+%# (commands links will come here)
+.. _kato-command-ref-<%= cmd[:argv].join("-") %>:
+
+%# Display usage of top level commands
+%   if cmd[:token_lines]
+%     cmd[:token_lines].each do |token_line|
+<%=
+        token_line.map do |arg|
+          if arg.is_a? Array
+            "(" + arg.map{ |a| a.syntax_highlight }.join(" | ") + ")"
+          else
+            arg.syntax_highlight
+          end
+        end.join(" ")
+%>
+
+%     end
+%   end
+%
+%   if cmd[:description]
+%     cmd[:description].each do |line| # TODO: format wrap80 with indent %>
+  <%=   line %>
+%     end
+
+%   end
+%
+%   [:commands, :arguments, :options].each do |arg_type|
+%     if cmd[arg_type]
+%       cmd[arg_type].each do |arg|
+  <%=   "%-40s%s" % [ arg[:arg].map { |a| a.syntax_highlight }.join(" "), arg[:description][0] ] %>
+
+%         arg[:description][1..-1].each do |line|
+  <%=     "%-40s%s" % [ "", line ] %>
+
+%         end
+%       end
+
+%     end
+%   end
+%
+%   if cmd[:keywords]
+%     cmd[:keywords].each_pair do |keyword, description|
+    <%= keyword %> - <%= description %><% # TODO: format wrap80 with indent %>
+%     end
+%   end
+%
+% end
+

@@ -1,0 +1,7 @@
+name: docs
+framework:
+    type: node
+mem: 32M
+instances: 1
+ignores:
+  - README.txt
