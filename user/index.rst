@@ -39,6 +39,7 @@ Deploying Applications
   deploy/index
   deploy/stackatoyml
   deploy/manifestyml
+  deploy/groups
 
 * :ref:`Languages & Frameworks <language-specific-deploy>`
 
@@ -93,20 +94,10 @@ Reference
    :maxdepth: 1
 
    reference/environment
-   reference/groups
    reference/glossary
    reference/troubleshoot
    reference/api
 
-
-Release & Support
------------------
-
-.. toctree::
-   :maxdepth: 1
-   
-   reference/release-notes
-  
 * `FAQ <http://community.activestate.com/faq-list?tid=453>`__
 * :ref:`genindex`
 * :ref:`search`

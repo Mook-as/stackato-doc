@@ -1,4 +1,4 @@
-.. _troubleshooting:
+.. _user-troubleshooting:
 
 .. index:: Troubleshooting
 

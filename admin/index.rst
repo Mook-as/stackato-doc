@@ -98,18 +98,3 @@ Reference
    reference/add-service
 
 
-Release & Support
------------------
-
-.. toctree::
-   :maxdepth: 1
-   
-   reference/release-notes
-   reference/known-issues
-  
-* `FAQ <http://community.activestate.com/faq-list?tid=453>`__
-* :ref:`genindex`
-* :ref:`search`
-
-
-

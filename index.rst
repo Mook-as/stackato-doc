@@ -40,3 +40,18 @@ User Guide
   :maxdepth: 2
   
   user/index
+
+
+Release & Support
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+   
+   admin/reference/release-notes
+   admin/reference/known-issues
+  
+* `FAQ <http://community.activestate.com/faq-list?tid=453>`__
+* :ref:`genindex`
+* :ref:`search`
+

@@ -1,45 +1,10 @@
-.. _troubleshooting:
+.. _admin-troubleshooting:
 
 .. index:: Troubleshooting
 
 Troubleshooting
 ===============
 
-SSH to Failed Containers
-------------------------
-
-For troubleshooting and diagnostic purposes, it is possible to use
-``stackato ssh`` to access a :term:`container` that has recently failed
-or did not start correctly.  Containers are kept for one hour before
-being reclaimed.  See the :ref:`Command Reference <command-ref-client>`
-for details on the ``stackato ssh`` command.
-
-Checking the Logs
------------------
-
-Most Stackato users will not have administrative access to the
-server. If you need to troubleshoot an application deployment or runtime
-failure, you can use the stackato client to view the stderr and stdout
-log files. For example, if an application called ``myapp`` did not
-deploy correctly, run the command::
-
-	$ stackato logs myapp --all
-
-This will generally show all errors encountered during deployment.
-
-If you need to view another log file (e.g. one specific to your application), use the files 
-command to explore the remote filesystem and return the contents of the files::
-
-	$ stackato files myapp logs
-	stderr.log                                 44B
-	stdout.log                                101B
-	myapp-err.log                             189B                        
-	
-	$ stackato files myapp logs/myapp-err.log
-
-If that command should fail, try using the run command in combination with ls or cat::
-
-	$ stackato run myapp cat ../logs/myapp-err.log
 
 Server Log Files
 ----------------
