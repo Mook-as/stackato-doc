@@ -91,7 +91,7 @@ to your ~/.profile.
 License & Copyright
 -------------------
 
-Stackato User Guide by ActiveState Software is licensed under a [Creative
+Stackato Documentation by ActiveState Software is licensed under a [Creative
 Commons Attribution 3.0 Unported License][1].
 
 [1]: http://creativecommons.org/licenses/by/3.0/
