@@ -110,7 +110,7 @@ settings. The options exposed are the same as those on the User Details
 page (above). 
 
 
-For more information on Group limits, see the :ref:`Groups, Users, and Limits <groups>` documentation.
+For more information on Group limits, see the :ref:`Groups, Users, & Limits <admin-groups>` documentation.
 
 .. _console-applications:
 

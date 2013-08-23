@@ -1,11 +1,11 @@
-.. _groups:
+.. _using-groups:
 
 .. index:: Groups
 .. index:: Limits
 .. index:: Users
 
-Groups, Users, and Limits
-=========================
+Groups & Users
+==============
 
 Users can be assigned to specific groups by Stackato admins. These
 groups have quotas just like regular user accounts, and users can choose

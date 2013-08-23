@@ -46,7 +46,7 @@ Groups** then the **Add Group** button. Specify a name (e.g.
 "stackato-micro") and a short description for the new group, then
 click **Create**.
 
-.. image:: /images/stackato-hpcs-security-group.png
+.. image:: ../images/stackato-hpcs-security-group.png
    :alt: HP Cloud Security Group - Stackato
    :class: shadow
    :width: 100 %
@@ -121,7 +121,7 @@ Under **Install Image** select the most recent *ActiveState Stackato* image avai
 
 Leave the **Key Pair** as *hpdefault* (it won't be needed for the basic setup), and **Instances** as 1.
 
-.. image:: /images/stackato-hpcs-create-server.png
+.. image:: ../images/stackato-hpcs-create-server.png
    :alt: HP Cloud Dashboard 
    :class: shadow
    :width: 100 %

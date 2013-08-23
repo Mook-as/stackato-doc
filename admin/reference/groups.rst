@@ -1,11 +1,11 @@
-.. _groups:
+.. _admin-groups:
 
 .. index:: Groups
 .. index:: Limits
 .. index:: Users
 
-Groups, Users, and Limits
-=========================
+Managing Groups, Users & Limits
+===============================
 
 Stackato users can be assigned to specific groups, and each group can have a set of limits
 assigned to it regarding apps, services, and memory usage.
@@ -186,47 +186,4 @@ import/export before actually running it.
 Working with Groups
 -------------------
 
-While working with groups, you can set a particular one to be the "current group"::
-
-	$ stackato group developers
-	Successfully set current group to [developers]
-	
-Subsequent commands will use the current group if you do not specify one in a command::
-
-	$ stackato limits
-	
-	Group: developers
-	+----------+-------+
-	| Limit    | Value |
-	+----------+-------+
-	| mem      | 2048  |
-	| services | 10    |
-	| apps     | 15    |
-	| appuris  | 4     |
-	| sudo     | true  |
-	+----------+-------+
-
-To switch groups, just run  ``stackato group`` with another group name.  To remove the set group,
-run ``stackato group --reset``.
-
-
-.. _groups-STACKATO_GROUP:
-
-STACKATO_GROUP
-^^^^^^^^^^^^^^
-
-The STACKATO_GROUP environment variable can be set in the local shell to
-set the active group for the ``stackato`` client. For example::
-
-  $ export STACKATO_GROUP='web-dev'
-
-Subsequent ``stackato`` commands will operate under the 'web-dev' group.
-To override this, use the ``--group`` option::
-
-  $ stackato apps --group example-dev
-  
-With this variable set, the ``stackato group`` command is ignored until
-the STACKATO_GROUP is explicitly unset::
-
-  $ unset STACKATO_GROUP
-  
+See :ref:`Groups & Users <using-groups>` in the User Guide.

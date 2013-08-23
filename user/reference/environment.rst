@@ -146,7 +146,7 @@ visible during runtime (including hook processing, cron jobs and ssh commands):
     ``STACKATO_FILESYSTEM_PLUGINS``.
   
   STACKATO_GROUP
-    Can be set in the local shell to specify the :ref:`group <groups>`
+    Can be set in the local shell to specify the :ref:`group <using-groups>`
     for the ``stackato`` client. When set, the ``stackato group``
     command is ignored until the variable is explicitly unset. If empty,
     the client sets the group to 'none'. Can be overridden with the

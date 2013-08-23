@@ -1,5 +1,5 @@
 Stackato Documentation
-====================
+======================
 
 .. only:: not public
 

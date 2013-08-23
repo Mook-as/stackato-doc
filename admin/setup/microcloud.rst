@@ -36,7 +36,7 @@ on the local subnet via :term:`multicast DNS`.
 
 You will use this hostname to connect to open the :ref:`Management
 Console <management-console>` in a browser or connect with the
-:ref:`Stackato Client <access-micro-cloud-client>`.
+:ref:`Stackato CLI client <client>`.
 
 .. note::
 

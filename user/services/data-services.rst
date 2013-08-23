@@ -296,7 +296,7 @@ Applications running in Stackato can use external databases by
 hard-coding the host and credentials, or by specifying the them in a
 custom environment variable.
 
-.. _bestpractices-migration-db-connections:
+.. _migrating-db-connections:
 
 Hard-coded Database Connections
 -------------------------------

@@ -110,7 +110,7 @@ of roles in a :ref:`cluster <cluster-setup>`:
   ``api.stackato-xxxx.local`` in a micro cloud will be given its own
   hostname and IP address in a cluster so that you can reach it from
   both the :ref:`Management Console <management-console>` and
-  the :ref:`command line <server-config-access-command>`.
+  the command line.
 
 * At the same time, the other nodes in the cluster will also need to
   reach the core node, so whatever address is configured on its network
@@ -729,8 +729,8 @@ Users and Groups
 
 Both individual users and groups can have the use of the ``sudo``
 command limited (the default is to disallow its use). See the
-:ref:`Groups, Users, and Limits <groups>` documents for details on
-managing these limits.
+:ref:`Managing Groups, Users, & Limits <admin-groups>` documents for
+details on managing these limits.
 
 
 Allowed Repositories

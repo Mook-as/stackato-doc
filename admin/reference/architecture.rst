@@ -5,7 +5,7 @@
 Architectural Design
 ====================
 
-.. image:: /images/stackato-architecture-diagram.png
+.. image:: ../images/stackato-architecture-diagram.png
 	:align: center
 	
 The Stackato VM is a stand-alone :term:`micro cloud` virtual machine with all the components necessary 

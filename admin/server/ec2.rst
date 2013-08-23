@@ -194,7 +194,7 @@ we can see that the root filesystem is already almost half full::
 
 	$ df -h
 
-.. image:: /images/persistent-ec2-01.png
+.. image:: ../images/persistent-ec2-01.png
 
 You can create a more robust instance by moving the Stackato service
 data and droplets onto an Amazon EBS (Elastic Block Store) volume.
@@ -205,26 +205,26 @@ Create the EBS Volume
 
 In the EC2 console, click on the **Volumes** entry under the *Elastic Block Store* section.
 
-.. image:: /images/persistent-ec2-02.png
+.. image:: ../images/persistent-ec2-02.png
    :alt: Elastic Block Store - Volumes tab
    :width: 100 %
 
 Click the **Create Volume** button and enter the size you wish your EBS volume to have.
 Make sure you set the *Availability Zone* to match the zone your instance is running in.
 
-.. image:: /images/persistent-ec2-03.png
+.. image:: ../images/persistent-ec2-03.png
    :alt: Elastic Block Store - Create Volume popup
    :width: 100 %
 
 Your volume is now ready to attach and will be marked as "Available".
 
-.. image:: /images/persistent-ec2-04.png
+.. image:: ../images/persistent-ec2-04.png
    :alt: Elastic Block Store - showing new volume
    :width: 100 %
 
 Under the *More* menu at the top of the screen, choose **Attach Volume**.
 
-.. image:: /images/persistent-ec2-05.png
+.. image:: ../images/persistent-ec2-05.png
    :alt: Elastic Block Store - More menu - Attach Volume item
    :width: 100 %
 
@@ -232,7 +232,7 @@ Select your instance from the drop-down list.
 Ensure the device name specified isn't already in use by your instance.
 Use ``mount`` or ``df`` to see which devices are already in use on your system.
 
-.. image:: /images/persistent-ec2-06.png
+.. image:: ../images/persistent-ec2-06.png
    :alt: Elastic Block Store - Attach Volumes popup
    :width: 100 %
 
@@ -244,7 +244,7 @@ Note that there is no need to partition the device before building a filesystem 
 
 	$ sudo fdisk -l
 
-.. image:: /images/persistent-ec2-07.png
+.. image:: ../images/persistent-ec2-07.png
 
 Create a Filesystem on the Volume
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -255,7 +255,7 @@ In this case, we specify ``ext3``::
 
 	$ sudo mkfs -t ext3 /dev/sdf
 
-.. image:: /images/persistent-ec2-08.png
+.. image:: ../images/persistent-ec2-08.png
 
 Mount the Filesystem
 ^^^^^^^^^^^^^^^^^^^^

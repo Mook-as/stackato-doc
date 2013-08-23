@@ -71,7 +71,7 @@ Cluster Configuration
   cluster/cloud-init
   cluster/external-db
   cluster/harbor
-  
+  cluster/dotnet
 
 Best Practices
 --------------

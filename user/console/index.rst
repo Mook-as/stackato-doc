@@ -16,7 +16,7 @@ does for regular end users. The features described below are available
 to end users. See the Stackato Admin Guide for information on the
 Management Console view for Admins.
 
-.. _console-overview:
+.. _user-console-overview:
 
 Overview
 --------
@@ -36,7 +36,7 @@ Shows general information about your system usage.
 * **Group Memberships**: Shows your group memberships. Only admins can grant
   an account membership in a group.
 
-.. _console-applications:
+.. _user-console-applications:
 
 * **Applications**: A list of applications you have deployed, showing:
 
@@ -56,7 +56,7 @@ Shows general information about your system usage.
 * **Provisioned Services**: A list of services (e.g. databases,
   filesystems) you have provisioned for applications.
 
-.. _console-groups:
+.. _user-console-groups:
 
 Groups
 ------
@@ -64,14 +64,14 @@ Groups
 Displays a list of the groups you are a member of. Admins control group
 membership.
 
-.. _console-features:
+.. _user-console-features:
 
 Features
 --------
 
 Shows the the frameworks, runtimes, and services available on the system.
 
-.. _console-app-store:
+.. _user-console-app-store:
 
 App Store
 ---------
@@ -92,7 +92,7 @@ Click the **More Information** link to open the software project
 homepage (e.g. a Github project page).
 
 
-.. _console-support:
+.. _user-console-support:
 
 Support
 -------

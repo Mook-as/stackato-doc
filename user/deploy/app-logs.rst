@@ -95,7 +95,7 @@ Use the `--json` option send the log lines in JSON format::
   becomes disconnected, Stackato will retry the connection at increasing
   intervals.
 
-.. _logging-examples:
+.. _app-logging-examples:
 
 Log Drain Examples
 ------------------
@@ -103,11 +103,11 @@ Log Drain Examples
 Detailed instructions on how to use drains with third party log analysis
 software or services:
 
-* :ref:`Papertrail <logging-examples-papertrail>`
-* :ref:`Loggly <logging-examples-loggly>`
-* :ref:`Splunk <logging-examples-splunk>`
+* :ref:`Papertrail <app-logging-examples-papertrail>`
+* :ref:`Loggly <app-logging-examples-loggly>`
+* :ref:`Splunk <app-logging-examples-splunk>`
 
-.. _logging-examples-papertrail:
+.. _app-logging-examples-papertrail:
 
 Papertrail
 ^^^^^^^^^^
@@ -140,7 +140,7 @@ Papertrail
 
     stackato drain add *drain-name* udp://logs.papertrailapp.com:*port#*
 
-.. _logging-examples-loggly:
+.. _app-logging-examples-loggly:
 
 Loggly
 ^^^^^^
@@ -192,7 +192,7 @@ OR
 
 Loggly supports JSON format with minor configuration changes shown above.
 
-.. _logging-examples-splunk:
+.. _app-logging-examples-splunk:
 
 Splunk
 ^^^^^^

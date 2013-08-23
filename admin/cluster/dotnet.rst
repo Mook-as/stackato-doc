@@ -28,7 +28,6 @@ To configure a DEA Agent .NET for use with Stackato instead, follow the directio
 Initial Setup
 -------------
 
-
 To add an Iron Foundry DEA to a existing :ref:`Stackato Cluster <cluster-setup>`, some minor modifications are required after you boot the Micro Iron Foundry VM.
 
 .. note:: The following editing step is required for Micro Iron Foundry version 1.4 and earlier. Subsequent releases should not require this edit to *setup.rb*.
@@ -39,7 +38,7 @@ To add an Iron Foundry DEA to a existing :ref:`Stackato Cluster <cluster-setup>`
 
 You'll find a section near the bottom starting with def stackato. Remove the section a few lines below starting with "print "Running patch..." and ending with "puts 'Done.'" (10 lines)
 
-.. image:: /images/ironfoundry-setup2.png
+.. image:: ../images/ironfoundry-setup2.png
    :alt: Iron Foundry Patching setup.rb
    :class: shadow
 
@@ -52,55 +51,9 @@ You'll be prompted for the hostname of your Stackato VM (without the 'api.' pref
 
 This is equivalent to the ``kato node attach`` command run on Stackato nodes.
 
-.. image:: /images/ironfoundry-setup3.png
+.. image:: ../images/ironfoundry-setup3.png
    :alt: Iron Foundry Attaching Prompt
    :class: shadow
 
 Once the setup script finishes, you will see "ASP.NET 4.0" under "Runtimes & Frameworks" and "MS SQL" under "Available Services" in the Features section of the Stackato Management Console.
 
-.. _aspdotnet-deploy:
-
-Deployment
-----------
-
-Use framework ``aspdotnet`` for application deployments. For example:
-::
-
-    name: blogengine
-    mem: 512M
-    framework:
-        type: aspdotnet
-
-.. _aspdotnet-mssql:
-
-MS SQL Data Service
--------------------
-
-The Iron Foundry VM exposes a MS SQL data service. To use it, request an ``mssql`` service in *stackato.yml*, *manifest.yml*, or when prompted by the client. For example:
-::
-
-    services:
-        blogengine-db: mssql
-        
-A ``connectionString`` attribute for this data service will be added to
-the *Web.config* file during application staging. You can view the
-contents of this file with the command:
-
-.. parsed-literal::
-
-  stackato files *appname* app/Web.config
-
-.. _aspdotnet-sample:
-
-Example
--------
-
-`Orchard CMS <http://orchardproject.net/>`_ is an open source ASP.NET application. To try it out with Stackato, download a copy from the "Download-as-a-zip" link on the project's homepage, then unpack it in a convenient local directory. Change to the Orchard directory, then run::
-
-  stackato push orchard
-
-* Specify "aspdontnet" for the framework
-* Give the instance the default 256M of memory
-* Request an "mssql" data service when prompted to "Create services to bind to 'orchard'".
-
-Orchard's "Get Started" wizard, does not automatically use the ``connectionString`` set in the *Web.config* file. To use the provisioned MS SQL service, retrieve the ``connectionString`` value as described above and paste it into the setup wizard.

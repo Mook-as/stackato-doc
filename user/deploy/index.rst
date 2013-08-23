@@ -117,7 +117,7 @@ the ``--no-start`` option is used. With this option, applications are
 pushed in a pre-staged, stopped state where variables can be added (e.g.
 for use in staging hooks). The application can then be staged and
 started with the :ref:`stackato start <command-operations>` command or
-the Start button in the :ref:`Management Console <console-applications>`.
+the Start button in the :ref:`Management Console <user-console-overview>`.
 
 The client will display staging logs while pushing the application but
 will generally exit before any application logs are visible. To view the
@@ -330,6 +330,7 @@ Lastly, delete the old app::
 	|                  |   |         | customertracker2.stackato-xxxx.local |            |
 	+------------------+---+---------+--------------------------------------+------------+
 
+.. _bestpractices-manage-multiple-targets:
 
 Managing Multiple Targets
 ^^^^^^^^^^^^^^^^^^^^^^^^^

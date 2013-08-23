@@ -126,7 +126,7 @@ Data export is done with the :ref:`kato data export
 * application droplets
 * data services
 
-Start by logging into the VM via :ref:`ssh <server-config-access-ssh>`::
+Start by logging into the VM via ``ssh``::
 
 	$ ssh stackato@stackato-xxxx.local
   
@@ -188,84 +188,6 @@ system. For example::
 
     $ kato data import --cluster stackato-host.example.com
 
-
-.. index:: Server Performance
-
-Server Performance
-------------------
-
-.. _bestpractices-reducing-downtime-updates:
-
-Reducing downtime during app updates
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Updating an app can create downtime while the new code is being staged.  URL mapping can be used
-to reduce this downtime by switching between two running versions of an app.
-
-For example, we have the ``customertracker`` app::
-
-	$ stackato apps
-	
-	+-----------------+---+---------+-------------------------------------+------------+
-	| Application     | # | Health  | URLS                                | Services   |
-	+-----------------+---+---------+-------------------------------------+------------+
-	| customertracker | 1 | RUNNING | customertracker.stackato-xxxx.local | customerdb |
-	+-----------------+---+---------+-------------------------------------+------------+
-
-The first time you do this, map a new URL to the existing app to ensure it continues to run once
-the main URL has been remapped (for future updates you will already have two)::
-
-	$ stackato map customertracker customertracker1.stackato-xxxx.local
-
-Push the updated code with a new application name::
-
-	$ stackato push customertracker2
-	
-	...
-	
-	$ stackato apps
-
-	+------------------+---+---------+--------------------------------------+------------+
-	| Application      | # | Health  | URLS                                 | Services   |
-	+------------------+---+---------+--------------------------------------+------------+
-	| customertracker  | 1 | RUNNING | customertracker.stackato-xxxx.local  | customerdb |
-	|                  |   |         | customertracker1.stackato-xxxx.local |            |
-	| customertracker2 | 1 | RUNNING | customertracker2.stackato-xxxx.local | customerdb |
-	+------------------+---+---------+--------------------------------------+------------+
-
-Note that the configured service(s) should be named the same, which will be automatically connected 
-to the existing service(s).
-
-Next, unmap the URL from the current app::
-
-	$ stackato unmap customertracker customertracker.stackato-xxxx.local
-	
-And immediately map it to the new app::	
-	
-	$ stackato map customertracker2 customertracker.stackato-xxxx.local
-
-	$ stackato apps
-	
-	+------------------+---+---------+--------------------------------------+------------+
-	| Application      | # | Health  | URLS                                 | Services   |
-	+------------------+---+---------+--------------------------------------+------------+
-	| customertracker  | 1 | RUNNING | customertracker1.stackato-xxxx.local | customerdb |
-	| customertracker2 | 1 | RUNNING | customertracker.stackato-xxxx.local  | customerdb |
-	|                  |   |         | customertracker2.stackato-xxxx.local |            |
-	+------------------+---+---------+--------------------------------------+------------+
-
-Lastly, delete the old app::
-
-	$ stackato delete customertracker
-
-	$ stackato apps
-	
-	+------------------+---+---------+--------------------------------------+------------+
-	| Application      | # | Health  | URLS                                 | Services   |
-	+------------------+---+---------+--------------------------------------+------------+
-	| customertracker2 | 1 | RUNNING | customertracker.stackato-xxxx.local  | customerdb |
-	|                  |   |         | customertracker2.stackato-xxxx.local |            |
-	+------------------+---+---------+--------------------------------------+------------+
 
 .. _bestpractices-nagios:
 
