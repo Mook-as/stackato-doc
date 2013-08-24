@@ -273,7 +273,7 @@ example::
 Another setting, ``read_limit``, defines the maximum number of bytes (in
 MB) to read from the end of any given application log file (default
 16MB). This is done to prevent performance problems when extremely large
-log file sources are added to a drain.
+log file drain sources are present when apptail (or the node) is restarted.
 
 When this limit is reached, a warning such as the following will appear
 in both the Cloud Events stream and the application's log stream::
