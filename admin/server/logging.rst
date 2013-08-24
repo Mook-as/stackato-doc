@@ -269,6 +269,21 @@ configuration using :ref:`kato config <kato-command-ref-config>`. For
 example::
 
   $ kato config set cloud_controller max_user_drains 250
+  
+Another setting, ``read_limit``, defines the maximum number of bytes (in
+MB) to read from the end of any given application log file (default
+16MB). This is done to prevent performance problems when extremely large
+log file sources are added to a drain.
+
+When this limit is reached, a warning such as the following will appear
+in both the Cloud Events stream and the application's log stream::
+
+    WARN -- [logspam] Skipping much of a large log file (stderr); size (26122040 bytes) > read_limit (15728640 bytes)
+
+To change the system limit to 100MB (for example)::
+
+  $ kato config set apptail read_limit 100
+
 
 .. _logging-keys:
 

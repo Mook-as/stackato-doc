@@ -29,8 +29,11 @@ Release Notes
     * [98870] Add app crashes/exits (eg: OOM killer) to cloud events
     * [98686] Add harbor service provision events to cloud events
     * [96827] Cloud Events patterns are now configurable (kato config)
+    * [99534] New ``read_limit`` setting for apptail (default 16MB) to
+      cope with extremely large application log files 
     
   * [98649] ``kato process stop fence`` now correctly stops fence process.
+  
   * Ruby:
 
     * Ruby 1.8.7 removed (EOL)
