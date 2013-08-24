@@ -31,6 +31,10 @@ Release Notes
     * [96827] Cloud Events patterns are now configurable (kato config)
     
   * [98649] ``kato process stop fence`` now correctly stops fence process.
+  * Ruby:
+
+    * Ruby 1.8.7 removed (EOL)
+    * Ruby 2.0.0 added
   
 v2.10.6 (June 10, 2013)
 -----------------------

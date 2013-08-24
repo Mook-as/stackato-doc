@@ -13,15 +13,15 @@ Deployment
 	See :ref:`buildpacks` for an alternative way to deploy
 	Ruby on Rails applications.
 
-Using Ruby 1.9.3
-^^^^^^^^^^^^^^^^
+Using Ruby 2.0
+^^^^^^^^^^^^^^
 
 The `stackato.yml` must specify the Ruby runtime version and Rails as the framework type::
 
     framework:
-        runtime: ruby19
+        runtime: ruby20
 
-Default supported ruby version is Ruby 1.8.7.
+Default Ruby version is Ruby 1.9
 
 Known Issues
 ^^^^^^^^^^^^
