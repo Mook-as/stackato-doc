@@ -61,8 +61,8 @@ This role cannot be disabled on any node.
 
 .. _architecture-controller:
 
-Controller
-^^^^^^^^^^
+Cloud Controller
+^^^^^^^^^^^^^^^^
 
 The Controller manages most of the operations of a Stackato
 system. It hosts the Management Console, provides the API endpoint for
@@ -72,7 +72,7 @@ tracks the availability of DEA nodes.
 
 In the case of a cluster setup, it resides on the :ref:`Core node
 <server-cluster-core-node>` that all other VM's in the cluster connect
-to.
+to. 
 
 A single Controller is sufficient for small and mid-sized
 clusters, but :ref:`multiple Controllers <cluster-multi-controllers>`
