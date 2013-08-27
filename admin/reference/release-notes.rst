@@ -34,6 +34,7 @@ Release Notes
     * [99571] Application log drain URLs now properly sanitized (v2.10.6 'logdrain-sanitize' patch)
     
   * [98649] ``kato process stop fence`` now correctly stops fence process.
+  * [99614] New default limit of 50 processes per container. Configurable with ``kato config`` under ``fence max_container_processes``.
   
   * Ruby:
 
