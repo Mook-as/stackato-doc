@@ -2,7 +2,7 @@
 
 .. index:: Router
 
-.. index:: router2g
+.. index:: router
 
 Router
 ======
@@ -44,6 +44,19 @@ The Router is configured using :ref:`kato config
   configured behind an external load balancer. To enable::
   
     $ kato config set router2g prevent_x_spoofing true --json
+
+* **x_frame_options**: Prevent clickjacking on requests with
+  `X-Frame response header <https://developer.mozilla.org/en-US/docs/HTTP/X-Frame-Options>`_
+  configuration. Disabled if empty (default). Valid values are:
+  
+  * DENY
+  * SAMEORIGIN
+  * ALLOW_FROM <uri>
+
+  For example::
+
+    $ kato config set router2g x_frame_options SAMEORIGIN
+
 
 .. index:: WebSockets
 
