@@ -304,8 +304,12 @@ Services
 **clone-services** *src-app* *dst-app*
     Clone service bindings from *src-app* application to *dst-app*
     
-**dbshell** [*appname*]* [*servicename*]
-    Invoke interactive db shell for a bound service.
+**dbshell** [*appname*] [*servicename*]
+    Invoke interactive db shell for a bound service. The service must be
+    bound to an application with a running instance in order to access
+    it. With no arguments specified, the client will look for
+    application and service names in a local *stackato.yml* or
+    *manifest.yml* file.
 
 **tunnel** [*servicename*] [**--port** *port*] [**--allow-http**]
     Create a local tunnel to a service.
