@@ -161,7 +161,7 @@ Cluster Admin
 
 Displays a list of nodes in the current cluster, and what services are running on each node. The view can be filtered by IP Address and/or Role. In a micro cloud configuration, only the current local node ('127.0.0.1') is shown.
 
-To enable or disable services on a node, click the **Configure** button to enter its **Role Configuration** page. This page shows a list of all available roles (see :ref:`kato info <kato-command-ref-info>` for the command line interface), and a toggle button to enable or disable each one (see also :ref:`kato role <kato-command-ref-role-add>`).
+To enable or disable services on a node, click the **Configure Roles** button to enter its **Role Configuration** page. This page shows a list of all available roles (see :ref:`kato info <kato-command-ref-info>` for the command line interface), and a toggle button to enable or disable each one (see also :ref:`kato role <kato-command-ref-role-add>`).
 
 To set up a Stackato cluster, or to add nodes to an existing cluster, see the :ref:`Cluster Setup <cluster-setup>` section.
 

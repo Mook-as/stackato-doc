@@ -102,11 +102,32 @@ Adding Users
 ------------
 
 The easiest way to add additional users is in the :ref:`Users section
-<console-users>` of the :ref:`Management Console <management-console>`, but you can also use the ``stackato`` client:
+<console-users>` of the :ref:`Management Console <management-console>`,
+but you can also use the ``stackato`` client:
 
 .. parsed-literal::
   
     $ stackato add-user *email@example.com* [--passwd *password*]
+
+
+.. _quickstart-enable-services:
+
+Enabling Services
+-----------------
+
+In order to leave as much memory as possible available for user
+applications, the micro cloud starts with a number of services
+disabled by default:
+
+* Memcached
+* Redis
+* Postgres
+* RabbitMQ
+* MongoDB
+
+You can enable them individually by clicking the **Configure Roles**
+button in the :ref:`Cluster Admin <console-cluster-admin>` section of
+the Management Console.
 
 
 Using Stackato

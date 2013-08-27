@@ -35,6 +35,7 @@ Release Notes
     
   * [98649] ``kato process stop fence`` now correctly stops fence process.
   * [99614] New default limit of 50 processes per container. Configurable with ``kato config`` under ``fence max_container_processes``.
+  * [97164] Micro cloud starts with Memcached, Redis, PostrgreSQL, RabbitMQ, and MongoDB roles disabled by default (enable via Managment Console).
   
   * Ruby:
 
