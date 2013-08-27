@@ -30,7 +30,8 @@ Release Notes
     * [98686] Add harbor service provision events to cloud events
     * [96827] Cloud Events patterns are now configurable (kato config)
     * [99534] New ``read_limit`` setting for apptail (default 16MB) to
-      cope with extremely large application log files 
+      cope with extremely large application log files
+    * [99571] Application log drain URLs now properly sanitized (v2.10.6 'logdrain-sanitize' patch)
     
   * [98649] ``kato process stop fence`` now correctly stops fence process.
   
