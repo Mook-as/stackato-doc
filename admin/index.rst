@@ -55,7 +55,7 @@ Server Configuration
    :maxdepth: 2
 
    server/index
-   server/router2g
+   server/router
    server/logging
    server/aok
 
