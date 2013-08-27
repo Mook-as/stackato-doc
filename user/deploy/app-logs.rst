@@ -80,6 +80,14 @@ This creates a UDP drain called "appdrain" for the application "myapp"
 which forwards all log messages and events for that application to
 `Loggly <http://loggly.com/>`_ on port 12345.
 
+The log drain URL can contain only:
+
+* **scheme**: "udp://" or "tcp://"
+* **host**: IP address or hostname
+* **port**: number
+
+Any additional parameters are discarded.
+
 To delete the drain::
 
   $ stackato drain delete appdrain
