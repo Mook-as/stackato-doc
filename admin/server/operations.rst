@@ -39,6 +39,25 @@ To shutdown the VM, run the ``shutdown`` command as root::
 	$ sudo shutdown -h now
 
 
+.. index:: Set Time Zone
+
+.. _server-operations-tz:
+
+Setting the Time Zone
+---------------------
+
+At first boot, the time zone of the Stackato VM is set to UTC. To set
+this to your local time zone, use the ``kato op set_timezone`` command.
+When run without arguments, the command will prompt for time zone
+selction, but the time zone can be set non-interactively with the
+``--timezone`` option. For example::
+
+  $ kato op set_timezone --timezone America/Chicago
+
+You can also use the ``tzselect`` command to find the appropriate time
+zone string for your location.
+
+
 .. index:: Reset
 
 .. index:: kato node reset
