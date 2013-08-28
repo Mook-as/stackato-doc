@@ -57,6 +57,10 @@ The Router is configured using :ref:`kato config
 
     $ kato config set router2g x_frame_options SAMEORIGIN
 
+.. note::
+  Alternatively, end user applications can employ `framekiller
+  <http://en.wikipedia.org/wiki/Framekiller>`_ JavaScript snippets to
+  help prevent frame based clickjacking. 
 
 .. index:: WebSockets
 
