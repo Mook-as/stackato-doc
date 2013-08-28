@@ -42,6 +42,10 @@ Release Notes
 
     * Ruby 1.8.7 removed (EOL)
     * Ruby 2.0.0 added
+    
+  * Perl:
+  
+    * ActivePerl 5.14 removed
   
 v2.10.6 (June 10, 2013)
 -----------------------
