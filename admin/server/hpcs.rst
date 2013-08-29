@@ -14,16 +14,42 @@ If you intend to create a production Stackato cluster, `contact
 ActiveState <http://www.activestate.com/get-quote>`_ about Stackato
 Enterprise.
 
-.. _server-vm-hpcs:
+.. _server-vm-marketplace:
 
-Initial Setup
--------------
+Partners and Solutions Setup Wizard
+-----------------------------------
 
-1. Log in to `HP Cloud Services console <https://console.hpcloud.com/>`_.
-   Choose an HP Cloud Compute region to run the Stackato server image. The
-   image can be launched in any Availability Zone:
+HP Cloud offers a quick, semi-automated method of setting up a Stackato
+VM through their Partners and Solutions page for Stackato.
 
-2. Click **Manage** in the zone of your choice.
+1. `Log in to HP Cloud <https://account.hpcloud.com/login>`__
+
+2. Navigate to the `Partners and Solutions page for Stackato <https://marketplace.hpcloud.com/stackato>`_.
+
+      `https://marketplace.hpcloud.com/stackato <https://marketplace.hpcloud.com/stackato>`__
+  
+3. Step through the setup wizard:
+
+  * choose a region and availability zone
+  * set a server name
+  * choose an instance flavor (minimum standard.small)
+  * choose a `Key Pair <https://docs.hpcloud.com/mc/compute/key-pairs/>`_
+  * choose a Security Group (see :ref:`HPCS Security Groups <server-vm-hpcs-firewall>` below)
+  * Click the **Install** button
+
+HP Cloud will create and boot a new Stackato instance for you. To finish setting up the VM:
+
+* Navigate to the instance in the HP Cloud Console (Dashboard > Computer > your chosen availability zone)
+
+* Click the settings icon
+
+* Select View Connection Info
+
+* Connect to the new VM and set up:
+
+  * :ref:`DNS <server-vm-hpcs-dns>` and
+  * :ref:`Configuring Stackato <server-vm-hpcs-config>`.
+
 
 .. _server-vm-hpcs-firewall:
 
@@ -108,27 +134,9 @@ See the `HP Extended Python Novaclient
 	(e.g. "TCP" rather than "tcp") it causes a later string comparison to fail.
 	This leads to Security Groups not being set correctly.
 
-.. index:: HPCS Launch Instance
-
-Launching the Instance
-----------------------
-
-Click **Manage Servers** and choose an HPCS server **Flavor** of at least *standard.small (2GB memory)*.
-
-Set the **Security Group** to the one created or modified above.
-
-Under **Install Image** select the most recent *ActiveState Stackato* image available.
-
-Leave the **Key Pair** as *hpdefault* (it won't be needed for the basic setup), and **Instances** as 1.
-
-.. image:: ../images/stackato-hpcs-create-server.png
-   :alt: HP Cloud Dashboard 
-   :class: shadow
-   :width: 100 %
-
-When ready, select **Create** to start the instance. The new Stackato instance should appear as "Active" under Running Instances within a few minutes. Take note of the Fixed Public IP. This will be used to configure DNS entries for Stackato.
-
 .. index:: HPCS DNS
+
+.. _server-vm-hpcs-dns:
 
 Configuring DNS
 ---------------
