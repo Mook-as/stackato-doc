@@ -140,6 +140,24 @@ node.  For example, to set up a Core node with the **controller**, **primary**
 Then proceed to configure the other VMs by attaching them to the Core
 node and assigning their particular roles.
 
+.. _server-cluster-attach:
+
+Attaching Nodes and Enabling Roles
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Adding nodes to the cluster involves attaching the new VMs to the Core
+node's IP address using the :ref:`kato node attach
+<kato-command-ref-node-attach>` command. This command will check that
+the new node has a version number compatible with the Core node before
+attaching it.
+
+Roles can be added (or removed) on the new node after attaching using
+the :ref:`kato role <kato-command-ref-role-add>` command, but it is
+generally preferable to enable roles during the ``kato attach`` step
+using the ``-e`` (enable) option as described below for each of the node
+types.
+
+
 .. _server-cluster-router:
 
 Router Nodes
@@ -229,16 +247,15 @@ Once cluster nodes are connected to the Core node, roles can be enabled
 or disabled using the :ref:`Cluster Admin <console-cluster-admin>`
 interface in the :ref:`Management Console <management-console>`.
 
-One-Node Cluster Example
-------------------------
+One-Node Example
+----------------
 
 This is a trivial case which you would not deploy in production, but it
 helps to illustrate the role architecture in Stackato, and can be useful
 diagnostically.
 
-Technically, it is a cluster, even though it consists of a single node.
-A node in this configuration will function much like a micro cloud and
-yet integrate as a cluster with your virtualization environment.
+A node in this configuration will function much like a micro cloud, but
+can be used as the starting point for building a cluster later.
 
 All that is required here is to enable all roles except for **mdns**
 (not used in a clustered or cloud-hosted environment):
@@ -248,19 +265,22 @@ All that is required here is to enable all roles except for **mdns**
 	$ kato node setup core api.\ *hostname.example.com*
 	$ kato role add --all-but mdns
 
-Three-Node Cluster Example
---------------------------
+Three-Node Example
+------------------
 
-This is exactly the configuration detailed above, being the smallest
-practical cluster deployment.  To review:
+This is the smallest viable cluster deployment, but it lacks the
+fault tolerance of larger configurations:
 
 * 1 Core node consisting of primary, controller, router, and stager
   (and supporting processes)
 * 1 data-services node running the database, messaging and filesystem services
 * 1 DEA (Droplet Execution Agent) node
 
-Five-Node Cluster Example
--------------------------
+This configuration can support more users and applications than a single
+node, but the failure of any single node will impact hosted applications. 
+
+Five-Node Example
+-----------------
 
 A typical small Stackato cluster deployment might look like this:
 
@@ -268,6 +288,48 @@ A typical small Stackato cluster deployment might look like this:
   (and supporting processes)
 * 1 data-services node running the database, messaging and filesystem services
 * 3 DEA (Droplet Execution Agent) nodes
+
+In this configuration, fault tolerance (and limited scalability) is
+introduced in the pool of DEA nodes. If any single DEA node fails,
+application instances will be automatically redeployed to the remaining
+DEA nodes with little or no application down time.
+
+20-node Example
+---------------
+
+A larger cluster requires more separation and duplication of roles for
+scalability and fault tolerance. For example:
+
+* 1 Core node running the primary and controller roles (with supporting
+  processes)
+* 1 supplemental Controller node (sharing a filesystem and PostgreSQL
+  database with the Core node)
+* 1 Load Balancer (Stackato VM or hardware)
+* 2 Router nodes
+* 1 Filesystem service node 
+* 1 PostgreSQL + MySQL data service node
+* 1 MongoDB, Redis, RabbitMQ + other data service node
+* 2 Stager nodes
+* 10 DEA (Droplet Execution Agent) nodes
+
+In this configuration:
+
+* application instances span a larger group of DEA nodes so 
+  applications can be easily scaled to meet increasing demand
+
+* web requests are evenly distributed between two Router nodes, either
+  of which can fail without any interruption of service
+  
+* any data service node failure will be localized, not affecting data
+  services on other nodes
+  
+* the duplicate stager spreads the load for application staging
+  operations and provides uninterrupted service for developers if the
+  other node fails or is removed from service
+
+* the auxiliary controller balances the load on the Management Console
+  and system management tasks
+
 
 .. index:: Persistent and Shared Storage
 
