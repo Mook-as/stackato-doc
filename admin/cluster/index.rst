@@ -10,6 +10,8 @@ then be cloned across several :term:`node`\s.  You connect to each node
 in turn and tell it which :term:`role`\s it is to serve, thereby
 distributing the processing load for maximum performance.
 
+.. _server-cluster-roles:
+
 Roles
 -----
 
@@ -32,18 +34,14 @@ A Stackato :term:`node` can take on one or more of the following roles:
 * :ref:`memcached <memcached>`
 * :ref:`Harbor <harbor>` (TCP/UDP port service)
 
-You can see a list of the available roles at the command line by running
-the :ref:`kato info <kato-command-ref-info>` command.
-
-.. _server-cluster-roles:
-
-Assigning Roles with Kato
--------------------------
-
 The command line tool used to configure Stackato servers is called
-:ref:`kato <kato-command-ref>`. Setup of cluster nodes is done primarily
-using the :ref:`kato node <kato-command-ref-node-attach>` setup, add,
-attach, and remove sub-commands.
+:ref:`kato <kato-command-ref>`. You can see a list of the available
+roles at the command line by running the :ref:`kato info
+<kato-command-ref-info>` command.
+
+Setup of cluster nodes is done using the :ref:`kato node
+<kato-command-ref-node-attach>` setup, add, attach, and remove
+sub-commands.
 
 The :ref:`kato info <kato-command-ref-info>` command will show:
 
@@ -53,7 +51,7 @@ The :ref:`kato info <kato-command-ref-info>` command will show:
 .. _server-cluster-core-node:
 
 Preparing the Core Node
-^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------
 
 In a Stackato cluster, one node is dedicated as the Core node. This node will
 have a :ref:`controller <architecture-controller>`, 
@@ -61,34 +59,33 @@ have a :ref:`controller <architecture-controller>`,
 :ref:`base <architecture-base>`, and 
 :ref:`router <architecture-router>` role but can also include additional roles.
 
-Choose one VM running the default Stackato :term:`micro cloud` as the
-Core node.  Set up the Core node first. Then you can proceed to add
-other node types.
-
-.. note::
-
-    A :ref:`static IP address <server-config-static-ip>` is necessary to
-    provide a consistent network interface for other nodes to connect
-    to. A real :ref:`DNS record <server-config-dns>` is also recommended
-    for production use. **You must set these values and reboot the VM
-    before proceeding.**
+Boot a Stackato VM and set up the Core node as described below, then add
+the other nodes and assign roles.
 
 
 CORE_IP
-~~~~~~~
+^^^^^^^
 
-First, take note of the IP address of the Core node. It
-will be required when configuring additional nodes in the following
-steps, so that they can attach to the Core node.  Make sure that the IP
-address of its ``eth0`` interface is registering the correct address,
-which may not be the case if you have set a static IP and not yet
-rebooted or restarted networking.  To check the IP address, run:
+A :ref:`static IP address <server-config-static-ip>` is necessary to
+provide a consistent network interface for other nodes to connect to. If
+your IaaS or cloud orchestration software provide IP addresses which
+persist indefinitely and are not reset on reboot you may not have to set
+this explicitly.
+
+Take note of the IP address of the Core node. It will be required when
+configuring additional nodes in the following steps, so that they can
+attach to the Core node.
+
+Make sure that the IP address of its ``eth0`` interface is registering
+the correct address, which may not be the case if you have set a static
+IP and not yet rebooted or restarted networking. To check the IP
+address, run:
 
     .. parsed-literal::
 
 	$ ifconfig eth0
 
-To set the :ref:`static IP address <server-config-static-ip>`, run:
+If necessary, set the :ref:`static IP address <server-config-static-ip>`:
 
     .. parsed-literal::
 
@@ -101,8 +98,8 @@ To set the :ref:`static IP address <server-config-static-ip>`, run:
   cluster (starting with the Core node) to set the new CORE_IP.
   
 
-HOSTNAME
-~~~~~~~~
+Hostname
+^^^^^^^^
 
 Next, set the **fully qualified hostname** of the Core node. This
 is required so that Stackato's internal configuration matches the
@@ -113,6 +110,24 @@ To set the hostname, run:
     .. parsed-literal::
 
 	$ kato node rename *hostname.example.com*
+
+This hostname will become the basename of the "API endpoint" address
+used by clients (e.g. "https://api.hostname.example.com").
+
+.. note::
+  If you are building a cluster with multiple Routers separate from the
+  Core node, the load balancer or gateway router must take on the API
+  endpoint address. Consult the :ref:`Load Balancer and Multiple Routers
+  <cluster-load-balancer>` section below.
+  
+
+Wildcard DNS
+^^^^^^^^^^^^
+
+A wildcard DNS record is necessary to resolve not only the API endpoint,
+but all applications which will subsequently be deployed on the PaaS.
+:ref:`Create a wildcard DNS record <server-config-dns>` for the Core
+node (or :ref:`Load Balancer/Router <cluster-load-balancer>`).
 
 
 Core Node
@@ -143,7 +158,7 @@ node and assigning their particular roles.
 .. _server-cluster-attach:
 
 Attaching Nodes and Enabling Roles
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------------
 
 Adding nodes to the cluster involves attaching the new VMs to the Core
 node's IP address using the :ref:`kato node attach
@@ -240,6 +255,18 @@ run the following command on the Core node:
 
 	$ kato status --all
 
+.. _cluster-remove-nodes:
+
+Removing Nodes
+^^^^^^^^^^^^^^
+
+Use the :ref:`kato node remove <kato-command-ref-node-attach>` to remove a node from 
+the cluster. Run the following command on the core node.
+
+  .. parsed-literal::
+
+        $ kato node remove *NODE_IP*
+
 Role Configuration using the Management Console
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -247,15 +274,17 @@ Once cluster nodes are connected to the Core node, roles can be enabled
 or disabled using the :ref:`Cluster Admin <console-cluster-admin>`
 interface in the :ref:`Management Console <management-console>`.
 
-One-Node Example
+Example Clusters
 ----------------
 
-This is a trivial case which you would not deploy in production, but it
-helps to illustrate the role architecture in Stackato, and can be useful
-diagnostically.
+Single-Node
+^^^^^^^^^^^
 
-A node in this configuration will function much like a micro cloud, but
-can be used as the starting point for building a cluster later.
+This is a configuration (not actually a cluster) which you would not
+generally deploy in production, but it helps to illustrate the role
+architecture in Stackato. A node in this configuration will function
+much like a micro cloud, but can be used as the starting point for
+building a cluster later.
 
 All that is required here is to enable all roles except for **mdns**
 (not used in a clustered or cloud-hosted environment):
@@ -265,8 +294,8 @@ All that is required here is to enable all roles except for **mdns**
 	$ kato node setup core api.\ *hostname.example.com*
 	$ kato role add --all-but mdns
 
-Three-Node Example
-------------------
+Three-Node
+^^^^^^^^^^
 
 This is the smallest viable cluster deployment, but it lacks the
 fault tolerance of larger configurations:
@@ -279,8 +308,8 @@ fault tolerance of larger configurations:
 This configuration can support more users and applications than a single
 node, but the failure of any single node will impact hosted applications. 
 
-Five-Node Example
------------------
+Five-Node
+^^^^^^^^^
 
 A typical small Stackato cluster deployment might look like this:
 
@@ -294,8 +323,8 @@ introduced in the pool of DEA nodes. If any single DEA node fails,
 application instances will be automatically redeployed to the remaining
 DEA nodes with little or no application down time.
 
-20-node Example
----------------
+20-Node
+^^^^^^^
 
 A larger cluster requires more separation and duplication of roles for
 scalability and fault tolerance. For example:
@@ -368,18 +397,6 @@ speed up application deployment.
 See the :ref:`Persistent Storage <bestpractices-persistent-storage>`
 documentation for instructions on relocating service data, application
 droplets, and containers.
-
-.. _cluster-remove-nodes:
-
-Removing Nodes from Cluster
----------------------------
-
-Use the :ref:`kato node remove <kato-command-ref-node-attach>` to remove a node from 
-the cluster. Run the following command on the core node.
-
-  .. parsed-literal::
-
-        $ kato node remove *NODE_IP*
 
 .. _cluster-firewall:
 
