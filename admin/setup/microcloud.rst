@@ -209,3 +209,14 @@ endpoint is ``api.stackato-xxxx.local`` and you have an app called
     192.168.68.54 api.stackato-xxxx.local
     192.168.68.54 myapp.stackato-xxxx.local
 
+
+.. _quickstart-uninstall:
+
+Uninstalling the VM
+-------------------
+
+Using the Stackato VM makes no changes to the underlying host operating
+system.
+
+If you wish to remove it, simply select the VM in your hypervisor and
+select **Remove...** or **Delete...** as appropriate.
