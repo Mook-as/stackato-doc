@@ -3,16 +3,16 @@
 Known Issues
 ============
 
-Nodes with FATAL processes
---------------------------
+Nodes with FATAL or perpetually STARTING processes
+--------------------------------------------------
 
 If the Core node of a Stackato cluster is offline for more than 90
 seconds, ``kato status`` will show processes on other nodes (systail,
-apptail, and others) in a FATAL state. These processes will not
-automatically reconnect to the Core node.
+apptail, router and others) in a FATAL or (hung) STARTING state. These
+processes will not automatically reconnect to the Core node.
 
-To correct this, run ``kato start`` on all nodes showing FATAL
-processes.
+To correct this, run ``kato start`` (for FATAL processes) or ``kato
+restart`` (for STARTING processes) on all affected nodes. 
 
 Hypervisor network subnet conflict
 ----------------------------------
