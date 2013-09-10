@@ -39,7 +39,7 @@ Release Notes
   * [99604] New X-Frame header configuration option for router
   * [98390] ``kato node attach`` now checks for version compatibility when adding a node to a cluster
   * [98930] RabbitMQ updated to 2.8.7
-  * [98457] RabbitMQ 3.0 available (disabled by default). Enable with ``kato role add rabbit3``
+  * [98457] RabbitMQ 3.1.3 available (disabled by default). Enable with ``kato role add rabbit3``
   
   
   * Ruby:
