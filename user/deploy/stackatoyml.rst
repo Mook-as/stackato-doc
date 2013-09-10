@@ -8,8 +8,6 @@ Stackato.yml Options
 Configuration options for Stackato applications can be stored in a *stackato.yml* 
 file in the top-level application directory.
 
-.. note::
-    These options take precedence over those declared in :ref:`manifest.yml <manifest_yml>`.
 
 The *stackato.yml* file defines **keys** and associated **values** which
 the ``stackato`` client uses to set options that are otherwise passed by
@@ -20,8 +18,19 @@ during the staging, post-staging, or pre-running steps in deployment.
 :ref:`Key substitution <stackato_yml-key-substitution>` can be used to
 insert values from one key into another.
 
-Now follows a description and further detail on each key and the values
-that can be assigned.
+.. note::
+
+    *stackato.yml* options take precedence over any declared in
+    :ref:`manifest.yml <manifest_yml>`. Detailed specifications for
+    these configuration files can be found in the `stackato-cli source
+    repository <https://github.com/ActiveState/stackato-cli/>`_:
+
+    * `stackato.yml specification <https://github.com/ActiveState/stackato-cli/blob/master/doc/stackato.yml.txt>`__
+    * `manifest.yml specification <https://github.com/ActiveState/stackato-cli/blob/master/doc/manifest.yml.txt>`__
+    * `stackato.yml to manifest.yml key mappings <https://github.com/ActiveState/stackato-cli/blob/master/doc/stackato-2-manifest.txt>`__
+    
+The following sections describe the available keys and the values that
+can be assigned to them:
 
 .. _stackato_yml-name:
 
