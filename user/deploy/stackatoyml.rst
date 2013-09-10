@@ -336,7 +336,26 @@ specified on the command line (eg. ``stackato push --mem 256M``).
 Example::
 	
   mem: 64M
+
+.. _stackato_yml-disk:
 	
+disk:
+^^^^^
+
+The amount of disk space to allocate for the application (minimum
+512MB).
+
+Syntax: <int> or <int>M - Disk in megabytes. eg. 768M
+
+Syntax: <int>G or <float>G - Disk in gigabytes. eg. 1.5G or 2G
+
+If not specified, 2GB of disk space is allocated. Can also be specified
+on the command line (eg. ``stackato push --disk 768M``).
+
+Example::
+	
+  mem: 3.5GB
+  
 instances:
 ^^^^^^^^^^
 
