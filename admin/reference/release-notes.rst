@@ -15,41 +15,41 @@ Release Notes
   See `release-notes.rst` in git for the up-to-date version of this file.
         `<https://github.com/ActiveState/stackato-doc>`_
 
-  dev (UNRELEASED)
-  ----------------
+dev (UNRELEASED)
+----------------
 
-  * Replace Doozer with Redis (TODO: details)
+* Replace Doozer with Redis (TODO: details)
 
-  * Logyard updates:
+* Logyard updates:
 
-    * [98998] Build with Go 1.1
-    * [98325] Move drains from doozer to redis
-    * [98687] Add "AppGroup" field to app log stream
-    * [98836] Add "HumanTime" field to systail log stream
-    * [98870] Add app crashes/exits (eg: OOM killer) to cloud events
-    * [98686] Add harbor service provision events to cloud events
-    * [96827] Cloud Events patterns are now configurable (kato config)
-    * [99534] New ``read_limit`` setting for apptail (default 16MB) to
-      cope with extremely large application log files
-    * [99571] Application log drain URLs now properly sanitized (v2.10.6 'logdrain-sanitize' patch)
-    
-  * [98649] ``kato process stop fence`` now correctly stops fence process.
-  * [99614] New default limit of 50 processes per container. Configurable with ``kato config`` under ``fence max_container_processes``.
-  * [97164] Micro cloud starts with Memcached, Redis, PostrgreSQL, RabbitMQ, and MongoDB roles disabled by default (enable via Managment Console).
-  * [99604] New X-Frame header configuration option for router
-  * [98390] ``kato node attach`` now checks for version compatibility when adding a node to a cluster
-  * [98930] RabbitMQ updated to 2.8.7
-  * [98457] RabbitMQ 3.1.3 available (disabled by default). Enable with ``kato role add rabbit3``
+  * [98998] Build with Go 1.1
+  * [98325] Move drains from doozer to redis
+  * [98687] Add "AppGroup" field to app log stream
+  * [98836] Add "HumanTime" field to systail log stream
+  * [98870] Add app crashes/exits (eg: OOM killer) to cloud events
+  * [98686] Add harbor service provision events to cloud events
+  * [96827] Cloud Events patterns are now configurable (kato config)
+  * [99534] New ``read_limit`` setting for apptail (default 16MB) to
+    cope with extremely large application log files
+  * [99571] Application log drain URLs now properly sanitized (v2.10.6 'logdrain-sanitize' patch)
   
-  
-  * Ruby:
+* [98649] ``kato process stop fence`` now correctly stops fence process.
+* [99614] New default limit of 50 processes per container. Configurable with ``kato config`` under ``fence max_container_processes``.
+* [97164] Micro cloud starts with Memcached, Redis, PostrgreSQL, RabbitMQ, and MongoDB roles disabled by default (enable via Managment Console).
+* [99604] New X-Frame header configuration option for router
+* [98390] ``kato node attach`` now checks for version compatibility when adding a node to a cluster
+* [98930] RabbitMQ updated to 2.8.7
+* [98457] RabbitMQ 3.1.3 available (disabled by default). Enable with ``kato role add rabbit3``
+* [98668] Memory consumption during staging is now limited to 1.5 times the application's allocated memory by default. Configurable with ``kato config`` under ``stager app_memory_multiplier``.
 
-    * Ruby 1.8.7 removed (EOL)
-    * Ruby 2.0.0 added
-    
-  * Perl:
+* Ruby:
+
+  * Ruby 1.8.7 removed (EOL)
+  * Ruby 2.0.0 added
   
-    * ActivePerl 5.14 removed
+* Perl:
+
+  * ActivePerl 5.14 removed
   
 v2.10.6 (June 10, 2013)
 -----------------------
