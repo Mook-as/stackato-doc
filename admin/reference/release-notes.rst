@@ -41,6 +41,7 @@ dev (UNRELEASED)
 * [98930] RabbitMQ updated to 2.8.7
 * [98457] RabbitMQ 3.1.3 available (disabled by default). Enable with ``kato role add rabbit3``
 * [98668] Memory consumption during staging is now limited to 1.5 times the application's allocated memory by default. Configurable with ``kato config`` under ``stager app_memory_multiplier``.
+* [99521] ``--no-stop`` option removed from ``kato role remove`` command.
 
 * Ruby:
 
