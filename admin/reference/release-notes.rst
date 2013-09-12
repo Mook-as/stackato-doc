@@ -47,6 +47,7 @@ dev (UNRELEASED)
 
   * Ruby 1.8.7 removed (EOL)
   * Ruby 2.0.0 added
+  * [99368] Fixed problem building Nokogiri 1.6 gem. Stager now uses using system libraries (``NOKOGIRI_USE_SYSTEM_LIBRARIES=true``).
   
 * Perl:
 
