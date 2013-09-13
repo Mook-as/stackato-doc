@@ -170,7 +170,7 @@ To set up a Stackato cluster, or to add nodes to an existing cluster, see the :r
 Status Graphs
 -------------
 
-Displays graphs for server statistics including CPU, Load, Memory, Processes, and Swap (primary node or micro cloud only).
+Displays graphs for server statistics: CPU, Load, Memory, Disk Operations, Disk Space, Processes, and Swap (primary node or micro cloud only).
 
 .. _console-app-store:
 
