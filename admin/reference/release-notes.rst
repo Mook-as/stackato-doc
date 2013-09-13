@@ -44,6 +44,10 @@ dev (UNRELEASED)
 * [99521] ``--no-stop`` option removed from ``kato role remove`` command.
 * [100215] prevent crontab breakage caused by newlines in environment variables
 
+* Management Console:
+
+  * [94745,94274] New disk activity and disk space graphs.
+
 * Ruby:
 
   * Ruby 1.8.7 removed (EOL)
