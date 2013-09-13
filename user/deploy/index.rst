@@ -164,6 +164,7 @@ scope (global and user/group):
 
 
 .. index:: Crontab Support
+
 .. _deploy-crontab:
 
 Crontab Support
@@ -186,6 +187,15 @@ commands will be included in the crontab file.
 After setting up environment variables, we copy the *$HOME/crontab* file, and finally the commands 
 from the ``cron:`` section in *stackato.yml*. The resulting file is stored at 
 *$STACKATO_APP_ROOT/crontab*.
+
+Whitespace & Newlines in Environment Variables
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To prevent breakage in cron, embedded newlines ("\\n") in environent
+variable values will be replaced with "\\\\n" when generating the
+crontab. Any leading and trailing spaces in environment variable values
+are also stripped.
+
 
 .. index:: Map Application Url
 .. _deploy-map-url:
