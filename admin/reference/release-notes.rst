@@ -42,6 +42,7 @@ dev (UNRELEASED)
 * [98457] RabbitMQ 3.1.3 available (disabled by default). Enable with ``kato role add rabbit3``
 * [98668] Memory consumption during staging is now limited to 1.5 times the application's allocated memory by default. Configurable with ``kato config`` under ``stager app_memory_multiplier``.
 * [99521] ``--no-stop`` option removed from ``kato role remove`` command.
+* [99745] ``kato config`` no longer supports node-specific config; ``--node`` option removed.
 * [100215] prevent crontab breakage caused by newlines in environment variables
 
 * Management Console:
