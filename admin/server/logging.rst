@@ -178,9 +178,9 @@ shorter command for creating the 'all-apps' drain would be::
 
 A custom "systail" log stream might look like this::
 
-  $ kato config set logyard drainformats/systail-papertrail '{{.HumanTime}} - {{.Name}}@{{.NodeID}} -- {{.Text}}'
+  $ kato config set logyard drainformats/systail-papertrail '<13>1 - {{.HumanTime}} - {{.Name}}@{{.NodeID}} -- {{.Text}}'
 
-This could be forwarded to a log analysis service::
+This could be forwarded to the Papertrail log analysis service::
 
   $ kato log drain add papertrail udp://logs.papertrailapp.com:45678 -f systail-papertrail
   
