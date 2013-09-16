@@ -202,7 +202,7 @@ update:
 	gem install --install-dir $(GEM_HOME) docopt --no-rdoc --no-ri
 	( RUBYLIB=$(KATO_DIR)/lib:`eval echo $(DOCOPT_LIB)` \
 	  GEM_HOME=$(GEM_HOME) \
-	  ruby -e 'require "kato/docs/sphinx"; render_kato_ref(ARGV.shift)' reference/kato-ref.rst.erb > reference/kato-ref.rst ; \
+	  ruby -e 'require "kato/docs/sphinx"; render_kato_ref(ARGV.shift)' admin/reference/kato-ref.rst.erb > admin/reference/kato-ref.rst ; \
 	)
 	rm -rf $(UPDATE) 
 
