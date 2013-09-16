@@ -24,7 +24,7 @@ Commands
 * :ref:`history <kato-command-ref-history>` Show the kato commands that have been run
 * :ref:`info <kato-command-ref-info>` Show information about this node or cluster including assigned and
 * :ref:`inspect <kato-command-ref-inspect>` Detect common problems with your Stackato install using 'kato inspect'
-* :ref:`log <kato-command-ref-log-drain-add>` Logging utilities for Stackato
+* :ref:`log <kato-command-ref-log-stream>` Logging utilities for Stackato
 * :ref:`node <kato-command-ref-node-attach>` Node management
 * :ref:`op <kato-command-ref-op>` Various operational commands
 * :ref:`patch <kato-command-ref-patch>` Update a Stackato cluster with post-release fixes.
@@ -65,9 +65,9 @@ Commands
 
 **config** **del** [**options**] *<component>* *<key-path>*
 
-**config** **push** [**options**] *<component>* *<key-path>* *<list-value>*
+**config** **push** [**options**] *<component>* *<key-path>* *<value>*
 
-**config** **pop** [**options**] *<component>* *<key-path>* *<list-value>*
+**config** **pop** [**options**] *<component>* *<key-path>* *<value>*
 
   Manipulate configuration values of Stackato components.
 
@@ -87,8 +87,6 @@ Commands
                                           YAML is the default output format.
 
   **-f** **--flat**                       Use a flat output format "<full-config-path> <value>"
-
-  **-n** **--node** *<node-IP>*           Take action on a specific cluster node
 
   **--force**                             Force updating value to different type.
 
@@ -220,6 +218,14 @@ Commands
 
   **--exclude-rabbit-metadata**           Do not include the RabbitMQ service's metadata
 
+  **--rabbit3**                           Include the RabbitMQ service
+
+  **--exclude-rabbit3**                   Do not include the RabbitMQ service
+
+  **--exclude-rabbit3-data**              Do not include the RabbitMQ service's data
+
+  **--exclude-rabbit3-metadata**          Do not include the RabbitMQ service's metadata
+
 
 
 ----
@@ -348,6 +354,14 @@ Commands
 
   **--exclude-rabbit-metadata**           Do not include the RabbitMQ service's metadata
 
+  **--rabbit3**                           Include the RabbitMQ service
+
+  **--exclude-rabbit3**                   Do not include the RabbitMQ service
+
+  **--exclude-rabbit3-data**              Do not include the RabbitMQ service's data
+
+  **--exclude-rabbit3-metadata**          Do not include the RabbitMQ service's metadata
+
 
 
 ----
@@ -374,30 +388,23 @@ Commands
 
 .. _kato-command-ref-debug-configwatch:
 
-**debug** **configwatch** [**options**]
+**debug** **configwatch** [**options**] [*<process-name>...*]
 
-  Watch changes to doozer config
-
-  **-n** **--node** *<node-IP>*           Watch config changes for a specific cluster node
-
-  **-p** **--process** *<process-name>*   The name of process to watch config for
-
-  **-g** **--global**                     Config is global and not specific to any node
+  Watch changes to cluster config
 
   **-d** **--dump-tree**                  Dump the config tree seen since starting
 
-  **-i** **--ignore-ctl**                 Ignore doozer tree under /ctl
-
-  **-a** **--show-applied**               Exit once we see this value is seen
-
-  **-w** **--with-revs**                  Show the revisions of config entries
-
   **-s** **--no-value**                   Do not print the value of path
 
-  **-u** **--until-path** *<path>*        Exit once we see this path
 
-  **-v** **--until-value** *<value>*      Exit once we see this value
 
+----
+
+.. _kato-command-ref-debug-redis:
+
+**debug** **redis**
+
+  Connect to the Redis server used for cluster config via redis-cli
 
 
 ----
@@ -515,6 +522,60 @@ Commands
   **-h** **--help**                       Show help information
 
 
+
+----
+
+.. _kato-command-ref-log-drain-status:
+
+**log** **drain** **status** [**options**] [*<drain>...*]
+
+  Show the status of all or specified log drains
+
+  **-h** **--help**                       Show help information
+
+  **-n** **--not-running**                Show only drains not running
+
+
+
+----
+
+.. _kato-command-ref-log-stream:
+
+**log** **stream** [**options**] *<key>...*
+
+  Examples:
+  
+    # stream cloud events
+    
+    kato log stream event
+  
+    # stream DEA, stager and app log stream
+    
+    kato log stream systail.dea systail.stager apptail
+  
+    # stream system logs (equivalent to 'kato log tail')
+    
+    kato log stream systail
+
+  *<key>*                                 Logyard stream key prefix (eg: systail.dea)
+
+
+  **-h** **--help**                       Show help information
+
+  **--no-color**                          Turn off color
+
+  **--raw**                               Show unformatted logs, including logyard INFO records (skipped by default)
+
+  **--json**                              Show the original JSON
+
+  **--time**                              Show timestamp
+
+  **-n** **--node** *<node-IP>*           Only show logs from a specific cluster node
+
+  **-l** **--local**                      Only show logs from the current node
+
+
+
 ----
 
 .. _kato-command-ref-log-tail:
@@ -562,11 +623,15 @@ Commands
 
 .. _kato-command-ref-node-list:
 
-**node** **list**
+**node** **list** [**options**]
 
   List all nodes known to this cluster
 
   **-h** **--help**                       Show help information
+
+  **-j** **--json**                       Use JSON format for displaying output
+
+  **-y** **--yaml**                       Use YAML format for displaying output
 
 
 
@@ -605,6 +670,8 @@ Commands
   **-s** **--skip-remap-hosts**           Skip the remapping of existing app URLS to the
 
                                           new domain.
+
+  **-l** **--skip-ssl-regeneration**      Skip regenerating the SSL keys
 
   **-r** **--no-restart**                 Do not restart roles.
 
@@ -723,11 +790,13 @@ Commands
 
 **op** **upstream_proxy** **delete**
 
-**op** **regenerate** **nginx**
+**op** **regenerate** **ssl_cert**
 
 **op** **regenerate** **mysql**
 
 **op** **regenerate** **postgresql** [**--no-restart**]
+
+**op** **set_timezone** [**--timezone** *<TZ>*]
 
 **op** **update_hostsfile**
 
@@ -738,6 +807,8 @@ Commands
 **op** **defer** *<command>* [**--run-as-root**] [**--reset**]
 
 **op** **run_deferred**
+
+**op** **import_from_yaml_files**
 
   Various operational commands
 
@@ -750,6 +821,10 @@ Commands
                                           server
 
   **regenerate**                          Regenerate the configuration for a process
+
+  **set_timezone**                        Change the default system timezone for the host machine
+
+                                          and deployed apps.
 
   **update_hostsfile**                    Updates the /etc/hosts file with the endpoint URI mapped
 
@@ -804,7 +879,7 @@ Commands
 
 .. _kato-command-ref-process-list:
 
-**process** **list** [**--help**] [**-a**] [**--node** *<node-IP>*] [*<process>...*]
+**process** **list** [**options**] [*<process>...*]
 
   Lists configured processes and their current running status.
 
@@ -813,6 +888,10 @@ Commands
   **-n** **--node** *<node-IP>*           Get status for a specific cluster node (defaults to local node)
 
   **-a** **--all**                        Include status of all cluster nodes
+
+  **-j** **--json**                       Use JSON format for displaying output
+
+  **-y** **--yaml**                       Use YAML format for displaying output
 
 
 
@@ -917,7 +996,7 @@ Commands
 
   Restart Stackato or individual roles.
 
-  **-a** **--all**                        Also restart doozerd
+  **-a** **--all**                        Also restart core processes
 
   **-n** **--node** *<node-IP>*           Restart a specific cluster node
 
@@ -959,15 +1038,33 @@ Commands
 
 ----
 
+.. _kato-command-ref-role-info:
+
+**role** **info** **--help**
+
+**role** **info** [*<role>...*]
+
+**role** **remove** [**-v**] [**--node** *<node-IP>*] **--all**
+
+**role** **remove** [**-v**] [**--node** *<node-IP>*] **--all-but** *<role>...*
+
+  Display info on roles
+
+  **-h** **--help**                       Show help information
+
+
+
+----
+
 .. _kato-command-ref-role-remove:
 
 **role** **remove** **--help**
 
-**role** **remove** [**-v**] [**--node** *<node-IP>*] [**--no-stop**] *<role>...*
+**role** **remove** [**-v**] [**--node** *<node-IP>*] *<role>...*
 
-**role** **remove** [**-v**] [**--node** *<node-IP>*] [**--no-stop**] **--all**
+**role** **remove** [**-v**] [**--node** *<node-IP>*] **--all**
 
-**role** **remove** [**-v**] [**--node** *<node-IP>*] [**--no-stop**] **--all-but** *<role>...*
+**role** **remove** [**-v**] [**--node** *<node-IP>*] **--all-but** *<role>...*
 
   Disable roles for a node
 
@@ -980,8 +1077,6 @@ Commands
   **-n** **--node** *<node-IP>*           Remove a role on a specific cluster node
 
   **-v** **--verbose**                    Show process information
-
-  **-s** **--no-stop**                    Do not stop processes
 
 
 
@@ -1042,8 +1137,6 @@ Commands
 **stop** **--help**
 
   Stop Stackato or individual roles.
-
-  **-a** **--all**                        Also stop doozerd
 
   **-n** **--node** *<node-IP>*           Stop a specific cluster node
 
