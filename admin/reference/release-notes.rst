@@ -32,6 +32,7 @@ dev (UNRELEASED)
   * [99534] New ``read_limit`` setting for apptail (default 16MB) to
     cope with extremely large application log files
   * [99571] Application log drain URLs now properly sanitized (v2.10.6 'logdrain-sanitize' patch)
+  * [100512] Fix a leak in growing TCP connections causing systail to crash (inotify panic), and logyard drains to malfunction.
   
 * [98649] ``kato process stop fence`` now correctly stops fence process.
 * [99614] New default limit of 50 processes per container. Configurable with ``kato config`` under ``fence max_container_processes``.
