@@ -109,7 +109,9 @@ config set <kato-command-ref-config>`:
        * email
        * userPrincipalName
        
-    * bind_dn: (optional) default credentials for user lookup
+    * bind_dn: (optional) credentials for user lookup (e.g.
+      'cn=Administrator,cn=Users,dc=example,dc=com'). LDAP servers that
+      allow anonymous binding will not require this setting.
     * password: (optional) default credentials for user lookup
     * try_sasl: (optional) when set to true attempts a SASL connection
       to the LDAP server
