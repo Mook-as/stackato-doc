@@ -72,6 +72,7 @@ Cluster Configuration
   cluster/external-db
   cluster/harbor
   cluster/dotnet
+  cluster/cpbm
 
 Best Practices
 --------------
