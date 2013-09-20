@@ -60,6 +60,10 @@ dev (UNRELEASED)
 
   * ActivePerl 5.14 removed
   
+* Python:
+
+  * Upgraded to ActivePython 2.7.5.6
+  
 v2.10.6 (June 10, 2013)
 -----------------------
 
