@@ -3,7 +3,7 @@
 Citrix CPBM
 ===========
 
-The `Citrix Cloud Portal Business Mangaer (CPBM) <http://www.citrix.com/products/cloudportal-business-manager/overview.html>`__ is a portal for provisioning hosted apps, desktops, services and Infrastructure-as-a-Service (IaaS) from the cloud. With the Stackato Connector, it can provision a Stackato PaaS.
+The `Citrix Cloud Portal Business Manager (CPBM) <http://www.citrix.com/products/cloudportal-business-manager/overview.html>`__ is a portal for provisioning hosted apps, desktops, services and Infrastructure-as-a-Service (IaaS) from the cloud. With the Stackato Connector, it can provision a Stackato PaaS.
 
 CPBM Stackato Connector Installation
 ------------------------------------
