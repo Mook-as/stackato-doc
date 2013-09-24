@@ -123,7 +123,7 @@ config set <kato-command-ref-config>`:
 
 .. note::
 
-  An aditional 'name_proc' option in the 'ldap' block allows users to
+  An additional 'name_proc' option in the 'ldap' block allows users to
   enter email addresses instead of LDAP user names, matching the user name
   entered with the format of the uid attributes. For example, value of
   'sAMAccountName' in AD contains only the Windows user name. If your
