@@ -96,6 +96,8 @@ Use the `--json` option send the log lines in JSON format::
 
   $ stackato drain add myapp jsondrain --json udp://logs.loggly.com:12346
   
+To check the status of your application drains, use the ``stackato drain
+list`` command.
   
 .. note::
 

@@ -212,6 +212,24 @@ Drains for application log streams can be added by end users with the
 :ref:`Application Logs <application_logs>` section of the User Guide for
 an example.
 
+.. _logging-drains-status:
+
+Drain Status
+^^^^^^^^^^^^
+
+You can check the status of all drains on Stackato with the ``kato log
+drain status`` subcommand. For example::
+
+  $ kato log drain status
+  appdrain.1.mine         192.168.68.5    RUNNING[53]
+  appdrain.1.mydrain      192.168.68.5    RETRYING[75]  invalid port 3424252
+  builtin.apptail         192.168.68.5    RUNNING[3]
+  builtin.cloudevents     192.168.68.5    RUNNING[3]
+  builtin.katohistory     192.168.68.5    RUNNING[3]
+
+If the RETRYING drain hits a :ref:`drain timeout
+<logging-drains-timeouts>`, its status will change to FATAL.
+
 .. _logging-keys:
 
 Keys
@@ -411,7 +429,6 @@ Drain Timeouts
 
 User Drain Limit
 ^^^^^^^^^^^^^^^^
-
 
 * **cloud_controller** **max_user_drains** (default 200): limits the
   total number of concurrent user application drains running on a
