@@ -156,7 +156,7 @@ Role Groups
 Role groups represent a set of roles. For example the **data-services**
 group provides all databases plus RabbitMQ and the filesystem service::
 
-  $kato role add data-services
+  $ kato role add data-services
   
 Additional groups can be defined by administrators in
 */s/etc/kato/role_groups.yml*.
