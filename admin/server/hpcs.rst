@@ -172,13 +172,17 @@ Log in to the instance using ``ssh`` with the username `stackato` and default pa
 
 	$ ssh stackato@stackato-test.example.com
   
-Do *not* change the ``stackato`` password at this point - it will happen in the next step.
+Do *not* change the ``stackato`` password at this point - it will happen in a subsequent step.
 
+Disable mDNS, as this service is not useful on a remote network::
+
+  $ kato role remove mdns
+  
 Use the :ref:`kato <kato-command-ref>` utility to set the server's
 hostname and internal Stackato configuration to match the DNS name you
 are using. For example::
 
-  kato node rename stackato-test.example.com
+  $ kato node rename stackato-test.example.com
   
 
 .. index:: HPCS Create Admin
