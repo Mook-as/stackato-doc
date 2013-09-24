@@ -15,10 +15,8 @@ Release Notes
   See `release-notes.rst` in git for the up-to-date version of this file.
         `<https://github.com/ActiveState/stackato-doc>`_
 
-dev (UNRELEASED)
-----------------
-
-* Replace Doozer with Redis (TODO: details)
+v2.11 (Sept 2013)
+-----------------
 
 * Logyard updates:
 
@@ -34,18 +32,6 @@ dev (UNRELEASED)
   * [99571] Application log drain URLs now properly sanitized (v2.10.6 'logdrain-sanitize' patch)
   * [100512] Fix a leak in growing TCP connections causing systail to crash (inotify panic), and logyard drains to malfunction.
   
-* [98649] ``kato process stop fence`` now correctly stops fence process.
-* [99614] New default limit of 50 processes per container. Configurable with ``kato config`` under ``fence max_container_processes``.
-* [97164] Micro cloud starts with Memcached, Redis, PostrgreSQL, RabbitMQ, and MongoDB roles disabled by default (enable via Managment Console).
-* [99604] New X-Frame header configuration option for router
-* [98390] ``kato node attach`` now checks for version compatibility when adding a node to a cluster
-* [98930] RabbitMQ updated to 2.8.7
-* [98457] RabbitMQ 3.1.3 available (disabled by default). Enable with ``kato role add rabbit3``
-* [98668] Memory consumption during staging is now limited to 1.5 times the application's allocated memory by default. Configurable with ``kato config`` under ``stager app_memory_multiplier``.
-* [99521] ``--no-stop`` option removed from ``kato role remove`` command.
-* [99745] ``kato config`` no longer supports node-specific config; ``--node`` option removed.
-* [100215] prevent crontab breakage caused by newlines in environment variables
-
 * Management Console:
 
   * [94745,94274] New disk activity and disk space graphs.
@@ -63,6 +49,20 @@ dev (UNRELEASED)
 * Python:
 
   * Upgraded to ActivePython 2.7.5.6
+  
+* [98649] ``kato process stop fence`` now correctly stops fence process.
+* [99614] New default limit of 50 processes per container. Configurable with ``kato config`` under ``fence max_container_processes``.
+* [97164] Micro cloud starts with Memcached, Redis, PostrgreSQL, RabbitMQ, and MongoDB roles disabled by default (enable via Managment Console).
+* [99604] New X-Frame header configuration option for router
+* [98390] ``kato node attach`` now checks for version compatibility when adding a node to a cluster
+* [98930] RabbitMQ updated to 2.8.7
+* [98457] RabbitMQ 3.1.3 available (disabled by default). Enable with ``kato role add rabbit3``
+* [98668] Memory consumption during staging is now limited to 1.5 times the application's allocated memory by default. Configurable with ``kato config`` under ``stager app_memory_multiplier``.
+* [99521] ``--no-stop`` option removed from ``kato role remove`` command.
+* [99745] ``kato config`` no longer supports node-specific config; ``--node`` option removed.
+* [100215] prevent crontab breakage caused by newlines in environment variables
+* Replaced Doozer with Redis 
+
   
 v2.10.6 (June 10, 2013)
 -----------------------
