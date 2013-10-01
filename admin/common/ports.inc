@@ -14,6 +14,8 @@ The Stackato :term:`micro cloud` runs with the following ports exposed:
   3306      tcp   mysql
   5432      tcp   postgresql
   9001      tcp   supervisord
+  9025      tcp   stackato-rest
+  9026      tcp   stackato-rest
   12345     tcp   netbus
   ========  ====  =======================
 
@@ -44,6 +46,8 @@ summary describes which ports are used by which services:
   9001                      tcp   all nodes   controller    :term:`supervisord`
   9022                      tcp   controller  dea           droplets
   9022                      tcp   dea         controller    droplets
+  9025                      tcp   router      controller    stackato-rest
+  9026                      tcp   all nodes   controller    stackato-rest
   ==================        ====  =========== ============= ================
 
 
