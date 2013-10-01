@@ -264,13 +264,28 @@ Specifies required modules, and allows the installation of additional OS package
 OS Packages
 ~~~~~~~~~~~
 
-For OS packages, two subsections are available, ``staging:`` and ``running:``. 
-For each subsection, the following sections can be specified: ``ubuntu:`` and ``redhat:``.
+OS packages can be added in an ``ubuntu:`` block within a ``staging:``
+and/or ``running:`` block. Plain strings are treated as package names::
 
-Plain strings are treated as package names. If your account has been
-given sudo privileges for application containers, you can use arrays to
-add additional repositories, overriding repository restrictions set by
-admins.
+  requirements:
+    staging:
+      ubuntu:
+        - libfoo-dev
+    running:
+      ubuntu:
+        - libfoo
+        - some-app
+
+To add the OS requirements to both the staging and running phases add
+the ``ubuntu:`` block directly beneath the ``requirements:`` key::
+
+  requirements:
+    ubuntu:
+      - libfoo-dev
+
+If your account has been given sudo privileges in application
+containers, you can use arrays to add additional repositories,
+overriding repository restrictions set by admins.
 
 Example::
 
@@ -281,14 +296,7 @@ Example::
         - golang-stable
     running:
       ubuntu:
-        - libfoo1
-
-OS requirements can be listed directly below the ``requirements:`` key and will 
-then apply to both the staging and running phases::
-
-  requirements:
-    ubuntu:
-      - libfoo1
+        - libfoo
 
 
 Language Modules
