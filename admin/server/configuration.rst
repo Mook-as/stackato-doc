@@ -584,8 +584,6 @@ or use your own (signed or self-signed) certificate.
 Using your own SSL certificate
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**For router2g (default router):**
-
 On all router nodes, upload your *.key* file to the */etc/ssl/private/*
 dirctory and your *.crt* file to */etc/ssl/certs/*. Change the following
 settings in */s/vcap/stackato-router/config/local.json* to point to
@@ -594,23 +592,6 @@ the new files::
   "sslKeyFile": "/etc/ssl/private/example.key",
   "sslCertFile": "/etc/ssl/certs/example.crt",
 
-**For Nginx (legacy router):**
-
-On all router nodes, edit the following block in
-``~/stackato/etc/nginx/stackato.conf`` (symlinked to
-``/etc/nginx/sites/enabled/stackato.conf``)::
-
-  server {
-      listen   443;
-      server_name  *.stackato-xxxx.local;
-
-      ssl  on;
-      ssl_certificate     /etc/ssl/certs/stackato.crt;
-      ssl_certificate_key /etc/ssl/private/stackato.key;
-
-Update the server name with current host and domain, then specify your
-own certificates on the ``ssl_certificate`` and ``ssl_certificate_key``
-lines.
 
 .. _server-config-ssl-cert-chain:
 
@@ -676,16 +657,11 @@ Following that, run::
 	$ openssl x509 -noout -fingerprint -text < host.crt > host.info
 	$ chmod 400 host.key host.crt
 
+To get the router to use the new certificate and key files, follow the
+steps in the :ref:`Using your own SSL certificate
+<server-config-ssl-cert-own-use>` section above.
+
 .. MARKUP Note that spaces are necessary below for correct alignment on display.
-
-Once you have a `host.crt` and `host.key`, change the
-``ssl_certificate`` and ``ssl_certificate_key`` lines in `stackato.conf`
-to reference them::
-
-	# ssl_certificate           /etc/ssl/certs/stackato.crt;
-	ssl_certificate         /home/stackato/hostname.mydomain.com/host.crt;
-	# ssl_certificate_key       /etc/ssl/private/stackato.key;
-	ssl_certificate_key     /home/stackato/hostname.mydomain.com/host.key;
 
 With any self-signed SSL certificate, you will get browser warning
 messages. The certificate will need to be added to the browser
