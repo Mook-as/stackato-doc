@@ -45,6 +45,11 @@ The Router is configured using :ref:`kato config
   
     $ kato config set router2g prevent_x_spoofing true --json
 
+* **session_affinity** (true|false): Enable sticky session support on
+  the router. Overrides normal round-robin load balancing for clients
+  with JSESSIONID or SESSIONID set, routing those clients to specific
+  application instances. Disabled by default.
+
 * **x_frame_options**: Prevent clickjacking on requests with
   `X-Frame response header <https://developer.mozilla.org/en-US/docs/HTTP/X-Frame-Options>`_
   configuration. Disabled if empty (default). Valid values are:
