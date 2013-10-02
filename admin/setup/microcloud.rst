@@ -46,10 +46,20 @@ Console <management-console>` in a browser or connect with the
     Once you've set up the primary Stackato admin account, use that
     account's password when logging in at the command line.
 
+.. _quickstart-config-nat:
+
+.. index:: NAT
+
+NAT vs. Bridged Networking
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. include:: ../common/nat.inc
+
+
 .. _quickstart-dns-mdns:
 
 DNS vs. mDNS
-------------
+^^^^^^^^^^^^
 
 By default, the Stackato VM broadcasts its generated hostname via
 multicast DNS. This mDNS/DNS-SD broadcast address (e.g.

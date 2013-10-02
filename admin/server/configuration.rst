@@ -5,22 +5,10 @@
 Detailed Configuration
 ======================
 
-.. _server-config-techniques:
+.. _server-config-general:
 
-.. index:: Server Configuration Techniques
-
-Techniques
-----------
-
-.. _server-config-nat:
-
-.. index:: NAT
-
-NAT vs. Bridged Networking
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. include:: ../common/nat.inc
-
+General
+-------
 
 .. _server-config-password:
 
@@ -39,6 +27,14 @@ Management Console pages (which could be one of :ref:`multiple
 Controller nodes <cluster-multi-controllers>`). In this case, it's best
 to log in to each node in the cluster to change the password manually
 with the ``passwd`` command.
+
+
+.. _server-config-network:
+
+.. index:: Network Setup
+
+Network Setup
+-------------
 
 .. _server-config-hostname:
 
@@ -545,8 +541,37 @@ nodes. For example::
 
 	app_http_proxy=http://192.168.0.99:3128
 
+
+
+.. _server-config-filesystem:
+
+VM Filesystem Setup
+-------------------
+
+The Stackato VM is distributed with a simple deafult partitioning
+scheme (i.e. everything but "/boot" mounted on "/").
+
+Additionally, some hypervisors (OpenStack/KVM) will start the VM with a
+relatively small disk (10GB).
+
+.. warning::
+  When setting up a production cluster, additional filesystem
+  configuration is necessary to prevent certain nodes from running out
+  of disk space.
+
+Some nodes in a production cluster may require additional mount points
+on external block storage for:
+
+* services (data and filesystem service nodes)
+* droplets (controller nodes)
+* containers (DEA and Stager nodes)
+
+Suggestions for mounting block storage and instructions for relocating
+data can be found in the :ref:`Persistent Storage
+<bestpractices-persistent-storage>` section.
+
 Stackato Data Services vs. High Availability Databases
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------------------------------
 
 Stackato data services do not offer any built-in redundancy. For
 business-critical data storage, a high-availability database or cluster
@@ -555,15 +580,18 @@ is recommended.
 To use an external database instead of the data services provided by
 Stackato, specify the database credentials directly in your application
 code instead of using the credentials from the :term:`VCAP_SERVICES`
-environment variable. 
+environment variable.
+
+To tie external databases to Stackato as a data service, see the
+examples in the :ref:`Adding System Services <add-service>` section.
 
 .. _server-config-https:
 
 .. index:: HTTPS
 .. index:: SSL
 
-HTTPS
------
+HTTPS & SSL
+-----------
 
 HTTPS mode provides access to the provisioned apps using wild card SSL
 certificates through the router or :term:`Nginx` web server.

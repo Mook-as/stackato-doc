@@ -62,7 +62,8 @@ v2.91.0 (Sept 30, 2013)
 * [99521] ``--no-stop`` option removed from ``kato role remove`` command.
 * [99745] ``kato config`` no longer supports node-specific config; ``--node`` option removed.
 * [100215] prevent crontab breakage caused by newlines in environment variables
-* Replaced Doozer with Redis 
+* Replaced Doozer with Redis.
+* [99518] Increased default filesystem service size to 500MB.
 
   
 v2.10.6 (June 10, 2013)
