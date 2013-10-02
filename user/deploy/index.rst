@@ -394,11 +394,7 @@ exists during the staging process, resources are copied to it and used when upda
 to the app are pushed.  Using :ref:`variable key substitution <stackato_yml-key-substitution>`,
 allows you to push multiple instances of the same app with their own bound services.
 Find an example of this process in the provided link above.
-.. warning::   
 
-    Key substitution for yaml key names is only available for client 1.4.3 and up.
-    See :ref:`min_version <stackato_yml-version>` section on how to enforce minimum client
-    versioning your stackato.yml file.
     
 You can also manually set the caching service name in the *stackato.yml* file.  Any application
 created using this stackato.yml file will then share a FOO-cache filesystem.  **This is NOT
