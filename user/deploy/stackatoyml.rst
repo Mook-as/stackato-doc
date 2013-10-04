@@ -51,15 +51,33 @@ Example::
     `hostname label <http://en.wikipedia.org/wiki/Hostname#Restrictions_on_valid_host_names>`_ 
     (i.e. containing only alphanumeric characters and hyphens).
     
+.. _stackato_yml-buildpack:
+
+buildpack:
+^^^^^^^^^^
+
+The Git repository URL for the specific :ref:`buildpack <buildpacks>`
+used to deploy the application. For example::
+
+    name: java-app
+    mem: 512M
+    buildpack: https://github.com/heroku/heroku-buildpack-java.git
+
+If unset, Stackato will check to see if the application triggers the
+``detect`` scripts in any of its :ref:`built-in buildpacks
+<buildpacks-built-in>`.
+
 .. _stackato_yml-framework:
 
 framework:
 ^^^^^^^^^^
 
-Allows the app to specify a framework and runtime to be used.
+Allows the app to specify a framework and runtime to be used. Specifying
+a value for the ``framework`` key triggers the use of the :ref:`Legacy
+Buildpack <buildpacks-built-in>`.
 
-type:
-~~~~~
+type (DEPRECATED):
+~~~~~~~~~~~~~~~~~~
 
 The framework to use.  Check ``stackato frameworks`` for a complete list of 
 available frameworks. If not specified, user may be prompted during 
@@ -68,8 +86,8 @@ available frameworks. If not specified, user may be prompted during
 
 .. _stackato_yml-runtime:
 
-runtime:
-~~~~~~~~
+runtime: (DEPRECATED)
+~~~~~~~~~~~~~~~~~~~~~
 
 The runtime to use.  Check ``stackato runtimes`` for a complete list of available 
 runtimes. If not specified, server will select the best option based on available 
@@ -84,8 +102,8 @@ Example::
 
 .. _stackato_yml-document-root:
 
-document-root
-~~~~~~~~~~~~~
+document-root: (DEPRECATED)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Overrides the default document-root setting ($HOME) for the web server.
 
@@ -106,8 +124,8 @@ The document-root must always be specified relative to $HOME (/app/app).
 
 .. _stackato_yml-start-file:
 
-start-file
-~~~~~~~~~~
+start-file: (DEPRECATED)
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 Set the main application filename.
 

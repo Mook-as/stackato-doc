@@ -9,6 +9,12 @@ depending on the application. Instructions for deploying the `Stackato
 sample applications <https://github.com/Stackato-Apps>`_ can be found in
 the `README.md` file of each app.
 
+.. warning::
+  In Stackato 3.0 (Cloud Foundry v2 API), application deployment is done
+  primarily using :ref:`Buildpacks <buildpacks>`. A special built-in 'Legacy'
+  buildpack handles Stackato v2 frameworks for existing application
+  configurations.
+
 To deploy an app to the Server VM, target the api endpoint URL with the
 :ref:`stackato client <client>`::
 

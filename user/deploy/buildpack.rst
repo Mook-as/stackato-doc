@@ -5,45 +5,63 @@
 Buildpacks
 ==========
 
-Stackato allows you to write custom frameworks by way of your own
-`buildpacks <https://devcenter.heroku.com/articles/buildpacks>`__. For
-a short introduction to writing buildpacks, see `this presentation
-<http://talks.codegram.com/heroku-buildpacks>`_.
+`Buildpacks <https://devcenter.heroku.com/articles/buildpacks>`__ are
+bundles of detection and configuration scripts which set up containers
+to run applications. For a short introduction to writing buildpacks, see
+`this presentation <http://talks.codegram.com/heroku-buildpacks>`_.
+
+.. note::
+  In Stackato 3.0 (Cloud Foundry v2 API) and later, application
+  deployment is done *primarily* using buildpacks, and the syntax for
+  specifying which buildpack to use has changed. Instead of using a
+  BUILDPACK_URL environment variable, set the buildpack's Git URL in
+  a``buildpack:`` key at the top level of *stackato.yml*.
 
 Deploy Using Buildpacks
 -----------------------
 
-Stackato Built-In Buildpacks
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Buildpacks are the recommended method for deploying applications to
+Stackato, replacing the built-in frameworks used in previous versions.
 
-* `Clojure <https://github.com/heroku/heroku-buildpack-clojure>`_ -
-  `unofficial documentation <https://devcenter.heroku.com/articles/clojure>`__
-        
-* `Go <https://github.com/kr/heroku-buildpack-go>`_ - `unofficial documentation <https://gist.github.com/299535bbf56bf3016cba>`__
-    
-* `Java <https://github.com/heroku/heroku-buildpack-java>`_ -
-  `unofficial documentation
-  <https://devcenter.heroku.com/categories/java>`__
-    
-* `Play! (Java and Scala)
-  <https://github.com/heroku/heroku-buildpack-play>`_ - `unofficial documentation <https://devcenter.heroku.com/articles/play>`__
+.. _buildpacks-built-in:
 
-* `Ruby/Rails <https://github.com/ActiveState/stackato-buildpack-ruby>`_ - `unofficial documentation <https://github.com/ActiveState/stackato-buildpack-ruby#readme>`__
+Built-In Buildpacks
+^^^^^^^^^^^^^^^^^^^
 
-In order to let Stackato use one of the above buildpacks, you need 
-to set the framework type in your stackato.yml. **Do not specify the runtime.**
-For example::
-  
-    framework:
-        type: buildpack
+For convenience and backwards compatibility, a few buildpacks are
+bundled with Stackato.
+
+* **Legacy**: A special meta-buildpack for deploying applications configured
+  for Stackato 2.10 (Cloud Foundry v1 API) and earlier without the need
+  for extensive reconfiguration.
+* `Python <https://github.com/ActiveState/stackato-buildpack-python>`__
+* `Java <https://github.com/cloudfoundry/java-buildpack>`__
+* `Node.js <https://github.com/cloudfoundry/heroku-buildpack-nodejs>`__
+* `Ruby <https://github.com/ActiveState/stackato-buildpack-ruby>`__
+
+To use the Legacy buildpack: specify the ``framework:`` key for
+the application framework you need (e.g. php, play, rails3, sinatra,
+java_web, java_ee, etc.). **Do not specify the runtime.**
+
+To use one of the other built-in buildpacks: omit the ``framework:``
+key. Stackato will cycle through the ``detect`` scripts of the built-in
+buildpacks prior to staging to match the code you are pushing.
 
 Custom Buildpacks
 ^^^^^^^^^^^^^^^^^
+
+To specify the exact buildpack to use for deploying your application,
+set a top-level ``buildpack:`` key in *stackato.yml* to the URL of the
+buildpack's Git repository. For example::
+
+    name: myrubyapp
+    mem: 256MB
+    buildpack: https://github.com/ActiveState/stackato-buildpack-ruby.git
+
 .. note::
-  Not all buildpacks work out of the box with Stackato due to
-  environmental differences with Heroku. Reliance on custom installed
-  runtimes or downloading of pre-built binaries are common reasons. It
-  is important to first test any buildpack before using it in
+  Not all Heroku buildpacks work with Stackato due to environmental
+  differences (e.g. relying on certain executables or libraires in
+  Heroku-specific locations). Test any buildpack before using it in
   production deployments.
 
 The following buildpacks are known to work with Stackato,
@@ -68,15 +86,6 @@ The following buildpacks are known to work with Stackato,
 
   * `Sphinx example <https://github.com/Stackato-Apps/sphinx-demo>`_
 
-In order to let Stackato use one of the above buildpacks, you need 
-to specify the git repo URL as a environment variable called ``$BUILDPACK_URL`` in your stackato.yml. For example:
-
-::
-
-    framework:
-        type: buildpack
-    env:
-        BUILDPACK_URL: git://github.com/<repo>.git
 
 Buildpack Examples
 ------------------
@@ -84,16 +93,14 @@ Buildpack Examples
 Pet-Clinic (Java)
 ^^^^^^^^^^^^^^^^^
 
-First, in ``stackato.yml`` you will need to define the framework type
-and to provide the buildpack url. Here is the pet-clinic stackato.yml::
+First, in ``stackato.yml`` you will need to define the the buildpack
+url. Here is the pet-clinic stackato.yml::
 
     name: pet-clinic
     mem: 512M
-    framework:
-        type: buildpack
+    buildpack: https://github.com/heroku/heroku-buildpack-java.git
     services:
-        mysql-spring:
-            type: mysql
+      ${name}-db: mysql
 
 As it is a buildpack application, you also need to create a ``Procfile``
 in which you declare how you want your application to be executed. Here
@@ -130,41 +137,6 @@ And finally, add the jetty dependency in your ``pom.xml`` in order to run your a
             </plugin>
         </plugins>
     </build>
-
-Kandan (Ruby)
-^^^^^^^^^^^^^
-
-In ``stackato.yml`` you will need to define:
-
-* framework type
-* buildpack url
-* :term:`PROCESSES_WEB`
-* some post-staging hooks such as precompile assets and bootstrap
-
-Here is the kandan stackato.yml::
-
-    name: kandan
-    instances: 1
-    framework:
-        type: buildpack
-        runtime: ruby19
-    env:
-        BUILDPACK_URL: git://github.com/ActiveState/stackato-buildpack-ruby.git
-    processes:
-        web: bundle exec rails server
-    mem: 256M
-    services:
-        pg-kandan: postgresql
-        fs-kandan: filesystem
-    hooks:
-        post-staging:
-        # create attachments directory in the shared filesystem and link to them
-        - mkdir -p $STACKATO_FILESYSTEM/attachments
-        - mkdir -p public/system
-        - ln -s "$STACKATO_FILESYSTEM"/attachments public/system/attachments
-        # Precompile assets
-        - bundle exec rake assets:precompile
-        - bundle exec rake kandan:bootstrap
 
 
 Asset Caching
