@@ -15,8 +15,8 @@ Release Notes
   See `release-notes.rst` in git for the up-to-date version of this file.
         `<https://github.com/ActiveState/stackato-doc>`_
 
-v2.91.0 (Sept 30, 2013)
------------------------
+v2.91.0 (Oct. 2013)
+-------------------
 
 * Logyard updates:
 
