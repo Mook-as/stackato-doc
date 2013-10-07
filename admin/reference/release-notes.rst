@@ -31,7 +31,8 @@ v2.91.0 (Oct. 2013)
     cope with extremely large application log files
   * [99571] Application log drain URLs now properly sanitized (v2.10.6 'logdrain-sanitize' patch)
   * [100512] Fix a leak in growing TCP connections causing systail to crash (inotify panic), and logyard drains to malfunction.
-  * [99435] New ``kato log drain status`` and ``stackato drain list`` commands for showing drain status 
+  * [99435] New ``kato log drain status`` and ``stackato drain list`` commands for showing drain status
+  * [100507] New WARNING log message on drain retries
   
 * Management Console:
 
