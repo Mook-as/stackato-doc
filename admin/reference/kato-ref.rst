@@ -17,7 +17,6 @@ Usage
 Commands
 --------
 
-* :ref:`admin <kato-command-ref-admin>` DEPRECATED: Use "kato config" instead
 * :ref:`config <kato-command-ref-config>` Manipulate configuration values of Stackato components.
 * :ref:`data <kato-command-ref-data-export>` Import or export Stackato system data to or from clusters/nodes.
 * :ref:`debug <kato-command-ref-debug-configwatch>` Commands for debugging for Stackato internals.
@@ -38,22 +37,6 @@ Commands
 * :ref:`status <kato-command-ref-status>` List configured roles and their current status across the cluster.
 * :ref:`stop <kato-command-ref-stop>` Stop Stackato or individual roles.
 * :ref:`version <kato-command-ref-version>` Display the version of Stackato being run.
-
-----
-
-.. _kato-command-ref-admin:
-
-**admin** [**options**] **grant** *<email>...*
-
-**admin** [**options**] **revoke** *<email>...*
-
-  DEPRECATED: Use "kato config" instead
-    
-    kato config (push|pop) cloud_controller admins <email>
-
-  **-h** **--help**                       Show help information
-
-
 
 ----
 
@@ -153,6 +136,10 @@ Commands
   **--aok-config**                        Include AOK's configuration 
 
   **--exclude-aok-config**                Do not include AOK's configuration (default)
+
+  **--stackato-rest-db**                  Include Stackato Rest's database
+
+  **--exclude-stackato-rest-db**          Do not include Stackato Rest's database
 
   **--filesystem**                        Include the filesystem service
 
@@ -289,6 +276,10 @@ Commands
   **--aok-config**                        Include AOK's configuration 
 
   **--exclude-aok-config**                Do not include AOK's configuration (default)
+
+  **--stackato-rest-db**                  Include Stackato Rest's database
+
+  **--exclude-stackato-rest-db**          Do not include Stackato Rest's database
 
   **--filesystem**                        Include the filesystem service
 
@@ -486,6 +477,10 @@ Commands
     # Add a drain to forward all application logs as json
     
     kato log drain add -f json -p apptail app_splunk udp://logs.splunk.com:1235/
+  
+    # Add a drain to forward all application and system logs as json
+  
+    kato log drain add -f json -p apptail,systail app_sys_splunk udp://logs.splunk.com:1235/
     
     # Add a drain with custom format,
     
@@ -495,7 +490,7 @@ Commands
 
   **-f** **--format** *<format>*          Message format
 
-  **-p** **--prefix** *<prefix>*          Message key prefix; possible values: systail, event, apptail
+  **-p** **--prefix** *<prefix>*          Message key prefix; possible values: systail, event, apptail (comma-separated, no spaces)
 
 
 
@@ -521,6 +516,10 @@ Commands
 
   **-h** **--help**                       Show help information
 
+  **-y** **--yaml**                       Output at YAML
+
+  **-j** **--json**                       Output at JSON
+
 
 
 ----
@@ -534,6 +533,10 @@ Commands
   **-h** **--help**                       Show help information
 
   **-n** **--not-running**                Show only drains not running
+
+  **-y** **--yaml**                       Output at YAML
+
+  **-j** **--json**                       Output at JSON
 
 
 
@@ -617,6 +620,24 @@ Commands
 
   **-v** **--verbose**                    Show process information when starting/stopping roles
 
+  **-f** **--force**                      Forces this node to attach to a core node, ignoring any version mismatches
+
+
+
+----
+
+.. _kato-command-ref-node-detach:
+
+**node** **detach** [**options**]
+
+  Detach this node from a stackato core node
+
+  **-h** **--help**                       Show help information
+
+  **-s** **--start**                      Automatically start processes after detaching
+
+  **-v** **--verbose**                    Show process information when starting/stopping roles
+
 
 
 ----
@@ -644,6 +665,8 @@ Commands
   Migrate the node configuration from old node to a new node
 
   **-h** **--help**                       Show help information
+
+  **-r** **--no-restart**                 Do not restart roles after migration
 
 
 
@@ -701,6 +724,22 @@ Commands
 
 ----
 
+.. _kato-command-ref-node-retire:
+
+**node** **retire** [**options**]
+
+  Retires a node from the cluster
+
+  **-h** **--help**                       Show help information
+
+  **-n** **--node** *<node-id>*           Retire the provided node, local node is used if
+
+                                          not specified
+
+
+
+----
+
 .. _kato-command-ref-node-setup-core:
 
 **node** **setup** **core** [*<endpoint>*]
@@ -719,13 +758,15 @@ Commands
 
 .. _kato-command-ref-node-setup-firstuser:
 
-**node** **setup** **firstuser** [**options**] *<email>*
+**node** **setup** **firstuser** [**options**] *<email>* *<org>*
 
 **setup** **--help**
 
   First user setup.
 
   *<email>*                               First user's email.
+
+  *<org>*                                 First user's organization.
 
 
   **-h** **--help**                       Show help information
@@ -737,6 +778,10 @@ Commands
                                           your unix password will be updated to this.
 
                                           Will be prompted for if not given.
+
+  **-u** **--username** *<username>*      First user's username.
+
+                                          Will be the provided email if not given.
 
 
 
@@ -782,13 +827,19 @@ Commands
 
 **op** **--help**
 
-**op** **remap_hosts** *<old-hostname>* *<new-hostname>*
+**op** **custom_ssl_cert** **install** *<key-path>* *<cert-path>* *<domain>* [**--wildcard-subdomains**] [**--update**]
+
+**op** **custom_ssl_cert** **remove** *<domain>*
+
+**op** **custom_ssl_cert** **list**
+
+**op** **dhcp**
+
+**op** **defer** *<command>* [**--run-as-root**] [**--reset**]
+
+**op** **import_from_yaml_files**
 
 **op** **max_client_upload** *<max-size>*
-
-**op** **upstream_proxy** **set** *<proxy-address>* [**-u** *<user>*] [**-p** *<pass>*]
-
-**op** **upstream_proxy** **delete**
 
 **op** **regenerate** **ssl_cert**
 
@@ -796,47 +847,57 @@ Commands
 
 **op** **regenerate** **postgresql** [**--no-restart**]
 
-**op** **set_timezone** [**--timezone** *<TZ>*]
+**op** **regenerate** **stackato-rest-auth**
 
-**op** **update_hostsfile**
+**op** **regenerate** **cloud-controller-client-auth**
 
-**op** **static_ip**
+**op** **regenerate** **token-signing-secret**
 
-**op** **dhcp**
-
-**op** **defer** *<command>* [**--run-as-root**] [**--reset**]
+**op** **remap_hosts** *<old-hostname>* *<new-hostname>*
 
 **op** **run_deferred**
 
-**op** **import_from_yaml_files**
+**op** **set_timezone** [**--timezone** *<TZ>*]
+
+**op** **static_ip** [**--no-restart**]
+
+**op** **upstream_proxy** **set** *<proxy-address>* [**-u** *<user>*] [**-p** *<pass>*]
+
+**op** **upstream_proxy** **delete**
+
+**op** **update_hostsfile**
 
   Various operational commands
 
-  **remap_hosts**                         Change the hostname to look for when remapping
+  **custom_ssl_cert**                     Allows admin configuration of custom SSL certificates
 
-  **max_client_upload**                   Set the maximum upload size in MB
+                                          to be used in conjunction with router2g and deployed
 
-  **upstream_proxy**                      Configure Stackato to use an external or upstream proxy
-
-                                          server
-
-  **regenerate**                          Regenerate the configuration for a process
-
-  **set_timezone**                        Change the default system timezone for the host machine
-
-                                          and deployed apps.
-
-  **update_hostsfile**                    Updates the /etc/hosts file with the endpoint URI mapped
-
-                                          to the CC's internal IP
-
-  **static_ip**                           Configures this node to use a static IP
+                                          applications.
 
   **dhcp**                                Configures this node's networking to use DHCP
 
   **defer**                               Defers a kato command to be run by 'op run_deferred'
 
+  **max_client_upload**                   Set the maximum upload size in MB
+
+  **regenerate**                          Regenerate the configuration for a process
+
+  **remap_hosts**                         Change the hostname to look for when remapping
+
   **run_deferred**                        Runs any previously deferred kato commands
+
+  **set_timezone**                        Change the default system timezone for the host machine
+
+  **static_ip**                           Configures this node to use a static IP
+
+  **upstream_proxy**                      Configure Stackato to use an external or upstream proxy
+
+                                          server and deployed apps.
+
+  **update_hostsfile**                    Updates the /etc/hosts file with the endpoint URI mapped
+
+                                          to the CC's internal IP
 
 
   **-h** **--help**                       Show help information
@@ -862,6 +923,10 @@ Commands
 **patch** **install** *<patchname>*
 
 **patch** **reset**
+
+**patch** **update**
+
+**patch** **reinstall** *<patchname>*
 
   Update a Stackato cluster with post-release fixes.
 
