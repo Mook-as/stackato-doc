@@ -50,6 +50,7 @@ v2.91.0 (Oct. 2013)
   
 * Python:
 
+  * Python 3.3 support, via ActivePython 3.3.2.0
   * Upgraded to ActivePython 2.7.5.6
   
 * [98649] ``kato process stop fence`` now correctly stops fence process.
