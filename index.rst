@@ -32,7 +32,9 @@ audiences:
   * app deployment is now primarily done using :ref:`buildpacks <buildpacks>`
   * some keys in :ref:`stackato.yml <stackato_yml>` are deprecated
   * the client reference is out-of-date - use ``stackato help ...``
-  * :ref:`Groups <groups>` have been replaced with `Organizations and Spaces <http://docs.cloudfoundry.com/docs/using/managing-apps/orgs-and-spaces.html>`__
+  * :ref:`Groups <using-groups>` have been replaced with `Organizations and
+    Spaces
+    <http://docs.cloudfoundry.com/docs/using/managing-apps/orgs-and-spaces.html>`__
 
 
 Admin Guide
