@@ -31,24 +31,25 @@ your hypervisor:
 * :ref:`EC2 Security Group Settings <server-vm-ec2-firewall>`
 * :ref:`HP Cloud ServicesSecurity Group Settings <server-vm-hpcs-firewall>`
 
-If you wish to restrict ports between some nodes (recommended only if
-you do not have the option to use security groups), the following
-summary describes which ports are used by which services:
+If you wish to restrict ports between some nodes (e.g. if you do not
+have the option to use security groups), the following summary describes
+which ports are used by which components:
 
-  ==================        ====  =========== ============= ================
-  Port Range                Type  Config on   Inbound       Required by
-  ==================        ====  =========== ============= ================
-  0 - 65535 (all)           tcp   dea         controller    ``stackato ssh``
-  4222                      tcp   controller  all nodes     :term:`NATS`
-  5454                      tcp   controller  all nodes     redis
-  7000 - 7999               tcp   all nodes   all nodes     ``kato log tail``
-  8046                      tcp   controller  all nodes     :term:`doozerd`
-  9001                      tcp   all nodes   controller    :term:`supervisord`
-  9022                      tcp   controller  dea           droplets
-  9022                      tcp   dea         controller    droplets
-  9025                      tcp   router      controller    stackato-rest
-  9026                      tcp   all nodes   controller    stackato-rest
-  ==================        ====  =========== ============= ================
+  ==================        ====  ===========   ============= ================
+  Port Range                Type  Destination   Source        Required by
+  ==================        ====  ===========   ============= ================
+  0 - 65535 (all)           tcp   dea           controller    ``stackato ssh``
+  4222                      tcp   controller    all nodes     :term:`NATS`
+  5454                      tcp   controller    all nodes     redis
+  7000 - 7999               tcp   all nodes     all nodes     ``kato log tail``
+  8046                      tcp   controller    all nodes     :term:`doozerd`
+  9001                      tcp   all nodes     controller    :term:`supervisord`
+  9022                      tcp   controller    dea           droplets
+  9022                      tcp   dea           controller    droplets
+  9025                      tcp   router        controller    stackato-rest
+  9026                      tcp   all nodes     controller    stackato-rest
+  32768 - 61000             tcp   service nodes controller    service gateways
+  ==================        ====  ============= ============= ================
 
 
 If you subscribe to the principle of "defense in depth", each node can
