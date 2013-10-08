@@ -36,12 +36,12 @@ Log streams are handled by three processes which run on all Stackato nodes:
 * **systail**: sends system logs (/s/log/\*, etc.) to **logyard** to be
   in turn forwarded to drains
 
-* **cloud_events**: listens for all system logs and extracts vital events
+* **logyard_sieve**: listens for all system logs and extracts vital events
   back to **logyard**
 
 **apptail** is an additional process which runs only on DEA and Stager
 nodes. It sends user application logs to **logyard**, injecting relevant
-application-specific events from the **cloud_events** stream.
+application-specific events from the **logyard_sieve** stream.
 
 
 .. _logging-drains:
@@ -306,7 +306,7 @@ systail
   * avahi_publisher
   * cc_nginx
   * cloud_controller
-  * cloud_events
+  * logyard_sieve
   * dea
   * doozerd
   * aok
@@ -494,4 +494,4 @@ These have access to a number logs streams which are not available
 via ``kato log``.
 
 Use ``logyard-cli stream debug`` to monitor only the Logyard-related log
-activity. It includes logyard, apptail, systail, and cloud_events. 
+activity. It includes logyard, apptail, systail, and logyard_sieve. 
