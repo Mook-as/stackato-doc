@@ -20,7 +20,7 @@ v2.91.0 (Oct. 2013)
 
 * Logyard updates:
 
-  * [98998] Build with Go 1.1
+  * [99435] New ``kato log drain status`` command for showing drain status
   * [98325] Move drains from doozer to redis
   * [98687] Add "AppGroup" field to app log stream
   * [98836] Add "HumanTime" field to systail log stream
@@ -31,8 +31,8 @@ v2.91.0 (Oct. 2013)
     cope with extremely large application log files
   * [99571] Application log drain URLs now properly sanitized (v2.10.6 'logdrain-sanitize' patch)
   * [100512] Fix a leak in growing TCP connections causing systail to crash (inotify panic), and logyard drains to malfunction.
-  * [99435] New ``kato log drain status`` and ``stackato drain list`` commands for showing drain status
   * [100507] New WARNING log message on drain retries
+  * [98998] Compile with Go 1.1
   
 * Management Console:
 
