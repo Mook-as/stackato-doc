@@ -60,11 +60,11 @@ buildpack's Git repository. For example::
 
 .. note::
   Not all Heroku buildpacks work with Stackato due to environmental
-  differences (e.g. relying on certain executables or libraires in
+  differences (e.g. relying on certain executables or libraries in
   Heroku-specific locations). Test any buildpack before using it in
   production deployments.
 
-The following buildpacks are known to work with Stackato,
+The following buildpacks are known to work with Stackato:
 
 * `Jekyll <https://github.com/troytop/stackato-buildpack-jekyll>`_
 * `JRuby <https://github.com/ActiveState/heroku-buildpack-jruby>`_
