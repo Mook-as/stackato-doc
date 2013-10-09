@@ -286,7 +286,7 @@ Examples:
 
 .. _api-apps-name-stackato_log:
 
-/app/<NAME>/stackato_log?num=<N>
+/apps/<NAME>/stackato_log?num=<N>
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
