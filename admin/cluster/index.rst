@@ -109,7 +109,7 @@ To set the hostname, run:
 
     .. parsed-literal::
 
-	$ kato node rename *hostname.example.com*
+	$ kato node rename *hostname.example.com* --no-restart
 
 This hostname will become the basename of the "API endpoint" address
 used by clients (e.g. "https://api.hostname.example.com").
