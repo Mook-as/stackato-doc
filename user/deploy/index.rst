@@ -383,9 +383,9 @@ the following methods:
 Caching Staging Assets
 ----------------------
 
-For apps using Python and Buildpack, it is possible to cache assets required for staging.  This
-speeds up the deployment of updates because the resources do not need
-to be downloaded and/or compiled each time.
+For apps using the :ref:`Legacy buildpack <buildpacks-built-in>`, it is possible
+to cache assets required for staging.  This speeds up the deployment of updates
+because the resources do not need to be downloaded and/or compiled each time.
 
 In order to make this happen, add a ``filesystem:`` service named
 ``${name}-cache`` to your *stackato.yml* file where ``${name}`` is your

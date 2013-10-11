@@ -15,7 +15,7 @@ to run applications. For a short introduction to writing buildpacks, see
   deployment is done *primarily* using buildpacks, and the syntax for
   specifying which buildpack to use has changed. Instead of using a
   BUILDPACK_URL environment variable, set the buildpack's Git URL in
-  a``buildpack:`` key at the top level of *stackato.yml*.
+  a ``buildpack:`` key at the top level of *stackato.yml*.
 
 Deploy Using Buildpacks
 -----------------------
@@ -39,9 +39,14 @@ bundled with Stackato.
 * `Node.js <https://github.com/cloudfoundry/heroku-buildpack-nodejs>`__
 * `Ruby <https://github.com/ActiveState/stackato-buildpack-ruby>`__
 
-To use the Legacy buildpack: specify the ``framework:`` key for
-the application framework you need (e.g. php, play, rails3, sinatra,
-java_web, java_ee, etc.). **Do not specify the runtime.**
+To use the Legacy buildpack: specify the ``framework:`` ``type:`` for your
+application (e.g. php, play, rails3, sinatra, java_web, java_ee, etc.). You can
+optionally set a specific ``runtime:`` as well. For example::
+
+    name: bottle-py3
+    framework:
+      type: python
+      runtime: python32  
 
 To use one of the other built-in buildpacks: omit the ``framework:``
 key. Stackato will cycle through the ``detect`` scripts of the built-in
@@ -139,9 +144,3 @@ And finally, add the jetty dependency in your ``pom.xml`` in order to run your a
     </build>
 
 
-Asset Caching
-^^^^^^^^^^^^^
-
-To speed up deployment, utilize **Asset Caching** to store resources downloaded
-by the buildpack.  See :ref:`Caching Staging Assets <caching-staging-assets>` for more
-details.

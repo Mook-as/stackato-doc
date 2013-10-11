@@ -535,8 +535,14 @@ processes:
 web:
 ~~~~
 
-This is how you specify a custom command to launch your web application
-or to pass custom arguments to uWSGI. For example::
+.. note:: 
+
+  Used with the :ref:`Legacy buildpack <buildpacks-built-in>` only. When using
+  other buildpacks, create a `Procfile <https://devcenter.heroku.com/articles/procfile>`__ 
+  in the application's root directory.
+
+Specify a custom command to launch your web application or to pass custom
+arguments to uWSGI. For example::
 
   processes:
     web: python3.2 app.py
