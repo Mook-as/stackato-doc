@@ -284,7 +284,10 @@ using ``cron`` and ``logrotate``:
     env:
       STACKATO_CRON_INSTANCES: all
     cron:
-      - 0 1 * * * /usr/sbin/logrotate /app/app/app-logrotate.conf
+      - 0 1 * * * /usr/sbin/logrotate --status /app/app/logrotate-status /app/app/app-logrotate.conf
+      
+   The ``--status`` option must be set because the ``stackato`` user
+   does not have permission to update the default status file.
 
 2. Add an *app-logrotate.conf* file to the base directory of your
    application to specify which log files to rotate, and and which
