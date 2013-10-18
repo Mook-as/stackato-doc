@@ -728,13 +728,15 @@ Commands
 
 **node** **retire** [**options**]
 
-  Retires a node from the cluster
+  Gracefully retires a DEA node from the cluster. New instances of the
+  apps are started on other available DEAs before the retiring DEA is shut
+  down. 
 
   **-h** **--help**                       Show help information
 
-  **-n** **--node** *<node-id>*           Retire the provided node, local node is used if
+  **-n** **--node** *<node-id>*           Retire the specified DEA node, local node is
 
-                                          not specified
+                                          used if not specified
 
 
 
@@ -818,6 +820,16 @@ Commands
   **-s** **--no-start**                   Do not auto start processes
 
   **-v** **--verbose**                    Show process information
+
+
+
+----
+
+.. _kato-command-ref-node-version:
+
+**node** **version** [**options**] [*<node-IP>*]
+
+  **-h** **--help**                       Show help information.
 
 
 
