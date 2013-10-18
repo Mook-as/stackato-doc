@@ -13,10 +13,8 @@ The Stackato :term:`micro cloud` runs with the following ports exposed:
   443       tcp   https
   3306      tcp   mysql
   5432      tcp   postgresql
+  5678      tcp   DEA directory server
   9001      tcp   supervisord
-  9025      tcp   stackato-rest
-  9026      tcp   stackato-rest
-  12345     tcp   netbus
   ========  ====  =======================
 
 On a production cluster, or a micro cloud running on a cloud hosting
@@ -38,6 +36,7 @@ which ports are used by which components:
   ==============  ====  ===========  =============  ==================
   Port Range      Type  Source       Destination    Required by
   ==============  ====  ===========  =============  ==================
+  22              tcp   all nodes    all nodes      ssh/scp/sshfs
   41000 - 61000   tcp   controller   service nodes  service gateways
   4222            tcp   all nodes    controller     :term:`NATS`
   5454            tcp   all nodes    controller     redis
@@ -45,17 +44,15 @@ which ports are used by which components:
   7000 - 7999     tcp   all nodes    all nodes      ``kato log tail``
   7474            tcp   all nodes    all nodes      config (redis)
   9001            tcp   controller   all nodes      :term:`supervisord`
-  9022            tcp   dea          controller     droplets
-  9022            tcp   controller   dea            droplets
+  9022            tcp   dea, stager  controller     droplets
+  9022            tcp   controller   dea, stager    droplets
   9025            tcp   controller   router         stackato-rest
   9026            tcp   controller   all nodes      stackato-rest
   ==============  ====  ===========  =============  ==================
 
-
-If you subscribe to the principle of "defense in depth", each node can
-also be internally firewalled using
-`iptables <http://manpages.ubuntu.com/manpages/man8/iptables.8.html>`_
-to apply the above rules.
+Each node can be internally firewalled using `iptables
+<http://manpages.ubuntu.com/manpages/man8/iptables.8.html>`_ to apply
+the above rules.
 
 Comments:
 
@@ -64,19 +61,20 @@ Comments:
 * Port 4222 should be open on all nodes for :term:`NATS` communication
   with the MBUS IP (core Cloud Controller)
 
-* Port 9022 should also be open to allow transfer of droplets to and
-  from the Cloud Controller.
+* Port 9022 should be open to allow transfer of droplets to and
+  from the DEAs, Stagers, and Cloud Controllers.
 
 * Port 7845 is required if you plan to stream logs from all nodes
   in a cluster using ``kato log tail`` command.
 
-* ``stackato ssh`` requires connections from the Cloud Controller to DEA
-  nodes on ports 49156 - 65535.
+* External access on port 22 can be restricted if necessary to the
+  subnet you expect to connect from. If you are providing the ``stackato
+  ssh`` feature to your users (recommended), define a distinct security
+  group for the public-facing Cloud Controller node that is the same as
+  a generic Stackato group, but has the additional policy of allowing
+  SSH (Port 22) from hosts external to the cluster.
 
-* Port 22 can be restricted if necessary to the subnet you expect to
-  connect from. If you are providing the ``stackato ssh`` feature to
-  your users (recommended), define a distinct security group for the
-  public-facing Cloud Controller node that is the same as a generic
-  Stackato group, but has the additional policy of allowing SSH (Port
-  22) from hosts external to the cluster.
-
+* Within the cluster, port 22 should be open on all hosts to allow
+  administrative access over SSH. Port 22 is also used to mount
+  Filesystem service partitions in application containers on the DEA
+  nodes (via SSHFS).
