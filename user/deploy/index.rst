@@ -376,41 +376,6 @@ the following methods:
     $ unset STACKATO_TARGET
 
 
-.. index:: Staging cache
-
-.. _caching-staging-assets:
-
-Caching Staging Assets
-----------------------
-
-For apps using the :ref:`Legacy buildpack <buildpacks-built-in>`, it is possible
-to cache assets required for staging.  This speeds up the deployment of updates
-because the resources do not need to be downloaded and/or compiled each time.
-
-In order to make this happen, add a ``filesystem:`` service named
-``${name}-cache`` to your *stackato.yml* file where ``${name}`` is your
-application name::
-
-    name: FOO
-    services:
-        ${name}-cache: filesystem
-
-This will create a filesystem service named FOO-cache.  If this filesystem service
-exists during the staging process, resources are copied to it and used when updates
-to the app are pushed.  Using :ref:`variable key substitution <stackato_yml-key-substitution>`,
-allows you to push multiple instances of the same app with their own bound services.
-Find an example of this process in the provided link above.
-
-    
-You can also manually set the caching service name in the *stackato.yml* file.  Any application
-created using this stackato.yml file will then share a FOO-cache filesystem.  **This is NOT
-recommended.  See below.**
-
-.. note::
-    To use this feature, the size of the application must not exceed the
-    the maximum size of the filesystem service. The default filesystem
-    size is 100MB, but this can be expanded by a Stackato admin.
-
 .. index:: Persistent Sessions
 .. index:: Session Persistence
 .. index:: Sticky Sessions
