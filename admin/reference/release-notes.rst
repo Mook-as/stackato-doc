@@ -15,8 +15,14 @@ Release Notes
   See `release-notes.rst` in git for the up-to-date version of this file.
         `<https://github.com/ActiveState/stackato-doc>`_
 
-v2.91.0 (Oct. 2013)
--------------------
+v3.0 Beta (Oct. 2013)
+---------------------
+
+* MongoDB client updated to 2.4.1 in application container template 
+
+
+v2.91.0 (Oct. 10, 2013)
+-----------------------
 
 * Logyard updates:
 
