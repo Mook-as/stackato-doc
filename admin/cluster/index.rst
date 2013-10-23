@@ -19,10 +19,7 @@ A Stackato :term:`node` can take on one or more of the following roles:
 
 * :ref:`primary <architecture-primary>`
 * :ref:`controller <architecture-controller>`
-* :ref:`base <architecture-base>`
-* :ref:`health manager <architecture-health-manager>`
 * :ref:`router <architecture-router>`
-* :ref:`stager <architecture-stager>`
 * :ref:`dea <architecture-dea>`
 * mdns (intended for micro clouds)
 * :ref:`filesystem <persistent-file-system>`

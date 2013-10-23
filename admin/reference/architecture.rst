@@ -18,6 +18,59 @@ nodes), Stager, or specific database services.
 Roles
 -----
 
+.. index:: Base
+
+.. _architecture-base:
+
+Base
+^^^^
+
+The Base role comprises of several processes that are necessary for any node to
+function as part of a Stackato cluster, and is mostly responsible for
+communicating with the primary node and forwarding log information.
+
+This role cannot be disabled on any node.
+
+.. index:: Primary
+.. index:: Health Manager
+
+.. _architecture-primary:
+
+Primary
+^^^^^^^
+
+The Primary role is a mandatory part of a Core node (or micro cloud) and runs a
+number of critical system processes, including the Health Manager.
+
+.. _architecture-health-manager:
+
+The Health Manager keeps track of the apps on each DEA and provides
+feedback on the number currently running. It works in conjunction with
+the Cloud Controller and must be run on the same VM.
+
+In a cluster setup, all nodes performing other roles are attached to the MBUS IP
+of the Core node. Every cluster must include exactly one Primary role.
+
+.. index:: Controller
+
+.. _architecture-controller:
+
+Cloud Controller
+^^^^^^^^^^^^^^^^
+
+The Controller manages most of the operations of a Stackato
+system. It hosts the Management Console, provides the API endpoint for
+client access, manages the cloud_controller process, provisions services, 
+dispatches applications for staging and deployment, and (with the Health Manager) 
+tracks the availability of DEA nodes.
+
+In a cluster setup, the Controller role must run on the :ref:`Core node
+<server-cluster-core-node>` that all other VM's in the cluster connect to. 
+
+A single Controller is sufficient for small and mid-sized
+clusters, but :ref:`multiple Controllers <cluster-multi-controllers>`
+can be configured if neccessary for larger implementations.
+
 .. index:: Router
 
 .. _architecture-router:
@@ -33,50 +86,6 @@ the other components.
 When additional DEAs are in use and traffic increases, additional
 routers can be added to handle the load. This will require a :ref:`load
 balancer <cluster-load-balancer>` to be available in the cluster.
-
-.. index:: Primary
-
-.. _architecture-primary:
-
-Primary
-^^^^^^^
-
-The primary node is the main entry point for a Stackato setup.  It is a mandatory part of
-a Core node and runs a number of system critical processes.
-
-In a cluster setup, this will be the node that nodes performing other roles are attached to.  Every cluster must include exactly one Primary node.
-
-.. index:: Base
-
-.. _architecture-base:
-
-Base
-^^^^
-
-The base role comprises of several processes that are necessary for any node to function as part of a stackato cluster, and is mostly responsible for communicating with the primary node and forwarding log information.
-
-This role cannot be disabled on any node.
-
-.. index:: Controller
-
-.. _architecture-controller:
-
-Cloud Controller
-^^^^^^^^^^^^^^^^
-
-The Controller manages most of the operations of a Stackato
-system. It hosts the Management Console, provides the API endpoint for
-client access, manages the cloud_controller process, provisions services, 
-dispatches applications for staging and deployment, and (with the Health Manager) 
-tracks the availability of DEA nodes.
-
-In the case of a cluster setup, it resides on the :ref:`Core node
-<server-cluster-core-node>` that all other VM's in the cluster connect
-to. 
-
-A single Controller is sufficient for small and mid-sized
-clusters, but :ref:`multiple Controllers <cluster-multi-controllers>`
-can be configured if neccessary for larger implementations.
 
 .. index:: Droplet Execution Agents
 .. index:: DEA
@@ -107,18 +116,6 @@ separate components (Stager and DEA respectively), but these roles have
 been combined in version 3.0 and later.
 
 The Docker image used for the containers can be customized by admins.
-
-.. index:: Health Manager
-
-.. _architecture-health-manager:
-
-Health Manager
-^^^^^^^^^^^^^^
-
-The Health Manager keeps track of the apps on each DEA and provides
-feedback on the number currently running. It works in conjunction with
-the Cloud Controller and must be run on the same VM.
-
 
 .. _architecture-services:
 
