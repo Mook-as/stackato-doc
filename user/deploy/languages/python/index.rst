@@ -208,14 +208,6 @@ by setting the ``PIP_REQUIREMENTS_FILE`` environment variable.
 	A `bug in pip <https://github.com/pypa/pip/issues/219>`_ may
 	prevent the log file from being accessed by ``stackato logs``.
 
-Asset Caching for pip and PyPM
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-To speed up deployment, utilize **Asset Caching** to store resources downloaded
-by PyPM and pip.  See :ref:`Caching Staging Assets <caching-staging-assets>` for more
-details.
-
-
 PyPy Support
 ------------
 
