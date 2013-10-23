@@ -86,12 +86,27 @@ can be configured if neccessary for larger implementations.
 Droplet Execution Agents
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-DEAs run on multiple nodes and receive requests from the Cloud Controller(s) to start staged 
-applications.  
+The Droplet Execution Agent (DEA) role in Stackato is responsible for
+staging applications and running application instances within Linux
+containers. In a Stackato cluster, there will typically be a number of
+nodes running the DEA role, which in turn each host multiple user
+application instances.
 
-As traffic increases, additional Stackato VMs can be configured as DEAs in order to
-reduce the load on each of them and to allow applications to be pushed to more than one
-instance.
+The DEA role is comprised of a number of processes:
+
+ * dea_ng: Master process for staging and starting application
+   instances, reporting on their state via NATS to the Health Manager.
+ * dir_server: Handles requests for directories/files, responding with
+   an HTTP URL.
+ * fence: Responsible for the management of application containers using
+   Docker.
+ * apptail: Streams application logs via Logyard to various log drains.
+
+In previous versions of Stackato, staging and running were handled by
+separate components (Stager and DEA respectively), but these roles have
+been combined in version 3.0 and later.
+
+The Docker image used for the containers can be customized by admins.
 
 .. index:: Health Manager
 
@@ -104,20 +119,6 @@ The Health Manager keeps track of the apps on each DEA and provides
 feedback on the number currently running. It works in conjunction with
 the Cloud Controller and must be run on the same VM.
 
-.. _architecture-stager:
-
-Stager
-^^^^^^
-
-The stager provides the runtime dependency requirements to the droplet
-before it is run, such as those from PyPy, PPM and NPM or
-staging hooks.
-
-For some applications, this can include compiling libraries or other
-programs, which can be demanding on system resources. Running a separate
-staging node on a dedicated instance, or running multiple stagers, can
-balance the load on a Stackato cluster that sees frequent deployments or
-application updates.
 
 .. _architecture-services:
 
