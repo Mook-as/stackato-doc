@@ -51,6 +51,63 @@ To apply a patch only to the local Stackato VM (not the whole cluster),
 use the ``--only-this-node`` option. 
 
 
+.. _bestpractices-modify-container:
+
+.. index:: Modifying the Container Image
+.. index:: Updating the Conatiner Image
+
+Modifying or Updating the Container Image
+-----------------------------------------
+
+Application containers are created from a base `Docker
+<http://docs.docker.io/en/latest/>`__ image (a template used to create
+Linux containers). Admins can create new images to add specific software
+required by applications or update operating system packages.
+
+To create a new base image for Stackato to use for application
+containers, perform the following steps on all nodes running the DEA
+role:
+
+* Start with an empty working directory::
+
+    $ mkdir ~/newimg
+    $ cd ~/newimg
+
+* Check which image Stackato is currently using as an app container
+  template::
+  
+    $ kato config get fence docker/image
+    stackato/app-holophonor:3.0.0
+  
+* Create a `Dockerfile <http://docs.docker.io/en/latest/use/builder/>`_
+  which inherits the current Docker image, then runs an update or
+  installation command. For example::
+
+    FROM stackato/app-holophonor:3.0.0
+    RUN apt-get -y install libgraphite2-dev
+    CMD ["start.sh"]
+
+* Build the image::
+
+    $ sudo docker build -t exampleco/newimg:1.0.0
+
+* Configure Stackato to use the new image::
+
+    $ kato config set fence docker/image exampleco/newimg:1.0.0
+    WARNING: Assumed type string
+    exampleco/newimg:1.0.0
+
+.. note::
+
+  This step only needs to be done once, as the configuration change is
+  shared with all nodes.
+  
+* Restart the ``fence`` process::
+  
+    $ kato process restart fence
+
+
+
 .. _bestpractices-migration:
 
 .. _bestpractices-controller-migration:
