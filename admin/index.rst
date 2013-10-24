@@ -33,6 +33,7 @@ Management Console
 
    console/index
    console/app-store
+   console/customize
 
 
 VM Setup
@@ -93,7 +94,6 @@ Reference
    reference/kato-ref
    reference/groups
    reference/architecture
-   reference/customize
    reference/glossary
    reference/troubleshoot
    reference/add-service
