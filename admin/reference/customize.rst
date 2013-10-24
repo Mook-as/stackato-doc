@@ -7,100 +7,97 @@ Customization
 
 A Stackato PaaS can be extensively customized and themed. PaaS
 administrators can add or remove runtimes, frameworks and services from
-the system, and OEM customers can change the :ref:`Management Console
-<management-console>` and modify other parts of the system to match
-their own brand.
+the system, and change the look and content of the :ref:`Management
+Console <management-console>` interface.
 
 
-Management Console Theming
---------------------------
 
-Theming is controlled by changing settings in the *theme* directory on
-the Cloud Controller node::
+Console Settings
+----------------
 
-  /home/stackato/stackato/StackatoWebConsole/theme
-  
-Most changes will happen in the *settings.js* and *style.css* files, but
-additional files and sub-directories can be added to the *theme*
-directory as outlined in *settings.js* (or as needed).
+The Management Console is modified mainly through the **Settings >
+Console** pages. Settings are saved as variables which can subsequently
+be used in HTML pages via the `Embedded JavaScript (EJS)
+<http://embeddedjs.com/>`_ templating engine.
 
-Changes take effect immediately, but a hard refresh (e.g. Shift+Refresh)
-of the browser may be necessary to see the changes.
+Product
+^^^^^^^
 
-settings.js
-^^^^^^^^^^^
+* **Product Name**:  Overrides all occurrences of 'Stackato'
+* **Company Name**: Overrides all occurrences of 'ActiveState Software'
+* **Vendor Version**: Overrides all occurrences of the Stackato version number.
+* **Default Locale**: Sets the default locale of the console if the users current locale isn't recognized. Currently, only the 'en' localization is complete.
+* **External Docs URL**: The link to direct users to to view docs. Defaults to the current documentation published to docs.stackato.com. Ticking 'Use local docs' will cause this URL to be ignored and the docs from the VM will be served instead.
 
-The *settings.js* file contains most of the configurable options for
-theming which are not directly controlled by CSS. Each block of options
-is preceded by comments explaining what the settings are used for. 
+Look and Feel
+^^^^^^^^^^^^^
 
-By default, most of these options are commented out with ``//``.
-Uncommenting the line enables the option, overriding default Stackato
-styles and content.
-
-Path values should generally be locations within the *theme* directory,
-but can be "\https://" URLs (using "\http://" will cause "Insecure
-Content" warnings).
-
-Styles: LESS to CSS
-^^^^^^^^^^^^^^^^^^^
-
-The CSS styles for the Management Console can be overridden by editing
-the `LESS <http://lesscss.org/>`_ files in the *theme* directory and
-compiling them with ``lessc`` into the `style.css` file.
-
-* *mixins.less*: Contains `LESS mixins <http://lesscss.org/#-mixins>`_
-  used in *theme.less*. 
-
-* *theme.less*: Contains the styles themselves. This is normally the
-  only file you will need to edit.
-
-* *style.less*: Imports *mixins.less* and *theme.less* during
-  compilation of the CSS.
-  
-To build the *style.css* file, run the following command within the
-*theme* directory::
-
-    $ lessc style.less > style.css
-
-The ``lessc`` compiler will populate *style.css* with the styles defined
-in the LESS files. The Management Console will use the styles in this
-file to override the default ones.
+* **FavIcon Logo URL**: The favicon to use. Recommended to be 32x32px image/png.
+* **Header Logo URL**: The logo image to use in the header. Size can vary although anything bigger than 50px vertically may result in some distortion of the header (fixable with a custom style sheet).
+* **Footer Logo URL**: The logo image to use in the footer. Same as above but height is about 40px before distortion occurs.
+* **Background Color**: Sets the background color of the console.
 
 
-EULA, Welcome and Support Content
----------------------------------
+Welcome Page
+^^^^^^^^^^^^
 
-The *eula.txt* file in the *theme* directory contains HTML formatted
-placeholder text. To customize it:
+The HTML/EJS to show on the Welcome page. The :ref:`settings variables <customize-settings-vars>` and ``username`` variable (current user) are available via EJS, but plain HTML will work for simple use cases.
 
-* replace the 'EULA title'
-* insert your own EULA text
-* add a link to an online version (optional)
-* enable the line in *settings.js* for using *eula.txt*
+Support Page
+^^^^^^^^^^^^
 
-Similarly, *welcome.txt* and *support.txt* files can be added to replace
-the Welcome message and the top half of the Support page. The files
-should contain HTML formatted content without higher level elements such
-as \<html>, \<head>, or \<body>. With the content files created, enable
-the relevant lines in *settings.js*. 
+The HTML/EJS to show on the Support page. The :ref:`settings variables <customize-settings-vars>` and ``support_email`` variable (see Settings > Controller) are available.
 
-Error Pages
------------
+Eula Content
+^^^^^^^^^^^^
 
-The *error_pages* subdirectory contains copies of the following HTTP
-error status pages:
+The HTML/EJS to show in the EULA overlay. The :ref:`settings variables <customize-settings-vars>` are available.
 
-* *404.html* - Not Found: The requested resource could not be found but
-  may be available again in the future.
-  
-* *422.html* - Unprocessable Entity: The request was well-formed but was
-  unable to be followed due to semantic errors.
+Custom Stylesheet
+^^^^^^^^^^^^^^^^^
 
-* *500.html* - Internal Server Error: A generic error message, given when
-  no more specific message is suitable.
+CSS defined here will be applied to the page after the default CSS has been loaded, and override/replace any style. Use this to change the layout and color of any element in the Management Console. Use web development tools like Firebug or Chrome DevTools to inspect elements and find the relevant styles. 
 
-These pages can be modified or replaced to match the rest of the theme.
+.. _customize-settings-vars:
+
+Settings Variables
+^^^^^^^^^^^^^^^^^^
+
+The following variables (with their default values) are available in the EJS templates on the settings object (e.g. ``settings.product_name``)::
+
+* product_name: null,
+* company_name: 'ActiveState Software',
+* vendor_version: '3.0',
+* default_locale: 'en',
+* product_logo_favicon_url: 'img/stackato_logo_favicon.png',
+* product_logo_header_url: 'img/stackato_logo_header.png',
+* product_logo_footer_url: 'img/stackato_logo_footer.png',
+* background_color: '#ffffff',
+* style: '',
+* support_template: SupportTemplate,
+* eula_template: EulaTemplate,
+* welcome_template: WelcomeTemplate,
+* external_docs_url: 'http://docs.stackato.com/3.0/',
+* use_local_docs: "false"
+
+Restoring values
+^^^^^^^^^^^^^^^^
+
+Each setting has an individual **Load Default** button (refresh icon to
+the left of the value field) which will replace the customized value
+with the default for that setting. Click 'Save' to apply the changes.
+
+The red **Load Defaults** button at the top of the page deletes all
+customizations and loads defaults for all settings.
+
+As a failsafe for when style changes have obscured the interface, admins
+can also reset specific settings by loading a URL with the following
+format::
+
+    https://<stackato-url>/#settings/console/reset/setting_name
+
+Replace ``setting_name`` with one of the variables above and that value
+will be reset to the default.
 
 Renaming the Client
 -------------------
@@ -119,52 +116,7 @@ will use the file name as the application name. For example::
     Try 'mypaas help [command]' or 'mypaas help options' for more information.
 
 After renaming the executable, you can re-package them in .zip files
-and save them in a 'client' sub-directory as suggested in *settings.js*
-to make them available for download from the Management Console.
-
-.. index:: Disabling Runtimes
-
-.. index:: Disabling Frameworks
-
-.. _customize-disabling:
-
-Disabling Frameworks & Runtimes
--------------------------------
-
-If you do not wish to expose particular frameworks or runtimes to end
-users, they can be disabled.
-
-* **To disable a framework**: On each Stager node, set ``disabled:
-  true`` in the YAML file corresponding to the framework you wish to
-  disable in */s/vcap/staging/lib/vcap/staging/plugin/manifests/*, then
-  restart the stager (``kato restart stager``). 
-
-* **To disable a runtime**: On each DEA node, edit the
-  */s/etc/runtimes.yml* file to remove the block for that runtime, then
-  restart the DEA (``kato restart dea``).
-  
-.. _customize-plugins:
-
-Adding Plugins
---------------
-
-Stackato can be extended with additional runtimes and frameworks. This
-requires fairly deep technical knowledge of either Stackato and/or Cloud
-Foundry, but the existing staging plugns can be used as a reference
-in creating new ones. 
-
-These plugins can be found on a Stackato VM under:
-*/s/vcap/staging/lib/vcap/staging/plugins*
-
-To avoid potential conflicts with the existing plugins, new staging
-plugins should be added under the *contrib* sub-directory. Create a
-directory there with the name of the plugin you are creating and add a
-corresponding YAML file in the *manifest* directory. For example::
-
-  ./contrib/java_web_jetty/
-  ./contrib/manifests/java_web_jetty.yml
-
-ActiveState can provide professional services to assist customers in
-developing these plugins. Contact stackato-sales@activestate.com to
-discuss your requirements.
+and modify the
+*~/stackato/code/console/js/views/client/templates/client.html*
+template to point to the renamed files.
 
