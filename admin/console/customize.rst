@@ -41,29 +41,39 @@ Look and Feel
 Welcome Page
 ^^^^^^^^^^^^
 
-The HTML/EJS to show on the Welcome page. The :ref:`settings variables <customize-settings-vars>` and ``username`` variable (current user) are available via EJS, but plain HTML will work for simple use cases.
+The HTML/EJS to show on the Welcome page. The :ref:`settings variables
+<customize-settings-vars>` and ``username`` variable (current user) are
+available via EJS, but plain HTML will work for simple use cases.
 
 Support Page
 ^^^^^^^^^^^^
 
-The HTML/EJS to show on the Support page. The :ref:`settings variables <customize-settings-vars>` and ``support_email`` variable (see Settings > Controller) are available.
+The HTML/EJS to show on the Support page. The :ref:`settings variables
+<customize-settings-vars>` and ``support_email`` variable (see Settings
+> Controller) are available.
 
 Eula Content
 ^^^^^^^^^^^^
 
-The HTML/EJS to show in the EULA overlay. The :ref:`settings variables <customize-settings-vars>` are available.
+The HTML/EJS to show in the EULA overlay. The :ref:`settings variables
+<customize-settings-vars>` are available.
 
 Custom Stylesheet
 ^^^^^^^^^^^^^^^^^
 
-CSS defined here will be applied to the page after the default CSS has been loaded, and override/replace any style. Use this to change the layout and color of any element in the Management Console. Use web development tools like Firebug or Chrome DevTools to inspect elements and find the relevant styles. 
+CSS defined here will be applied to the page after the default CSS has
+been loaded, and override/replace any style. Use this to change the
+layout and color of any element in the Management Console. Use web
+development tools like Firebug or Chrome DevTools to inspect elements
+and find the relevant styles. 
 
 .. _customize-settings-vars:
 
 Settings Variables
 ^^^^^^^^^^^^^^^^^^
 
-The following variables (with their default values) are available in the EJS templates on the settings object (e.g. ``settings.product_name``)::
+The following variables (with their default values) are available in the
+EJS templates on the settings object (e.g. ``settings.product_name``):
 
 * product_name: null,
 * company_name: 'ActiveState Software',
