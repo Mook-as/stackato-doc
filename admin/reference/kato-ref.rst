@@ -17,6 +17,7 @@ Usage
 Commands
 --------
 
+* :ref:`admin <kato-command-ref-admin>` DEPRECATED: Use "kato config" instead
 * :ref:`config <kato-command-ref-config>` Manipulate configuration values of Stackato components.
 * :ref:`data <kato-command-ref-data-export>` Import or export Stackato system data to or from clusters/nodes.
 * :ref:`debug <kato-command-ref-debug-configwatch>` Commands for debugging for Stackato internals.
@@ -37,6 +38,22 @@ Commands
 * :ref:`status <kato-command-ref-status>` List configured roles and their current status across the cluster.
 * :ref:`stop <kato-command-ref-stop>` Stop Stackato or individual roles.
 * :ref:`version <kato-command-ref-version>` Display the version of Stackato being run.
+
+----
+
+.. _kato-command-ref-admin:
+
+**admin** [**options**] **grant** *<email>...*
+
+**admin** [**options**] **revoke** *<email>...*
+
+  DEPRECATED: Use "kato config" instead
+    
+    kato config (push|pop) cloud_controller admins <email>
+
+  **-h** **--help**                       Show help information
+
+
 
 ----
 
@@ -516,10 +533,6 @@ Commands
 
   **-h** **--help**                       Show help information
 
-  **-y** **--yaml**                       Output at YAML
-
-  **-j** **--json**                       Output at JSON
-
 
 
 ----
@@ -533,10 +546,6 @@ Commands
   **-h** **--help**                       Show help information
 
   **-n** **--not-running**                Show only drains not running
-
-  **-y** **--yaml**                       Output at YAML
-
-  **-j** **--json**                       Output at JSON
 
 
 
@@ -626,22 +635,6 @@ Commands
 
 ----
 
-.. _kato-command-ref-node-detach:
-
-**node** **detach** [**options**]
-
-  Detach this node from a stackato core node
-
-  **-h** **--help**                       Show help information
-
-  **-s** **--start**                      Automatically start processes after detaching
-
-  **-v** **--verbose**                    Show process information when starting/stopping roles
-
-
-
-----
-
 .. _kato-command-ref-node-list:
 
 **node** **list** [**options**]
@@ -724,24 +717,6 @@ Commands
 
 ----
 
-.. _kato-command-ref-node-retire:
-
-**node** **retire** [**options**]
-
-  Gracefully retires a DEA node from the cluster. New instances of the
-  apps are started on other available DEAs before the retiring DEA is shut
-  down. 
-
-  **-h** **--help**                       Show help information
-
-  **-n** **--node** *<node-id>*           Retire the specified DEA node, local node is
-
-                                          used if not specified
-
-
-
-----
-
 .. _kato-command-ref-node-setup-core:
 
 **node** **setup** **core** [*<endpoint>*]
@@ -760,15 +735,13 @@ Commands
 
 .. _kato-command-ref-node-setup-firstuser:
 
-**node** **setup** **firstuser** [**options**] *<email>* *<org>*
+**node** **setup** **firstuser** [**options**] *<email>*
 
 **setup** **--help**
 
   First user setup.
 
   *<email>*                               First user's email.
-
-  *<org>*                                 First user's organization.
 
 
   **-h** **--help**                       Show help information
@@ -780,10 +753,6 @@ Commands
                                           your unix password will be updated to this.
 
                                           Will be prompted for if not given.
-
-  **-u** **--username** *<username>*      First user's username.
-
-                                          Will be the provided email if not given.
 
 
 
@@ -825,16 +794,6 @@ Commands
 
 ----
 
-.. _kato-command-ref-node-version:
-
-**node** **version** [**options**] [*<node-IP>*]
-
-  **-h** **--help**                       Show help information.
-
-
-
-----
-
 .. _kato-command-ref-op:
 
 **op** **--help**
@@ -858,12 +817,6 @@ Commands
 **op** **regenerate** **mysql**
 
 **op** **regenerate** **postgresql** [**--no-restart**]
-
-**op** **regenerate** **stackato-rest-auth**
-
-**op** **regenerate** **cloud-controller-client-auth**
-
-**op** **regenerate** **token-signing-secret**
 
 **op** **remap_hosts** *<old-hostname>* *<new-hostname>*
 
@@ -905,7 +858,9 @@ Commands
 
   **upstream_proxy**                      Configure Stackato to use an external or upstream proxy
 
-                                          server and deployed apps.
+                                          server
+
+                                          and deployed apps.
 
   **update_hostsfile**                    Updates the /etc/hosts file with the endpoint URI mapped
 
@@ -926,19 +881,15 @@ Commands
 
 .. _kato-command-ref-patch:
 
-**patch** **status**
+**patch** **status** [**--all**]
 
-**patch** **status** **--all**
-
-**patch** **install** [**--all**]
-
-**patch** **install** *<patchname>*
+**patch** **install** [**--all|--no-restart|--only-this-node**] [*<patchname>*]
 
 **patch** **reset**
 
 **patch** **update**
 
-**patch** **reinstall** *<patchname>*
+**patch** **reinstall** [**--all|--only-this-node|--no-restart**] *<patchname>*
 
   Update a Stackato cluster with post-release fixes.
 
