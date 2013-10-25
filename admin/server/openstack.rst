@@ -206,9 +206,9 @@ storage volume at any one time, you either need to dedicate a system for
 this that serves to the others via nfs, or attach to one node and mount
 on the others via sshfs.
 
-For example, in a cluster with one Primary node and two Controller /
-Stager nodes. Start with the following commands to create the volume and
-attach it to the Primary::
+For example, in a cluster with one Primary node and two Controller
+nodes. Start with the following commands to create the volume and attach
+it to the Primary::
 
   nova volume-create --display-name stackato-droplets 10 # GB
   nova volume-attach <ID of primary server> <ID of volume created above> /dev/vdc
@@ -222,7 +222,7 @@ SSH to the Primary node, then format and mount the volume::
   sudo chown stackato:stackato /mnt/add-volume/stackato-shared
   kato relocate droplets /mnt/add-volume/stackato-shared
 
-On the two Controller/Stager nodes, run a command such as::
+On the two Controller nodes, run a command such as::
 
   sshfs -o idmap=user -o reconnect -o ServerAliveInterval=15 stackato@<Primary node IP>:/mnt/add-volume/stackato-shared/ /var/vcap/shared/
 

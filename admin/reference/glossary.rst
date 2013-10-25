@@ -180,7 +180,7 @@
     capabilities
     within the Stackato architecture.
     These capabilities are called **roles**, and are usually denoted in lowercase.
-    Examples of essential roles are **router**, **primary**, **controller**, **stager**, and **dea**.
+    Examples of essential roles are **router**, **primary**, **controller**, and **dea**.
     In addition, there are **role groups** (for convenience) such as **data-services** that 
     represent all data-services. (postgresql mysql rabbit mongodb redis filesystem memcached)
     

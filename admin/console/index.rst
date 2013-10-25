@@ -239,11 +239,6 @@ DEA
 
 * **Max Memory Percentage**: The percentage of physical memory each DEA node can use for applications. The default of 80% leaves enough memory space for normal system runtime operation. Do not exceed 100% unless you are using machine or hypervisor that correctly supports swap space and has it enabled.
 
-Stager
-^^^^^^
-
-* **Max Staging Duration**: The maximum time allowed for application staging.
-
 Harbor
 ^^^^^^
 

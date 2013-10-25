@@ -44,8 +44,8 @@ which ports are used by which components:
   7000 - 7999     tcp   all nodes    all nodes      ``kato log tail``
   7474            tcp   all nodes    all nodes      config (redis)
   9001            tcp   controller   all nodes      :term:`supervisord`
-  9022            tcp   dea, stager  controller     droplets
-  9022            tcp   controller   dea, stager    droplets
+  9022            tcp   dea          controller     droplets
+  9022            tcp   controller   dea            droplets
   9025            tcp   controller   router         stackato-rest
   9026            tcp   controller   all nodes      stackato-rest
   ==============  ====  ===========  =============  ==================
@@ -62,7 +62,7 @@ Comments:
   with the MBUS IP (core Cloud Controller)
 
 * Port 9022 should be open to allow transfer of droplets to and
-  from the DEAs, Stagers, and Cloud Controllers.
+  from the DEAs, and Cloud Controllers.
 
 * Port 7845 is required if you plan to stream logs from all nodes
   in a cluster using ``kato log tail`` command.

@@ -11,7 +11,7 @@ Architectural Design
 The Stackato VM is a stand-alone :term:`micro cloud` virtual machine with all the components necessary 
 for running a test environment in one instance. For use on a larger scale, the VM can be cloned 
 and assigned specific roles: Router, Cloud Controller, Droplet Execution Agents (DEAs, or worker 
-nodes), Stager, or specific database services.
+nodes), or specific database services.
 
 .. _architecture-roles:
 

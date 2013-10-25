@@ -142,12 +142,12 @@ This sets up the Core node with just the implicit **controller**, **primary**, a
 If you intend to set up the rest of the cluster immediately, you would
 carry on to enable those roles you ultimately intend to run on the Core
 node.  For example, to set up a Core node with the **controller**, **primary**
-**router**, and **stager** roles:
+**router**, and **dea** roles:
 
   .. parsed-literal::
 
 	$ kato node setup core api.\ *hostname.example.com*
-	$ kato role add stager
+	$ kato role add dea
 
 Then proceed to configure the other VMs by attaching them to the Core
 node and assigning their particular roles.
@@ -209,32 +209,14 @@ following command on the data services node:
   Requirements & Setup <harbor-setup>` documentation for details. 
 
 
-Stager Nodes
-^^^^^^^^^^^^
-
-In smaller clusters, a single Stager role running on the Core node (or a
-DEA node) should be sufficient.
-
-On systems where there are likely to be several applications staged
-concurrently, multiple stagers can be configured on separate nodes
-(running just the Stager role or sharing a node with the DEA role).
-Stackato will distribute staging tasks between the Stagers.
-
-To turn a generic Stackato VM into a Stager and connect it to the
-Core node:
-
-  .. parsed-literal::
-
-	$ kato node attach -e stager *CORE_IP*
-
 DEA Nodes
 ^^^^^^^^^
 
-An application "worker" node is called a Droplet Execution Agent (DEA).
-Once the controller node is running, you can begin to add some of
-these nodes with the :ref:`kato node attach <kato-command-ref-node-attach>`
-command. To turn a generic Stackato VM into a DEA and connect it to the
-Core node:
+Nodes which stage application code and run application containers are
+called Droplet Execution Agents (DEAs). Once the controller node is
+running, you can begin to add some of these nodes with the :ref:`kato
+node attach <kato-command-ref-node-attach>` command. To turn a generic
+Stackato VM into a DEA and connect it to the Core node:
 
   .. parsed-literal::
 
@@ -297,7 +279,7 @@ Three-Node
 This is the smallest viable cluster deployment, but it lacks the
 fault tolerance of larger configurations:
 
-* 1 Core node consisting of primary, controller, router, and stager
+* 1 Core node consisting of primary, controller, and router
   (and supporting processes)
 * 1 data-services node running the database, messaging and filesystem services
 * 1 DEA (Droplet Execution Agent) node
@@ -310,7 +292,7 @@ Five-Node
 
 A typical small Stackato cluster deployment might look like this:
 
-* 1 Core node consisting of primary, controller, router, and stager
+* 1 Core node consisting of primary, controller, and router
   (and supporting processes)
 * 1 data-services node running the database, messaging and filesystem services
 * 3 DEA (Droplet Execution Agent) nodes
@@ -335,8 +317,7 @@ scalability and fault tolerance. For example:
 * 1 Filesystem service node 
 * 1 PostgreSQL + MySQL data service node
 * 1 MongoDB, Redis, RabbitMQ + other data service node
-* 2 Stager nodes
-* 10 DEA (Droplet Execution Agent) nodes
+* 12 DEA (Droplet Execution Agent) nodes
 
 In this configuration:
 
@@ -349,10 +330,6 @@ In this configuration:
 * any data service node failure will be localized, not affecting data
   services on other nodes
   
-* the duplicate stager spreads the load for application staging
-  operations and provides uninterrupted service for developers if the
-  other node fails or is removed from service
-
 * the auxiliary controller balances the load on the Management Console
   and system management tasks
 
@@ -384,12 +361,6 @@ their */var/vcap/services* directory on persistent storage:
 In clusters with multiple Cloud Controllers, the nodes **must** share
 a common */var/vcap/shared* mount point as described :ref:`below
 <cluster-multi-controllers>` in order to work together properly. 
-
-Optionally, DEA and Stager nodes can be backed with a persistent
-filesystem. If the DEAs and Stagers share the same */var/vcap/shared*
-directory, the DEAs will be able to use 'local' copies of the droplets
-rather than downloading them from the Stager via HTTP, which should
-speed up application deployment.
 
 See the :ref:`Persistent Storage <bestpractices-persistent-storage>`
 documentation for instructions on relocating service data, application

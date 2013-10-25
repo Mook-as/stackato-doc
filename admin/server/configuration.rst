@@ -306,7 +306,7 @@ identify the node hosting the MBUS, usually the same as the Cloud
 Controller. On this node, you will see a correspondence between the
 network interface ``eth0`` address and ``/etc/hosts`` as in the above
 example. On each of the *other nodes* in the cluster, for example DEA
-and Stager nodes, ``eth0`` will be configured with its own address on
+nodes, ``eth0`` will be configured with its own address on
 the same subnet, but ``/etc/hosts`` will remain the same..
 
 If modifying ``/etc/hosts`` becomes necessary because of a hostname change,
@@ -519,15 +519,9 @@ module managers that support the :term:`HTTP_PROXY` environment variable
 (e.g. pip, PyPM, PPM, NPM, etc). This is limited to 100MB of in-memory
 cache.
 
-To disable Stackato from using the local staging proxy cache, remove or
-comment out the following line from the
-``/lxc/template/rootfs/etc/environment`` file on all Stager nodes::
-
-	HTTP_PROXY=http://localhost:8123
-
 If you have an upstream HTTP proxy that deployed applications and the
 staging system need to traverse to access the internet, use the ``kato
-op upstream_proxy ...`` command on all DEA and Stager nodes::
+op upstream_proxy ...`` command on all DEA nodes::
 
 	$ kato op upstream_proxy set 192.168.0.99:3128
 	

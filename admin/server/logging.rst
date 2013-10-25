@@ -39,8 +39,8 @@ Log streams are handled by three processes which run on all Stackato nodes:
 * **logyard_sieve**: listens for all system logs and extracts vital events
   back to **logyard**
 
-**apptail** is an additional process which runs only on DEA and Stager
-nodes. It sends user application logs to **logyard**, injecting relevant
+**apptail** is an additional process which runs only on DEA nodes. It
+sends user application logs to **logyard**, injecting relevant
 application-specific events from the **logyard_sieve** stream.
 
 
@@ -127,7 +127,7 @@ Different JSON keys are available in different :ref:`log streams <logging-keys>`
 * AppID: unique id for this app
 * AppName
 * AppGroup
-* NodeID: Host (DEA/stager) IP of this app instance
+* NodeID: DEA host IP of this app instance
 
 **event.**:
 
