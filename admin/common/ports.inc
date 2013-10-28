@@ -31,24 +31,27 @@ your hypervisor:
 
 If you wish to restrict ports between some nodes (e.g. if you do not
 have the option to use security groups), the following summary describes
-which ports are used by which components:
+which ports are used by which components. **Source** nodes initiate the
+communication, **Destination** nodes need to listen on the specified port.
 
-  ==============  ====  ===========  =============  ==================
-  Port Range      Type  Source       Destination    Required by
-  ==============  ====  ===========  =============  ==================
-  22              tcp   all nodes    all nodes      ssh/scp/sshfs
-  41000 - 61000   tcp   controller   service nodes  service gateways
-  4222            tcp   all nodes    controller     :term:`NATS`
-  5454            tcp   all nodes    controller     redis
-  6464            tcp   all nodes    all nodes      applog (redis)
-  7000 - 7999     tcp   all nodes    all nodes      ``kato log tail``
-  7474            tcp   all nodes    all nodes      config (redis)
-  9001            tcp   controller   all nodes      :term:`supervisord`
-  9022            tcp   dea          controller     droplets
-  9022            tcp   controller   dea            droplets
-  9025            tcp   controller   router         stackato-rest
-  9026            tcp   controller   all nodes      stackato-rest
-  ==============  ====  ===========  =============  ==================
+  =============  ====  ==============  ================  ===================
+  Port Range     Type  Source          Destination       Required by
+  =============  ====  ==============  ================  ===================
+  22             tcp   all nodes       all nodes         ssh/scp/sshfs
+  4222           tcp   all nodes       controller        :term:`NATS`
+  3306           tcp   dea,controler   mysql nodes       MySQL
+  5432           tcp   dea,controler   postgresql nodes  PostgreSQL
+  5454           tcp   all nodes       controller        redis
+  6464           tcp   all nodes       all nodes         applog (redis)
+  7000 - 7999    tcp   all nodes       all nodes         ``kato log tail``
+  7474           tcp   all nodes       all nodes         config (redis)
+  9001           tcp   controller      all nodes         :term:`supervisord`
+  9022           tcp   dea             controller        droplets
+  9022           tcp   controller      dea               droplets
+  9025           tcp   controller      router            stackato-rest
+  9026           tcp   controller      all nodes         stackato-rest
+  41000 - 61000  tcp   dea,controller  service nodes     service gateways
+  =============  ====  ==============  ================  ===================
 
 Each node can be internally firewalled using `iptables
 <http://manpages.ubuntu.com/manpages/man8/iptables.8.html>`_ to apply
