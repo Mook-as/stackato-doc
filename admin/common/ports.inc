@@ -78,3 +78,7 @@ Comments:
   administrative access over SSH. Port 22 is also used to mount
   Filesystem service partitions in application containers on the DEA
   nodes (via SSHFS).
+  
+* The optional Harbor port service has a configurable port range
+  (default 41000 - 61000) which can be exposed externally if required.
+  
