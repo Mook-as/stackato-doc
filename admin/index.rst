@@ -57,6 +57,7 @@ Server Configuration
 
    server/index
    server/router
+   server/docker
    server/logging
    server/aok
 
