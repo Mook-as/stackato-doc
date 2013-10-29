@@ -8,13 +8,13 @@ User-provided service instances allow you connect applications running
 on Stackato to specified external data services, without hard coding the
 credentials into the application. The service instance provides the
 connection information to the application via the VCAP_SERVICES or
-STACKATO_SERVICES environment variables, just like the built-in
-services.
+STACKATO_SERVICES environment variables, just like the :ref:`built-in
+data services <data-services>`.
 
 Think of user-provided services as a credentials database for your
 Stackato application space. You provide the connection information,
-Stackato stores it in a JSON object which can be bound any applications
-in the space.
+Stackato stores it in a :ref:`JSON object <user-provided-using>` which
+can be bound any applications in the space.
 
 .. _user-provided-creating:
 
@@ -79,10 +79,11 @@ The ``stackato service`` command will show the credentials::
     | Applications | django-cms                   |
     +--------------+------------------------------+
   
-The STACKATO_SERVICES and VCAP_SERVICES variables will expose the
-connection information within the application container. The parameter
-names you provided when setting up the service instance become the keys
-in the ``prod-db-int`` JSON object::
+The :ref:`STACKATO_SERVICES <database-services-stackato-services>` and
+:ref:`VCAP_SERVICES <database-services-vcap-services>` variables will
+expose the connection information within the application container. The
+parameter names you provided when setting up the service instance become
+the keys in the ``prod-db-int`` JSON object::
 
     django-cms$ echo $STACKATO_SERVICES |json
     {
@@ -95,9 +96,10 @@ in the ``prod-db-int`` JSON object::
       }
     }
 
-To have your application use this information, parse
-:ref:`STACKATO_SERVICES <database-services-stackato-services>` or
-:ref:`VCAP_SERVICES <database-services-vcap-services>`.
+To have your application use this information, parse the variable in
+your application code to extract the credentials at runtime. See the
+:ref:`Language Specific Deployment <language-specific-deploy>` section
+for examples.
 
 Frameworks or buildpacks that autoconfigure bound services will do so
 automatically, as they would for system-provided data services.
