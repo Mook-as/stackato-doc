@@ -15,14 +15,10 @@ Release Notes
   See `release-notes.rst` in git for the up-to-date version of this file.
         `<https://github.com/ActiveState/stackato-doc>`_
 
-v3.0 Beta (Oct. 2013)
----------------------
-
-* MongoDB client updated to 2.4.1 in application container template 
-
-
-v2.91.0 (Oct. 10, 2013)
+v3.0.0 Beta (Oct. 2013)
 -----------------------
+
+* MongoDB client updated to 2.4.1 in application container 
 
 * Logyard updates:
 
@@ -72,6 +68,13 @@ v2.91.0 (Oct. 10, 2013)
 * [100215] prevent crontab breakage caused by newlines in environment variables
 * Replaced Doozer with Redis.
 * [99518] Increased default filesystem service size to 500MB.
+
+v2.10.x Patches
+---------------
+
+See `Stackato FAQs tagged 'patch'
+<http://community.activestate.com/taxonomy/term/547>`__ on the
+ActiveState Community Site.
 
   
 v2.10.6 (June 10, 2013)
