@@ -68,6 +68,7 @@ Services
    services/filesystem
    services/memcached
    services/port-service
+   services/user-provided
 
 Logging & Monitoring
 --------------------
