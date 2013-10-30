@@ -17,7 +17,6 @@ Usage
 Commands
 --------
 
-* :ref:`admin <kato-command-ref-admin>` DEPRECATED: Use "kato config" instead
 * :ref:`config <kato-command-ref-config>` Manipulate configuration values of Stackato components.
 * :ref:`data <kato-command-ref-data-export>` Import or export Stackato system data to or from clusters/nodes.
 * :ref:`debug <kato-command-ref-debug-configwatch>` Commands for debugging for Stackato internals.
@@ -38,22 +37,6 @@ Commands
 * :ref:`status <kato-command-ref-status>` List configured roles and their current status across the cluster.
 * :ref:`stop <kato-command-ref-stop>` Stop Stackato or individual roles.
 * :ref:`version <kato-command-ref-version>` Display the version of Stackato being run.
-
-----
-
-.. _kato-command-ref-admin:
-
-**admin** [**options**] **grant** *<email>...*
-
-**admin** [**options**] **revoke** *<email>...*
-
-  DEPRECATED: Use "kato config" instead
-    
-    kato config (push|pop) cloud_controller admins <email>
-
-  **-h** **--help**                       Show help information
-
-
 
 ----
 
@@ -491,17 +474,18 @@ Commands
     
     kato log drain add system_splunk udp://logs.splunk.com:1234/
     
-    # Add a drain to forward all application logs as json
-    
-    kato log drain add -f json -p apptail app_splunk udp://logs.splunk.com:1235/
-  
     # Add a drain to forward all application and system logs as json
   
     kato log drain add -f json -p apptail,systail app_sys_splunk udp://logs.splunk.com:1235/
     
-    # Add a drain with custom format,
+    # Add a drain with a custom or named format,
     
     kato log drain add -f "{{.Name}}: {{.Text}}"  system_splunk_2 udp://logs.splunk.com:1236/
+    kato log drain add -f systail-syslog  system_splunk_2 udp://logs.splunk.com:1236/
+  
+    # Passing custom parameters to a drain
+  
+    kato log drain add mydrain redis://localhost:6379 key=logdata 
 
   **-h** **--help**                       Show help information
 
@@ -533,6 +517,10 @@ Commands
 
   **-h** **--help**                       Show help information
 
+  **-y** **--yaml**                       Output at YAML
+
+  **-j** **--json**                       Output at JSON
+
 
 
 ----
@@ -546,6 +534,10 @@ Commands
   **-h** **--help**                       Show help information
 
   **-n** **--not-running**                Show only drains not running
+
+  **-y** **--yaml**                       Output at YAML
+
+  **-j** **--json**                       Output at JSON
 
 
 
@@ -561,7 +553,7 @@ Commands
     
     kato log stream event
   
-    # stream DEA, stager and app log stream
+    # stream DEA and app log stream
     
     kato log stream systail.dea systail.stager apptail
   
@@ -630,6 +622,22 @@ Commands
   **-v** **--verbose**                    Show process information when starting/stopping roles
 
   **-f** **--force**                      Forces this node to attach to a core node, ignoring any version mismatches
+
+
+
+----
+
+.. _kato-command-ref-node-detach:
+
+**node** **detach** [**options**]
+
+  Detach this node from a stackato core node
+
+  **-h** **--help**                       Show help information
+
+  **-s** **--start**                      Automatically start processes after detaching
+
+  **-v** **--verbose**                    Show process information when starting/stopping roles
 
 
 
@@ -717,6 +725,24 @@ Commands
 
 ----
 
+.. _kato-command-ref-node-retire:
+
+**node** **retire** [**options**]
+
+  Gracefully retires a DEA node from the cluster. New instances of the
+  apps are started on other available DEAs before the retiring DEA is shut
+  down. 
+
+  **-h** **--help**                       Show help information
+
+  **-n** **--node** *<node-id>*           Retire the specified DEA node, local node is
+
+                                          used if not specified
+
+
+
+----
+
 .. _kato-command-ref-node-setup-core:
 
 **node** **setup** **core** [*<endpoint>*]
@@ -735,13 +761,15 @@ Commands
 
 .. _kato-command-ref-node-setup-firstuser:
 
-**node** **setup** **firstuser** [**options**] *<email>*
+**node** **setup** **firstuser** [**options**] *<email>* *<org>*
 
 **setup** **--help**
 
   First user setup.
 
   *<email>*                               First user's email.
+
+  *<org>*                                 First user's organization.
 
 
   **-h** **--help**                       Show help information
@@ -753,6 +781,10 @@ Commands
                                           your unix password will be updated to this.
 
                                           Will be prompted for if not given.
+
+  **-u** **--username** *<username>*      First user's username.
+
+                                          Will be the provided email if not given.
 
 
 
@@ -794,6 +826,50 @@ Commands
 
 ----
 
+.. _kato-command-ref-node-upgrade:
+
+**node** **upgrade** [**options**]
+
+  Upgrades Stackato
+
+  **-h** **--help**                       Show help information
+
+  **-f** **--file** *<file>*              Performs the Stackato upgrade using the local provided file. Otherwise the upgrade is
+
+                                          gathered from the ActiveState website.
+
+  **-n** **--node** *<node>*              Targets the provided node.
+
+  **-v** **--version** *<version>*        The version of Stackato to upgrade to. The latest version is used if this isn't supplied.
+
+  **--rollback**                          Rolls Stackato back to the previous version.
+
+  **--skip-confirmation**                 Skips initial confirmation of upgrade.
+
+  **--resume**                            Resumes an upgrade process, used internally by Kato and should only be called manually when
+
+                                          requested.
+
+  **--all**                               Targets all nodes in the cluster.
+
+  **--status**                            Shows the status of upgrades on a node.
+
+  **--force**                             Forces an upgrade to run.
+
+
+
+----
+
+.. _kato-command-ref-node-version:
+
+**node** **version** [**options**] [*<node-IP>*]
+
+  **-h** **--help**                       Show help information.
+
+
+
+----
+
 .. _kato-command-ref-op:
 
 **op** **--help**
@@ -817,6 +893,12 @@ Commands
 **op** **regenerate** **mysql**
 
 **op** **regenerate** **postgresql** [**--no-restart**]
+
+**op** **regenerate** **stackato-rest-auth**
+
+**op** **regenerate** **cloud-controller-client-auth**
+
+**op** **regenerate** **token-signing-secret**
 
 **op** **remap_hosts** *<old-hostname>* *<new-hostname>*
 
@@ -858,9 +940,7 @@ Commands
 
   **upstream_proxy**                      Configure Stackato to use an external or upstream proxy
 
-                                          server
-
-                                          and deployed apps.
+                                          server and deployed apps.
 
   **update_hostsfile**                    Updates the /etc/hosts file with the endpoint URI mapped
 
@@ -881,15 +961,19 @@ Commands
 
 .. _kato-command-ref-patch:
 
-**patch** **status** [**--all**]
+**patch** **status**
 
-**patch** **install** [**--all|--no-restart|--only-this-node**] [*<patchname>*]
+**patch** **status** **--all**
+
+**patch** **install** [**--all**]
+
+**patch** **install** *<patchname>*
 
 **patch** **reset**
 
 **patch** **update**
 
-**patch** **reinstall** [**--all|--only-this-node|--no-restart**] *<patchname>*
+**patch** **reinstall** *<patchname>*
 
   Update a Stackato cluster with post-release fixes.
 
