@@ -27,8 +27,8 @@ specific software required by applications or update operating system
 packages.
 
 To create a new base image for Stackato to use for application
-containers, perform the following steps on all nodes running the DEA
-role:
+containers, perform the following steps **on all nodes running the DEA
+role**:
 
 1. Start with an empty working directory::
 
@@ -49,10 +49,15 @@ role:
     RUN apt-get -y install libgraphite2-dev
     CMD ["start.sh"]
 
-   The ``FROM`` instruction inherits the environment and installed
-   software from Stackato's app image. The ``RUN`` instruction specifies
-   arbitrary commands to run before saving the image.
-   
+   * `FROM <http://docs.docker.io/en/latest/use/builder/#from>`__:
+     inherits the environment and installed software from Stackato's app
+     image.
+   * `RUN <http://docs.docker.io/en/latest/use/builder/#run>`__:
+     specifies arbitrary commands to run before saving the image.
+   * `ADD <http://docs.docker.io/en/latest/use/builder/#add>`__: could
+     be used to copy files into the image.
+     
+
 4. Build the image, setting the maintainer's name, an image name, and a
    version number (optional, but recommended)::
 
@@ -60,16 +65,17 @@ role:
   
    The version number at the end of the image name is 
 
-5. Configure Stackato to use the new image::
-
-    $ kato config set fence docker/image exampleco/newimg:1.0.0
-    WARNING: Assumed type string
-    exampleco/newimg:1.0.0
+5. Configure Stackato to use the new image:
 
 .. note::
 
   This step only needs to be done once, as the configuration change is
-  shared with all nodes.
+  shared with all nodes::
+
+    $ kato config set fence docker/image api.paas.example.com:49153/newimg:1.0.0
+    WARNING: Assumed type string
+    api.paas.example.com:49153/newimg:1.0.0
+
   
 6. Restart the ``fence`` process::
   
@@ -87,7 +93,7 @@ The steps above will work with smaller clusters or micro clouds where
 the creation of Docker images on each DEA can be done manually. On
 larger clusters, you should set up a `Docker registry
 <http://blog.docker.io/2013/07/how-to-use-your-own-registry/>`__ as a
-central registry for your container tempates.
+central repository for your container tempates.
 
 1. On the Core node of your cluster, pull the `docker-registry
    <https://index.docker.io/u/samalba/docker-registry/>` image from
@@ -132,16 +138,17 @@ central registry for your container tempates.
 
     $ sudo docker pull api.paas.example.com:49153/newimg:1.0.0
 
-7. Configure Stackato to use the new image::
+7. Configure Stackato to use the new image:
+
+.. note::
+
+  This step only needs to be done once, as the configuration change is
+  shared with all nodes::
 
     $ kato config set fence docker/image api.paas.example.com:49153/newimg:1.0.0
     WARNING: Assumed type string
     api.paas.example.com:49153/newimg:1.0.0
 
-.. note::
-
-  This step only needs to be done once, as the configuration change is
-  shared with all nodes.
   
 8. Restart the ``fence`` process **on each DEA**::
   
