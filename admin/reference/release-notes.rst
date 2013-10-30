@@ -18,6 +18,8 @@ Release Notes
 v3.0.0 Beta (Oct. 2013)
 -----------------------
 
+
+* ``kato admin ...`` commands removed; use the corresponding ``stackato admin ...`` commands or the web console.
 * MongoDB client updated to 2.4.1 in application container 
 
 * Logyard updates:
