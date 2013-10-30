@@ -39,13 +39,13 @@ role:
    template::
   
     $ kato config get fence docker/image
-    stackato/app-holophonor:3.0.0
+    stackato/app-holophonor
   
 3. Create a `Dockerfile <http://docs.docker.io/en/latest/use/builder/>`_
    which inherits the current Docker image, then runs an update or
    installation command. For example::
 
-    FROM stackato/app-holophonor:3.0.0
+    FROM stackato/app-holophonor
     RUN apt-get -y install libgraphite2-dev
     CMD ["start.sh"]
 
