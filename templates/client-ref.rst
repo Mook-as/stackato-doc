@@ -1,0 +1,41 @@
+{#
+ # To generate user/reference/client-ref.rst run `make update`
+ #}
+
+.. index:: Command Reference: Client
+
+.. _command-ref-client:
+
+Stackato Client Command Reference
+=================================
+
+Usage
+-----
+
+**stackato** [*options*] *command* [*arguments*] [*command-options*]
+
+Try ``stackato help``, ``stackato help [command]``, and ``stackato options`` for more information.
+
+Many of the informational commands take a ``--json`` option if you wish to generate machine-parseable output.
+In some cases the  ``--json`` option reveals additional details.
+
+.. note::
+    Administrative user privileges are required where "*(admin)*" is noted.
+
+{% for section in sections %}
+**{{ section['name'] }}**
+
+    {% for command in section['commands'] %}
+    {{ command }}
+        {{ commands[command]['description'] }}
+    {% endfor %}
+
+    {% for subsection in section['sections'] %}
+        *{{ subsection['name'] }}*
+        
+        {% for command in subsection['commands'] %}
+            {{ command }}
+                {{ commands[command]['description'] }}
+        {% endfor %}
+    {% endfor %}
+{% endfor %}

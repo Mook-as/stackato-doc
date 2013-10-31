@@ -204,7 +204,11 @@ update:
 	  GEM_HOME=$(GEM_HOME) \
 	  ruby -e 'require "kato/docs/sphinx"; render_kato_ref(ARGV.shift)' admin/reference/kato-ref.rst.erb > admin/reference/kato-ref.rst ; \
 	)
-	rm -rf $(UPDATE) 
+	rm -rf $(UPDATE)
+
+client-update:
+	@echo "Generating user reference from Jinja2"
+	stackato2 help --json | python -c "import sys, json, os; from jinja2 import Environment, FileSystemLoader; help = json.loads(sys.stdin.read()); env = Environment(loader=FileSystemLoader('templates'), trim_blocks=True, lstrip_blocks=True); template = env.get_template('client-ref.rst'); print template.render(commands=help['commands'], sections=help['sections'])"
 
 reupdate:	
 	@echo "Generating kato reference from EXISTING docopts."
