@@ -5,69 +5,92 @@
 App Store
 =========
 
-The App Store is a collection of links to ready-to-run applications
-which can be deployed to Stackato by any user or group with one or two
-clicks. This interface uses the same API as the CLI client, pulling the
-source code in to the system using Git rather than pushing an archive
-from the local filesystem.
+The App Store is a collection of ready-to-run applications which can be
+deployed to Stackato with a couple of clicks. This interface uses the
+same API as the CLI client, pulling the source code from a Git
+repository rather than pushing an archive from the user's local
+filesystem.
 
-End users have access to the main App Store interface (see the Stackato
+Users have access to the main App Store interface (see the Stackato
 User Guide), but do not have access to add new applications or store
 definitions.
 
 Creating an App Store
 ---------------------
 
-The App Store interface exposes multiple "stores" which define lists of
-Git repositories containing the desired applications. These store
-definition files are specified in the main :ref:`Settings
-<console-settings>` page of the Management Console or set using
-:ref:`kato config <kato-command-ref-config>`.
+The App Store interface exposes multiple "stores" which specify the
+available applications. These stores are source from definition files
+specified in the main :ref:`Settings <console-settings>` page of the
+Management Console or set using :ref:`kato config
+<kato-command-ref-config>`.
 
 App Store Definition
 ^^^^^^^^^^^^^^^^^^^^
 
 App Store definition :term:`YAML` files describe each store and its
-apps, including a link to the source location for each app::
+apps, including a link to the source location for each app. For
+example::
 
-    store:
-      title: ActiveState Stackato Sample Applications
-      contact: Stackato Support <stackato-support@activestate.com>
-      icon: activestate.png
-      icon-url: http://get.stackato.com/store/icon/
-      src-url: git://github.com/Stackato-Apps/
-      defaults:
-        id: $id-from-name
-        mem: 128
-        src: $id.git
-        icon: $id.png
-        commit: master
-        info: $github-url#readme
+  store:
+    title: Third Party Apps for Stackato
+    contact: Stackato Support <stackato-support@activestate.com>
+    icon: https://get.stackato.com/store/icon/third-party.png
+  
+  apps:
+  - name: Bugzilla
+    id: bugzilla
+    desc: A bug tracking system for individuals or groups of developers
+    framework: perl
+    runtime: perl514
+    services: mysql
+    license: MPL
+    commit: master
+    src: https://github.com/Stackato-Apps/bugzilla.git
+    info: https://github.com/Stackato-Apps/bugzilla.git#readme
+    icon: https://get.stackato.com/store/icon/bugzilla.png
+    mem: 256
+  
+  - name: Django CMS
+    id: django-cms
+    desc: A content management system platform for publishing content on the internet.
+    framework: python
+    runtime: python27
+    services: postgresql
+    license: BSD
+    commit: stackato
+    src: https://github.com/Stackato-Apps/django-cms.git
+    info: https://github.com/Stackato-Apps/django-cms.git#readme
+    icon: https://get.stackato.com/store/icon/django-cms.png
+    mem: 128
+  
+  - name: Node Chat
+    id: node-chat
+    desc: A simple chat application in Node.js with no other dependencies. Originally written by Ryan Dahl, the creator of Node.js.
+    framework: node
+    runtime: node
+    commit: master
+    icon: https://get.stackato.com/store/icon/chat.png
+    mem: 64
+    license: MIT
+    src: https://github.com/Stackato-Apps/node-chat.git
+    info: https://github.com/Stackato-Apps/node-chat.git#readme
 
-    apps:
-    - name: Currency Converter
-      desc: Currency converter using Python bottle framework
-      runtime: Python 2.7
-      services: Redis
-      id: currency
-      src: bottle-currency.git
-      tags: money, foo, ingy
+The YAML string requires two top-level keys: ``store`` and ``apps``.
 
-    - name: PHP Info
-      desc: Executes the phpinfo() function.
-      runtime: PHP
-      id: phpinfo
-      icon: php.png
+store
+~~~~~
 
-    - name: Rails Movies
-      desc: Sample Rails app to manage a list of movie titles.
-      runtime: Ruby 1.9
-      framework: Rails 3
-      services: MySQL
-      src: rails-movie.git
-      icon: default
+  Contains entries that define the store.
 
-The YAML string requires just two keys: ``apps`` and ``store``.
+  **title**
+    Text used as a display name for the App Store in the Management Console.
+    
+  **contact**
+    A name and email address of the store maintainer.
+
+  **icon**
+    An image used for the App Store icon. Specified as a full URL.
+
 
 apps
 ~~~~
@@ -88,11 +111,12 @@ apps
     URL of the git repository where the app code resides.
 
   **commit**
-    Branch name, tag name, or exact commit hash of the git repository to use.  If unspecified, the HEAD commit of ``master``
-    branch is used.
+    Branch name, tag name, or exact commit hash to use. If unspecified,
+    the HEAD commit of ``master`` branch is used.
 
   **framework**
-    The framework the app uses. Examples include ``perl``, ``python``, ``buildpack``, ``node``, ``rails3``.
+    The framework the app uses. Examples include ``perl``, ``python``,
+    ``buildpack``, ``node``, ``rails3``.
 
   **icon**
     An image used for the app icon specified either as a full URL, 
@@ -114,41 +138,6 @@ apps
   **services**
     The data services to the app uses.
 
-store
-~~~~~
-
-  Contains entries that help define the App Store itself.
-
-  **contact**
-    A name and email address that can be used to contact someone regarding the App Store.
-
-  **defaults**
-    Default values for apps. See above example for more details.
-
-  **icon**
-    An image used for the App Store icon specified either as a full URL, or a file
-    relative to the **icons** URL.
-
-  **icon-url**
-    A URL pointing to an base directory used for images.
-
-  **src-url**
-    A git URL pointing to an git repository used for applications. 
-
-  **title**
-    Text used as a display name for the App Store in the Management Console.  
-
-variable values
-~~~~~~~~~~~~~~~
-
-  **$id**
-   The ID of the app.
-
-  **$id-from-name**
-   name.replace(/[^\w]+/g, '-').replace(/^-/, '').replace(/-$/, '')
-
-  **$github-url**
-   Combination of **src-url** and **src** seperated by a **/**
 
 Hosting the Store Definition Files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
