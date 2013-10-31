@@ -1,3 +1,5 @@
+.. _stackato-admin-guide:
+
 Stackato Admin Guide
 ====================
 

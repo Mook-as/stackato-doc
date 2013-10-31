@@ -1,3 +1,5 @@
+.. _stackato-user-guide:
+
 Stackato User Guide
 ===================
 
