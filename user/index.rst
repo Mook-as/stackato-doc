@@ -46,6 +46,7 @@ Deploying Applications
   .. toctree::
     :maxdepth: 1
      
+    deploy/orgs-spaces
     deploy/buildpack
     deploy/other-frameworks
     deploy/languages/aspdotnet

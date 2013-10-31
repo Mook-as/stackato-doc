@@ -4,41 +4,93 @@
 General Deployment
 ==================
 
+Applications are typically deployed to Stackato by pushing source code
+and configuration to the system's API endpoint using the :ref:`stackato
+cli client <client>` or other clients that use the Stackato or Cloud
+Foundry API. 
+
 The steps for deploying applications will be slightly different
-depending on the application. Instructions for deploying the `Stackato
-sample applications <https://github.com/Stackato-Apps>`_ can be found in
-the `README.md` file of each app.
+depending on the application and its requirements. Instructions for
+deploying the `Stackato sample applications
+<https://github.com/Stackato-Apps>`_ can be found in the `README.md`
+file of each app.
 
-.. warning::
-  In Stackato 3.0 (Cloud Foundry v2 API), application deployment is done
-  primarily using :ref:`Buildpacks <buildpacks>`. A special built-in 'Legacy'
-  buildpack handles Stackato v2 frameworks for existing application
-  configurations.
+.. note::
+  In Stackato 3.0 and later (Cloud Foundry v2 API), application
+  deployment is done primarily using :ref:`Buildpacks <buildpacks>`. A
+  special built-in 'Legacy' buildpack handles Stackato v2 frameworks for
+  existing application configurations.
 
-To deploy an app to the Server VM, target the api endpoint URL with the
-:ref:`stackato client <client>`::
+Targeting & Authenticating
+--------------------------
 
-  $ stackato target api.stackato-xxxx.local
+Before deploying an app, the client must first target Stackato's API
+endpoint URL. This will generally be the same URL that exposes the
+Management Console. For example::
+
+  $ stackato target api.stacka.to
+  Successfully targeted to [https://api.stacka.to]
+  ...
 
 Use the ``stackato login`` command to authenticate with your username
-and password, then use the command::
+and password::
+
+  $ stackato login <username>
+  Attempting login to [https://api.stacka.to]
+  Password: ******
+  Successfully logged into [https://api.stacka.to]
+
+Selecting Org & Space
+---------------------
+
+If your account is a member of multiple :ref:`organizations
+<orgs-spaces>`, choose which one you want to operate under::
+
+  $ stackato switch-org exampleco
+
+Likewise, if you are a member of more than one space, choose a default
+space::
+
+  $ stackato switch-space devel-example
+
+Pushing Application Code
+------------------------
+
+Change to the root directory of your source code project, and use the
+``stackato push`` command to deploy your application. If you have a
+:ref:`stackato.yml <stackato_yml>` or :ref:`manifest.yml <manifest_yml>`
+config file in this directory, you can use just::
 
 	$ stackato push
 
 The output of the push command will be something like::
-	
+
 	$ stackato push -n
-	Application Url: myapp.stackato-xxxx.local
-	Creating Application [myapp]: OK
-	Creating mysql Service [mydb]: OK
-	Binding Service [mydb]: OK
-	Uploading Application [myapp]:
-		Checking for available resources: OK
-		Packing application: OK
-		Uploading (30K): 100% OK
-	Push Status: OK
-	Staging Application [myapp]: OK                                          
-	Starting Application [myapp]: OK 
+  Using manifest file "stackato.yml"
+  Application Url: env.stacka.to
+  Creating Application [env] as [https://api.stacka.to -> exampleco -> devel-example -> env] ... OK
+    Map env.stacka.to ... OK
+  Uploading Application [env] ... 
+    Checking for bad links ... 80 OK
+    Copying to temp space ... 79 OK
+    Checking for available resources ...  OK
+    Processing resources ... OK
+    Packing application ... OK
+    Uploading (223K) ... 100% OK
+  Push Status: OK
+  ...
+  stackato.dea_ng: [STAGED_APP] Completed staging application
+  stackato.dea_ng.0: [SPAWNING_APP] Spawning app web process: node server.js
+  app.0: Server running at
+  app.0:   => http://0.0.0.0:50932/
+  app.0: CTRL + C to shutdown
+  OK
+  http://env.stacka.to/ deployed
+
+The ``stackato`` client will show staging and running logs for the
+deployment process. To inspect these logs after deployment has finished,
+use the :ref:`stackato logs <command-logs>` command.
+
 
 .. _language-specific-deploy:
 
