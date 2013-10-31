@@ -1,3 +1,5 @@
+.. _stackato-user-guide:
+
 Stackato User Guide
 ===================
 
@@ -46,6 +48,7 @@ Deploying Applications
   .. toctree::
     :maxdepth: 1
      
+    deploy/orgs-spaces
     deploy/buildpack
     deploy/other-frameworks
     deploy/languages/aspdotnet
@@ -68,6 +71,7 @@ Services
    services/filesystem
    services/memcached
    services/port-service
+   services/user-provided
 
 Logging & Monitoring
 --------------------

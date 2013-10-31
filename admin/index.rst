@@ -1,3 +1,5 @@
+.. _stackato-admin-guide:
+
 Stackato Admin Guide
 ====================
 
@@ -33,6 +35,7 @@ Management Console
 
    console/index
    console/app-store
+   console/customize
 
 
 VM Setup
@@ -56,6 +59,7 @@ Server Configuration
 
    server/index
    server/router
+   server/docker
    server/logging
    server/aok
 
@@ -93,7 +97,6 @@ Reference
    reference/kato-ref
    reference/groups
    reference/architecture
-   reference/customize
    reference/glossary
    reference/troubleshoot
    reference/add-service

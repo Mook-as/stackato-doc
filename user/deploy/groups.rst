@@ -4,8 +4,13 @@
 .. index:: Limits
 .. index:: Users
 
+
 Groups & Users
 ==============
+
+.. warning:: 
+  Stackato Groups have been replaced by :ref:`Organizations and Spaces <orgs-spaces>`.
+
 
 Users can be assigned to specific groups by Stackato admins. These
 groups have quotas just like regular user accounts, and users can choose

@@ -474,17 +474,18 @@ Commands
     
     kato log drain add system_splunk udp://logs.splunk.com:1234/
     
-    # Add a drain to forward all application logs as json
-    
-    kato log drain add -f json -p apptail app_splunk udp://logs.splunk.com:1235/
-  
     # Add a drain to forward all application and system logs as json
   
     kato log drain add -f json -p apptail,systail app_sys_splunk udp://logs.splunk.com:1235/
     
-    # Add a drain with custom format,
+    # Add a drain with a custom or named format,
     
     kato log drain add -f "{{.Name}}: {{.Text}}"  system_splunk_2 udp://logs.splunk.com:1236/
+    kato log drain add -f systail-syslog  system_splunk_2 udp://logs.splunk.com:1236/
+  
+    # Passing custom parameters to a drain
+  
+    kato log drain add mydrain redis://localhost:6379 key=logdata 
 
   **-h** **--help**                       Show help information
 
@@ -552,7 +553,7 @@ Commands
     
     kato log stream event
   
-    # stream DEA, stager and app log stream
+    # stream DEA and app log stream
     
     kato log stream systail.dea systail.stager apptail
   
@@ -820,6 +821,40 @@ Commands
   **-s** **--no-start**                   Do not auto start processes
 
   **-v** **--verbose**                    Show process information
+
+
+
+----
+
+.. _kato-command-ref-node-upgrade:
+
+**node** **upgrade** [**options**]
+
+  Upgrades Stackato
+
+  **-h** **--help**                       Show help information
+
+  **-f** **--file** *<file>*              Performs the Stackato upgrade using the local provided file. Otherwise the upgrade is
+
+                                          gathered from the ActiveState website.
+
+  **-n** **--node** *<node>*              Targets the provided node.
+
+  **-v** **--version** *<version>*        The version of Stackato to upgrade to. The latest version is used if this isn't supplied.
+
+  **--rollback**                          Rolls Stackato back to the previous version.
+
+  **--skip-confirmation**                 Skips initial confirmation of upgrade.
+
+  **--resume**                            Resumes an upgrade process, used internally by Kato and should only be called manually when
+
+                                          requested.
+
+  **--all**                               Targets all nodes in the cluster.
+
+  **--status**                            Shows the status of upgrades on a node.
+
+  **--force**                             Forces an upgrade to run.
 
 
 

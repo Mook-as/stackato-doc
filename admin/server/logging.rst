@@ -39,8 +39,8 @@ Log streams are handled by three processes which run on all Stackato nodes:
 * **logyard_sieve**: listens for all system logs and extracts vital events
   back to **logyard**
 
-**apptail** is an additional process which runs only on DEA and Stager
-nodes. It sends user application logs to **logyard**, injecting relevant
+**apptail** is an additional process which runs only on DEA nodes. It
+sends user application logs to **logyard**, injecting relevant
 application-specific events from the **logyard_sieve** stream.
 
 
@@ -119,32 +119,40 @@ Different JSON keys are available in different :ref:`log streams <logging-keys>`
 **apptail.**:
 
 * Text: actual log line
-* LogFilename 
 * UnixTime: timestamp (seconds since  1 January 1970)
 * HumanTime: formatted time
+* NodeID: DEA host IP of this app instance
+* LogFilename: log file from which this line originated
 * Source: e.g. app, staging, stackato.dea, stackato.stager, appstore
 * InstanceIndex: instance number
-* AppID: unique id for this app
-* AppName
-* AppGroup
-* NodeID: Host (DEA/stager) IP of this app instance
+* AppGUID: GUID of this app
+* AppName: application name
+* AppSpace: GUID of the space this app belongs to
+* Syslog.Priority: syslog priority
+* Syslog.Time: syslog formatted time
 
 **event.**:
 
-* Type: type of event (eg: process_stop) 
+* Text: event description
 * UnixTime: timestamp
-* Desc: human-readable description of this event (as shown in the Management Console)
-* Severity: INFO, WARN, ERROR
-* Info: event-specific information as JSON
-* Process: the process generating the event
+* HumanTime: formatted time
 * NodeID: Node IP from which this event originated
+* Type: type of event (eg: process_stop) 
+* Severity: INFO, WARN, ERROR
+* Process: the process generating the event
+* Info: event-specific information as JSON
+* Syslog.Priority: syslog priority
+* Syslog.Time: syslog formatted time
 
 **systail.**:
 
 * Text: actual log line
 * UnixTime: timestamp
-* Name: name of the component (eg: redis_gateway)
+* HumanTime: formatted time
 * NodeID: Node IP from which this log line originated
+* Name: name of the component (eg: redis_gateway)
+* Syslog.Priority: syslog priority
+* Syslog.Time: syslog formatted time
 
 You can see a list of the default drain formats using :ref:`kato config
 get <kato-command-ref-config>`::
@@ -153,6 +161,7 @@ get <kato-command-ref-config>`::
   apptail: ! '{{.HumanTime}} {{.Source}}.{{.InstanceIndex}}: {{.Text}}'
   event: ! '{{.Type}}@{{.NodeID}}: {{.Desc}} -- via {{.Process}}'
   systail: ! '{{.Name}}@{{.NodeID}}: {{.Text}}'
+  [...]
 
 These default log formats are used when the corresponding prefix is used
 and no format options ("-f") are specified. For example ``kato drain add
