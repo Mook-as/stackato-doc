@@ -18,7 +18,7 @@ Release Notes
 v3.0.0 Beta (Oct. 2013)
 -----------------------
 
-
+* Added ``kato node retire`` to gracefully shut down a DEA, moving its application instances on other available nodes first. 
 * ``kato admin ...`` commands removed; use the corresponding ``stackato admin ...`` commands or the web console.
 * MongoDB client updated to 2.4.1 in application container 
 
