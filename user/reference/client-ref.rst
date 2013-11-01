@@ -1,4 +1,3 @@
-
 .. index:: Command Reference: Client
 
 .. _command-ref-client:
@@ -19,328 +18,761 @@ In some cases the  ``--json`` option reveals additional details.
 .. note::
     Administrative user privileges are required where "*(admin)*" is noted.
 
-**Getting Started**
+  
+Getting Started
+^^^^^^^^^^^^^^^^^^^^^
 
-    login
-        Log with the named user into the current or specified target.
-    logout
-        Log out of the current, specified, or all targets.
-    target
-        Report the current target, or set a new target.
-    targets
-        List the available targets, and their authorization tokens, if any.
-    tokens
-        List the available targets, and their authorization tokens, if any.
+    
+.. _command-login:
+  
+  login
+    Log in to the current or specified target with the named user.
+    
+.. _command-logout:
+  
+  logout
+    Log out of the current, specified, or all targets.
+    
+.. _command-target:
+  
+  target
+    Set the target API endpoint for the client, or report the current target.
 
-**Applications**
+  
+Applications
+^^^^^^^^^^^^^^^^^^^^^
 
-    app
-        Show the information of the specified application.
-    apps
-        List the applications deployed to the target.
-    list
-        List the applications deployed to the target.
+    
+.. _command-app:
+  
+  app
+    Show the information of the specified application.
+    
+.. _command-apps:
+  
+  apps
+    List the applications deployed to the target.
+    
+.. _command-list:
+  
+  list
+    List the applications deployed to the target.
 
-        *Information*
-        
-            crashes
-                List recent application crashes.
-            crashlogs
-                Display log information for the application. An alias of 'logs'.
-            disk
-                Show the disk reservation for a deployed application.
-            drains
-                Show the list of drains attached to the application.
-            env
-                List the application's environment variables.
-            events
-                Show the application's events as recorded so far.
-            file
-                Display directory listing or file download.
-            files
-                Display directory listing or file download.
-            health
-                Report the health of the seecified applications.
-            instances
-                List application instances for a deployed application.
-            logs
-                Display log information for the application.
-            mem
-                Show the memory reservation for a deployed application.
-            stats
-                Display resource usage for a deployed application.
-            tail
-                Monitor file for changes and stream them.
-            drain list
-                Show the list of drains attached to the application.
-        *Management*
-        
-            create-app
-                Create an empty application with the specified configuration.
-            dbshell
-                Invoke interactive db shell for a bound service.
-            delete
-                Delete the specified applications.
-            env-add
-                Add the specified environment variable to the named application.
-            env-del
-                Remove the specified environment variable from the named application.
-            map
-                Make the application accessible through the url (a route consisting of host and domain)
-            open
-                Open the application|url|target (web console) in a browser
-            push
-                Configure, create, push, map, and start a new application.
-            rename
-                Rename the specified application.
-            restart
-                Stop and restart a deployed application.
-            run
-                Run an arbitrary command on a running instance.
-            scale
-                Update the number of instances, memory and/or disk reservation for a deployed application.
-            scp
-                Copy source files and directories to the destination.
-            set-env
-                Add the specified environment variable to the named application.
-            ssh
-                ssh to a running instance (or target), or run an arbitrary command.
-            start
-                Start a deployed application.
-            stop
-                Stop a deployed application.
-            unmap
-                Unregister the application from the url.
-            unset-env
-                Remove the specified environment variable from the named application.
-            drain add
-                Attach a new named drain to the application.
-            drain delete
-                Remove the named drain from the application.
-**Services**
+    *Information*
+      
+.. _command-crashes:
 
-    service
-        Show the information about the named service.
-    service-plans
-        List all available plans of the supported services.
-    services
-        List the supported and provisioned services of the target.
+      crashes
+        List recent application crashes.
+              
+.. _command-crashlogs:
 
-        *Authentication Tokens*
-        
-            create-service-auth-token
-                Create a new service authentication token.
-            delete-service-auth-token
-                Delete the specified service authentication token.
-            service-auth-tokens
-                Show all service authentication tokens knowns to the target.
-            update-service-auth-token
-                Update the specified service authentication token.
-        *Brokers*
-        
-            add-service-broker
-                Make the named service broker known.
-            service-brokers
-                Show the list of known service brokers.
-        *Management*
-        
-            bind-service
-                Bind the named service to the specified application.
-            bind_service
-                Bind the named service to the specified application.
-            clone-services
-                Copy the service bindings of the source application to the destination application.
-            create-service
-                Create a new provisioned service, possibly bind it to an application.
-            create_service
-                Create a new provisioned service, possibly bind it to an application.
-            delete-service
-                Delete the named provisioned service.
-            delete_service
-                Delete the named provisioned service.
-            rename-service
-                Rename the specified service instance.
-            rename_service
-                Rename the specified service instance.
-            tunnel
-                Create a local tunnel to a service, possibly start a local client as well.
-            unbind-service
-                Disconnect the named service from the specified application.
-            unbind_service
-                Disconnect the named service from the specified application.
-**Organizations**
+      crashlogs
+        Display log information for the application. An alias of 'logs'.
+              
+.. _command-disk:
 
-    create-org
-        Create a new organization.
-    delete-org
-        Delete the named organization.
-    org
-        Show the named organization's information.
-    orgs
-        List the available organizations.
-    quota-org
-        Set the quotas for the current or named organization.
-    rename-org
-        Rename the named organization.
-    switch-org
-        Switch the current organization to the named organization. This invalidates the current space.
+      disk
+        Show the disk reservation for a deployed application.
+              
+.. _command-drains:
 
-**Spaces**
+      drains
+        Show the list of drains attached to the application.
+              
+.. _command-env:
 
-    create-space
-        Create a new space.
-    delete-space
-        Delete the named space.
-    rename-space
-        Rename the named space.
-    space
-        Show the named space's information.
-    spaces
-        List the available spaces in the specified organization. See --organization for details
-    switch-space
-        Switch the current space to the named space. This may switch the organization as well.
+      env
+        List the application's environment variables.
+              
+.. _command-events:
 
-**Routes**
+      events
+        Show the application's events as recorded so far.
+              
+.. _command-file:
 
-    delete-route
-        Delete the named route.
-    routes
-        List all available routes.
+      file
+        Display directory listing or file.
+              
+.. _command-files:
 
-**Domains**
+      files
+        Display directory listing or file.
+              
+.. _command-health:
 
-    domains
-        List the available domains in the specified space, or all.
-    map-domain
-        Add the named domain to an organization or space.
-    unmap-domain
-        Remove the named domain from an organization or space.
+      health
+        Report the health of the specified application(s).
+              
+.. _command-instances:
 
-**Administration**
+      instances
+        List application instances for a deployed application.
+              
+.. _command-logs:
 
-    frameworks
-        List the supported frameworks of the target.
-    group
-        Report the current group, or (un)set it.
-    info
-        Show the basic system and account information.
-    limits
-        Show and/or modify the limits applying to applications in the named group.
-    quota-org
-        Set the quotas for the current or named organization.
-    quotas
-        List the available quota definitions.
-    runtimes
-        List the supported runtimes of the target.
-    stacks
-        List the supported stacks of the target.
-    target
-        Report the current target, or set a new target.
-    targets
-        List the available targets, and their authorization tokens, if any.
-    tokens
-        List the available targets, and their authorization tokens, if any.
-    usage
-        Show the current memory allocation and usage of the active or specified user/group (CFv1), or the specified or current space (CFv2).
-    user
-        Show the name of the user we are logged in as in the current or specified target.
-    user-info
-        Shows the information of a user in the current or specified target. Defaults to the current user. Naming a specific user requires a CFv2 target.
-    version
-        Print the version number of the client.
-    admin grant
-        Grant the named user administrator privileges for the current or specified target.
-    admin list
-        Show a list of the administrators for the current or specified target.
-    admin patch
-        Apply a patch to the current or specified target.
-    admin report
-        Retrieve a report containing the logs of the current or specified target.
-    admin revoke
-        Revoke the administrator privileges for named user at the current or specified target.
-    groups add-user
-        Add the named user to the specified group.
-    groups create
-        Create a new group with the specified name.
-    groups delete-user
-        Remove the named user from the specified group.
-    groups delete
-        Delete the named group.
-    groups limits
-        Show and/or modify the limits applying to applications in the named group.
-    groups show
-        Show the list of groups known to the target.
-    groups users
-        Show the list of users in the named group.
-    quota configure
-        Reconfigure the named quota definition.
-    quota create
-        Create a new quota definition.
-    quota delete
-        Delete the named quota definition.
-    quota list
-        List the available quota definitions.
-    quota rename
-        Rename the named quota definition.
-    quota show
-        Show the details of the named quota definition. If not specified it will be asked for interactively (menu).
+      logs
+        Display log information for the application.
+              
+.. _command-mem:
 
-        *User Management*
-        
-            add-user
-                Register a new user in the current or specified target. This operation requires administrator privileges, except if "allow_registration" is set server-side.
-            add_user
-                Register a new user in the current or specified target. This operation requires administrator privileges, except if "allow_registration" is set server-side.
-            create-user
-                Register a new user in the current or specified target. This operation requires administrator privileges, except if "allow_registration" is set server-side.
-            create_user
-                Register a new user in the current or specified target. This operation requires administrator privileges, except if "allow_registration" is set server-side.
-            delete-user
-                Delete the named user, its applications and services from the current or specified target. This operation requires administrator privileges.
-            delete_user
-                Delete the named user, its applications and services from the current or specified target. This operation requires administrator privileges.
-            login
-                Log with the named user into the current or specified target.
-            logout
-                Log out of the current, specified, or all targets.
-            passwd
-                Change the password of the user we are logged in as in the current or specified target.
-            register
-                Register a new user in the current or specified target. This operation requires administrator privileges, except if "allow_registration" is set server-side.
-            token
-                Interactively set authentication token.
-            unregister
-                Delete the named user, its applications and services from the current or specified target. This operation requires administrator privileges.
-            users
-                Show the list of users known to the current or specified target.
-**Convenience**
+      mem
+        Show the memory reservation for a deployed application.
+              
+.. _command-stats:
 
-    alias
-        Create a shortcut for a command (prefix).
-    aliases
-        List the known aliases (shortcuts).
-    unalias
-        Remove a shortcut by name.
+      stats
+        Display the resource usage for a deployed application.
+              
+.. _command-tail:
 
-**Miscellaneous**
+      tail
+        Monitor file for changes and stream them.
+              
+.. _command-drain list:
 
-    curl
-        Run a raw rest request against the chosen target
-    guid
-        Map the specified name into a uuid, given the type.
-    help
-        Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
-    named-entities
-        List the entity types usable for 'guid'. I.e. the types of the named entities known to the client.
-    trace
-        Print the saved REST trace for the last client command to stdout.
-    admin help
-        Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
-    drain help
-        Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
-    groups help
-        Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
-    quota help
-        Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
+      drain list
+        Show the list of drains attached to the application.
+              
+    *Management*
+      
+.. _command-create-app:
+
+      create-app
+        Create an empty application with the specified configuration.
+              
+.. _command-dbshell:
+
+      dbshell
+        Invoke interactive db shell for a bound service.
+              
+.. _command-delete:
+
+      delete
+        Delete the specified application(s).
+              
+.. _command-env-add:
+
+      env-add
+        Add the specified environment variable to the named application.
+              
+.. _command-env-del:
+
+      env-del
+        Remove the specified environment variable from the named application.
+              
+.. _command-map:
+
+      map
+        Make the application accessible through the specified URL (a route consisting of host and domain)
+              
+.. _command-open:
+
+      open
+        Open the application|URL|target (web console) in a browser
+              
+.. _command-push:
+
+      push
+        Configure, create, push, map, and start a new application.
+              
+.. _command-rename:
+
+      rename
+        Rename the specified application.
+              
+.. _command-restart:
+
+      restart
+        Stop and restart a deployed application.
+              
+.. _command-run:
+
+      run
+        Run an arbitrary command on a running instance.
+              
+.. _command-scale:
+
+      scale
+        Update the number of instances, memory and/or disk reservation for a deployed application.
+              
+.. _command-scp:
+
+      scp
+        Copy source files and directories to the destination.
+              
+.. _command-set-env:
+
+      set-env
+        Add the specified environment variable to the named application.
+              
+.. _command-ssh:
+
+      ssh
+        SSH to a running instance (or target), or run an arbitrary command.
+              
+.. _command-start:
+
+      start
+        Start a deployed application.
+              
+.. _command-stop:
+
+      stop
+        Stop a deployed application.
+              
+.. _command-unmap:
+
+      unmap
+        Unregister the application from a URL.
+              
+.. _command-unset-env:
+
+      unset-env
+        Remove the specified environment variable from the named application.
+              
+.. _command-drain add:
+
+      drain add
+        Attach a new named drain to the application.
+              
+.. _command-drain delete:
+
+      drain delete
+        Remove the named drain from the application.
+              
+  
+Services
+^^^^^^^^^^^^^^^^^^^^^
+
+    
+.. _command-service:
+  
+  service
+    Show the information about the named service.
+    
+.. _command-service-plans:
+  
+  service-plans
+    List all available plans of the supported services.
+    
+.. _command-services:
+  
+  services
+    List the supported and provisioned services of the target.
+
+    *Authentication Tokens*
+      
+.. _command-create-service-auth-token:
+
+      create-service-auth-token
+        Create a new service authentication token.
+              
+.. _command-delete-service-auth-token:
+
+      delete-service-auth-token
+        Delete the specified service authentication token.
+              
+.. _command-service-auth-tokens:
+
+      service-auth-tokens
+        Show all service authentication tokens knowns to the target.
+              
+.. _command-update-service-auth-token:
+
+      update-service-auth-token
+        Update the specified service authentication token.
+              
+    *Brokers*
+      
+.. _command-add-service-broker:
+
+      add-service-broker
+        Make the named service broker known.
+              
+.. _command-service-brokers:
+
+      service-brokers
+        Show the list of known service brokers.
+              
+    *Management*
+      
+.. _command-bind-service:
+
+      bind-service
+        Bind the named service to the specified application.
+              
+.. _command-bind_service:
+
+      bind_service
+        Bind the named service to the specified application.
+              
+.. _command-clone-services:
+
+      clone-services
+        Copy the service bindings of the source application to the destination application.
+              
+.. _command-create-service:
+
+      create-service
+        Create a new provisioned service, and optionally bind it to an application.
+              
+.. _command-create_service:
+
+      create_service
+        Create a new provisioned service, and optionally bind it to an application.
+              
+.. _command-delete-service:
+
+      delete-service
+        Delete the named provisioned service.
+              
+.. _command-delete_service:
+
+      delete_service
+        Delete the named provisioned service.
+              
+.. _command-rename-service:
+
+      rename-service
+        Rename the specified service instance.
+              
+.. _command-rename_service:
+
+      rename_service
+        Rename the specified service instance.
+              
+.. _command-tunnel:
+
+      tunnel
+        Create a local tunnel to a service, optionally start a local client as well.
+              
+.. _command-unbind-service:
+
+      unbind-service
+        Disconnect the named service from the specified application.
+              
+.. _command-unbind_service:
+
+      unbind_service
+        Disconnect the named service from the specified application.
+              
+  
+Organizations
+^^^^^^^^^^^^^^^^^^^^^
+
+    
+.. _command-create-org:
+  
+  create-org
+    Create a new organization.
+    
+.. _command-delete-org:
+  
+  delete-org
+    Delete the named organization.
+    
+.. _command-link-user-org:
+  
+  link-user-org
+    Add the specified user to the named organization, in various roles. This is a CFv2 specific command
+    
+.. _command-org:
+  
+  org
+    Show the named organization's information.
+    
+.. _command-orgs:
+  
+  orgs
+    List the available organizations.
+    
+.. _command-quota-org:
+  
+  quota-org
+    Set the quotas for the current or named organization.
+    
+.. _command-rename-org:
+  
+  rename-org
+    Rename the named organization.
+    
+.. _command-switch-org:
+  
+  switch-org
+    Switch the current organization to the named organization. This invalidates the current space.
+    
+.. _command-unlink-user-org:
+  
+  unlink-user-org
+    Remove the specified user from the named organization, in various roles. This is a CFv2 specific command
+
+  
+Spaces
+^^^^^^^^^^^^^^^^^^^^^
+
+    
+.. _command-create-space:
+  
+  create-space
+    Create a new space.
+    
+.. _command-delete-space:
+  
+  delete-space
+    Delete the named space.
+    
+.. _command-link-user-space:
+  
+  link-user-space
+    Add the specified user to the named space, in various roles. This is a CFv2 specific command
+    
+.. _command-rename-space:
+  
+  rename-space
+    Rename the named space.
+    
+.. _command-space:
+  
+  space
+    Show the named space's information.
+    
+.. _command-spaces:
+  
+  spaces
+    List the available spaces in the specified organization. See --organization for details
+    
+.. _command-switch-space:
+  
+  switch-space
+    Switch from the current space to the named space. This may switch the organization as well.
+    
+.. _command-unlink-user-space:
+  
+  unlink-user-space
+    Remove the specified user from the named space, in various roles. This is a CFv2 specific command
+
+  
+Routes
+^^^^^^^^^^^^^^^^^^^^^
+
+    
+.. _command-delete-route:
+  
+  delete-route
+    Delete the named route.
+    
+.. _command-routes:
+  
+  routes
+    List all available routes.
+
+  
+Domains
+^^^^^^^^^^^^^^^^^^^^^
+
+    
+.. _command-domains:
+  
+  domains
+    List the available domains in the specified space, or all.
+    
+.. _command-map-domain:
+  
+  map-domain
+    Add the named domain to an organization or space.
+    
+.. _command-unmap-domain:
+  
+  unmap-domain
+    Remove the named domain from an organization or space.
+
+  
+Administration
+^^^^^^^^^^^^^^^^^^^^^
+
+    
+.. _command-frameworks:
+  
+  frameworks
+    List the supported frameworks of the target.
+    
+.. _command-group:
+  
+  group
+    Report the current group, or (un)set it.
+    
+.. _command-info:
+  
+  info
+    Show the basic system and account information.
+    
+.. _command-limits:
+  
+  limits
+    Show and/or modify the limits applying to applications in the named group.
+    
+.. _command-quotas:
+  
+  quotas
+    List the available quota definitions.
+    
+.. _command-runtimes:
+  
+  runtimes
+    List the supported runtimes of the target.
+    
+.. _command-stacks:
+  
+  stacks
+    List the supported stacks of the target.
+    
+.. _command-targets:
+  
+  targets
+    List the available targets, and their authorization tokens, if any.
+    
+.. _command-tokens:
+  
+  tokens
+    List the available targets, and their authorization tokens, if any.
+    
+.. _command-usage:
+  
+  usage
+    Show the current memory allocation and usage of the active or specified user/group (CFv1), or the specified or current space (CFv2).
+    
+.. _command-user:
+  
+  user
+    Show the name of the current user in the current or specified target.
+    
+.. _command-user-info:
+  
+  user-info
+    Shows the information of a user in the current or specified target. Defaults to the current user. Naming a specific user requires a CFv2 target.
+    
+.. _command-version:
+  
+  version
+    Print the version number of the client.
+    
+.. _command-admin grant:
+  
+  admin grant
+    Grant the named user administrator privileges for the current or specified target.
+    
+.. _command-admin list:
+  
+  admin list
+    Show a list of the administrators for the current or specified target.
+    
+.. _command-admin patch:
+  
+  admin patch
+    Apply a patch to the current or specified target.
+    
+.. _command-admin report:
+  
+  admin report
+    Retrieve a report containing the logs of the current or specified target.
+    
+.. _command-admin revoke:
+  
+  admin revoke
+    Revoke administrator privileges for the named user at the current or specified target.
+    
+.. _command-groups add-user:
+  
+  groups add-user
+    Add the named user to the specified group.
+    
+.. _command-groups create:
+  
+  groups create
+    Create a new group with the specified name.
+    
+.. _command-groups delete-user:
+  
+  groups delete-user
+    Remove the named user from the specified group.
+    
+.. _command-groups delete:
+  
+  groups delete
+    Delete the named group.
+    
+.. _command-groups limits:
+  
+  groups limits
+    Show and/or modify the limits applying to applications in the named group.
+    
+.. _command-groups show:
+  
+  groups show
+    Show the list of groups known to the target.
+    
+.. _command-groups users:
+  
+  groups users
+    Show the list of users in the named group.
+    
+.. _command-quota configure:
+  
+  quota configure
+    Reconfigure the named quota definition.
+    
+.. _command-quota create:
+  
+  quota create
+    Create a new quota definition.
+    
+.. _command-quota delete:
+  
+  quota delete
+    Delete the named quota definition.
+    
+.. _command-quota list:
+  
+  quota list
+    List the available quota definitions.
+    
+.. _command-quota rename:
+  
+  quota rename
+    Rename the named quota definition.
+    
+.. _command-quota show:
+  
+  quota show
+    Show the details of the named quota definition. If not specified it will be asked for interactively (menu).
+
+    *User Management*
+      
+.. _command-add-user:
+
+      add-user
+        Register a new user in the current or specified target. This operation requires administrator privileges, except if "allow_registration" is set server-side.
+              
+.. _command-add_user:
+
+      add_user
+        Register a new user in the current or specified target. This operation requires administrator privileges, except if "allow_registration" is set server-side.
+              
+.. _command-create-user:
+
+      create-user
+        Register a new user in the current or specified target. This operation requires administrator privileges, except if "allow_registration" is set server-side.
+              
+.. _command-create_user:
+
+      create_user
+        Register a new user in the current or specified target. This operation requires administrator privileges, except if "allow_registration" is set server-side.
+              
+.. _command-delete-user:
+
+      delete-user
+        Delete the named user, and the user's applications and services from the current or specified target. This operation requires administrator privileges.
+              
+.. _command-delete_user:
+
+      delete_user
+        Delete the named user, and the user's applications and services from the current or specified target. This operation requires administrator privileges.
+              
+.. _command-passwd:
+
+      passwd
+        Change the password of the current user in the current or specified target.
+              
+.. _command-register:
+
+      register
+        Register a new user in the current or specified target. This operation requires administrator privileges, except if "allow_registration" is set server-side.
+              
+.. _command-token:
+
+      token
+        Interactively set authentication token.
+              
+.. _command-unregister:
+
+      unregister
+        Delete the named user, and the user's applications and services from the current or specified target. This operation requires administrator privileges.
+              
+.. _command-users:
+
+      users
+        Show the list of users known to the current or specified target.
+              
+  
+Convenience
+^^^^^^^^^^^^^^^^^^^^^
+
+    
+.. _command-alias:
+  
+  alias
+    Create a shortcut for a command (prefix).
+    
+.. _command-aliases:
+  
+  aliases
+    List the known aliases (shortcuts).
+    
+.. _command-unalias:
+  
+  unalias
+    Remove a shortcut by name.
+
+  
+Miscellaneous
+^^^^^^^^^^^^^^^^^^^^^
+
+    
+.. _command-curl:
+  
+  curl
+    Run a raw rest request against the chosen target
+    
+.. _command-guid:
+  
+  guid
+    Map the specified name into a uuid, given the type.
+    
+.. _command-help:
+  
+  help
+    Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
+    
+.. _command-named-entities:
+  
+  named-entities
+    List the entity types usable for 'guid'. I.e. the types of the named entities known to the client.
+    
+.. _command-trace:
+  
+  trace
+    Print the saved REST trace for the last client command to stdout.
+    
+.. _command-admin help:
+  
+  admin help
+    Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
+    
+.. _command-drain help:
+  
+  drain help
+    Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
+    
+.. _command-groups help:
+  
+  groups help
+    Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
+    
+.. _command-quota help:
+  
+  quota help
+    Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
 
 

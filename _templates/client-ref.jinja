@@ -1,7 +1,6 @@
 {#
- # To generate user/reference/client-ref.rst run `make update`
+ # To generate user/reference/client-ref.rst run `make client-update`
  #}
-
 .. index:: Command Reference: Client
 
 .. _command-ref-client:
@@ -23,19 +22,27 @@ In some cases the  ``--json`` option reveals additional details.
     Administrative user privileges are required where "*(admin)*" is noted.
 
 {% for section in sections %}
-**{{ section['name'] }}**
+  
+{{ section['name'] }}
+^^^^^^^^^^^^^^^^^^^^^
 
-    {% for command in section['commands'] %}
-    {{ command }}
+  {% for command in section['commands'] %}
+    
+.. _command-{{command}}:
+  
+  {{ command }}
+    {{ commands[command]['description'] }}
+  {% endfor %}
+
+  {% for subsection in section['sections'] %}
+    *{{ subsection['name'] }}*
+      
+    {% for command in subsection['commands'] %}
+.. _command-{{command}}:
+
+      {{ command }}
         {{ commands[command]['description'] }}
-    {% endfor %}
-
-    {% for subsection in section['sections'] %}
-        *{{ subsection['name'] }}*
-        
-        {% for command in subsection['commands'] %}
-            {{ command }}
-                {{ commands[command]['description'] }}
-        {% endfor %}
-    {% endfor %}
+              
+      {% endfor %}
+  {% endfor %}
 {% endfor %}
