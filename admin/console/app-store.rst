@@ -95,8 +95,8 @@ store
 apps
 ~~~~
 
-  This is an array of items, one for each app in the App Store.
-  Each app is defined by the following fields:
+  This is an array of items (see YAML format above), one for each app in
+  the store. Each app is defined by the following fields:
 
   **name**
     The name of the app as displayed in the App Store list.
@@ -105,20 +105,22 @@ apps
     A short description of the app, displayed below the name.
 
   **id**
-    A short, lowercase, and unique string associated with the app.  Apps are sorted alphabetically in the list based on this field.
+    A short, lowercase, unique string associated with the app. Apps are
+    sorted alphabetically in the list based on this field.
 
   **repo**
     URL of the git repository where the app code resides.
 
-  **commit**
+  **commit** 
     Branch name, tag name, or exact commit hash to use. If unspecified,
     the HEAD commit of ``master`` branch is used.
 
-  **framework**
-    The framework the app uses. Examples include ``perl``, ``python``,
-    ``buildpack``, ``node``, ``rails3``.
+  **framework** 
+    The framework, if the app is deploed using the :ref:`Legacy
+    Buildpack <buildpacks-built-in>` (e.g. ``perl``, ``python``,
+    ``node``, ``rails3``).
 
-  **icon**
+  **icon** 
     An image used for the app icon specified either as a full URL, 
     a file relative to the ``store`` key **icon-url** URL, 
     ``default``, or other variable values.
@@ -126,34 +128,43 @@ apps
   **info**
     A URL pointing to documentation for the app.
 
-  **license**
-    Software license of the app.
+  **license** 
+    Optional string indicating the software license of the app (e.g.
+    ``MIT``, ``MPL``, ``BSD``).
 
   **mem**
-    Memory requirements of the app (an integer), in MB.
+    Memory requirements of the app (integer, in MB).
 
-  **runtime**
-    The runtime for the app. Examples include ``java``, ``python32``, ``ruby19``, ``php``, ``perl514``.
+  **runtime** 
+    The runtime, if the app is deployed using the :ref:`Legacy Buildpack
+    <buildpacks-built-in>` (e.g. ``java``, ``python32``, ``ruby19``,
+    ``php``, ``perl518``).
 
   **services**
-    The data services to the app uses.
+    Data services required by the app.
 
 
 Hosting the Store Definition Files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The YAML file defining the App Store needs to be placed on a server accessible by any users who
-need to use it.  For a publically accessible App Store, it could be something like::
+The YAML files defining the stores can be served via HTTP or HTTPS by
+any web server at a URL accessible from the Cloud Controller.
 
-	http://www.mywebsite.com/appstore.yml
 	
 Adding the App Store to Stackato
 --------------------------------
 
-#. Log into the :ref:`Management Console <management-console>`, and go to the Settings section.  
-#. Choose the "Stores" tab across the top.
-#. Enter the full URL to your App Store YML file and press the "Add" button next to it.
+#. Log into the :ref:`Management Console <management-console>`, 
+#. Select **Settings > Cloud Controller** from the menu.
+#. In the **App Store URLs** section, enter a name and content URL for 
+   your store definition YAML file then click **Add App Store URL**.
 
 To confirm the App Store is loading correctly, select "App Store" in the
-left menu and view the list of applications displayed.  An error will be
-displayed in the console if an App Store URL fails to load.
+menu and view the list of applications displayed. A "CC Catalog Manager"
+error appear in the Event Log if an App Store URL fails to load.
+
+App Store URLs can also be viewed, added, deleted, enabled, and disabled
+with :ref:`kato config <kato-command-ref-config>`. For example::
+
+  $ kato config get cloud_controller_ng app_store
+
