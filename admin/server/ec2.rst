@@ -280,13 +280,13 @@ To perform the relocation manually, stop Stackato first::
 
 	$ kato stop
   
-Copy ``/var/vcap/services`` and ``/var/vcap/shared`` directories into
-the new target filesystem. Ensure that the symlink targets themselves
-(in this case ``/data/vcap/services`` and ``/data/vcap/shared``) are set
-to ``chmod 755``.
+Copy ``/var/stackato/services`` and
+``/var/stackato/data/cloud_controller/tmp`` directories into the new
+target filesystem. Ensure that the symlink targets themselves are set to
+``chmod 755``.
 
 .. warning::
-	Do not relocate ``/var/vcap`` itself but just these two subdirectories.
+	Do not relocate ``/var/stackato`` itself but just these two subdirectories.
 
 When copying using ``cp``, the  ``-p`` option is required, otherwise you will run
 into various file permission issues.
@@ -299,9 +299,10 @@ attributes including permissions and dates::
 	# ls -ld /data/vcap/services /data/vcap/shared
 	# exit
 
-Finally, as root, move the original ``/var/vcap/services`` or ``/var/vcap/shared``
-directories out of the way, then symlink to the relocated directories.
-Hard links cannot span filesystems so "ln -s" is the command used for this::
+Finally, as root, move the original ``/var/stackato/services`` or
+``/var/stackato/data/cloud_controller_ng/tmp`` directories out of the
+way, then symlink to the relocated directories. Hard links cannot span
+filesystems so "ln -s" is the command used for this::
 
 	$ cd /var/vcap
 	$ mv -i services services.backup

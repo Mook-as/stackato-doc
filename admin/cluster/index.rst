@@ -345,7 +345,7 @@ Though all roles can run using the VM's default filesystem, in
 production clusters some roles should always be backed by a persistent
 filesystem (block storage/EBS volumes) to provide scalable storage
 space and easy snapshotting. Nodes with the following roles should have
-their */var/vcap/services* directory on persistent storage:
+their */var/stackato/services* directory on persistent storage:
 
 * Data Services: MySQL, PostgreSQL, MongoDB, Redis
 * Filesystem Service
@@ -358,9 +358,10 @@ their */var/vcap/services* directory on persistent storage:
     info data is stored on disk, so backing them with a persistent
     filesystem is recommended.
 
-In clusters with multiple Cloud Controllers, the nodes **must** share
-a common */var/vcap/shared* mount point as described :ref:`below
-<cluster-multi-controllers>` in order to work together properly. 
+In clusters with multiple Cloud Controllers, the nodes **must** share a
+common */var/stackato/data/cloud_controller_ng/tmp* mount point as
+described :ref:`below <cluster-multi-controllers>` in order to work
+together properly. 
 
 See the :ref:`Persistent Storage <bestpractices-persistent-storage>`
 documentation for instructions on relocating service data, application
@@ -388,10 +389,11 @@ Port Configuration
 Multiple Controllers
 --------------------------
 
-A Stackato cluster can have multiple controller nodes running
-on separate VMs to improve redundancy. The key element in designing this
-redundancy is to have all controller nodes share a ``/var/vcap/shared``
-directory stored on a high-availability filesystem server. For example:
+A Stackato cluster can have multiple controller nodes running on
+separate VMs to improve redundancy. The key element in designing this
+redundancy is to have all controller nodes share a
+``/var/stackato/data/cloud_controller_ng/tmp`` directory stored on a
+high-availability filesystem server. For example:
 
 * Create a shared filesystem on a Network Attached Storage device. [1]_
 
@@ -412,17 +414,17 @@ directory stored on a high-availability filesystem server. For example:
 
   * Mount the shared filesystem on the mount point. [1]_
 
-  * Set aside the original ``/var/vcap/shared``:
+  * Set aside the original ``/var/stackato/data/cloud_controller_ng/tmp``:
 
     .. parsed-literal::
 
-	$ mv /var/vcap/shared /var/vcap/shared.old
+  $ mv /var/stackato/data/cloud_controller_ng/tmp /var/stackato/data/cloud_controller_ng/tmp.old
 
-  * Create a symlink from ``/var/vcap/shared`` to the mount point.
+  * Create a symlink from ``/var/stackato/data/cloud_controller_ng/tmp`` to the mount point.
 
     .. parsed-literal::
 
-	$ ln -s /mnt/controller /var/vcap/shared
+	$ ln -s /mnt/controller /var/stackato/data/cloud_controller_ng/tmp
 
 * On the Core node, start the controller process:
 
