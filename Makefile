@@ -48,8 +48,8 @@ KATO_REPO=https://github.com/ActiveState/kato.git
 
 UPDATE=docopts
 KATO_DIR=$(UPDATE)/kato
+GEN_KATOREF_DIR=generator/katoref
 GEM_HOME=$(UPDATE)/gems
-DOCOPT_LIB=$(GEM_HOME)/gems/docopt-*/lib
 
 # The targets "all", "install", and "uninstall", as well as the variables
 # DESTDIR, prefix and PKG_GITDESCRIBE, are used by packaging systems.
@@ -200,9 +200,9 @@ update:
 	rm -rf $(UPDATE)
 	git clone $(BRANCH_OPT) $(KATO_REPO) $(KATO_DIR)
 	gem install --install-dir $(GEM_HOME) docopt --no-rdoc --no-ri
-	( RUBYLIB=$(KATO_DIR)/lib:`eval echo $(DOCOPT_LIB)` \
+	( RUBYLIB=$(GEN_KATOREF_DIR)/lib \
 	  GEM_HOME=$(GEM_HOME) \
-	  ruby -e 'require "kato/docs/sphinx"; render_kato_ref(ARGV.shift)' admin/reference/kato-ref.rst.erb > admin/reference/kato-ref.rst ; \
+	  ruby -e 'require "katoref/sphinx"; render_kato_ref(ARGV.shift)' admin/reference/kato-ref.rst.erb > admin/reference/kato-ref.rst ; \
 	)
 	rm -rf $(UPDATE)
 
@@ -213,9 +213,9 @@ client-update:
 reupdate:	
 	@echo "Generating kato reference from EXISTING docopts."
 	@echo "Not a clean build. Use for debugging docopt only."
-	( RUBYLIB=$(KATO_DIR)/lib:`eval echo $(DOCOPT_LIB)` \
+	( RUBYLIB=$(GEN_KATOREF_DIR)/lib \
 	  GEM_HOME=$(GEM_HOME) \
-	  ruby -e 'require "kato/docs/sphinx"; render_kato_ref(ARGV.shift)' reference/kato-ref.rst.erb > reference/kato-ref.rst ; \
+	  ruby -e 'require "katoref/sphinx"; render_kato_ref(ARGV.shift)' admin/reference/kato-ref.rst.erb > admin/reference/kato-ref.rst ; \
 	)
 
 publicdocs:
