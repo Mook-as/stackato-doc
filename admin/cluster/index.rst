@@ -398,44 +398,32 @@ high-availability filesystem server. For example:
 * Create a shared filesystem on a Network Attached Storage device. [1]_
 
 * Stop the controller process on the Core node before proceeding
-  further:
-
-  .. parsed-literal::
+  further::
 
 	$ kato stop controller
 
 * On the Core node *and each additional controller node*:
 
-  * Create a mount point:
+  * Create a mount point::
 
-    .. parsed-literal::
-
-	$ sudo mkdir /mnt/controller
+    $ sudo mkdir /mnt/controller
 
   * Mount the shared filesystem on the mount point. [1]_
 
-  * Set aside the original ``/var/stackato/data/cloud_controller_ng/tmp``:
+  * Set aside the original ``/var/stackato/data/cloud_controller_ng/tmp``::
 
-    .. parsed-literal::
+    $ mv /var/stackato/data/cloud_controller_ng/tmp /var/stackato/data/cloud_controller_ng/tmp.old
 
-  $ mv /var/stackato/data/cloud_controller_ng/tmp /var/stackato/data/cloud_controller_ng/tmp.old
+  * Create a symlink from ``/var/stackato/data/cloud_controller_ng/tmp`` to the mount point::
 
-  * Create a symlink from ``/var/stackato/data/cloud_controller_ng/tmp`` to the mount point.
+    $ ln -s /mnt/controller /var/stackato/data/cloud_controller_ng/tmp
 
-    .. parsed-literal::
-
-	$ ln -s /mnt/controller /var/stackato/data/cloud_controller_ng/tmp
-
-* On the Core node, start the controller process:
-
-  .. parsed-literal::
+* On the Core node, start the controller process::
 
 	$ kato start controller
 
 * Run the following command on the additional Controller nodes to enable
-  *only* the controller process:
-
-  .. parsed-literal::
+  *only* the controller process::
 
  	$ kato node attach -e controller *CORE_IP*
 
@@ -468,28 +456,22 @@ Rename the Load Balancer
 The Load Balancer is the primary point of entry to the cluster. It must
 have a public-facing IP address and take on the primary hostname for
 the system as :ref:`configured in DNS <server-config-dns>`. Run the
-following on Load Balancer node:
+following on Load Balancer node::
 
-    .. parsed-literal::
-
-        $ kato node rename *hostname.example.com*
+  $ kato node rename *hostname.example.com*
 
 Set up the Core Node
 ^^^^^^^^^^^^^^^^^^^^
 
 The Core node will need to temporarily take on the primary hostname of
 the Stackato system (i.e. the same name as the Load Balancer above). Run
-the following on the Core node:
+the following on the Core node::
 
-    .. parsed-literal::
+  $ kato node rename *hostname.example.com*
 
-        $ kato node rename *hostname.example.com*
+If it is not already configured as the Core node, do so now::
 
-If it is not already configured as the Core node, do so now:
-
-    .. parsed-literal::
-
-        $ kato node setup core api.\ *hostname.example.com*
+  $ kato node setup core api.\ *hostname.example.com*
 
 The ``kato node rename`` command above is being used to set internal Stackato
 parameters, but all hosts on a network should ultimately have unique
@@ -501,17 +483,13 @@ Set up Supplemental Routers
 
 As with the Core node, you will need to run ``kato node rename`` on each
 router with the same primary hostname. Run the following on each
-Router:
+Router::
 
-    .. parsed-literal::
+  $ kato node rename *hostname.example.com*
 
-        $ kato node rename *hostname.example.com*
+Then enable the 'router' role and attach the node to the cluster::
 
-Then enable the 'router' role and attach the node to the cluster:
-
-    .. parsed-literal::
-
-        $ kato node attach -e router <MBUS_IP>
+  $ kato node attach -e router <MBUS_IP>
 
 As above, rename each host manually after configuration to give them 
 unique hostnames. The MBUS_IP is for the network interface of the Core
@@ -521,17 +499,13 @@ Configure the Load Balancer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Attach the Load Balancer to the Core node and enable the 'router' role.
-On the Load Balancer node, run:
+On the Load Balancer node, run::
 
-    .. parsed-literal::
+  $ kato node attach -e router <MBUS_IP>
 
-        $ kato node attach -e router <MBUS_IP>
+Then set up the node as a Load Balancer::
 
-Then set up the node as a Load Balancer:
-
-    .. parsed-literal::
-
-        $ kato node setup load_balancer
+  $ kato node setup load_balancer
 
 This command will fetch the IP addresses for all configured routers in
 the cluster. It will prompt you to remove the IP address of the local
