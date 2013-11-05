@@ -47,7 +47,7 @@ v3.0.0 Beta (November 6, 2013)
 
 * Languages updates:
 
-  * [99429] Add Ruby 2.0 runtime and remove 1.8.7 (EOL)
+  * [99429] Add Ruby 2.0 runtime and remove Ruby 1.8.7 (EOL)
   * [99368] Fixed problem building Nokogiri 1.6 gem. Stager now uses using system libraries (``NOKOGIRI_USE_SYSTEM_LIBRARIES=true``).
   * [94620] ActivePerl 5.14 removed
   * Update to ActivePython 2.7.5.6 and ActivePython 3.3.2.0
@@ -62,9 +62,8 @@ v3.0.0 Beta (November 6, 2013)
   * [98836] Add "HumanTime" field to systail log stream
   * [98870] Add app crashes/exits (eg: OOM killer) to cloud events
   * [98686] Add harbor service provision events to cloud events
-  * [96827] Cloud Events patterns are now configurable (kato config)
-  * [99534] New ``read_limit`` setting for apptail (default 16MB) to
-    cope with extremely large application log files
+  * [96827] Cloud Events patterns are now configurable (via ``kato config``)
+  * [99534] New ``read_limit`` setting for apptail (default 16MB) to cope with extremely large application log files
   * [99571] Application log drain URLs now properly sanitized (v2.10.6 'logdrain-sanitize' patch)
   * [100512] Fix a leak in growing TCP connections causing systail to crash (inotify panic), and logyard drains to malfunction.
   * [100507] New WARNING log message on drain retries
@@ -77,7 +76,7 @@ v3.0.0 Beta (November 6, 2013)
   * [99505] New Activity Stream API and timeline
   * [94745,94274] New disk activity and disk space graphs
   * [98737] New dashboard for router metrics
-  * [99452,100047] Updated App Store to use new API and yaml format
+  * [99452,100047] Updated App Store to use new API and YAML format
 
 * Services updates:
 
