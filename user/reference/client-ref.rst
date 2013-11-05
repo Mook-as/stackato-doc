@@ -16,7 +16,7 @@ Many of the informational commands take a ``--json`` option if you wish to gener
 In some cases the  ``--json`` option reveals additional details.
 
 .. note::
-    Administrative user privileges are required where "*(admin)*" is noted.
+    Administrative user privileges are required for some commands.
 
   
 Getting Started
