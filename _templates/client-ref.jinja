@@ -32,7 +32,22 @@ In some cases the  ``--json`` option reveals additional details.
   
   {{ command }}
     {{ commands[command]['description'] }}
+
+    .. raw:: html
+
+      <div class="spoiler">
+      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <div class="inner" style="display:none;">
+
+    {% for option in commands[command]['options'] %}
+    {{ option }}
+      {{ commands[command]['options'][option] }}
+    {% endfor %}
   {% endfor %}
+
+    ..raw:: html
+    
+      </div></div>
 
   {% for subsection in section['sections'] %}
   **{{ subsection['name'] }}**
@@ -43,6 +58,19 @@ In some cases the  ``--json`` option reveals additional details.
       {{ command }}
         {{ commands[command]['description'] }}
               
-      {% endfor %}
+    {% endfor %}
   {% endfor %}
 {% endfor %}
+
+.. raw:: html
+
+  <script type="text/javascript">
+    function showSpoiler(obj)
+    {
+      var inner = obj.parentNode.getElementsByTagName("div")[0];
+      if (inner.style.display == "none")
+        inner.style.display = "";
+      else
+        inner.style.display = "none";
+    }
+    </script>
