@@ -25,7 +25,7 @@ Getting Started
     
 .. _command-login:
   
-  login
+  login  *<email>* 
     Log in to the current or specified target with the named user.
 
     .. raw:: html
@@ -102,7 +102,7 @@ Getting Started
     
 .. _command-logout:
   
-  logout
+  logout  *<target>* 
     Log out of the current, specified, or all targets.
 
     .. raw:: html
@@ -144,7 +144,7 @@ Getting Started
     
 .. _command-target:
   
-  target
+  target  *<url>* 
     Set the target API endpoint for the client, or report the current target.
 
     .. raw:: html
@@ -188,8 +188,6 @@ Getting Started
 	    Required to prevent the client from rejecting http urls.
 	
 
-    ..raw:: html
-
       </div></div>
 
   
@@ -199,7 +197,7 @@ Applications
     
 .. _command-app:
   
-  app
+  app  *<application>* 
     Show the information of the specified application.
 
     .. raw:: html
@@ -283,7 +281,7 @@ Applications
     
 .. _command-apps:
   
-  apps
+  apps 
     List the applications deployed to the target.
 
     .. raw:: html
@@ -362,7 +360,7 @@ Applications
     
 .. _command-list:
   
-  list
+  list 
     List the applications deployed to the target.
 
     .. raw:: html
@@ -439,8 +437,6 @@ Applications
 	    This is a stackato V1 option.
 	
 
-    ..raw:: html
-
       </div></div>
 
     
@@ -450,7 +446,7 @@ Applications
       
 .. _command-crashes:
 
-      crashes
+      crashes  *<application>*       
         List recent application crashes.
 
         .. raw:: html
@@ -538,13 +534,11 @@ Applications
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-crashlogs:
 
-      crashlogs
+      crashlogs  *<application>*       
         Display log information for the application. An alias of 'logs'.
 
         .. raw:: html
@@ -674,13 +668,11 @@ Applications
         --non-interactive
           Alias of --no-prompt.
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-disk:
 
-      disk
+      disk  *<application>*       
         Show the disk reservation for a deployed application.
 
         .. raw:: html
@@ -764,13 +756,11 @@ Applications
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-drains:
 
-      drains
+      drains  *<application>*       
         Show the list of drains attached to the application.
 
         .. raw:: html
@@ -858,13 +848,11 @@ Applications
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-env:
 
-      env
+      env  *<application>*       
         List the application's environment variables.
 
         .. raw:: html
@@ -952,13 +940,11 @@ Applications
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-events:
 
-      events
+      events  *<application>*       
         Show the application's events as recorded so far.
 
         .. raw:: html
@@ -1046,13 +1032,11 @@ Applications
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-file:
 
-      file
+      file  *<application>*  *<apath>*       
         Display directory listing or file.
 
         .. raw:: html
@@ -1156,14 +1140,12 @@ Applications
 	
         --non-interactive
           Alias of --no-prompt.
-
-          ..raw:: html
 
             </div></div>
 
 .. _command-files:
 
-      files
+      files  *<application>*  *<apath>*       
         Display directory listing or file.
 
         .. raw:: html
@@ -1268,13 +1250,11 @@ Applications
         --non-interactive
           Alias of --no-prompt.
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-health:
 
-      health
+      health  *<application>*       
         Report the health of the specified application(s).
 
         .. raw:: html
@@ -1319,13 +1299,11 @@ Applications
 	    Defaults to the current working directory.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-instances:
 
-      instances
+      instances  *<application>*       
         List application instances for a deployed application.
 
         .. raw:: html
@@ -1413,13 +1391,11 @@ Applications
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-logs:
 
-      logs
+      logs  *<application>*       
         Display log information for the application.
 
         .. raw:: html
@@ -1549,13 +1525,11 @@ Applications
         --non-interactive
           Alias of --no-prompt.
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-mem:
 
-      mem
+      mem  *<application>*       
         Show the memory reservation for a deployed application.
 
         .. raw:: html
@@ -1639,13 +1613,11 @@ Applications
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-stats:
 
-      stats
+      stats  *<application>*       
         Display the resource usage for a deployed application.
 
         .. raw:: html
@@ -1733,13 +1705,11 @@ Applications
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-tail:
 
-      tail
+      tail  *<application>*  *<apath>*       
         Monitor file for changes and stream them.
 
         .. raw:: html
@@ -1829,13 +1799,11 @@ Applications
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-drain list:
 
-      drain list
+      drain list  *<application>*       
         Show the list of drains attached to the application.
 
         .. raw:: html
@@ -1923,8 +1891,6 @@ Applications
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
     
@@ -1934,7 +1900,7 @@ Applications
       
 .. _command-create-app:
 
-      create-app
+      create-app  *<application>*       
         Create an empty application with the specified configuration.
 
         .. raw:: html
@@ -2102,13 +2068,11 @@ Applications
 		specified by stackato.yml.
 	    
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-dbshell:
 
-      dbshell
+      dbshell  *<application>*  *<service>*       
         Invoke interactive db shell for a bound service.
 
         .. raw:: html
@@ -2199,13 +2163,11 @@ Applications
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-delete:
 
-      delete
+      delete  *<application>*       
         Delete the specified application(s).
 
         .. raw:: html
@@ -2298,13 +2260,11 @@ Applications
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-env-add:
 
-      env-add
+      env-add  *<application>*  *<varname>*  *<value>*       
         Add the specified environment variable to the named application.
 
         .. raw:: html
@@ -2388,13 +2348,11 @@ Applications
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-env-del:
 
-      env-del
+      env-del  *<application>*  *<varname>*       
         Remove the specified environment variable from the named application.
 
         .. raw:: html
@@ -2478,13 +2436,11 @@ Applications
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-map:
 
-      map
+      map  *<application>*  *<url>*       
         Make the application accessible through the specified URL (a route consisting of host and domain)
 
         .. raw:: html
@@ -2568,13 +2524,11 @@ Applications
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-open:
 
-      open
+      open  *<application>*       
         Open the application|URL|target (web console) in a browser
 
         .. raw:: html
@@ -2652,13 +2606,11 @@ Applications
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-push:
 
-      push
+      push  *<application>*       
         Configure, create, push, map, and start a new application.
 
         .. raw:: html
@@ -2850,13 +2802,11 @@ Applications
 		specified by stackato.yml.
 	    
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-rename:
 
-      rename
+      rename  *<application>*  *<name>*       
         Rename the specified application.
 
         .. raw:: html
@@ -2940,13 +2890,11 @@ Applications
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-restart:
 
-      restart
+      restart  *<application>*       
         Stop and restart a deployed application.
 
         .. raw:: html
@@ -3030,13 +2978,11 @@ Applications
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-run:
 
-      run
+      run  *<command>*       
         Run an arbitrary command on a running instance.
 
         .. raw:: html
@@ -3138,13 +3084,11 @@ Applications
         --dry-run
           Alias of --dry.
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-scale:
 
-      scale
+      scale  *<application>*       
         Update the number of instances, memory and/or disk reservation for a deployed application.
 
         .. raw:: html
@@ -3247,13 +3191,11 @@ Applications
 		The new disk reservation to use.
 	    
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-scp:
 
-      scp
+      scp  *<paths>*       
         Copy source files and directories to the destination.
 
         .. raw:: html
@@ -3348,13 +3290,11 @@ Applications
         --non-interactive
           Alias of --no-prompt.
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-set-env:
 
-      set-env
+      set-env  *<application>*  *<varname>*  *<value>*       
         Add the specified environment variable to the named application.
 
         .. raw:: html
@@ -3438,13 +3378,11 @@ Applications
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-ssh:
 
-      ssh
+      ssh  *<command>*       
         SSH to a running instance (or target), or run an arbitrary command.
 
         .. raw:: html
@@ -3547,13 +3485,11 @@ Applications
         --dry-run
           Alias of --dry.
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-start:
 
-      start
+      start  *<application>*       
         Start a deployed application.
 
         .. raw:: html
@@ -3637,13 +3573,11 @@ Applications
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-stop:
 
-      stop
+      stop  *<application>*       
         Stop a deployed application.
 
         .. raw:: html
@@ -3727,13 +3661,11 @@ Applications
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-unmap:
 
-      unmap
+      unmap  *<application>*  *<url>*       
         Unregister the application from a URL.
 
         .. raw:: html
@@ -3817,13 +3749,11 @@ Applications
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-unset-env:
 
-      unset-env
+      unset-env  *<application>*  *<varname>*       
         Remove the specified environment variable from the named application.
 
         .. raw:: html
@@ -3907,13 +3837,11 @@ Applications
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-drain add:
 
-      drain add
+      drain add  *<application>*  *<drain>*  *<uri>*       
         Attach a new named drain to the application.
 
         .. raw:: html
@@ -4001,13 +3929,11 @@ Applications
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-drain delete:
 
-      drain delete
+      drain delete  *<application>*  *<drain>*       
         Remove the named drain from the application.
 
         .. raw:: html
@@ -4091,8 +4017,6 @@ Applications
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
   
@@ -4102,7 +4026,7 @@ Services
     
 .. _command-service:
   
-  service
+  service  *<name>* 
     Show the information about the named service.
 
     .. raw:: html
@@ -4176,7 +4100,7 @@ Services
     
 .. _command-service-plans:
   
-  service-plans
+  service-plans 
     List all available plans of the supported services.
 
     .. raw:: html
@@ -4222,7 +4146,7 @@ Services
     
 .. _command-services:
   
-  services
+  services 
     List the supported and provisioned services of the target.
 
     .. raw:: html
@@ -4294,8 +4218,6 @@ Services
 	    This is a stackato V1 option.
 	
 
-    ..raw:: html
-
       </div></div>
 
     
@@ -4305,7 +4227,7 @@ Services
       
 .. _command-create-service-auth-token:
 
-      create-service-auth-token
+      create-service-auth-token  *<label>*  *<provider>*       
         Create a new service authentication token.
 
         .. raw:: html
@@ -4377,13 +4299,11 @@ Services
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-delete-service-auth-token:
 
-      delete-service-auth-token
+      delete-service-auth-token  *<label>*       
         Delete the specified service authentication token.
 
         .. raw:: html
@@ -4451,13 +4371,11 @@ Services
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-service-auth-tokens:
 
-      service-auth-tokens
+      service-auth-tokens       
         Show all service authentication tokens knowns to the target.
 
         .. raw:: html
@@ -4529,13 +4447,11 @@ Services
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-update-service-auth-token:
 
-      update-service-auth-token
+      update-service-auth-token  *<label>*       
         Update the specified service authentication token.
 
         .. raw:: html
@@ -4607,8 +4523,6 @@ Services
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
     
@@ -4618,7 +4532,7 @@ Services
       
 .. _command-add-service-broker:
 
-      add-service-broker
+      add-service-broker  *<name>*       
         Make the named service broker known.
 
         .. raw:: html
@@ -4694,13 +4608,11 @@ Services
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-service-brokers:
 
-      service-brokers
+      service-brokers       
         Show the list of known service brokers.
 
         .. raw:: html
@@ -4772,8 +4684,6 @@ Services
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
     
@@ -4783,7 +4693,7 @@ Services
       
 .. _command-bind-service:
 
-      bind-service
+      bind-service  *<service>*  *<application>*       
         Bind the named service to the specified application.
 
         .. raw:: html
@@ -4866,14 +4776,12 @@ Services
 	    The once-off group to use for the current operation.
 	    This is a stackato V1 option.
 	
-
-          ..raw:: html
 
             </div></div>
 
 .. _command-bind_service:
 
-      bind_service
+      bind_service  *<service>*  *<application>*       
         Bind the named service to the specified application.
 
         .. raw:: html
@@ -4957,13 +4865,11 @@ Services
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-clone-services:
 
-      clone-services
+      clone-services  *<source>*  *<application>*       
         Copy the service bindings of the source application to the destination application.
 
         .. raw:: html
@@ -5037,13 +4943,11 @@ Services
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-create-service:
 
-      create-service
+      create-service  *<vendor>*  *<name>*  *<application>*       
         Create a new provisioned service, and optionally bind it to an application.
 
         .. raw:: html
@@ -5135,14 +5039,12 @@ Services
 	    The once-off organization to use for the current operation.
 	    This is a stackato CF v2 option.
 	
-
-          ..raw:: html
 
             </div></div>
 
 .. _command-create_service:
 
-      create_service
+      create_service  *<vendor>*  *<name>*  *<application>*       
         Create a new provisioned service, and optionally bind it to an application.
 
         .. raw:: html
@@ -5235,13 +5137,11 @@ Services
 	    This is a stackato CF v2 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-delete-service:
 
-      delete-service
+      delete-service  *<service>*       
         Delete the named provisioned service.
 
         .. raw:: html
@@ -5318,14 +5218,12 @@ Services
 	
         -o
           Alias of --organization.
-
-          ..raw:: html
 
             </div></div>
 
 .. _command-delete_service:
 
-      delete_service
+      delete_service  *<service>*       
         Delete the named provisioned service.
 
         .. raw:: html
@@ -5403,13 +5301,11 @@ Services
         -o
           Alias of --organization.
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-rename-service:
 
-      rename-service
+      rename-service  *<service>*  *<name>*       
         Rename the specified service instance.
 
         .. raw:: html
@@ -5476,14 +5372,12 @@ Services
 	    The once-off group to use for the current operation.
 	    This is a stackato V1 option.
 	
-
-          ..raw:: html
 
             </div></div>
 
 .. _command-rename_service:
 
-      rename_service
+      rename_service  *<service>*  *<name>*       
         Rename the specified service instance.
 
         .. raw:: html
@@ -5551,13 +5445,11 @@ Services
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-tunnel:
 
-      tunnel
+      tunnel  *<service>*  *<tunnelclient>*       
         Create a local tunnel to a service, optionally start a local client as well.
 
         .. raw:: html
@@ -5645,13 +5537,11 @@ Services
 	    This is a stackato V1 option.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-unbind-service:
 
-      unbind-service
+      unbind-service  *<service>*  *<application>*       
         Disconnect the named service from the specified application.
 
         .. raw:: html
@@ -5734,14 +5624,12 @@ Services
 	    The once-off group to use for the current operation.
 	    This is a stackato V1 option.
 	
-
-          ..raw:: html
 
             </div></div>
 
 .. _command-unbind_service:
 
-      unbind_service
+      unbind_service  *<service>*  *<application>*       
         Disconnect the named service from the specified application.
 
         .. raw:: html
@@ -5824,8 +5712,6 @@ Services
 	    The once-off group to use for the current operation.
 	    This is a stackato V1 option.
 	
-
-          ..raw:: html
 
             </div></div>
 
@@ -5836,7 +5722,7 @@ Organizations
     
 .. _command-create-org:
   
-  create-org
+  create-org  *<name>* 
     Create a new organization.
 
     .. raw:: html
@@ -5896,7 +5782,7 @@ Organizations
     
 .. _command-delete-org:
   
-  delete-org
+  delete-org  *<name>* 
     Delete the named organization.
 
     .. raw:: html
@@ -5948,7 +5834,7 @@ Organizations
     
 .. _command-link-user-org:
   
-  link-user-org
+  link-user-org  *<user>*  *<org>* 
     Add the specified user to the named organization, in various roles. This is a CFv2 specific command
 
     .. raw:: html
@@ -6002,7 +5888,7 @@ Organizations
     
 .. _command-org:
   
-  org
+  org  *<name>* 
     Show the named organization's information.
 
     .. raw:: html
@@ -6056,7 +5942,7 @@ Organizations
     
 .. _command-orgs:
   
-  orgs
+  orgs 
     List the available organizations.
 
     .. raw:: html
@@ -6110,7 +5996,7 @@ Organizations
     
 .. _command-quota-org:
   
-  quota-org
+  quota-org  *<name>*  *<quota>* 
     Set the quotas for the current or named organization.
 
     .. raw:: html
@@ -6156,7 +6042,7 @@ Organizations
     
 .. _command-rename-org:
   
-  rename-org
+  rename-org  *<name>*  *<newname>* 
     Rename the named organization.
 
     .. raw:: html
@@ -6202,7 +6088,7 @@ Organizations
     
 .. _command-switch-org:
   
-  switch-org
+  switch-org  *<name>* 
     Switch the current organization to the named organization. This invalidates the current space.
 
     .. raw:: html
@@ -6248,7 +6134,7 @@ Organizations
     
 .. _command-unlink-user-org:
   
-  unlink-user-org
+  unlink-user-org  *<user>*  *<org>* 
     Remove the specified user from the named organization, in various roles. This is a CFv2 specific command
 
     .. raw:: html
@@ -6300,8 +6186,6 @@ Organizations
     --developer
        Affect the developer role 
 
-    ..raw:: html
-
       </div></div>
 
   
@@ -6311,7 +6195,7 @@ Spaces
     
 .. _command-create-space:
   
-  create-space
+  create-space  *<name>* 
     Create a new space.
 
     .. raw:: html
@@ -6397,7 +6281,7 @@ Spaces
     
 .. _command-delete-space:
   
-  delete-space
+  delete-space  *<name>* 
     Delete the named space.
 
     .. raw:: html
@@ -6461,7 +6345,7 @@ Spaces
     
 .. _command-link-user-space:
   
-  link-user-space
+  link-user-space  *<user>*  *<space>* 
     Add the specified user to the named space, in various roles. This is a CFv2 specific command
 
     .. raw:: html
@@ -6525,7 +6409,7 @@ Spaces
     
 .. _command-rename-space:
   
-  rename-space
+  rename-space  *<name>*  *<newname>* 
     Rename the named space.
 
     .. raw:: html
@@ -6583,7 +6467,7 @@ Spaces
     
 .. _command-space:
   
-  space
+  space  *<name>* 
     Show the named space's information.
 
     .. raw:: html
@@ -6649,7 +6533,7 @@ Spaces
     
 .. _command-spaces:
   
-  spaces
+  spaces 
     List the available spaces in the specified organization. See --organization for details
 
     .. raw:: html
@@ -6715,7 +6599,7 @@ Spaces
     
 .. _command-switch-space:
   
-  switch-space
+  switch-space  *<name>* 
     Switch from the current space to the named space. This may switch the organization as well.
 
     .. raw:: html
@@ -6773,7 +6657,7 @@ Spaces
     
 .. _command-unlink-user-space:
   
-  unlink-user-space
+  unlink-user-space  *<user>*  *<space>* 
     Remove the specified user from the named space, in various roles. This is a CFv2 specific command
 
     .. raw:: html
@@ -6835,8 +6719,6 @@ Spaces
     --developer
        Affect the developer role 
 
-    ..raw:: html
-
       </div></div>
 
   
@@ -6846,7 +6728,7 @@ Routes
     
 .. _command-delete-route:
   
-  delete-route
+  delete-route  *<name>* 
     Delete the named route.
 
     .. raw:: html
@@ -6914,7 +6796,7 @@ Routes
     
 .. _command-routes:
   
-  routes
+  routes 
     List all available routes.
 
     .. raw:: html
@@ -6962,8 +6844,6 @@ Routes
 	    Disable interactive queries.
 	
 
-    ..raw:: html
-
       </div></div>
 
   
@@ -6973,7 +6853,7 @@ Domains
     
 .. _command-domains:
   
-  domains
+  domains 
     List the available domains in the specified space, or all.
 
     .. raw:: html
@@ -7048,7 +6928,7 @@ Domains
     
 .. _command-map-domain:
   
-  map-domain
+  map-domain  *<name>* 
     Add the named domain to an organization or space.
 
     .. raw:: html
@@ -7116,7 +6996,7 @@ Domains
     
 .. _command-unmap-domain:
   
-  unmap-domain
+  unmap-domain  *<name>* 
     Remove the named domain from an organization or space.
 
     .. raw:: html
@@ -7182,8 +7062,6 @@ Domains
 	    Disable interactive queries.
 	
 
-    ..raw:: html
-
       </div></div>
 
   
@@ -7193,7 +7071,7 @@ Administration
     
 .. _command-frameworks:
   
-  frameworks
+  frameworks 
     List the supported frameworks of the target.
 
     .. raw:: html
@@ -7243,7 +7121,7 @@ Administration
     
 .. _command-group:
   
-  group
+  group  *<name>* 
     Report the current group, or (un)set it.
 
     .. raw:: html
@@ -7298,7 +7176,7 @@ Administration
     
 .. _command-info:
   
-  info
+  info 
     Show the basic system and account information.
 
     .. raw:: html
@@ -7372,7 +7250,7 @@ Administration
     
 .. _command-limits:
   
-  limits
+  limits  *<group>* 
     Show and/or modify the limits applying to applications in the named group.
 
     .. raw:: html
@@ -7448,7 +7326,7 @@ Administration
     
 .. _command-quotas:
   
-  quotas
+  quotas 
     List the available quota definitions.
 
     .. raw:: html
@@ -7498,7 +7376,7 @@ Administration
     
 .. _command-runtimes:
   
-  runtimes
+  runtimes 
     List the supported runtimes of the target.
 
     .. raw:: html
@@ -7548,7 +7426,7 @@ Administration
     
 .. _command-stacks:
   
-  stacks
+  stacks 
     List the supported stacks of the target.
 
     .. raw:: html
@@ -7598,7 +7476,7 @@ Administration
     
 .. _command-targets:
   
-  targets
+  targets 
     List the available targets, and their authorization tokens, if any.
 
     .. raw:: html
@@ -7629,7 +7507,7 @@ Administration
     
 .. _command-tokens:
   
-  tokens
+  tokens 
     List the available targets, and their authorization tokens, if any.
 
     .. raw:: html
@@ -7660,7 +7538,7 @@ Administration
     
 .. _command-usage:
   
-  usage
+  usage  *<userOrGroup>* 
     Show the current memory allocation and usage of the active or specified user/group (CFv1), or the specified or current space (CFv2).
 
     .. raw:: html
@@ -7739,7 +7617,7 @@ Administration
     
 .. _command-user:
   
-  user
+  user 
     Show the name of the current user in the current or specified target.
 
     .. raw:: html
@@ -7789,7 +7667,7 @@ Administration
     
 .. _command-user-info:
   
-  user-info
+  user-info  *<name>* 
     Shows the information of a user in the current or specified target. Defaults to the current user. Naming a specific user requires a CFv2 target.
 
     .. raw:: html
@@ -7839,7 +7717,7 @@ Administration
     
 .. _command-version:
   
-  version
+  version 
     Print the version number of the client.
 
     .. raw:: html
@@ -7861,7 +7739,7 @@ Administration
     
 .. _command-admin grant:
   
-  admin grant
+  admin grant  *<email>* 
     Grant the named user administrator privileges for the current or specified target.
 
     .. raw:: html
@@ -7893,7 +7771,7 @@ Administration
     
 .. _command-admin list:
   
-  admin list
+  admin list 
     Show a list of the administrators for the current or specified target.
 
     .. raw:: html
@@ -7943,7 +7821,7 @@ Administration
     
 .. _command-admin patch:
   
-  admin patch
+  admin patch  *<patch>* 
     Apply a patch to the current or specified target.
 
     .. raw:: html
@@ -7989,7 +7867,7 @@ Administration
     
 .. _command-admin report:
   
-  admin report
+  admin report  *<destination>* 
     Retrieve a report containing the logs of the current or specified target.
 
     .. raw:: html
@@ -8035,7 +7913,7 @@ Administration
     
 .. _command-admin revoke:
   
-  admin revoke
+  admin revoke  *<email>* 
     Revoke administrator privileges for the named user at the current or specified target.
 
     .. raw:: html
@@ -8067,7 +7945,7 @@ Administration
     
 .. _command-groups add-user:
   
-  groups add-user
+  groups add-user  *<group>*  *<user>* 
     Add the named user to the specified group.
 
     .. raw:: html
@@ -8113,7 +7991,7 @@ Administration
     
 .. _command-groups create:
   
-  groups create
+  groups create  *<name>* 
     Create a new group with the specified name.
 
     .. raw:: html
@@ -8159,7 +8037,7 @@ Administration
     
 .. _command-groups delete-user:
   
-  groups delete-user
+  groups delete-user  *<group>*  *<user>* 
     Remove the named user from the specified group.
 
     .. raw:: html
@@ -8205,7 +8083,7 @@ Administration
     
 .. _command-groups delete:
   
-  groups delete
+  groups delete  *<name>* 
     Delete the named group.
 
     .. raw:: html
@@ -8251,7 +8129,7 @@ Administration
     
 .. _command-groups limits:
   
-  groups limits
+  groups limits  *<group>* 
     Show and/or modify the limits applying to applications in the named group.
 
     .. raw:: html
@@ -8327,7 +8205,7 @@ Administration
     
 .. _command-groups show:
   
-  groups show
+  groups show 
     Show the list of groups known to the target.
 
     .. raw:: html
@@ -8377,7 +8255,7 @@ Administration
     
 .. _command-groups users:
   
-  groups users
+  groups users  *<group>* 
     Show the list of users in the named group.
 
     .. raw:: html
@@ -8427,7 +8305,7 @@ Administration
     
 .. _command-quota configure:
   
-  quota configure
+  quota configure  *<name>* 
     Reconfigure the named quota definition.
 
     .. raw:: html
@@ -8493,7 +8371,7 @@ Administration
     
 .. _command-quota create:
   
-  quota create
+  quota create  *<name>* 
     Create a new quota definition.
 
     .. raw:: html
@@ -8559,7 +8437,7 @@ Administration
     
 .. _command-quota delete:
   
-  quota delete
+  quota delete  *<name>* 
     Delete the named quota definition.
 
     .. raw:: html
@@ -8605,7 +8483,7 @@ Administration
     
 .. _command-quota list:
   
-  quota list
+  quota list 
     List the available quota definitions.
 
     .. raw:: html
@@ -8655,7 +8533,7 @@ Administration
     
 .. _command-quota rename:
   
-  quota rename
+  quota rename  *<name>*  *<newname>* 
     Rename the named quota definition.
 
     .. raw:: html
@@ -8701,7 +8579,7 @@ Administration
     
 .. _command-quota show:
   
-  quota show
+  quota show  *<name>* 
     Show the details of the named quota definition. If not specified it will be asked for interactively (menu).
 
     .. raw:: html
@@ -8749,8 +8627,6 @@ Administration
 	    Disable interactive queries.
 	
 
-    ..raw:: html
-
       </div></div>
 
     
@@ -8760,7 +8636,7 @@ Administration
       
 .. _command-add-user:
 
-      add-user
+      add-user  *<name>*       
         Register a new user in the current or specified target. This operation requires administrator privileges, except if "allow_registration" is set server-side.
 
         .. raw:: html
@@ -8857,14 +8733,12 @@ Administration
           
 	    Limit for the number of drains in the group.
 	
-
-          ..raw:: html
 
             </div></div>
 
 .. _command-add_user:
 
-      add_user
+      add_user  *<name>*       
         Register a new user in the current or specified target. This operation requires administrator privileges, except if "allow_registration" is set server-side.
 
         .. raw:: html
@@ -8961,14 +8835,12 @@ Administration
           
 	    Limit for the number of drains in the group.
 	
-
-          ..raw:: html
 
             </div></div>
 
 .. _command-create-user:
 
-      create-user
+      create-user  *<name>*       
         Register a new user in the current or specified target. This operation requires administrator privileges, except if "allow_registration" is set server-side.
 
         .. raw:: html
@@ -9065,14 +8937,12 @@ Administration
           
 	    Limit for the number of drains in the group.
 	
-
-          ..raw:: html
 
             </div></div>
 
 .. _command-create_user:
 
-      create_user
+      create_user  *<name>*       
         Register a new user in the current or specified target. This operation requires administrator privileges, except if "allow_registration" is set server-side.
 
         .. raw:: html
@@ -9170,13 +9040,11 @@ Administration
 	    Limit for the number of drains in the group.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-delete-user:
 
-      delete-user
+      delete-user  *<email>*       
         Delete the named user, and the user's applications and services from the current or specified target. This operation requires administrator privileges.
 
         .. raw:: html
@@ -9219,14 +9087,12 @@ Administration
           
 	    Disable interactive queries.
 	
-
-          ..raw:: html
 
             </div></div>
 
 .. _command-delete_user:
 
-      delete_user
+      delete_user  *<email>*       
         Delete the named user, and the user's applications and services from the current or specified target. This operation requires administrator privileges.
 
         .. raw:: html
@@ -9270,13 +9136,11 @@ Administration
 	    Disable interactive queries.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-passwd:
 
-      passwd
+      passwd       
         Change the password of the current user in the current or specified target.
 
         .. raw:: html
@@ -9327,13 +9191,11 @@ Administration
 		asked for.
 	    
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-register:
 
-      register
+      register  *<name>*       
         Register a new user in the current or specified target. This operation requires administrator privileges, except if "allow_registration" is set server-side.
 
         .. raw:: html
@@ -9431,13 +9293,11 @@ Administration
 	    Limit for the number of drains in the group.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-token:
 
-      token
+      token       
         Interactively set authentication token.
 
         .. raw:: html
@@ -9466,13 +9326,11 @@ Administration
 	    Disable interactive queries.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-unregister:
 
-      unregister
+      unregister  *<email>*       
         Delete the named user, and the user's applications and services from the current or specified target. This operation requires administrator privileges.
 
         .. raw:: html
@@ -9516,13 +9374,11 @@ Administration
 	    Disable interactive queries.
 	
 
-          ..raw:: html
-
             </div></div>
 
 .. _command-users:
 
-      users
+      users       
         Show the list of users known to the current or specified target.
 
         .. raw:: html
@@ -9570,8 +9426,6 @@ Administration
 	    Disable interactive queries.
 	
 
-          ..raw:: html
-
             </div></div>
 
   
@@ -9581,7 +9435,7 @@ Convenience
     
 .. _command-alias:
   
-  alias
+  alias  *<name>*  *<command>* 
     Create a shortcut for a command (prefix).
 
     .. raw:: html
@@ -9603,7 +9457,7 @@ Convenience
     
 .. _command-aliases:
   
-  aliases
+  aliases 
     List the known aliases (shortcuts).
 
     .. raw:: html
@@ -9629,7 +9483,7 @@ Convenience
     
 .. _command-unalias:
   
-  unalias
+  unalias  *<name>* 
     Remove a shortcut by name.
 
     .. raw:: html
@@ -9649,8 +9503,6 @@ Convenience
     --non-interactive
       Alias of --no-prompt.
 
-    ..raw:: html
-
       </div></div>
 
   
@@ -9660,7 +9512,7 @@ Miscellaneous
     
 .. _command-curl:
   
-  curl
+  curl  *<operation>*  *<path>*  *<header>* 
     Run a raw rest request against the chosen target
 
     .. raw:: html
@@ -9706,7 +9558,7 @@ Miscellaneous
     
 .. _command-guid:
   
-  guid
+  guid  *<type>*  *<name>* 
     Map the specified name into a uuid, given the type.
 
     .. raw:: html
@@ -9732,7 +9584,7 @@ Miscellaneous
     
 .. _command-help:
   
-  help
+  help  *<cmdname>* 
     Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
 
     .. raw:: html
@@ -9790,7 +9642,7 @@ Miscellaneous
     
 .. _command-named-entities:
   
-  named-entities
+  named-entities 
     List the entity types usable for 'guid'. I.e. the types of the named entities known to the client.
 
     .. raw:: html
@@ -9816,7 +9668,7 @@ Miscellaneous
     
 .. _command-trace:
   
-  trace
+  trace 
     Print the saved REST trace for the last client command to stdout.
 
     .. raw:: html
@@ -9838,7 +9690,7 @@ Miscellaneous
     
 .. _command-admin help:
   
-  admin help
+  admin help  *<cmdname>* 
     Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
 
     .. raw:: html
@@ -9896,7 +9748,7 @@ Miscellaneous
     
 .. _command-drain help:
   
-  drain help
+  drain help  *<cmdname>* 
     Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
 
     .. raw:: html
@@ -9954,7 +9806,7 @@ Miscellaneous
     
 .. _command-groups help:
   
-  groups help
+  groups help  *<cmdname>* 
     Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
 
     .. raw:: html
@@ -10012,7 +9864,7 @@ Miscellaneous
     
 .. _command-quota help:
   
-  quota help
+  quota help  *<cmdname>* 
     Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
 
     .. raw:: html
@@ -10067,8 +9919,6 @@ Miscellaneous
       
 		Activate by-category form of the help.
 	    
-
-    ..raw:: html
 
       </div></div>
 

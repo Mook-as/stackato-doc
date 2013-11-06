@@ -30,7 +30,8 @@ In some cases the  ``--json`` option reveals additional details.
     
 .. _command-{{command}}:
   
-  {{ command }}
+  {{ command }} {% for argument in commands[command]['arguments'] %} *<{{ argument }}>* {% endfor %}
+
     {{ commands[command]['description'] }}
 
     .. raw:: html
@@ -45,8 +46,6 @@ In some cases the  ``--json`` option reveals additional details.
     {% endfor %}
   {% endfor %}
 
-    ..raw:: html
-
       </div></div>
 
   {% for subsection in section['sections'] %}
@@ -58,7 +57,8 @@ In some cases the  ``--json`` option reveals additional details.
     {% for command in subsection['commands'] %}
 .. _command-{{command}}:
 
-      {{ command }}
+      {{ command }} {% for argument in commands[command]['arguments'] %} *<{{ argument }}>* {% endfor %}
+      
         {{ commands[command]['description'] }}
 
         .. raw:: html
@@ -71,8 +71,6 @@ In some cases the  ``--json`` option reveals additional details.
         {{ option }}
           {{ commands[command]['options'][option] }}
         {% endfor %}
-
-          ..raw:: html
 
             </div></div>
 
