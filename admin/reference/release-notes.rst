@@ -16,7 +16,7 @@ Release Notes
         `<https://github.com/ActiveState/stackato-doc>`_
 
 v3.0.0 Beta (November 6, 2013)
------------------------
+------------------------------
 
 * [93889] Update core components to Cloud Foundry v2 API
 * [99842] Update AOK replacement of UAA to new CFv2 API compatibility
