@@ -117,7 +117,7 @@ but you can also use the ``stackato`` client:
 
 .. parsed-literal::
   
-    $ stackato add-user *email@example.com* [--passwd *password*]
+    $ stackato add-user *username* [--passwd *password*]
 
 
 .. _quickstart-enable-services:
@@ -129,16 +129,15 @@ In order to leave as much memory as possible available for user
 applications, the micro cloud starts with a number of services
 disabled by default:
 
+* Filesystem
 * Memcached
 * Redis
-* Postgres
 * RabbitMQ
 * MongoDB
 
-You can enable them individually by clicking the **Configure Roles**
-button in the :ref:`Cluster Admin <console-cluster-admin>` section of
-the Management Console.
-
+You can enable them individually in the Management Console under **Admin
+> Cluster > Node Settings** (cog icon button), or use :ref:`kato role
+add <kato-command-ref-role-add>`.
 
 Using Stackato
 --------------

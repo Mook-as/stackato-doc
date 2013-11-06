@@ -11,6 +11,13 @@ displays more options and settings for Admin users than it does for
 regular end users. Many of the features described below are only
 available in the Admin view.
 
+.. note::
+  The Management Console in Stackato 3.0 Beta has changed significantly
+  and is still under active development. The documentation below
+  describes the Stackato 2.10 interface, but will be updated for the
+  3.0.0 release.
+
+
 .. include:: ../common/console-intro.inc
 
 .. _console-overview:
