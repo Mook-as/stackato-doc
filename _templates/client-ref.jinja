@@ -35,7 +35,7 @@ In some cases the  ``--json`` option reveals additional details.
   {% endfor %}
 
   {% for subsection in section['sections'] %}
-    *{{ subsection['name'] }}*
+  **{{ subsection['name'] }}**
       
     {% for command in subsection['commands'] %}
 .. _command-{{command}}:
