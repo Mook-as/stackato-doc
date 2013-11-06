@@ -42,6 +42,18 @@ be able to do anything). An admin will have to add each user to an
 organization after their initial login.
 
 
+Service Gateway Log Errors in Maintenance Mode
+----------------------------------------------
+
+With Stackato set in :ref:`Maintenance Mode <console-settings>`, all
+"_gateway" processes will report the following error once per minute::
+
+  Failed registering with cloud controller, status=503
+
+This is normal, and can be safely ignored. The service nodes will 
+reconnect once the Controller is taken out of Maintenance Mode.
+
+
 Nodes with FATAL or perpetually STARTING processes
 --------------------------------------------------
 
