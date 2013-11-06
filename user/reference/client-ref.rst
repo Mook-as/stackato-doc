@@ -29,9 +29,9 @@ Getting Started
     Log in to the current or specified target with the named user.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -106,9 +106,9 @@ Getting Started
     Log out of the current, specified, or all targets.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -148,9 +148,9 @@ Getting Started
     Set the target API endpoint for the client, or report the current target.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     -n
@@ -203,9 +203,9 @@ Applications
     Show the information of the specified application.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -287,9 +287,9 @@ Applications
     List the applications deployed to the target.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -366,9 +366,9 @@ Applications
     List the applications deployed to the target.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -456,7 +456,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -550,7 +550,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --filename
@@ -686,7 +686,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -776,7 +776,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -870,7 +870,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -964,7 +964,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -1058,7 +1058,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         -n
@@ -1169,7 +1169,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         -n
@@ -1280,7 +1280,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         -n
@@ -1331,7 +1331,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -1425,7 +1425,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --filename
@@ -1561,7 +1561,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -1651,7 +1651,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -1745,7 +1745,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -1841,7 +1841,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -1940,7 +1940,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --instances
@@ -2114,7 +2114,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -2211,7 +2211,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --force
@@ -2310,7 +2310,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -2400,7 +2400,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -2490,7 +2490,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -2580,7 +2580,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -2664,7 +2664,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --instances
@@ -2862,7 +2862,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -2952,7 +2952,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -3042,7 +3042,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --noprompt
@@ -3150,7 +3150,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --instances
@@ -3259,7 +3259,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --noprompt
@@ -3360,7 +3360,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -3450,7 +3450,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --noprompt
@@ -3559,7 +3559,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -3649,7 +3649,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -3739,7 +3739,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -3829,7 +3829,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -3919,7 +3919,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -4013,7 +4013,7 @@ Applications
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -4106,9 +4106,9 @@ Services
     Show the information about the named service.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -4180,9 +4180,9 @@ Services
     List all available plans of the supported services.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -4226,9 +4226,9 @@ Services
     List the supported and provisioned services of the target.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -4311,7 +4311,7 @@ Services
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -4389,7 +4389,7 @@ Services
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -4463,7 +4463,7 @@ Services
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -4541,7 +4541,7 @@ Services
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -4624,7 +4624,7 @@ Services
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -4706,7 +4706,7 @@ Services
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -4789,7 +4789,7 @@ Services
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -4879,7 +4879,7 @@ Services
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -4969,7 +4969,7 @@ Services
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -5049,7 +5049,7 @@ Services
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -5148,7 +5148,7 @@ Services
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -5247,7 +5247,7 @@ Services
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -5331,7 +5331,7 @@ Services
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -5415,7 +5415,7 @@ Services
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -5489,7 +5489,7 @@ Services
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -5563,7 +5563,7 @@ Services
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -5657,7 +5657,7 @@ Services
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -5747,7 +5747,7 @@ Services
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -5840,9 +5840,9 @@ Organizations
     Create a new organization.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -5900,9 +5900,9 @@ Organizations
     Delete the named organization.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -5952,9 +5952,9 @@ Organizations
     Add the specified user to the named organization, in various roles. This is a CFv2 specific command
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -6006,9 +6006,9 @@ Organizations
     Show the named organization's information.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -6060,9 +6060,9 @@ Organizations
     List the available organizations.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -6114,9 +6114,9 @@ Organizations
     Set the quotas for the current or named organization.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -6160,9 +6160,9 @@ Organizations
     Rename the named organization.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -6206,9 +6206,9 @@ Organizations
     Switch the current organization to the named organization. This invalidates the current space.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -6252,9 +6252,9 @@ Organizations
     Remove the specified user from the named organization, in various roles. This is a CFv2 specific command
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -6315,9 +6315,9 @@ Spaces
     Create a new space.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -6401,9 +6401,9 @@ Spaces
     Delete the named space.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -6465,9 +6465,9 @@ Spaces
     Add the specified user to the named space, in various roles. This is a CFv2 specific command
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -6529,9 +6529,9 @@ Spaces
     Rename the named space.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -6587,9 +6587,9 @@ Spaces
     Show the named space's information.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -6653,9 +6653,9 @@ Spaces
     List the available spaces in the specified organization. See --organization for details
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -6719,9 +6719,9 @@ Spaces
     Switch from the current space to the named space. This may switch the organization as well.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -6777,9 +6777,9 @@ Spaces
     Remove the specified user from the named space, in various roles. This is a CFv2 specific command
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -6850,9 +6850,9 @@ Routes
     Delete the named route.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -6918,9 +6918,9 @@ Routes
     List all available routes.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -6977,9 +6977,9 @@ Domains
     List the available domains in the specified space, or all.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -7052,9 +7052,9 @@ Domains
     Add the named domain to an organization or space.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -7120,9 +7120,9 @@ Domains
     Remove the named domain from an organization or space.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -7197,9 +7197,9 @@ Administration
     List the supported frameworks of the target.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -7247,9 +7247,9 @@ Administration
     Report the current group, or (un)set it.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -7302,9 +7302,9 @@ Administration
     Show the basic system and account information.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -7376,9 +7376,9 @@ Administration
     Show and/or modify the limits applying to applications in the named group.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -7452,9 +7452,9 @@ Administration
     List the available quota definitions.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -7502,9 +7502,9 @@ Administration
     List the supported runtimes of the target.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -7552,9 +7552,9 @@ Administration
     List the supported stacks of the target.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -7602,9 +7602,9 @@ Administration
     List the available targets, and their authorization tokens, if any.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -7633,9 +7633,9 @@ Administration
     List the available targets, and their authorization tokens, if any.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -7664,9 +7664,9 @@ Administration
     Show the current memory allocation and usage of the active or specified user/group (CFv1), or the specified or current space (CFv2).
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -7743,9 +7743,9 @@ Administration
     Show the name of the current user in the current or specified target.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -7793,9 +7793,9 @@ Administration
     Shows the information of a user in the current or specified target. Defaults to the current user. Naming a specific user requires a CFv2 target.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -7843,9 +7843,9 @@ Administration
     Print the version number of the client.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --no-prompt
@@ -7865,9 +7865,9 @@ Administration
     Grant the named user administrator privileges for the current or specified target.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --noprompt
@@ -7897,9 +7897,9 @@ Administration
     Show a list of the administrators for the current or specified target.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -7947,9 +7947,9 @@ Administration
     Apply a patch to the current or specified target.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -7993,9 +7993,9 @@ Administration
     Retrieve a report containing the logs of the current or specified target.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -8039,9 +8039,9 @@ Administration
     Revoke administrator privileges for the named user at the current or specified target.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --noprompt
@@ -8071,9 +8071,9 @@ Administration
     Add the named user to the specified group.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -8117,9 +8117,9 @@ Administration
     Create a new group with the specified name.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -8163,9 +8163,9 @@ Administration
     Remove the named user from the specified group.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -8209,9 +8209,9 @@ Administration
     Delete the named group.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -8255,9 +8255,9 @@ Administration
     Show and/or modify the limits applying to applications in the named group.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -8331,9 +8331,9 @@ Administration
     Show the list of groups known to the target.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -8381,9 +8381,9 @@ Administration
     Show the list of users in the named group.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -8431,9 +8431,9 @@ Administration
     Reconfigure the named quota definition.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -8497,9 +8497,9 @@ Administration
     Create a new quota definition.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -8563,9 +8563,9 @@ Administration
     Delete the named quota definition.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -8609,9 +8609,9 @@ Administration
     List the available quota definitions.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -8659,9 +8659,9 @@ Administration
     Rename the named quota definition.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -8705,9 +8705,9 @@ Administration
     Show the details of the named quota definition. If not specified it will be asked for interactively (menu).
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -8766,7 +8766,7 @@ Administration
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --noprompt
@@ -8870,7 +8870,7 @@ Administration
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --noprompt
@@ -8974,7 +8974,7 @@ Administration
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --noprompt
@@ -9078,7 +9078,7 @@ Administration
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --noprompt
@@ -9182,7 +9182,7 @@ Administration
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -9232,7 +9232,7 @@ Administration
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -9282,7 +9282,7 @@ Administration
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -9339,7 +9339,7 @@ Administration
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --noprompt
@@ -9443,7 +9443,7 @@ Administration
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -9478,7 +9478,7 @@ Administration
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -9528,7 +9528,7 @@ Administration
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         --token-file
@@ -9585,9 +9585,9 @@ Convenience
     Create a shortcut for a command (prefix).
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --no-prompt
@@ -9607,9 +9607,9 @@ Convenience
     List the known aliases (shortcuts).
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --no-prompt
@@ -9633,9 +9633,9 @@ Convenience
     Remove a shortcut by name.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --no-prompt
@@ -9664,9 +9664,9 @@ Miscellaneous
     Run a raw rest request against the chosen target
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --token-file
@@ -9710,9 +9710,9 @@ Miscellaneous
     Map the specified name into a uuid, given the type.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --no-prompt
@@ -9736,9 +9736,9 @@ Miscellaneous
     Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --query
@@ -9794,9 +9794,9 @@ Miscellaneous
     List the entity types usable for 'guid'. I.e. the types of the named entities known to the client.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --no-prompt
@@ -9820,9 +9820,9 @@ Miscellaneous
     Print the saved REST trace for the last client command to stdout.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --no-prompt
@@ -9842,9 +9842,9 @@ Miscellaneous
     Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --query
@@ -9900,9 +9900,9 @@ Miscellaneous
     Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --query
@@ -9958,9 +9958,9 @@ Miscellaneous
     Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --query
@@ -10016,9 +10016,9 @@ Miscellaneous
     Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     --query
@@ -10079,9 +10079,18 @@ Miscellaneous
     function showSpoiler(obj)
     {
       var inner = obj.parentNode.getElementsByTagName("div")[0];
-      if (inner.style.display == "none")
+      if (inner.style.display == "none") {
         inner.style.display = "";
-      else
+        obj.innerHTML = '- options'
+      }
+      else {
         inner.style.display = "none";
+        obj.innerHTML = '+ options'
+      }
+
+	return false;
+
     }
-    </script>
+  </script>
+
+

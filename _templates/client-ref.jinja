@@ -34,9 +34,9 @@ In some cases the  ``--json`` option reveals additional details.
     {{ commands[command]['description'] }}
 
     .. raw:: html
-
+    
       <div class="spoiler">
-      <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
     {% for option in commands[command]['options'] %}
@@ -64,7 +64,7 @@ In some cases the  ``--json`` option reveals additional details.
         .. raw:: html
 
           <div class="spoiler">
-          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
         {% for option in commands[command]['options'] %}
@@ -86,9 +86,18 @@ In some cases the  ``--json`` option reveals additional details.
     function showSpoiler(obj)
     {
       var inner = obj.parentNode.getElementsByTagName("div")[0];
-      if (inner.style.display == "none")
+      if (inner.style.display == "none") {
         inner.style.display = "";
-      else
+        obj.innerHTML = '- options'
+      }
+      else {
         inner.style.display = "none";
+        obj.innerHTML = '+ options'
+      }
+
+	return false;
+
     }
-    </script>
+  </script>
+
+
