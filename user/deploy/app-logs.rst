@@ -65,6 +65,26 @@ The ``--json`` flag can be used to return each log line as a JSON object.
     log :ref:`drain <application_logs-drain>` preemptively (where
     possible).
 
+
+.. _application_logs-adding:
+
+Adding Files to the Log Stream
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+By default, ``stackato logs`` streams log data from *logs/stdout.log*
+and *logs/stderr.log* in the application containers.
+
+To add a log file to the stream, set a STACKATO_LOG_FILE_<NAME>
+environment variable in :ref:`stackato.yml <stackato_yml-env>` with the
+path to the desired file as its value (relative to $STACKATO_APP_ROOT). 
+For example::
+
+  env:
+    STACKATO_LOG_FILE_YOURLOG: logs/yourlog.log
+
+You can add up to five custom log files to an application's log stream.
+
+
 .. _application_logs-drain:
 
 stackato drain
