@@ -57,7 +57,22 @@ In some cases the  ``--json`` option reveals additional details.
 
       {{ command }}
         {{ commands[command]['description'] }}
-              
+
+        .. raw:: html
+
+          <div class="spoiler">
+          <input type="button" onclick="showSpoiler(this);" value="Show/Hide Options" />
+          <div class="inner" style="display:none;">
+
+        {% for option in commands[command]['options'] %}
+        {{ option }}
+          {{ commands[command]['options'][option] }}
+        {% endfor %}
+
+          ..raw:: html
+
+            </div></div>
+
     {% endfor %}
   {% endfor %}
 {% endfor %}
