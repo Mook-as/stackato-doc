@@ -32,6 +32,7 @@ Commands
 %     # calculate ref_cmd, which is the first leaf-node child, which we will link to
 %     ref_cmd = cmd
 %     ref_cmd = cmd[:children][0] while ref_cmd[:has_children]
+
   * :ref:`<%= cmd[:name] %> <kato-command-ref-<%= ref_cmd[:argv].join("-") %>>`
 %   end
 % end
