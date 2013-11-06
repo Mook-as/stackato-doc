@@ -39,10 +39,14 @@ Commands
 %
 %
 %# Command usage details
+
+.. _kato-command-ref-details:
+
+Command Usage Details
+---------------------
+
 % cmds.each do |cmd|
 %   next if cmd[:has_children]
-
-----
 
 %# (commands links will come here)
 .. _kato-command-ref-<%= cmd[:argv].join("-") %>:
@@ -89,6 +93,14 @@ Commands
     <%= keyword %> - <%= description %><% # TODO: format wrap80 with indent %>
 %     end
 %   end
+
+----
+
 %
 % end
+
+.. _kato-command-ref-end:
+
+
+
 

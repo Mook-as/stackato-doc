@@ -19,26 +19,84 @@ Commands
 
 * :ref:`config <kato-command-ref-config>` Manipulate configuration values of Stackato components.
 * :ref:`data <kato-command-ref-data-export>` Import or export Stackato system data to or from clusters/nodes.
+
+  * :ref:`data export <kato-command-ref-data-export>`
+
+  * :ref:`data import <kato-command-ref-data-import>`
+
+  * :ref:`data users <kato-command-ref-data-users>`
 * :ref:`debug <kato-command-ref-debug-configwatch>` Commands for debugging for Stackato internals.
+
+  * :ref:`debug configwatch <kato-command-ref-debug-configwatch>`
+
+  * :ref:`debug redis <kato-command-ref-debug-redis>`
 * :ref:`history <kato-command-ref-history>` Show the kato commands that have been run
 * :ref:`info <kato-command-ref-info>` Show information about this node or cluster including assigned and
 * :ref:`inspect <kato-command-ref-inspect>` Detect common problems with your Stackato install using 'kato inspect'
 * :ref:`log <kato-command-ref-log-stream>` Logging utilities for Stackato
+
+  * :ref:`log drain <kato-command-ref-log-drain-add>`
+
+  * :ref:`log stream <kato-command-ref-log-stream>`
+
+  * :ref:`log tail <kato-command-ref-log-tail>`
 * :ref:`node <kato-command-ref-node-attach>` Node management
+
+  * :ref:`node attach <kato-command-ref-node-attach>`
+
+  * :ref:`node detach <kato-command-ref-node-detach>`
+
+  * :ref:`node list <kato-command-ref-node-list>`
+
+  * :ref:`node migrate <kato-command-ref-node-migrate>`
+
+  * :ref:`node remove <kato-command-ref-node-remove>`
+
+  * :ref:`node rename <kato-command-ref-node-rename>`
+
+  * :ref:`node reset <kato-command-ref-node-reset>`
+
+  * :ref:`node retire <kato-command-ref-node-retire>`
+
+  * :ref:`node setup <kato-command-ref-node-setup-core>`
+
+  * :ref:`node upgrade <kato-command-ref-node-upgrade>`
+
+  * :ref:`node version <kato-command-ref-node-version>`
 * :ref:`op <kato-command-ref-op>` Various operational commands
 * :ref:`patch <kato-command-ref-patch>` Update a Stackato cluster with post-release fixes.
 * :ref:`process <kato-command-ref-process-list>` Start, stop, or restart individual processes. Generally not required;
+
+  * :ref:`process list <kato-command-ref-process-list>`
+
+  * :ref:`process ready <kato-command-ref-process-ready>`
+
+  * :ref:`process restart <kato-command-ref-process-restart>`
+
+  * :ref:`process start <kato-command-ref-process-start>`
+
+  * :ref:`process stop <kato-command-ref-process-stop>`
 * :ref:`relocate <kato-command-ref-relocate>` Move containers, application droplets, or services to a new mount point
 * :ref:`report <kato-command-ref-report>` Generate a report that can be sent to Stackato support.
 * :ref:`restart <kato-command-ref-restart>` Restart Stackato or individual roles.
 * :ref:`role <kato-command-ref-role-add>` Management of node roles
+
+  * :ref:`role add <kato-command-ref-role-add>`
+
+  * :ref:`role info <kato-command-ref-role-info>`
+
+  * :ref:`role remove <kato-command-ref-role-remove>`
 * :ref:`shell <kato-command-ref-shell>` Interactive shell for kato
 * :ref:`start <kato-command-ref-start>` Start Stackato or individual roles.
 * :ref:`status <kato-command-ref-status>` List configured roles and their current status across the cluster.
 * :ref:`stop <kato-command-ref-stop>` Stop Stackato or individual roles.
 * :ref:`version <kato-command-ref-version>` Display the version of Stackato being run.
 
-----
+.. _kato-command-ref-details:
+
+Command Usage Details
+---------------------
+
 
 .. _kato-command-ref-config:
 
@@ -77,6 +135,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-data-export:
 
 **data** **export** **--only-this-node** [**options**] [*<filename>*]
@@ -113,6 +172,10 @@ Commands
 
   **--exclude-droplets**                  Do not include droplets (uploaded apps)
 
+  **--packages**                          Include app packages
+
+  **--exclude-packages**                  Do not include app packages
+
   **--resources**                         Include the upload cache
 
   **--exclude-resources**                 Do not include the upload cache (default)
@@ -121,9 +184,9 @@ Commands
 
   **--exclude-license**                   Do not include the Stackato license
 
-  **--admins-list**                       Include the list of users that are admins
+  **--db-encryption-key**                 Include the key used to encrypt the Stackato DB (recommended)
 
-  **--exclude-admins-list**               Do not include the list of users that are admins
+  **--exclude-db-encryption-key**         Do not include the key
 
   **--main-db**                           Include the cloud controller's main database
 
@@ -216,6 +279,7 @@ Commands
 
 
 ----
+
 
 .. _kato-command-ref-data-import:
 
@@ -253,6 +317,10 @@ Commands
 
   **--exclude-droplets**                  Do not include droplets (uploaded apps)
 
+  **--packages**                          Include app packages
+
+  **--exclude-packages**                  Do not include app packages
+
   **--resources**                         Include the upload cache
 
   **--exclude-resources**                 Do not include the upload cache (default)
@@ -261,9 +329,9 @@ Commands
 
   **--exclude-license**                   Do not include the Stackato license
 
-  **--admins-list**                       Include the list of users that are admins
+  **--db-encryption-key**                 Include the key used to encrypt the Stackato DB (recommended)
 
-  **--exclude-admins-list**               Do not include the list of users that are admins
+  **--exclude-db-encryption-key**         Do not include the key
 
   **--main-db**                           Include the cloud controller's main database
 
@@ -357,6 +425,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-data-users:
 
 **data** **users** **import** [**options**] *<filename>*
@@ -377,6 +446,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-debug-configwatch:
 
 **debug** **configwatch** [**options**] [*<process-name>...*]
@@ -391,6 +461,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-debug-redis:
 
 **debug** **redis**
@@ -399,6 +470,7 @@ Commands
 
 
 ----
+
 
 .. _kato-command-ref-history:
 
@@ -415,6 +487,7 @@ Commands
 
 
 ----
+
 
 .. _kato-command-ref-info:
 
@@ -434,6 +507,7 @@ Commands
 
 
 ----
+
 
 .. _kato-command-ref-inspect:
 
@@ -461,6 +535,7 @@ Commands
 
 
 ----
+
 
 .. _kato-command-ref-log-drain-add:
 
@@ -497,6 +572,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-log-drain-delete:
 
 **log** **drain** **delete** [**options**] *<name>*
@@ -508,6 +584,7 @@ Commands
 
 
 ----
+
 
 .. _kato-command-ref-log-drain-list:
 
@@ -524,6 +601,7 @@ Commands
 
 
 ----
+
 
 .. _kato-command-ref-log-drain-status:
 
@@ -542,6 +620,7 @@ Commands
 
 
 ----
+
 
 .. _kato-command-ref-log-stream:
 
@@ -582,6 +661,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-log-tail:
 
 **log** **tail** [**options**] [*<component>...*]
@@ -607,6 +687,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-node-attach:
 
 **node** **attach** [**options**] *<core-ip>*
@@ -627,6 +708,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-node-detach:
 
 **node** **detach** [**options**]
@@ -642,6 +724,7 @@ Commands
 
 
 ----
+
 
 .. _kato-command-ref-node-list:
 
@@ -659,6 +742,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-node-migrate:
 
 **node** **migrate** *<old-node-IP>* *<new-node-IP>*
@@ -673,6 +757,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-node-remove:
 
 **node** **remove** *<node-IP>*
@@ -684,6 +769,7 @@ Commands
 
 
 ----
+
 
 .. _kato-command-ref-node-rename:
 
@@ -705,6 +791,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-node-reset:
 
 **node** **reset** **soft**
@@ -725,6 +812,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-node-retire:
 
 **node** **retire** [**options**]
@@ -743,6 +831,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-node-setup-core:
 
 **node** **setup** **core** [*<endpoint>*]
@@ -758,6 +847,7 @@ Commands
 
 
 ----
+
 
 .. _kato-command-ref-node-setup-firstuser:
 
@@ -790,6 +880,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-node-setup-load_balancer:
 
 **node** **setup** **load_balancer**
@@ -805,6 +896,7 @@ Commands
 
 
 ----
+
 
 .. _kato-command-ref-node-setup-micro:
 
@@ -825,6 +917,7 @@ Commands
 
 
 ----
+
 
 .. _kato-command-ref-node-upgrade:
 
@@ -860,6 +953,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-node-version:
 
 **node** **version** [**options**] [*<node-IP>*]
@@ -869,6 +963,7 @@ Commands
 
 
 ----
+
 
 .. _kato-command-ref-op:
 
@@ -884,7 +979,7 @@ Commands
 
 **op** **defer** *<command>* [**--run-as-root**] [**--reset**]
 
-**op** **import_from_yaml_files**
+**op** **import_from_yaml_files** [**--upgrade**]
 
 **op** **max_client_upload** *<max-size>*
 
@@ -959,6 +1054,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-patch:
 
 **patch** **status**
@@ -989,6 +1085,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-process-list:
 
 **process** **list** [**options**] [*<process>...*]
@@ -1009,6 +1106,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-process-ready:
 
 **process** **ready** [**options**] *<process>*
@@ -1025,6 +1123,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-process-restart:
 
 **process** **restart** [**options**] [*<process>...*]
@@ -1036,6 +1135,7 @@ Commands
 
 
 ----
+
 
 .. _kato-command-ref-process-start:
 
@@ -1049,6 +1149,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-process-stop:
 
 **process** **stop** [**options**] [*<process>...*]
@@ -1060,6 +1161,7 @@ Commands
 
 
 ----
+
 
 .. _kato-command-ref-relocate:
 
@@ -1077,6 +1179,7 @@ Commands
 
 
 ----
+
 
 .. _kato-command-ref-report:
 
@@ -1100,6 +1203,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-restart:
 
 **restart** [**options**] [*<role>...*]
@@ -1117,6 +1221,7 @@ Commands
 
 
 ----
+
 
 .. _kato-command-ref-role-add:
 
@@ -1150,6 +1255,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-role-info:
 
 **role** **info** **--help**
@@ -1167,6 +1273,7 @@ Commands
 
 
 ----
+
 
 .. _kato-command-ref-role-remove:
 
@@ -1194,6 +1301,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-shell:
 
 **shell** [**--help**]
@@ -1205,6 +1313,7 @@ Commands
 
 
 ----
+
 
 .. _kato-command-ref-start:
 
@@ -1224,6 +1333,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-status:
 
 **status** [**options**]
@@ -1242,6 +1352,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-stop:
 
 **stop** [**options**] [*<role>...*]
@@ -1258,6 +1369,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-version:
 
 **version** [**--help**]
@@ -1265,6 +1377,14 @@ Commands
   Display the version of Stackato being run.
 
   **-h** **--help**                       Show help information
+
+
+
+----
+
+
+.. _kato-command-ref-end:
+
 
 
 
