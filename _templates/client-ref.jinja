@@ -50,6 +50,9 @@ In some cases the  ``--json`` option reveals additional details.
       </div></div>
 
   {% for subsection in section['sections'] %}
+    
+.. _command-{{ section['name'] }}-{{ subsection['name'] }}:
+    
   **{{ subsection['name'] }}**
       
     {% for command in subsection['commands'] %}
