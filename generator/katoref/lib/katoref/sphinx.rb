@@ -40,6 +40,7 @@ def push_sub_cmds(cmds, argv)
         :argv => argv,
         :token_lines => command.tokenized,
       }
+      cmds << cmd
       child_cmds = push_sub_cmds(cmds, argv)
       if child_cmds.size > 0
         cmd[:has_children] = true
@@ -49,7 +50,6 @@ def push_sub_cmds(cmds, argv)
         cmd.update(command.usage_sections)
         sibling_usage_cmds << cmd
       end
-      cmds << cmd
     else
       $stderr.puts "No command.has_specific_usage_file for #{argv}"
     end
