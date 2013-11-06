@@ -35,7 +35,7 @@ module KatoRef
             section = $1.downcase.to_sym
 
           # 2-spaces then text within section
-          elsif section and /^\s{2}(?:(\S+.*\S)\s{2})?\s*(\S.*)\s*$/.match(line)
+          elsif section and /^\s{2}(\S+(?:\s\S+)*)?\s{2}?\s*(\S.*)\s*$/.match(line)
             # line under section "Usage:" or "Options:"
             sections[section] ||= []
             if $1
