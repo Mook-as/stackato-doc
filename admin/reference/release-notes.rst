@@ -15,6 +15,15 @@ Release Notes
   See `release-notes.rst` in git for the up-to-date version of this file.
         `<https://github.com/ActiveState/stackato-doc>`_
 
+
+.. only:: not public
+
+  v3.0.0 FINAL
+  ------------
+
+  * [101560] Enable rotation of some log files
+  * [101081]
+
 v3.0.0 Beta (November 6, 2013)
 ------------------------------
 
