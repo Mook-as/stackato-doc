@@ -74,33 +74,27 @@ Adding Files to the Stream
 By default, ``stackato logs`` streams log data from *staging_tasks.log*
 (while staging), *stdout.log* and *stderr.log* (while running). 
 
-You can add up to five additonal files to the log stream by setting one
-or more of the following environment variables in the application
-containers:
+You can add up to five additonal files to the log stream by modifying the 
+**STACKATO_LOG_FILES** environment variable (in :ref:`stackato.yml
+<stackato_yml-env>` or using :ref:`stackato set-env <command-set-env>`).
 
-* **STACKATO_LOG_FILES**: A list of files included in the log stream. The
-  variable value should be in the format::
+The variable should contain a list of named files separated with ":" in
+the following format:
+
+    name=/path/to/file.log:name=/path/to/another.log
   
-    *name*=*/path/to/file.log*:*name*=*/path/to/another.log*
-  
-  For example, to add a specific Tomcat log file to the default
-  $STACKATO_LOG_FILES variable, you might set the following in
-  :ref:`stackato.yml <stackato_yml-env>`::
+The *name* used in the value or individual variable name becomes part of
+each log line, and can be used for filtering the stream.
+
+For example, to add a specific Tomcat log file to the default
+$STACKATO_LOG_FILES variable, you might set the following in
+*stackato.yml*::
   
     env:
       STACKATO_LOG_FILES: tomcat=/app/app/.tomcat/logs/catalina.2013-11-04.log:$STACKATO_LOG_FILES
       
-
-* **STACKATO_LOG_FILE_<NAME>**: Individual variables for each log file
-  you wish to add. For example::
-
-    env:
-      STACKATO_LOG_FILE_YOURLOG: logs/yourlog.log
-
 Paths can be specified fully, or relative to $STACKATO_APP_ROOT.
 
-The *name* used in the value or individual variable name becomes part of
-each log line, and can be used for filtering the stream.
 
 
 .. _application_logs-drain:
