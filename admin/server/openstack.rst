@@ -5,7 +5,7 @@
 OpenStack
 =========
 
-*Recommended version*: **Folsom**
+*Recommended version*: `Grizzly <http://www.openstack.org/software/grizzly/>`__
 
 Simple Stackato deployments can be done using the OpenStack `Horizon
 <http://docs.openstack.org/developer/horizon/>`__ interface. If your
@@ -17,7 +17,7 @@ should use the following (Python) command line tools:
   import a Stackato VM image into the OpenStack Image Service. There are
   a number of installation options: 
   
-  * `pip <http://pypi.python.org/pypi/python-glanceclient/0.7.0>`__: ``pip install python-glanceclient``
+  * `pip <http://pypi.python.org/pypi/python-glanceclient>`__: ``pip install python-glanceclient``
   * `source <git://github.com/openstack/python-glanceclient.git>`__
   * Ubuntu packages: On Ubuntu 12.04, use the version in the `Ubuntu Cloud Archive  <https://wiki.ubuntu.com/ServerTeam/CloudArchive#How_to_Enable_and_Use>`__  
 
@@ -26,7 +26,7 @@ should use the following (Python) command line tools:
   be installed via:
   
   * `pypm <http://code.activestate.com/pypm/python-novaclient/>`__: ``pypm install python-novaclient``
-  * `pip <http://pypi.python.org/pypi/python-novaclient/2.10.0>`__: ``pip install python-novaclient``
+  * `pip <http://pypi.python.org/pypi/python-novaclient>`__: ``pip install python-novaclient``
   * `source <https://github.com/openstack/python-novaclient>`__
   * Linux packages: e.g. ``sudo apt-get install python-novaclient``
 
@@ -53,23 +53,29 @@ Micro Cloud VM.
 
 Unzip the image in a convenient local directory, then use ``glance`` to
 create an image in OpenStack. For example, the following command imports
-a raw image of Stackato 2.10 to OpenStack and makes it publicly
-available::
+a raw image of Stackato to OpenStack and makes it publicly available:
 
-  glance image-create --name="Stackato-2.10" --is-public=true \
-    --container-format=bare --disk-format=raw < stackato-img-kvm-v2.10.0.img
+.. parsed-literal::
+
+  glance image-create --name="Stackato-|version|" --is-public=true \\
+    --container-format=bare --disk-format=raw \\
+    --file stackato-img-kvm-|version|.0.img
 
 The unzipped KVM image is quite large (around 10GB) and will take a long
 time to upload on some networks. You can use one of the following steps
 to make it smaller first:
 
-* Copy the image to create a 'sparse' file::
+* Copy the image to create a 'sparse' file:
   
-    $ cp --sparse=always stackato-img-kvm-v2.10.0.img stackato-sparse.img 
+  .. parsed-literal::
 
-* Convert the image to qcow2 format::
+    $ cp --sparse=always stackato-img-kvm-|version|.0.img stackato-sparse.img 
 
-    $ qemu-img convert stackato-img-kvm-v2.10.0.img -O qcow2 stackato-qcow.img
+* Convert the image to qcow2 format:
+
+  .. parsed-literal::
+
+    $ qemu-img convert stackato-img-kvm-|version|.0.img -O qcow2 stackato-qcow.img
 
 Using either of the resultant images will significantly speed up the
 ``glance image-create`` step. Specify ``--disk-format=qcow2`` when using
@@ -166,17 +172,19 @@ Booting a Stackato VM
 ---------------------
 
 Find the Stackato VM image using ``nova image-list`` or the Horizon
-interface. For example above we should see the name 'Stackato-2.10' in
-the list.
+interface. For example above we should see the name 'Stackato-|version|'
+in the list.
 
 Use ``nova flavor-list`` to see a list of available instance sizes and
 configurations and choose a flavor that provides 2GB of RAM or
 greater. Make note of the flavor ID. 
 
 To boot a single Stackato VM for use as a Micro Cloud, use the ``nova
-boot`` command. For example::
+boot`` command. For example:
 
-  nova boot microcloud --image Stackato-2.10 --flavor 4 \
+.. parsed-literal::
+
+  nova boot microcloud --image Stackato-|version| --flavor m1.medium \\
     --key_name stackato-admin --security_groups stackato-ext
 
 Cluster Setup
