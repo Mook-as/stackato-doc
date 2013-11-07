@@ -158,20 +158,6 @@ Another possible workaround in such cases is to write a script that will pull th
 from ``VCAP_SERVICES`` and update the app's config as needed, then add this script to the
 pre-running hooks.
 
-Cloud Controller Memory Usage
------------------------------
-
-The cloud_controller process will often consume too much memory on the system over time, causing it to become unresponsive. To address this, a memory_limit option has been added which will restart the process when the limit has been reached. The default setting is 50% resident memory, but this can be modified with :ref:`kato config <kato-command-ref-config>`. For example, to raise the threshold to 80%::
-
-  $ kato config set cloud_controller memory_limit 80
-
-Setting memory_limit to 0% will turn this behaviour off, preventing restarts.
-
-Cloud Events, missing errors and warnings
------------------------------------------
-
-Errors and warnings from router2g and harbor_proxy_connector are not
-displayed by Cloud Events. This will be fixed in future releases.
 
 Community Forums
 ----------------
