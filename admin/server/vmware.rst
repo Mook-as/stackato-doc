@@ -5,7 +5,8 @@
 VMware Fusion/Player
 ====================
 
-*Recommended version*: **VMware Fusion / VMware Player 4** or newer
+*Recommended version*: **VMware Fusion / VMware Player 6** or newer
+
 
 Initial Setup
 -------------
