@@ -8,9 +8,14 @@ The Stackato documentation is built using Sphinx:
 This is the same system used for Python language documentation and
 several other projects.
 
-Documentation for the current release in HTML format is available at:
+Current documentation in HTML format for the latest release is available at:
 
  http://docs.stackato.com/
+
+Documentation for previous (or Beta) versions is available in numbered
+sub-directories corresponding to the version number. For example:
+
+ http://docs.stackato.com/2.10/
 
 Editing
 -------
