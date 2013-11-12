@@ -61,11 +61,14 @@ Change to the root directory of your source code project, and use the
 :ref:`stackato.yml <stackato_yml>` or :ref:`manifest.yml <manifest_yml>`
 config file in this directory, you can use just::
 
-	$ stackato push
+	$ stackato push -n
+
+The "-n" option is an alias for "--no-prompt", which takes options from
+the config YAML file instead of prompting for them.
 
 The output of the push command will be something like::
 
-	$ stackato push -n
+  $ stackato push -n
   Using manifest file "stackato.yml"
   Application Url: env.stacka.to
   Creating Application [env] as [https://api.stacka.to -> exampleco -> devel-example -> env] ... OK
@@ -153,23 +156,26 @@ Most applications should be able to run under Stackato with only a few changes.
   See the :ref:`Environment Variables <environment-variables>` section
   for a complete list.
 
-Stackato push and update
-------------------------
+Stackato push
+-------------
 
-The :ref:`stackato push <command-push>` and :ref:`stackato update
-<command-updates>` commands will prompt the user for input or use
-options from the :ref:`stackato.yml <stackato_yml>` and
-:ref:`manifest.yml <manifest_yml>` files. 
+The :ref:`stackato push <command-push>` command creates (or updates)
+applications on Stackato. It negotiates with the API endpoint to reserve
+application URLs, allocate application instances, provision data
+services, upload application code, and optionally stage and start the
+application.
 
-* stackato push: Create, push, map, and start a new application
-* stackato update: Update the application bits
+The command will prompt for options or use those specified in a
+:ref:`stackato.yml <stackato_yml>` or :ref:`manifest.yml <manifest_yml>`
+file. 
 
 .. note::
     
     The application name must be a valid `hostname label
     <http://en.wikipedia.org/wiki/Hostname#Restrictions_on_valid_host_names>`_
     (i.e. containing only alphanumeric characters and hyphens).
-    
+
+
 The ``push`` command implicitly stages and starts the application unless
 the ``--no-start`` option is used. With this option, applications are
 pushed in a pre-staged, stopped state where variables can be added (e.g.
@@ -202,23 +208,23 @@ Naming and URLs
 ---------------
 
 To prevent confusion or collisions, Stackato enforces uniqueness for
-URLs, application names, and service names at two different levels of
-scope (global and user/group):
+URLs, application names, and service names:
 
 * **URLs** (auto-generated or :ref:`manually mapped <deploy-map-url>`)
   must be globally unique, and are allocated on a "first come, first
   serve" basis.
 
-* **Application names** must be unique within the scope of the user or
-  group. Applications deployed by different users or groups can have the
-  same name, but a globally unique URL must be specified during
-  deployment (overriding the auto-generated URL, which would conflict).
+* **Application names** must be unique within the scope of the
+  :ref:`space <orgs-spaces>`. Applications deployed in different spaces
+  can have the same name, but the full application URL must be globally
+  unique URL.
 
-* **Service names** must be unique within the scope of the user or
-  group. The name given to a service during creation is a pointer to a
-  globally unique string (i.e. the *actual* database name in the system
-  as shown by STACKATO_SERVICES), so there is no possiblility of naming
-  conflicts with services created by other users or groups.
+* **Service names** must be unique within the scope of the :ref:`space
+  <orgs-spaces>`. The name given to a service during creation is a
+  pointer to a globally unique string (i.e. the *actual* database name
+  in the system as shown by STACKATO_SERVICES), so there is no
+  possiblility of naming conflicts with services created in other orgs
+  and spaces.
 
 
 .. index:: Crontab Support
