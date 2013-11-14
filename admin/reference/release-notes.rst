@@ -23,6 +23,9 @@ Release Notes
 
   * [101560] Enable rotation of some log files
   * [101081]
+  * Upgrade to Docker 0.6.6
+  * Logyard:
+    * [101635] Fix inotify panic in systail
 
 v3.0.0 Beta (November 6, 2013)
 ------------------------------
