@@ -76,12 +76,6 @@ role**:
     WARNING: Assumed type string
     api.paas.example.com:49153/newimg:1.0.0
 
-  
-6. Restart the ``fence`` process::
-  
-    $ kato process restart fence
-
-
 .. _docker-registry:
 
 .. index:: Docker Registry
@@ -148,10 +142,4 @@ central repository for your container tempates.
     $ kato config set fence docker/image api.paas.example.com:49153/newimg:1.0.0
     WARNING: Assumed type string
     api.paas.example.com:49153/newimg:1.0.0
-
-  
-8. Restart the ``fence`` process **on each DEA**::
-  
-    $ kato process restart fence
-    
 
