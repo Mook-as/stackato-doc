@@ -10,6 +10,13 @@ Detailed Configuration
 General
 -------
 
+.. note::
+  After booting the VM, run ``kato process ready all`` before starting
+  the following configuration steps. This command returns ``READY`` when
+  all configured system processes have started, and is particularly
+  important when using ``kato`` commands in automated configuration
+  scripts which run immediately after boot.
+  
 .. _server-config-password:
 
 Changing the Password
@@ -47,14 +54,12 @@ Changing the Hostname
 
 You may want or need to change the hostname of the Stackato system,
 either to match a DNS record you've created or just to make the system
-URLs more convenient.
-
-For a :term:`micro cloud` using :term:`multicast DNS`,
-(mDNS) this can be done using the :ref:`kato node rename
+URLs more convenient. This can be done using the :ref:`kato node rename
 <kato-command-ref>` command::
 
-	$ kato node rename mynewname
+	$ kato node rename mynewname.example.com
   
+
 This command will change the system hostname in ``/etc/hostname`` and ``/etc/hosts``,
 as well as performing some internal configuration for Stackato such as generating a new
 server certificate for the :ref:`Management Console <management-console>`.
