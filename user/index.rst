@@ -51,7 +51,6 @@ Deploying Applications
     deploy/orgs-spaces
     deploy/buildpack
     deploy/other-frameworks
-    deploy/languages/aspdotnet
     deploy/languages/clojure
     deploy/languages/go
     deploy/languages/java

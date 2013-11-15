@@ -105,7 +105,6 @@ See each of these sections for language specific deployment details and examples
 .. toctree::
    :maxdepth: 1
 
-   languages/aspdotnet
    languages/clojure
    languages/go
    languages/java
