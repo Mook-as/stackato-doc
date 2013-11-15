@@ -435,20 +435,19 @@ high-availability filesystem server. For example:
 Load Balancer and Multiple Routers
 ----------------------------------
 
-For large scale deployments requiring multiple Router nodes, a Load
-Balancer must be configured to distribute connections between the
-Routers. The Stackato VM can be configured to take on this role.
-
-.. note::
-    A node configured as a Load Balancer cannot have any other roles
-    enabled.
+For large scale deployments requiring multiple Router nodes, a load
+balancer must be configured to distribute connections between the
+Routers. Though most users will prefer to use a hardware load balancer
+or elastic load balancing service provided by the cloud hosting
+provider, a Stackato VM can be configured to take on this role.
 
 The :ref:`kato node setup load_balancer <kato-command-ref-node-attach>`
 command retrieves IP addresses of every router in the cluster and
 configures an nginx process to distribute load (via round-robin) among a
 pool of Routers and handle SSL termination.
 
-For example, to setup a cluster with a Load Balancer and multiple Routers:
+For example, to setup a cluster with a Stackato Load Balancer and
+multiple Routers:
 
 Rename the Load Balancer
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -463,9 +462,9 @@ following on Load Balancer node::
 Set up the Core Node
 ^^^^^^^^^^^^^^^^^^^^
 
-The Core node will need to temporarily take on the primary hostname of
-the Stackato system (i.e. the same name as the Load Balancer above). Run
-the following on the Core node::
+The Core node will need to temporarily take on the API endpoint hostname
+of the Stackato system (i.e. the same name as the Load Balancer above).
+Run the following on the Core node::
 
   $ kato node rename *hostname.example.com*
 
@@ -476,13 +475,13 @@ If it is not already configured as the Core node, do so now::
 The ``kato node rename`` command above is being used to set internal Stackato
 parameters, but all hosts on a network should ultimately have unique
 hostnames. After setup, rename the Core node **manually** by editing
-*/etc/hostname* and restarting.
+*/etc/hostname* and */etc/hosts*, then ``sudo service hostname restart``.
 
 Set up Supplemental Routers 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 As with the Core node, you will need to run ``kato node rename`` on each
-router with the same primary hostname. Run the following on each
+router with the same API endpoint hostname. Run the following on each
 Router::
 
   $ kato node rename *hostname.example.com*
@@ -492,24 +491,31 @@ Then enable the 'router' role and attach the node to the cluster::
   $ kato node attach -e router <MBUS_IP>
 
 As above, rename each host manually after configuration to give them 
-unique hostnames. The MBUS_IP is for the network interface of the Core
+unique hostnames. The MBUS_IP is the network interface of the Core
 node (usually eth0).
 
-Configure the Load Balancer
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Configure the Stackato Load Balancer
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Attach the Load Balancer to the Core node and enable the 'router' role.
-On the Load Balancer node, run::
+.. note::
+    A Stackato node configured as a Load Balancer cannot have any other
+    roles enabled.
+    
+Attach the Stackato VM to the Core node::
 
-  $ kato node attach -e router <MBUS_IP>
+  $ kato node attach <MBUS_IP>
 
-Then set up the node as a Load Balancer::
+To set up the node as a Load Balancer automatically::
 
-  $ kato node setup load_balancer
+  $ kato node setup load_balancer --force
 
-This command will fetch the IP addresses for all configured routers in
-the cluster. It will prompt you to remove the IP address of the local
-Load Balancer from the pool of Routers (recommended).
+This command fetches the IP addresses of all configured routers in
+the cluster. 
+  
+To set up the Load Balancer manually, specify the IP addresses of the
+Router nodes. For example::
+
+ $ kato node setup load_balancer 10.5.31.140 10.5.31.145
 
 .. note::
   If you are using the AOK authentication service, see also :ref:`AOK
