@@ -300,7 +300,7 @@ attributes including permissions and dates::
 	# exit
 
 Finally, as root, move the original ``/var/stackato/services`` or
-``/var/stackato/data/cloud_controller_ng/tmp`` directories out of the
+``/home/stackato/stackato/data`` directories out of the
 way, then symlink to the relocated directories. Hard links cannot span
 filesystems so "ln -s" is the command used for this::
 

@@ -232,7 +232,7 @@ SSH to the Primary node, then format and mount the volume::
 
 On the two Controller nodes, run a command such as::
 
-  sshfs -o idmap=user -o reconnect -o ServerAliveInterval=15 stackato@<Primary node IP>:/mnt/add-volume/stackato-shared/ /var/stackato/data/cloud_controller_ng/tmp
+  sshfs -o idmap=user -o reconnect -o ServerAliveInterval=15 stackato@<Primary node IP>:/mnt/add-volume/stackato-shared/ /home/stackato/stackato/data
 
 The data services may be colocated onto a single node for smaller
 production clusters, or separated on to individual nodes. You

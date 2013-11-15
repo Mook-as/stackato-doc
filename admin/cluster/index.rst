@@ -359,7 +359,7 @@ their */var/stackato/services* directory on persistent storage:
     filesystem is recommended.
 
 In clusters with multiple Cloud Controllers, the nodes **must** share a
-common */var/stackato/data/cloud_controller_ng/tmp* mount point as
+common */home/stackato/stackato/data* mount point as
 described :ref:`below <cluster-multi-controllers>` in order to work
 together properly. 
 
@@ -392,7 +392,7 @@ Multiple Controllers
 A Stackato cluster can have multiple controller nodes running on
 separate VMs to improve redundancy. The key element in designing this
 redundancy is to have all controller nodes share a
-``/var/stackato/data/cloud_controller_ng/tmp`` directory stored on a
+``/home/stackato/stackato/data`` directory stored on a
 high-availability filesystem server. For example:
 
 * Create a shared filesystem on a Network Attached Storage device. [1]_
@@ -410,13 +410,13 @@ high-availability filesystem server. For example:
 
   * Mount the shared filesystem on the mount point. [1]_
 
-  * Set aside the original ``/var/stackato/data/cloud_controller_ng/tmp``::
+  * Set aside the original ``/home/stackato/stackato/data``::
 
-    $ mv /var/stackato/data/cloud_controller_ng/tmp /var/stackato/data/cloud_controller_ng/tmp.old
+    $ mv /home/stackato/stackato/data /home/stackato/stackato/data.old
 
-  * Create a symlink from ``/var/stackato/data/cloud_controller_ng/tmp`` to the mount point::
+  * Create a symlink from ``/home/stackato/stackato/data`` to the mount point::
 
-    $ ln -s /mnt/controller /var/stackato/data/cloud_controller_ng/tmp
+    $ ln -s /mnt/controller /home/stackato/stackato/data
 
 * On the Core node, start the controller process::
 
