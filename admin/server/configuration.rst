@@ -15,7 +15,9 @@ General
   the following configuration steps. This command returns ``READY`` when
   all configured system processes have started, and is particularly
   important when using ``kato`` commands in automated configuration
-  scripts which run immediately after boot.
+  scripts which run immediately after boot (the :ref:`--block
+  <kato-command-ref-process-ready>` option is useful in this
+  scenario).
   
 .. _server-config-password:
 
