@@ -81,6 +81,7 @@ v3.0.0 Beta (November 6, 2013)
   * [100507] New WARNING log message on drain retries
   * [98214] Improve handling of drain state transitions
   * [98998] Compile with Go 1.1
+  * systail now works with logrotate managed files (eg: router2g-access.log)
   
 * Management Console updates:
 
