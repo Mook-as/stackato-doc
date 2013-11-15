@@ -71,7 +71,7 @@ buildpack's Git repository. For example::
 
 The following buildpacks are known to work with Stackato:
 
-* `Jekyll <https://github.com/troytop/stackato-buildpack-jekyll>`_
+* `Jekyll <https://github.com/ActiveState/heroku-buildpack-jekyll/>`_
 * `JRuby <https://github.com/ActiveState/heroku-buildpack-jruby>`_
   
   * `JRuby example <https://github.com/ActiveState/heroku-jruby-example>`_
