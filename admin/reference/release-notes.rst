@@ -26,6 +26,7 @@ Release Notes
   * Upgrade to Docker 0.6.6
   * Logyard:
     * [101635] Fix inotify panic in systail
+  * [101692] Remove appstore containers after use
 
 v3.0.0 Beta (November 6, 2013)
 ------------------------------
