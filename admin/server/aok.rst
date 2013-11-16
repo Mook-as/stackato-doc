@@ -211,15 +211,23 @@ under the *aok/ca_file* key in the Cloud Controller's configuration.
 AOK with a Load Balancer
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-In clusters with multiple Routers (specifically if the :ref:`Load
+In clusters with multiple Routers (specifically if a :ref:`Load
 Balancer <cluster-load-balancer>` is used), the following steps will
 correctly configure SSL certificates.
+  
 
-1. Take copies of the cert in */etc/ssl/certs/stackato.crt* from the Load Balancer node to each of the Controller nodes running AOK. This can be done with scp:
+1. Take copies of the cert in */etc/ssl/certs/stackato.crt* from the Stackato Load Balancer node to each of the Controller nodes running AOK. This can be done with scp:
 
   ::
   
     $ scp stackato@<Load Balancer node>:/etc/ssl/certs/stackato.crt /tmp/aok.crt
+
+
+  .. note::
+    If you are using a third-party hardware load balancer or load
+    balancing service, consult its documentation to find the SSL
+    certificate. You may need to convert the certificate to PEM format if
+    its native format is different.
 
 2. Move the newly copied cert on your Controller into */etc/ssl/certs/* as 'root' or using sudo. Do not overwrite the existing */etc/ssl/certs/stackato.crt*:
 
@@ -227,9 +235,9 @@ correctly configure SSL certificates.
   
     $ sudo mv /tmp/aok.crt /etc/ssl/certs/
 
-.. note::
-  These first two steps need to be repeated for *all* Controller nodes in
-  the cluster.
+  .. note::
+    These first two steps need to be repeated for *all* Controller nodes in
+    the cluster.
 
 3. Update Stackato's configuration with the following command:
 

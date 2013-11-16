@@ -521,11 +521,18 @@ Router nodes. For example::
   If you are using the AOK authentication service, see also :ref:`AOK
   with a Load Balancer <aok-ssl-load-balancer>`
 
-SSL Certificates
-^^^^^^^^^^^^^^^^
 
-Since the Load Balancer terminates SSL connections, SSL certificates
-must be set up and maintained on this node. See the :ref:`Using your own
-SSL certificate <server-config-ssl-cert-own-use>` and :ref:`CA
-Certificate Chaining <server-config-ssl-cert-chain>` sections for
+Load Balancer SSL Certificates
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The load balancer terminates SSL connections, so SSL certificates must
+be set up and maintained on this node.
+
+See the :ref:`Using your own SSL certificate
+<server-config-ssl-cert-own-use>` and :ref:`CA Certificate Chaining
+<server-config-ssl-cert-chain>` sections for Stackato Load Balancer
 instructions.
+
+For other load balancers, consult the documentation for your device or
+service on uploading/updating server certificates.
+ 
