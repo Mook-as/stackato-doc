@@ -243,8 +243,17 @@ Application
 
 DEA
 ^^^
+.. index:: Max Memory Percentage
+.. index:: max_memory_percentage
 
-* **Max Memory Percentage**: The percentage of physical memory each DEA node can use for applications. The default of 80% leaves enough memory space for normal system runtime operation. Do not exceed 100% unless you are using machine or hypervisor that correctly supports swap space and has it enabled.
+* **Max Memory Percentage**: The percentage of physical memory each DEA
+  node can use for hosted applications. The 80% default setting leaves
+  enough memory for the OS and DEA processes on a node with 4GB of RAM.
+  This can be increased on nodes with more memory available (e.g. to 90%
+  on a node with 8GB of RAM). Do not exceed 100% unless the system
+  correctly supports swap space and has it enabled. Restart all DEA
+  roles/nodes to apply the change.
+
 
 Harbor
 ^^^^^^
