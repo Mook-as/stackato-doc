@@ -25,9 +25,29 @@ A simple Ruby echo service is available in this repository:
 
   `<https://github.com/ActiveState/stackato-echoservice>`_
   
+.. warning::
+  The current echo service sample is a Stackato v2 / Cloud Foundry v1
+  service. A replacement example is under development which will use the
+  Cloud Foundry v2 services API.
+  
 The configuration files and instructions can be adapted (with reference
 to the built-in system services) to create and install more complex
 services to Stackato.
+
+Amazon RDS for MySQL
+--------------------
+
+If you are using Stackato on Amazon EC2, you can set up the Stackato
+MySQL service to use `Amazon RDS for MySQL
+<http://aws.amazon.com/rds/mysql/>`__ as the database back end.
+
+Set the host, port and credentials for the RDS instance in the
+configuration for mysql_service via :ref:`kato config
+<kato-command-ref-config>`, then add the ``aws_rds_compat`` option (set
+to ``true``)::
+
+  $ kato config set mysql_node aws_rds_compat true
+  
 
 .. _oracle-db:
 
