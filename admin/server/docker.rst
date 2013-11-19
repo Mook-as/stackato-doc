@@ -76,6 +76,56 @@ role**:
     WARNING: Assumed type string
     api.paas.example.com:49153/newimg:1.0.0
 
+
+.. index:: Admin Hooks
+.. index:: Global Hooks
+
+.. _docker-admin-hooks:
+
+Admin Hooks
+-----------
+
+If an administrator wants to run arbitrary commands in all application
+containers, global admin hooks can be set to run immediately after
+corresponding user-specified deployment hooks (pre-staging,
+post-staging, pre-running) set in application *stackato.yml* or
+*manifest.yml* files.
+
+These hooks must be:
+
+* plain bash scripts with the executable bit set (``chmod +x``) 
+* named *pre-staging*, *post-staging*, or *pre-running* 
+* installed in */etc/stackato/hooks* within the Docker image
+
+For example, a pre-running admin hook might look like this::
+
+  #!/bin/sh
+  export PRE_RUN_DATE=`date`
+  export EXAMPLECO_KEY="3A0fwPwUftDu0FEzmhN8yJkvM1vS6A"
+  if [ -z "$NEW_RELIC_LICENSE_KEY" ]; then
+    echo "setting default New Relic key"
+    export NEW_RELIC_LICENSE_KEY="bdb9b44e8n4411d8bf39870f1919927d79cr0f1r"
+  fi
+  export STACKATO_HOOK_ENV=PRE_RUN_DATE,EXAMPLECO_KEY
+  /usr/sbin/nrsysmond-config --set license_key=$NEW_RELIC_LICENSE_KEY
+  /etc/init.d/newrelic-sysmond start
+
+.. note::
+  The ``STACKATO_HOOK_ENV`` environment variable is needed to expose the
+  specified variables in ``stackato ssh`` sessions, the application
+  container's crontab, and PHP applications using the Legacy buildpack.
+  This requirement may change in subsequent releases. 
+
+The Dockerfile for creating the image (see :ref:`Modifying or Updating
+the Container Image <docker-modify-container>` ) would use the ADD
+directive to put a local *hooks* directory in the Docker image's
+*/etc/stackato/* directory::
+
+  FROM stackato/app-holophonor
+  ADD hooks /etc/stackato/hooks
+  CMD ["start.sh"]
+
+
 .. _docker-registry:
 
 .. index:: Docker Registry
