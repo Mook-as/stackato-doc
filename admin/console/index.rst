@@ -80,7 +80,11 @@ and lists of that user's applications and provisioned services.
 
 The following options can be set for the user by clicking **User Limits**:
 
-* **Enable sudo**: Sets whether or not the ``sudo`` command can be used. The default setting is ``false``.
+.. index:: Enable Sudo
+
+.. _console-user-details-sudo:
+
+* **Enable sudo**: Toggles 'sudo' (root) privileges within application containers. Though applications containers (LXC) are highly secure, there are potential vulnerabilities that could be exposed with sudo enabled, so this should only be enabled for trusted end users. Privileges are added to containers during creation, so changing this setting will only affect subsequently created containers (i.e. 'sudo' will not be enabled/disabled for the user in existing containers).
 
 * **Memory Allotted**: Sets the amount of memory allowed.
 
@@ -222,7 +226,7 @@ User
 
 * **Default User Settings**: The defaults for new user account creation.
 
-  * **Enable sudo**: Toggles whether new accounts have 'sudo' (root) privileges within application containers. Though applications containers (LXC) are highly secure, there are potential vulnerabilities that could be exposed with sudo enabled. This should only be enabled for trusted end users.
+  * **Enable sudo**: Toggles 'sudo' (root) privileges within application containers for new users (see :ref:`User Details <console-user-details>` above). 
   
   * **Memory Allotted**: The amount of memory in a default user's quota.
   
