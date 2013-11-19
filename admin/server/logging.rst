@@ -486,21 +486,25 @@ Apptail Limits
 
 .. _logging-logyard-cli:
 
-Debugging Logyard (logyard-cli)
--------------------------------
+Debugging Logyard
+-----------------
 
-The ``logyard-cli`` utility is a server side tool for inspecting and
-debugging Logyard. It has the following commands:
+Use ``kato log stream debug`` to monitor Logyard-related log activity.
+The command tails the logyard, apptail, systail, and logyard_sieve
+streams. 
 
-* logyard-cli recv 
-* logyard-cli stream
-* logyard-cli list
-* logyard-cli add
-* logyard-cli delete
-* logyard-cli status
+.. only:: not public
 
-These have access to a number logs streams which are not available
-via ``kato log``.
+  The ``logyard-cli`` utility is a server side tool for inspecting and
+  debugging Logyard. It has the following commands:
+  
+  * logyard-cli recv 
+  * logyard-cli stream
+  * logyard-cli list
+  * logyard-cli add
+  * logyard-cli delete
+  * logyard-cli status
+  
+  These have access to a number logs streams which are not available
+  via ``kato log``.
 
-Use ``logyard-cli stream debug`` to monitor only the Logyard-related log
-activity. It includes logyard, apptail, systail, and logyard_sieve. 
