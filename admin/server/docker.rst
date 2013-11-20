@@ -62,8 +62,6 @@ role**:
    version number (optional, but recommended)::
 
     $ sudo docker build -t exampleco/newimg:1.0.0
-  
-   The version number at the end of the image name is 
 
 5. Configure Stackato to use the new image:
 
