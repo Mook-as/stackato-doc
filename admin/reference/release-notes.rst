@@ -27,6 +27,7 @@ Release Notes
   * Logyard:
     * [101635] Fix inotify panic in systail
   * [101692] Remove appstore containers after use
+  * [101648] ``kato report`` and ``kato cluster`` ``--all`` (``-a``) options changed to ``--cluster`` (``-c``)
 
 v3.0.0 Beta (November 6, 2013)
 ------------------------------
