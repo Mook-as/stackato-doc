@@ -65,10 +65,12 @@ There are currently two supported strategies:
   LDAP groups are not currently supported as a visible construct in
   Stackato.
   
-* **google_apps**: Authenticates users on a `Google Apps for Business
-  <http://www.google.com/enterprise/apps/business/>`_ domain.
-  ``stackato`` clients will need to authenticate using the
-  :ref:`stackato token <command-token>` command.
+.. only:: not public
+
+  * **google_apps**: Authenticates users on a `Google Apps for Business
+    <http://www.google.com/enterprise/apps/business/>`_ domain.
+    ``stackato`` clients will need to authenticate using the
+    :ref:`stackato token <command-token>` command.
       
 The `use` key in the configuration file controls the strategy that AOK
 will use. This value must correspond exactly to one of the supported
@@ -84,10 +86,9 @@ config set <kato-command-ref-config>`:
 
 * strategy:
 
-  * use: set to either 'builtin', 'ldap', or 'google_apps'. The builtin
-    strategy requires no further modification. The ldap and google_apps
-    strategies requires setting options in the corresponding blocks
-    below.
+  * use: set to either 'builtin' or 'ldap'. The builtin
+    strategy requires no further modification. The ldap strategy
+    requires setting options in the corresponding block below.
   
   * ldap:
   
@@ -116,6 +117,8 @@ config set <kato-command-ref-config>`:
     * try_sasl: (optional) when set to true attempts a SASL connection
       to the LDAP server
     * sasl_mechanims: (optional) 'DIGEST-MD5' or 'GSS-SPNEGO'
+
+.. only:: not public
 
   * google_apps:
   
