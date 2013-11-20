@@ -70,9 +70,9 @@ role**:
   This step only needs to be done once, as the configuration change is
   shared with all nodes::
 
-    $ kato config set fence docker/image api.paas.example.com:49153/newimg:1.0.0
+    $ kato config set fence docker/image exampleco/newimg:1.0.0
     WARNING: Assumed type string
-    api.paas.example.com:49153/newimg:1.0.0
+    exampleco/newimg:1.0.0
 
 
 .. index:: Admin Hooks
