@@ -71,11 +71,11 @@ to make it smaller first:
 
     $ cp --sparse=always stackato-img-kvm-|version|.0.img stackato-sparse.img 
 
-* Convert the image to qcow2 format:
+* Convert the image to compressed qcow2 format:
 
   .. parsed-literal::
 
-    $ qemu-img convert stackato-img-kvm-|version|.0.img -O qcow2 stackato-qcow.img
+    $ qemu-img convert -c -O qcow2 stackato-img-kvm-|version|.0.img stackato-qcow.img
 
 Using either of the resultant images will significantly speed up the
 ``glance image-create`` step. Specify ``--disk-format=qcow2`` when using
