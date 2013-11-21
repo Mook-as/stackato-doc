@@ -268,19 +268,7 @@ event
 
   * kato_action
 
-  * cc_waiting_for_dea
-
-  * cc_app_update
-
-  * stager_start
-
-  * stager_end
-
-  * dea_start
-
-  * dea_stop
-
-  * dea_ready
+  * timeline
 
   * nginx_error
 
@@ -305,7 +293,6 @@ systail
   * kato
   * kernel
   * nginx_error
-  * stackato-lxc
   * supervisord
   * cc_nginx_error
   * app_mdns
@@ -314,10 +301,10 @@ systail
   * apptail
   * avahi_publisher
   * cc_nginx
-  * cloud_controller
+  * cloud_controller_ng
   * logyard_sieve
-  * dea
-  * doozerd
+  * dea_ng
+  * dockerd
   * aok
   * filesystem_gateway
   * filesystem_node
@@ -362,15 +349,15 @@ source for an existing key.
 
 * To retrieve the current list of log files being streamed::
 
-  $ kato config get logyard systail/log_files
+  $ kato config get systail log_files
 
 * To remove a log file from the stream::
 
-  $ kato config del logyard systail/log_files/dpkg
+  $ kato config del systail log_files/dpkg
 
 * To add a new log file to the stream::
 
-  $ kato config set logyard systail/log_files/dpkg /var/log/dpkg.log
+  $ kato config set systail log_files/dpkg /var/log/dpkg.log
 
 Restart the ``systail`` process after adding or removing log files::
 
@@ -450,7 +437,7 @@ User Drain Limit
   To change the limit, set ``max_user_drains`` in the cloud_controller
   configuration. For example, to change this limit to 250 drains::
 
-    $ kato config set cloud_controller max_user_drains 250
+    $ kato config set cloud_controller_ng max_user_drains 250
 
 Apptail Limits
 ^^^^^^^^^^^^^^
