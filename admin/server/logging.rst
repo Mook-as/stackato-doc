@@ -105,7 +105,7 @@ Log drains can emit entries in a variety of formats:
 
 For example, to add a drain with just the timestamp, application name and message::
 
-  $ kato log drain add -p apptail -f '{{.HumanTime}} - {{.AppName}}: {{.Text}}' \
+  $ kato log drain add -p apptail -f '{{.human_time}} - {{.app_name}}: {{.text}}' \
   > all-apps file:///s/logs/apptail-short.log
 
 JSON keys are enclosed in double curly braces and prefixed with a
@@ -118,49 +118,49 @@ Different JSON keys are available in different :ref:`log streams <logging-keys>`
 
 **apptail.**:
 
-* Text: actual log line
-* UnixTime: timestamp (seconds since  1 January 1970)
-* HumanTime: formatted time
-* NodeID: DEA host IP of this app instance
-* LogFilename: log file from which this line originated
-* Source: e.g. app, staging, stackato.dea, stackato.stager, appstore
-* InstanceIndex: instance number
-* AppGUID: GUID of this app
-* AppName: application name
-* AppSpace: GUID of the space this app belongs to
-* Syslog.Priority: syslog priority
-* Syslog.Time: syslog formatted time
+* text: actual log line
+* unix_time: timestamp (seconds since  1 January 1970)
+* human_time: formatted time
+* node_id: DEA host IP of this app instance
+* filename: log file from which this line originated
+* source: e.g. app, staging, stackato.dea, stackato.stager, appstore
+* instance_index: instance number
+* app_guid: GUID of this app
+* app_name: application name
+* app_space: GUID of the space this app belongs to
+* syslog.priority: syslog priority
+* syslog.time: syslog formatted time
 
 **event.**:
 
-* Text: event description
-* UnixTime: timestamp
-* HumanTime: formatted time
-* NodeID: Node IP from which this event originated
-* Type: type of event (eg: process_stop) 
-* Severity: INFO, WARN, ERROR
-* Process: the process generating the event
-* Info: event-specific information as JSON
-* Syslog.Priority: syslog priority
-* Syslog.Time: syslog formatted time
+* text: event description
+* unix_time: timestamp
+* human_time: formatted time
+* node_id: Node IP from which this event originated
+* type: type of event (eg: process_stop) 
+* severity: INFO, WARN, ERROR
+* process: the process generating the event
+* info: event-specific information as JSON
+* syslog.priority: syslog priority
+* syslog.time: syslog formatted time
 
 **systail.**:
 
-* Text: actual log line
-* UnixTime: timestamp
-* HumanTime: formatted time
-* NodeID: Node IP from which this log line originated
-* Name: name of the component (eg: redis_gateway)
-* Syslog.Priority: syslog priority
-* Syslog.Time: syslog formatted time
+* text: actual log line
+* unix_time: timestamp
+* human_time: formatted time
+* node_id: Node IP from which this log line originated
+* name: name of the component (eg: redis_gateway)
+* syslog.priority: syslog priority
+* syslog.time: syslog formatted time
 
 You can see a list of the default drain formats using :ref:`kato config
 get <kato-command-ref-config>`::
 
   $ kato config get logyard drainformats
-  apptail: ! '{{.HumanTime}} {{.Source}}.{{.InstanceIndex}}: {{.Text}}'
-  event: ! '{{.Type}}@{{.NodeID}}: {{.Desc}} -- via {{.Process}}'
-  systail: ! '{{.Name}}@{{.NodeID}}: {{.Text}}'
+  apptail: ! '{{.human_time}} {{.source}}.{{.instance_index}}: {{.text}}'
+  event: ! '{{.type}}@{{.node_id}}: {{.desc}} -- via {{.process}}'
+  systail: ! '{{.name}}@{{.node_id}}: {{.text}}'
   [...]
 
 These default log formats are used when the corresponding prefix is used
@@ -178,7 +178,7 @@ configuration. To do this, add the formatting string to a new key in
 logyard/drainformats. For example, to save the log format used in the
 'all-apps' drain example above::
 
-  $ kato config set logyard drainformats/simplefmt "{{.HumanTime}} - {{.AppName}}: {{.Text}}"
+  $ kato config set logyard drainformats/simplefmt "{{.human_time}} - {{.app_name}}: {{.text}}"
 
 You can use this named format when setting up new drains. For example, a
 shorter command for creating the 'all-apps' drain would be::
@@ -187,7 +187,7 @@ shorter command for creating the 'all-apps' drain would be::
 
 A custom "systail" log stream might look like this::
 
-  $ kato config set logyard drainformats/systail-papertrail '<13>1 - {{.HumanTime}} - {{.Name}}@{{.NodeID}} -- {{.Text}}'
+  $ kato config set logyard drainformats/systail-papertrail '<13>1 - {{.human_time}} - {{.name}}@{{.node_id}} -- {{.text}}'
 
 This could be forwarded to the Papertrail log analysis service::
 
