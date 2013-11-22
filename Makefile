@@ -44,7 +44,7 @@ PREV_TARGET = $(stackato target)
 
 # Variables used for extracting docopts from kato.
 
-KATO_REPO=https://github.com/ActiveState/kato.git
+KATO_REPO=http://git-mirrors.activestate.com/github.com/ActiveState/kato.git
 
 UPDATE=docopts
 KATO_DIR=$(UPDATE)/kato
