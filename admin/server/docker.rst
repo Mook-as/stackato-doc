@@ -61,7 +61,7 @@ role**:
 4. Build the image, setting the maintainer's name, an image name, and a
    version number (optional, but recommended)::
 
-    $ sudo docker build -t exampleco/newimg:1.0.0
+    $ sudo docker build -rm -t exampleco/newimg:1.0.0 .
 
 5. Configure Stackato to use the new image:
 
@@ -170,7 +170,7 @@ central repository for your container tempates.
    registry location for the organization name used in step 4. For
    example::
    
-    $ sudo docker build -t api.paas.example.com:49153/newimg:1.0.0
+    $ sudo docker build -rm -t api.paas.example.com:49153/newimg:1.0.0 .
    
 5. Push the newly built Docker image to the registry::
 
