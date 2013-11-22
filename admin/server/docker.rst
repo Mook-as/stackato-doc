@@ -47,7 +47,7 @@ role**:
 
     FROM stackato/app-holophonor
     RUN apt-get -y install libgraphite2-dev
-    CMD ["start.sh"]
+    CMD ["/start.sh"]
 
    * `FROM <http://docs.docker.io/en/latest/use/builder/#from>`__:
      inherits the environment and installed software from Stackato's app
@@ -121,7 +121,7 @@ directive to put a local *hooks* directory in the Docker image's
 
   FROM stackato/app-holophonor
   ADD hooks /etc/stackato/hooks
-  CMD ["start.sh"]
+  CMD ["/start.sh"]
 
 
 .. _docker-registry:
