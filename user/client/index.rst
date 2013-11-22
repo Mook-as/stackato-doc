@@ -65,3 +65,13 @@ With these set, the client will recognize these settings and route
 appropriately. On Windows the client queries the Internet Settings
 values so this step should not be necessary.
 
+
+.. _client-uninstall:
+
+.. index:: Uninstall Client 
+
+Removing the Client
+-------------------
+
+To uninstall the client, simply delete the executable and remove any aliases or
+$PATH modifications you have made for it. 

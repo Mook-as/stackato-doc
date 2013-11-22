@@ -36,12 +36,12 @@ Log streams are handled by three processes which run on all Stackato nodes:
 * **systail**: sends system logs (/s/log/\*, etc.) to **logyard** to be
   in turn forwarded to drains
 
-* **cloud_events**: listens for all system logs and extracts vital events
+* **logyard_sieve**: listens for all system logs and extracts vital events
   back to **logyard**
 
-**apptail** is an additional process which runs only on DEA and Stager
-nodes. It sends user application logs to **logyard**, injecting relevant
-application-specific events from the **cloud_events** stream.
+**apptail** is an additional process which runs only on DEA nodes. It
+sends user application logs to **logyard**, injecting relevant
+application-specific events from the **logyard_sieve** stream.
 
 
 .. _logging-drains:
@@ -119,32 +119,40 @@ Different JSON keys are available in different :ref:`log streams <logging-keys>`
 **apptail.**:
 
 * Text: actual log line
-* LogFilename 
 * UnixTime: timestamp (seconds since  1 January 1970)
 * HumanTime: formatted time
+* NodeID: DEA host IP of this app instance
+* LogFilename: log file from which this line originated
 * Source: e.g. app, staging, stackato.dea, stackato.stager, appstore
 * InstanceIndex: instance number
-* AppID: unique id for this app
-* AppName
-* AppGroup
-* NodeID: Host (DEA/stager) IP of this app instance
+* AppGUID: GUID of this app
+* AppName: application name
+* AppSpace: GUID of the space this app belongs to
+* Syslog.Priority: syslog priority
+* Syslog.Time: syslog formatted time
 
 **event.**:
 
-* Type: type of event (eg: process_stop) 
+* Text: event description
 * UnixTime: timestamp
-* Desc: human-readable description of this event (as shown in the Management Console)
-* Severity: INFO, WARN, ERROR
-* Info: event-specific information as JSON
-* Process: the process generating the event
+* HumanTime: formatted time
 * NodeID: Node IP from which this event originated
+* Type: type of event (eg: process_stop) 
+* Severity: INFO, WARN, ERROR
+* Process: the process generating the event
+* Info: event-specific information as JSON
+* Syslog.Priority: syslog priority
+* Syslog.Time: syslog formatted time
 
 **systail.**:
 
 * Text: actual log line
 * UnixTime: timestamp
-* Name: name of the component (eg: redis_gateway)
+* HumanTime: formatted time
 * NodeID: Node IP from which this log line originated
+* Name: name of the component (eg: redis_gateway)
+* Syslog.Priority: syslog priority
+* Syslog.Time: syslog formatted time
 
 You can see a list of the default drain formats using :ref:`kato config
 get <kato-command-ref-config>`::
@@ -153,6 +161,7 @@ get <kato-command-ref-config>`::
   apptail: ! '{{.HumanTime}} {{.Source}}.{{.InstanceIndex}}: {{.Text}}'
   event: ! '{{.Type}}@{{.NodeID}}: {{.Desc}} -- via {{.Process}}'
   systail: ! '{{.Name}}@{{.NodeID}}: {{.Text}}'
+  [...]
 
 These default log formats are used when the corresponding prefix is used
 and no format options ("-f") are specified. For example ``kato drain add
@@ -178,9 +187,9 @@ shorter command for creating the 'all-apps' drain would be::
 
 A custom "systail" log stream might look like this::
 
-  $ kato config set logyard drainformats/systail-papertrail '{{.HumanTime}} - {{.Name}}@{{.NodeID}} -- {{.Text}}'
+  $ kato config set logyard drainformats/systail-papertrail '<13>1 - {{.HumanTime}} - {{.Name}}@{{.NodeID}} -- {{.Text}}'
 
-This could be forwarded to a log analysis service::
+This could be forwarded to the Papertrail log analysis service::
 
   $ kato log drain add papertrail udp://logs.papertrailapp.com:45678 -f systail-papertrail
   
@@ -199,7 +208,7 @@ You can add custom drains to Logyard to look for certain events or parse
 certain log messages (e.g. tracking application push requests or user
 logins). Examples of custom drains and more advanced usage of Logyard
 can be found in the `Logyard Developer Guide
-<https://github.com/ActiveState/logyard-devguide/blob/master/README.md>`_
+<https://github.com/ActiveState/logyard-devguide#readme>`_
 
 
 .. _logging-drains-app:
@@ -212,68 +221,28 @@ Drains for application log streams can be added by end users with the
 :ref:`Application Logs <application_logs>` section of the User Guide for
 an example.
 
+.. _logging-drains-status:
 
-.. _logging-drains-timeouts:
+Drain Status
+^^^^^^^^^^^^
 
-Drain Timeouts
-^^^^^^^^^^^^^^
+You can check the status of all drains on Stackato with the ``kato log
+drain status`` subcommand. For example::
 
-If a drain gets disconnected (e.g. if the log aggregation service goes
-down), Logyard will retry the connection at the following intervals:
+  $ kato log drain status
+  appdrain.1.mine         192.168.68.5    RUNNING[53]
+  appdrain.1.mydrain      192.168.68.5    RETRYING[75]  invalid port 3424252
+  builtin.apptail         192.168.68.5    RUNNING[3]
+  builtin.cloudevents     192.168.68.5    RUNNING[3]
+  builtin.katohistory     192.168.68.5    RUNNING[3]
 
-* once every 5 seconds for 1 to 2 minutes
-* once every 30 seconds for 5 minutes
-* once every 1 minute for 10 minutes
-* once every 5 minutes until connect or destroyed
-
-This ensures that once connectivity is restored, the drains will
-re-establish their connections within (at most) 5 minutes.
-
-Application drains will retry for one day. Temporary drains (e.g. ``kato
-tail``) will retry for 25 minutes. All other drains will retry
-indefinitely.
-
-These timeouts can be configured. To see a list of the configured
-timeouts, use :ref:`kato config get <kato-command-ref-config>`. For
-example::
-
-  $ kato config get logyard retrylimits
-  appdrain.: 24h
-  tmp.: 25m
-  
-To set a timout (minimum 21m), use :ref:`kato config set
-<kato-command-ref-config>`. For example, to set the timeout limit to 10
-hours on all drains named with the prefix "papertrail"::
-
-  $ kato config set logyard retrylimits/papertrail 10h
-
-These limits will take effect on new drains, deleted/re-created drains,
-or for all matching drains after ``kato process restart logyard`` has
-been run on all nodes.
-
-.. _logging-user-drain-limits:
-
-User Drain Limits
-^^^^^^^^^^^^^^^^^
-
-For performance reasons, it's necessary to limit the total number of
-concurrent user application drains running on a Stackato system. This is
-set by default to 200. Once this limit is reached, users will see the
-following notificition when trying to add a new drain::
-
-  $ stackato drain add mydrain udp://loghost.example.com:12346
-  Error 22002: No more drains can be added; contact your cluster admin.
-
-To change the limit, set the ``max_user_drains`` in the cloud_controller
-configuration using :ref:`kato config <kato-command-ref-config>`. For
-example::
-
-  $ kato config set cloud_controller max_user_drains 250
+If the RETRYING drain hits a :ref:`drain timeout
+<logging-drains-timeouts>`, its status will change to FATAL.
 
 .. _logging-keys:
 
 Keys
-----
+^^^^
 
 Each message in a log stream is prefixed with a key, identifying what
 type of message it is or to which log stream it belongs. The following
@@ -283,13 +252,13 @@ flag for :ref:`kato log drain add <kato-command-ref-log-drain-add>`).
 Systail keys are :ref:`configurable <logging-systail-manage>`.
 
 apptail
-^^^^^^^
+~~~~~~~
 
   apptail.<app.id>
 
 
 event
-^^^^^
+~~~~~
 
 * event.<eventname>
 
@@ -324,7 +293,7 @@ event
 .. _logging-keys-systail:
 
 systail
-^^^^^^^
+~~~~~~~
 
 * systail.<processname>
 
@@ -346,7 +315,7 @@ systail
   * avahi_publisher
   * cc_nginx
   * cloud_controller
-  * cloud_events
+  * logyard_sieve
   * dea
   * doozerd
   * aok
@@ -384,7 +353,7 @@ systail
 .. _logging-systail-manage:
 
 Managing the systail stream
----------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The list above shows the default systail keys. These can keys can be
 modified with the :ref:`kato config <kato-command-ref-config>` command
@@ -413,3 +382,129 @@ Restart the ``systail`` process after adding or removing log files::
   Do not remove the default Stackato log stream keys (i.e. anything in
   the :ref:`systail <logging-keys-systail>` list above) as this would
   affect the output of ``kato tail``.
+
+
+.. _logging-configuration:
+
+Configuration
+-------------
+
+Stackato has a number of configurable limits on application log drains
+to help prevent performance problems the logging subsystems. These
+settings can all be viewed and set with :ref:`kato config
+<kato-command-ref-config>` commands as described below:
+
+.. _logging-drains-timeouts:
+
+Drain Timeouts
+^^^^^^^^^^^^^^
+
+* **logyard** **retrylimits**: If a drain gets disconnected (e.g. if the
+  log aggregation service goes down), Logyard will retry the connection
+  at the following intervals:
+
+  * once every 5 seconds for 1 to 2 minutes
+  * once every 30 seconds for 5 minutes
+  * once every 1 minute for 10 minutes
+  * once every 5 minutes until connect or destroyed
+
+  This ensures that once connectivity is restored, the drains will
+  re-establish their connections within (at most) 5 minutes.
+
+  Application drains will retry for one day. Temporary drains (e.g. ``kato
+  tail``) will retry for 25 minutes. All other drains will retry
+  indefinitely.
+
+  These timeouts can be configured. To see a list of the configured
+  timeouts, use :ref:`kato config get <kato-command-ref-config>`. For
+  example::
+  
+    $ kato config get logyard retrylimits
+    appdrain.: 24h
+    tmp.: 25m
+    
+  To set a timout (minimum 21m), use :ref:`kato config set
+  <kato-command-ref-config>`. For example, to set the timeout limit to 10
+  hours on all drains named with the prefix "papertrail"::
+  
+    $ kato config set logyard retrylimits/papertrail 10h
+  
+  These limits will take effect on new drains, deleted/re-created drains,
+  or for all matching drains after ``kato process restart logyard`` has
+  been run on all nodes.
+
+
+.. _logging-user-limits:
+
+User Drain Limit
+^^^^^^^^^^^^^^^^
+
+* **cloud_controller** **max_user_drains** (default 200): limits the
+  total number of concurrent user application drains running on a
+  Stackato system. Once this limit is reached, users will see the
+  following notificition when trying to add a new drain::
+
+    Error 22002: No more drains can be added; contact your cluster
+    admin.
+
+  To change the limit, set ``max_user_drains`` in the cloud_controller
+  configuration. For example, to change this limit to 250 drains::
+
+    $ kato config set cloud_controller max_user_drains 250
+
+Apptail Limits
+^^^^^^^^^^^^^^
+
+* **apptail** **read_limit** (default 16MB): defines the maximum number
+  of bytes to read from the end of application log files. This is done
+  to prevent performance problems during restart of the ``apptail``
+  process (or nodes running the process) if the log file sources have
+  grown extremely large.
+
+  When this limit is reached, a warning such as the following will appear
+  in both the Cloud Events stream and the application's log stream::
+
+    WARN -- [exampleapp] Skipping much of a large log file (stderr); size (26122040 bytes) > read_limit (15728640 bytes)
+
+  To change the read_limit to 100MB::
+
+    $ kato config set apptail read_limit 100
+
+* **apptail** **rate_limit** (default 400): limits the number of log
+  lines per second that can be read from an application log file. The
+  ``apptail`` process reads (at most) the specified number of log lines
+  per second, after which it will wait for one second before resuming. A
+  line similar to the ``read_limit`` warning above is inserted in the
+  stream to explain the missing data. 
+  
+  To change the rate_limit to 300 lines::
+
+    $ kato config set apptail rate_limit 300
+
+
+.. index:: logyard-cli
+
+.. _logging-logyard-cli:
+
+Debugging Logyard
+-----------------
+
+Use ``kato log stream debug`` to monitor Logyard-related log activity.
+The command tails the logyard, apptail, systail, and logyard_sieve
+streams. 
+
+.. only:: not public
+
+  The ``logyard-cli`` utility is a server side tool for inspecting and
+  debugging Logyard. It has the following commands:
+  
+  * logyard-cli recv 
+  * logyard-cli stream
+  * logyard-cli list
+  * logyard-cli add
+  * logyard-cli delete
+  * logyard-cli status
+  
+  These have access to a number logs streams which are not available
+  via ``kato log``.
+

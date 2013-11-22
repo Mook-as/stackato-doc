@@ -8,35 +8,66 @@ Common Server Operations
 Server Status
 -------------
 
-To check the status of Stackato services::
+To check the status of Stackato::
 
 	$ kato status
 
-This will list all the services configured to run on the VM, and whether they are running or stopped.
+This will list all the roles configured to run on the VM, and whether
+they are running, stopped, or starting.
 
-Starting and Stopping Services
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Roles are logical groups of processes (see :ref:`kato role info
+<kato-command-ref-role-info>`) which can be inspected individually with
+:ref:`kato process ... <kato-command-ref-process-list>` commands. 
 
-To control the Stackato services, use ``kato`` start, stop and restart commands::
+In particular, the :ref:`kato process ready
+<kato-command-ref-process-ready>` command is useful for determining if
+the system is in a state to receive :ref:`configuration commands
+<server-configuration>`. For example, to check that all processes for
+the configured roles are ready::
+
+  $ kato process ready all
+
+
+Starting and Stopping Roles
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To control the Stackato roles, use ``kato`` start, stop and restart
+commands::
 
 	$ kato stop
 
-Without any further options the operation applies to all Stackato services. To start, stop or 
-restart individual services, specify them after the desired command::
+Without any further options the operation applies to all Stackato
+roles. To start, stop or restart individual roles, specify them
+after the desired command::
 
 	$ kato stop mysql
 
-.. note:
-	Each data service appears as two separate items in the status
-	output (e.g. "mysql_gateway" and "mysql_node"). However, for
-	starting and stopping use just the base name as above.
 
 System Shutdown
 ^^^^^^^^^^^^^^^
 
-To shutdown the VM, run the ``shutdown`` command as root::
+To safely shutdown the VM, run the ``shutdown`` command as root::
 
 	$ sudo shutdown -h now
+
+
+.. index:: Set Time Zone
+
+.. _server-operations-tz:
+
+Setting the Time Zone
+---------------------
+
+At first boot, the time zone of the Stackato VM is set to UTC. To set
+this to your local time zone, use the ``kato op set_timezone`` command.
+When run without arguments, the command will prompt for time zone
+selction, but the time zone can be set non-interactively with the
+``--timezone`` option. For example::
+
+  $ kato op set_timezone --timezone America/Chicago
+
+You can also use the ``tzselect`` command to find the appropriate time
+zone string for your location.
 
 
 .. index:: Reset

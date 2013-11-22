@@ -20,8 +20,15 @@ also be declared in *manifest.yml*. Those that cannot are listed in the
 :ref:`stackato <manifest-yml-stackato>` section below.
 
 .. note::
+    
     Options in :ref:`stackato.yml <stackato_yml>` take precedence over
-    those declared here.
+    those declared in *manifest.yml*. Detailed specifications for these
+    configuration files can be found in the `stackato-cli source
+    repository <https://github.com/ActiveState/stackato-cli/>`_:
+
+    * `stackato.yml specification <https://github.com/ActiveState/stackato-cli/blob/master/doc/stackato.yml.txt>`__
+    * `manifest.yml specification <https://github.com/ActiveState/stackato-cli/blob/master/doc/manifest.yml.txt>`__
+    * `stackato.yml to manifest.yml key mappings <https://github.com/ActiveState/stackato-cli/blob/master/doc/stackato-2-manifest.txt>`__
 
 applications:
 ^^^^^^^^^^^^^

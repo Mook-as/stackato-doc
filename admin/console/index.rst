@@ -11,6 +11,13 @@ displays more options and settings for Admin users than it does for
 regular end users. Many of the features described below are only
 available in the Admin view.
 
+.. note::
+  The Management Console in Stackato 3.0 Beta has changed significantly
+  and is still under active development. The documentation below
+  describes the Stackato 2.10 interface, but will be updated for the
+  3.0.0 release.
+
+
 .. include:: ../common/console-intro.inc
 
 .. _console-overview:
@@ -73,7 +80,11 @@ and lists of that user's applications and provisioned services.
 
 The following options can be set for the user by clicking **User Limits**:
 
-* **Enable sudo**: Sets whether or not the ``sudo`` command can be used. The default setting is ``false``.
+.. index:: Enable Sudo
+
+.. _console-user-details-sudo:
+
+* **Enable sudo**: Toggles 'sudo' (root) privileges within application containers. Though applications containers (LXC) are highly secure, there are potential vulnerabilities that could be exposed with sudo enabled, so this should only be enabled for trusted end users. Privileges are added to containers during creation, so changing this setting will only affect subsequently created containers (i.e. 'sudo' will not be enabled/disabled for the user in existing containers).
 
 * **Memory Allotted**: Sets the amount of memory allowed.
 
@@ -161,7 +172,7 @@ Cluster Admin
 
 Displays a list of nodes in the current cluster, and what services are running on each node. The view can be filtered by IP Address and/or Role. In a micro cloud configuration, only the current local node ('127.0.0.1') is shown.
 
-To enable or disable services on a node, click the **Configure** button to enter its **Role Configuration** page. This page shows a list of all available roles (see :ref:`kato info <kato-command-ref-info>` for the command line interface), and a toggle button to enable or disable each one (see also :ref:`kato role <kato-command-ref-role-add>`).
+To enable or disable services on a node, click the **Configure Roles** button to enter its **Role Configuration** page. This page shows a list of all available roles (see :ref:`kato info <kato-command-ref-info>` for the command line interface), and a toggle button to enable or disable each one (see also :ref:`kato role <kato-command-ref-role-add>`).
 
 To set up a Stackato cluster, or to add nodes to an existing cluster, see the :ref:`Cluster Setup <cluster-setup>` section.
 
@@ -170,7 +181,7 @@ To set up a Stackato cluster, or to add nodes to an existing cluster, see the :r
 Status Graphs
 -------------
 
-Displays graphs for server statistics including CPU, Load, Memory, Processes, and Swap (primary node or micro cloud only).
+Displays graphs for server statistics: CPU, Load, Memory, Disk Operations, Disk Space, Processes, and Swap (primary node or micro cloud only).
 
 .. _console-app-store:
 
@@ -215,7 +226,7 @@ User
 
 * **Default User Settings**: The defaults for new user account creation.
 
-  * **Enable sudo**: Toggles whether new accounts have 'sudo' (root) privileges within application containers. Though applications containers (LXC) are highly secure, there are potential vulnerabilities that could be exposed with sudo enabled. This should only be enabled for trusted end users.
+  * **Enable sudo**: Toggles 'sudo' (root) privileges within application containers for new users (see :ref:`User Details <console-user-details>` above). 
   
   * **Memory Allotted**: The amount of memory in a default user's quota.
   
@@ -236,13 +247,17 @@ Application
 
 DEA
 ^^^
+.. index:: Max Memory Percentage
+.. index:: max_memory_percentage
 
-* **Max Memory Percentage**: The percentage of physical memory each DEA node can use for applications. The default of 80% leaves enough memory space for normal system runtime operation. Do not exceed 100% unless you are using machine or hypervisor that correctly supports swap space and has it enabled.
+* **Max Memory Percentage**: The percentage of physical memory each DEA
+  node can use for hosted applications. The 80% default setting leaves
+  enough memory for the OS and DEA processes on a node with 4GB of RAM.
+  This can be increased on nodes with more memory available (e.g. to 90%
+  on a node with 8GB of RAM). Do not exceed 100% unless the system
+  correctly supports swap space and has it enabled. Restart all DEA
+  roles/nodes to apply the change.
 
-Stager
-^^^^^^
-
-* **Max Staging Duration**: The maximum time allowed for application staging.
 
 Harbor
 ^^^^^^

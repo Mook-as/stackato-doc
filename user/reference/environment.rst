@@ -14,12 +14,24 @@ Environment Variables
     `Glossary Directive <http://sphinx.pocoo.org/markup/para.html#glossary>`_.
     Due to a bug in Sphinx, this must be a leaf document with no references to labels elsewhere in the document tree.
 
-Here is a list of predefined `environment variables <http://manpages.ubuntu.com/manpages/man7/environ.7.html>`_
-visible during runtime (including hook processing, cron jobs and ssh commands):
+Stackato exposes a number of predefined `environment variables
+<http://manpages.ubuntu.com/manpages/man7/environ.7.html>`_
+during runtime (including hook processing, cron jobs and ssh commands).
+
+You can set your own environment variables:
+
+* in an ``env:`` block in :ref:`stackato.yml <stackato_yml-env>`,
+* via the application's Details page in the :ref:`Management Console <management-console>`, or
+* using the :ref:`stackato env-add <command-app-env>` command. 
 
 .. note::
     
-    For complete list of available environment variables, deploy sample app: `node-env <https://github.com/Stackato-Apps/node-env>`_.
+    To see a complete list of environment variables in a Stackato
+    application container, deploy the `node-env
+    <https://github.com/Stackato-Apps/node-env>`_ sample.
+
+
+
 
 .. glossary::
 

@@ -286,8 +286,8 @@ Examples:
 
 .. _api-apps-name-stackato_log:
 
-/app/<NAME>/stackato_log?num=<N>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/apps/<NAME>/stackato_log?num=<N>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
@@ -435,7 +435,11 @@ Services
 
 ::
 
+    GET Get the JSON data of the name service. See /services above for
+        the structure of the returned json object. (Just not an array).
+
     DELETE  Delete the named service.
+
 
 Users
 -----

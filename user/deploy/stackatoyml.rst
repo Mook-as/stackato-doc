@@ -8,8 +8,6 @@ Stackato.yml Options
 Configuration options for Stackato applications can be stored in a *stackato.yml* 
 file in the top-level application directory.
 
-.. note::
-    These options take precedence over those declared in :ref:`manifest.yml <manifest_yml>`.
 
 The *stackato.yml* file defines **keys** and associated **values** which
 the ``stackato`` client uses to set options that are otherwise passed by
@@ -20,8 +18,19 @@ during the staging, post-staging, or pre-running steps in deployment.
 :ref:`Key substitution <stackato_yml-key-substitution>` can be used to
 insert values from one key into another.
 
-Now follows a description and further detail on each key and the values
-that can be assigned.
+.. note::
+
+    *stackato.yml* options take precedence over any declared in
+    :ref:`manifest.yml <manifest_yml>`. Detailed specifications for
+    these configuration files can be found in the `stackato-cli source
+    repository <https://github.com/ActiveState/stackato-cli/>`_:
+
+    * `stackato.yml specification <https://github.com/ActiveState/stackato-cli/blob/master/doc/stackato.yml.txt>`__
+    * `manifest.yml specification <https://github.com/ActiveState/stackato-cli/blob/master/doc/manifest.yml.txt>`__
+    * `stackato.yml to manifest.yml key mappings <https://github.com/ActiveState/stackato-cli/blob/master/doc/stackato-2-manifest.txt>`__
+    
+The following sections describe the available keys and the values that
+can be assigned to them:
 
 .. _stackato_yml-name:
 
@@ -42,15 +51,33 @@ Example::
     `hostname label <http://en.wikipedia.org/wiki/Hostname#Restrictions_on_valid_host_names>`_ 
     (i.e. containing only alphanumeric characters and hyphens).
     
+.. _stackato_yml-buildpack:
+
+buildpack:
+^^^^^^^^^^
+
+The Git repository URL for the specific :ref:`buildpack <buildpacks>`
+used to deploy the application. For example::
+
+    name: java-app
+    mem: 512M
+    buildpack: https://github.com/heroku/heroku-buildpack-java.git
+
+If unset, Stackato will check to see if the application triggers the
+``detect`` scripts in any of its :ref:`built-in buildpacks
+<buildpacks-built-in>`.
+
 .. _stackato_yml-framework:
 
 framework:
 ^^^^^^^^^^
 
-Allows the app to specify a framework and runtime to be used.
+Allows the app to specify a framework and runtime to be used. Specifying
+a value for the ``framework`` key triggers the use of the :ref:`Legacy
+Buildpack <buildpacks-built-in>`.
 
-type:
-~~~~~
+type (DEPRECATED):
+~~~~~~~~~~~~~~~~~~
 
 The framework to use.  Check ``stackato frameworks`` for a complete list of 
 available frameworks. If not specified, user may be prompted during 
@@ -59,8 +86,8 @@ available frameworks. If not specified, user may be prompted during
 
 .. _stackato_yml-runtime:
 
-runtime:
-~~~~~~~~
+runtime: (DEPRECATED)
+~~~~~~~~~~~~~~~~~~~~~
 
 The runtime to use.  Check ``stackato runtimes`` for a complete list of available 
 runtimes. If not specified, server will select the best option based on available 
@@ -75,8 +102,8 @@ Example::
 
 .. _stackato_yml-document-root:
 
-document-root
-~~~~~~~~~~~~~
+document-root: (DEPRECATED)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Overrides the default document-root setting ($HOME) for the web server.
 
@@ -97,8 +124,8 @@ The document-root must always be specified relative to $HOME (/app/app).
 
 .. _stackato_yml-start-file:
 
-start-file
-~~~~~~~~~~
+start-file: (DEPRECATED)
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 Set the main application filename.
 
@@ -255,13 +282,28 @@ Specifies required modules, and allows the installation of additional OS package
 OS Packages
 ~~~~~~~~~~~
 
-For OS packages, two subsections are available, ``staging:`` and ``running:``. 
-For each subsection, the following sections can be specified: ``ubuntu:`` and ``redhat:``.
+OS packages can be added in an ``ubuntu:`` block within a ``staging:``
+and/or ``running:`` block. Plain strings are treated as package names::
 
-Plain strings are treated as package names. If your account has been
-given sudo privileges for application containers, you can use arrays to
-add additional repositories, overriding repository restrictions set by
-admins.
+  requirements:
+    staging:
+      ubuntu:
+        - libfoo-dev
+    running:
+      ubuntu:
+        - libfoo
+        - some-app
+
+To add the OS requirements to both the staging and running phases add
+the ``ubuntu:`` block directly beneath the ``requirements:`` key::
+
+  requirements:
+    ubuntu:
+      - libfoo-dev
+
+If your account has been given sudo privileges in application
+containers, you can use arrays to add additional repositories,
+overriding repository restrictions set by admins.
 
 Example::
 
@@ -272,14 +314,7 @@ Example::
         - golang-stable
     running:
       ubuntu:
-        - libfoo1
-
-OS requirements can be listed directly below the ``requirements:`` key and will 
-then apply to both the staging and running phases::
-
-  requirements:
-    ubuntu:
-      - libfoo1
+        - libfoo
 
 
 Language Modules
@@ -327,7 +362,26 @@ specified on the command line (eg. ``stackato push --mem 256M``).
 Example::
 	
   mem: 64M
+
+.. _stackato_yml-disk:
 	
+disk:
+^^^^^
+
+The amount of disk space to allocate for the application (minimum
+512MB).
+
+Syntax: <int> or <int>M - Disk in megabytes. eg. 768M
+
+Syntax: <int>G or <float>G - Disk in gigabytes. eg. 1.5G or 2G
+
+If not specified, 2GB of disk space is allocated. Can also be specified
+on the command line (eg. ``stackato push --disk 768M``).
+
+Example::
+	
+  mem: 3.5GB
+  
 instances:
 ^^^^^^^^^^
 
@@ -481,8 +535,14 @@ processes:
 web:
 ~~~~
 
-This is how you specify a custom command to launch your web application
-or to pass custom arguments to uWSGI. For example::
+.. note:: 
+
+  Used with the :ref:`Legacy buildpack <buildpacks-built-in>` only. When using
+  other buildpacks, create a `Procfile <https://devcenter.heroku.com/articles/procfile>`__ 
+  in the application's root directory.
+
+Specify a custom command to launch your web application or to pass custom
+arguments to uWSGI. For example::
 
   processes:
     web: python3.2 app.py

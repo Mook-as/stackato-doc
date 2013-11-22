@@ -1,0 +1,101 @@
+{#
+ # To generate user/reference/client-ref.rst run `make client-update`
+ #}
+.. index:: Command Reference: Client
+
+.. _command-ref-client:
+
+Stackato Client Command Reference
+=================================
+
+Usage
+-----
+
+**stackato** [*options*] *command* [*arguments*] [*command-options*]
+
+Try ``stackato help``, ``stackato help [command]``, and ``stackato options`` for more information.
+
+Many of the informational commands take a ``--json`` option if you wish to generate machine-parseable output.
+In some cases the  ``--json`` option reveals additional details.
+
+.. note::
+    Administrative user privileges are required for some commands.
+
+{% for section in sections %}
+  
+{{ section['name'] }}
+^^^^^^^^^^^^^^^^^^^^^
+
+  {% for command in section['commands'] %}
+    
+.. _command-{{command}}:
+  
+  {{ command }} {% for argument in commands[command]['arguments'] %} *<{{ argument }}>* {% endfor %}
+
+    {{ commands[command]['description'] }}
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    {% for option in commands[command]['options'] %}
+    {{ option }}
+      {{ commands[command]['options'][option] }}
+    {% endfor %}
+  {% endfor %}
+
+      </div></div>
+
+  {% for subsection in section['sections'] %}
+    
+.. _command-{{ section['name'] }}-{{ subsection['name'] }}:
+    
+  **{{ subsection['name'] }}**
+      
+    {% for command in subsection['commands'] %}
+.. _command-{{command}}:
+
+      {{ command }} {% for argument in commands[command]['arguments'] %} *<{{ argument }}>* {% endfor %}
+      
+        {{ commands[command]['description'] }}
+
+        .. raw:: html
+
+          <div class="spoiler">
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+          <div class="inner" style="display:none;">
+
+        {% for option in commands[command]['options'] %}
+        {{ option }}
+          {{ commands[command]['options'][option] }}
+        {% endfor %}
+
+            </div></div>
+
+    {% endfor %}
+  {% endfor %}
+{% endfor %}
+
+.. raw:: html
+
+  <script type="text/javascript">
+    function showSpoiler(obj)
+    {
+      var inner = obj.parentNode.getElementsByTagName("div")[0];
+      if (inner.style.display == "none") {
+        inner.style.display = "";
+        obj.innerHTML = '- options'
+      }
+      else {
+        inner.style.display = "none";
+        obj.innerHTML = '+ options'
+      }
+
+	return false;
+
+    }
+  </script>
+
+

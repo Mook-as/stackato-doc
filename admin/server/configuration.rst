@@ -5,23 +5,20 @@
 Detailed Configuration
 ======================
 
-.. _server-config-techniques:
+.. _server-config-general:
 
-.. index:: Server Configuration Techniques
+General
+-------
 
-Techniques
-----------
-
-.. _server-config-nat:
-
-.. index:: NAT
-
-NAT vs. Bridged Networking
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. include:: ../common/nat.inc
-
-
+.. note::
+  After booting the VM, run ``kato process ready all`` before starting
+  the following configuration steps. This command returns ``READY`` when
+  all configured system processes have started, and is particularly
+  important when using ``kato`` commands in automated configuration
+  scripts which run immediately after boot (the :ref:`--block
+  <kato-command-ref-process-ready>` option is useful in this
+  scenario).
+  
 .. _server-config-password:
 
 Changing the Password
@@ -40,6 +37,14 @@ Controller nodes <cluster-multi-controllers>`). In this case, it's best
 to log in to each node in the cluster to change the password manually
 with the ``passwd`` command.
 
+
+.. _server-config-network:
+
+.. index:: Network Setup
+
+Network Setup
+-------------
+
 .. _server-config-hostname:
 
 .. index:: Changing the Hostname
@@ -51,14 +56,12 @@ Changing the Hostname
 
 You may want or need to change the hostname of the Stackato system,
 either to match a DNS record you've created or just to make the system
-URLs more convenient.
-
-For a :term:`micro cloud` using :term:`multicast DNS`,
-(mDNS) this can be done using the :ref:`kato node rename
+URLs more convenient. This can be done using the :ref:`kato node rename
 <kato-command-ref>` command::
 
-	$ kato node rename mynewname
+	$ kato node rename mynewname.example.com
   
+
 This command will change the system hostname in ``/etc/hostname`` and ``/etc/hosts``,
 as well as performing some internal configuration for Stackato such as generating a new
 server certificate for the :ref:`Management Console <management-console>`.
@@ -310,7 +313,7 @@ identify the node hosting the MBUS, usually the same as the Cloud
 Controller. On this node, you will see a correspondence between the
 network interface ``eth0`` address and ``/etc/hosts`` as in the above
 example. On each of the *other nodes* in the cluster, for example DEA
-and Stager nodes, ``eth0`` will be configured with its own address on
+nodes, ``eth0`` will be configured with its own address on
 the same subnet, but ``/etc/hosts`` will remain the same..
 
 If modifying ``/etc/hosts`` becomes necessary because of a hostname change,
@@ -523,15 +526,9 @@ module managers that support the :term:`HTTP_PROXY` environment variable
 (e.g. pip, PyPM, PPM, NPM, etc). This is limited to 100MB of in-memory
 cache.
 
-To disable Stackato from using the local staging proxy cache, remove or
-comment out the following line from the
-``/lxc/template/rootfs/etc/environment`` file on all Stager nodes::
-
-	HTTP_PROXY=http://localhost:8123
-
 If you have an upstream HTTP proxy that deployed applications and the
 staging system need to traverse to access the internet, use the ``kato
-op upstream_proxy ...`` command on all DEA and Stager nodes::
+op upstream_proxy ...`` command on all DEA nodes::
 
 	$ kato op upstream_proxy set 192.168.0.99:3128
 	
@@ -545,8 +542,37 @@ nodes. For example::
 
 	app_http_proxy=http://192.168.0.99:3128
 
+
+
+.. _server-config-filesystem:
+
+VM Filesystem Setup
+-------------------
+
+The Stackato VM is distributed with a simple deafult partitioning
+scheme (i.e. everything but "/boot" mounted on "/").
+
+Additionally, some hypervisors (OpenStack/KVM) will start the VM with a
+relatively small disk (10GB).
+
+.. warning::
+  When setting up a production cluster, additional filesystem
+  configuration is necessary to prevent certain nodes from running out
+  of disk space.
+
+Some nodes in a production cluster may require additional mount points
+on external block storage for:
+
+* services (data and filesystem service nodes)
+* droplets (controller nodes)
+* containers (DEA and Stager nodes)
+
+Suggestions for mounting block storage and instructions for relocating
+data can be found in the :ref:`Persistent Storage
+<bestpractices-persistent-storage>` section.
+
 Stackato Data Services vs. High Availability Databases
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------------------------------
 
 Stackato data services do not offer any built-in redundancy. For
 business-critical data storage, a high-availability database or cluster
@@ -555,15 +581,18 @@ is recommended.
 To use an external database instead of the data services provided by
 Stackato, specify the database credentials directly in your application
 code instead of using the credentials from the :term:`VCAP_SERVICES`
-environment variable. 
+environment variable.
+
+To tie external databases to Stackato as a data service, see the
+examples in the :ref:`Adding System Services <add-service>` section.
 
 .. _server-config-https:
 
 .. index:: HTTPS
 .. index:: SSL
 
-HTTPS
------
+HTTPS & SSL
+-----------
 
 HTTPS mode provides access to the provisioned apps using wild card SSL
 certificates through the router or :term:`Nginx` web server.
@@ -584,8 +613,6 @@ or use your own (signed or self-signed) certificate.
 Using your own SSL certificate
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**For router2g (default router):**
-
 On all router nodes, upload your *.key* file to the */etc/ssl/private/*
 dirctory and your *.crt* file to */etc/ssl/certs/*. Change the following
 settings in */s/vcap/stackato-router/config/local.json* to point to
@@ -594,23 +621,6 @@ the new files::
   "sslKeyFile": "/etc/ssl/private/example.key",
   "sslCertFile": "/etc/ssl/certs/example.crt",
 
-**For Nginx (legacy router):**
-
-On all router nodes, edit the following block in
-``~/stackato/etc/nginx/stackato.conf`` (symlinked to
-``/etc/nginx/sites/enabled/stackato.conf``)::
-
-  server {
-      listen   443;
-      server_name  *.stackato-xxxx.local;
-
-      ssl  on;
-      ssl_certificate     /etc/ssl/certs/stackato.crt;
-      ssl_certificate_key /etc/ssl/private/stackato.key;
-
-Update the server name with current host and domain, then specify your
-own certificates on the ``ssl_certificate`` and ``ssl_certificate_key``
-lines.
 
 .. _server-config-ssl-cert-chain:
 
@@ -676,16 +686,11 @@ Following that, run::
 	$ openssl x509 -noout -fingerprint -text < host.crt > host.info
 	$ chmod 400 host.key host.crt
 
+To get the router to use the new certificate and key files, follow the
+steps in the :ref:`Using your own SSL certificate
+<server-config-ssl-cert-own-use>` section above.
+
 .. MARKUP Note that spaces are necessary below for correct alignment on display.
-
-Once you have a `host.crt` and `host.key`, change the
-``ssl_certificate`` and ``ssl_certificate_key`` lines in `stackato.conf`
-to reference them::
-
-	# ssl_certificate           /etc/ssl/certs/stackato.crt;
-	ssl_certificate         /home/stackato/hostname.mydomain.com/host.crt;
-	# ssl_certificate_key       /etc/ssl/private/stackato.key;
-	ssl_certificate_key     /home/stackato/hostname.mydomain.com/host.key;
 
 With any self-signed SSL certificate, you will get browser warning
 messages. The certificate will need to be added to the browser

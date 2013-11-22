@@ -4,8 +4,9 @@ Stackato Documentation
 .. only:: not public
 
   .. note:: **internal**:
-     You are viewing the Stackato *internal* documentation. To edit the
-     documentation, clone `stackato-doc.git
+     Sections marked '.. only:: not public' in the documentation sources
+     are excluded from the HTML output of the public doc build. To edit
+     the documentation, clone `stackato-doc.git
      <https://github.com/ActiveState/stackato-doc>`_, modify the `*.rst`
      files and then follow *README.md* to publish the changes.
 
@@ -18,10 +19,23 @@ hosting provider to provide a private or public PaaS.
 Documentation is provided for two different, but sometimes overlapping
 audiences:
 
-* Stackato Users: Developers and other end users who will be using a
-  PaaS set up and maintained by others.
-* Stackato Admins: System operators in charge of setting up,
-  configuring, and maintaining the PaaS
+* :ref:`Stackato Users <stackato-user-guide>` : Developers and other end
+  users who will be using a PaaS set up and maintained by others.
+* :ref:`Stackato Admins <stackato-admin-guide>`: System operators in
+  charge of setting up, configuring, and maintaining the PaaS
+
+.. note::
+  Documentation of new features in Stackato 3.0 is still in progress.
+  Please note:
+  
+  * app deployment is now primarily done using :ref:`buildpacks <buildpacks>`
+  * some keys in :ref:`stackato.yml <stackato_yml>` have changed
+  * :ref:`Groups <using-groups>` have been replaced with `Organizations and
+    Spaces
+    <http://docs.cloudfoundry.com/docs/using/managing-apps/orgs-and-spaces.html>`__
+  * the Stackato v3 API is not yet fully documented, but is compatible
+    with the `Cloud Foundry v2 API
+    <http://docs.cloudfoundry.com/docs/reference/cc-api.html>`__ 
 
 
 Admin Guide

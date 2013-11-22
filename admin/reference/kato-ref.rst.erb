@@ -28,15 +28,25 @@ Commands
 %     ref_cmd = cmd
 %     ref_cmd = cmd[:children][0] while ref_cmd[:has_children]
 * :ref:`<%= cmd[:name] %> <kato-command-ref-<%= ref_cmd[:argv].join("-") %>>` <%= cmd[:one_liner] %>
+%   elsif cmd[:level] == 2
+%     # calculate ref_cmd, which is the first leaf-node child, which we will link to
+%     ref_cmd = cmd
+%     ref_cmd = cmd[:children][0] while ref_cmd[:has_children]
+
+  * :ref:`<%= cmd[:name] %> <kato-command-ref-<%= ref_cmd[:argv].join("-") %>>`
 %   end
 % end
 %
 %
 %# Command usage details
+
+.. _kato-command-ref-details:
+
+Command Usage Details
+---------------------
+
 % cmds.each do |cmd|
 %   next if cmd[:has_children]
-
-----
 
 %# (commands links will come here)
 .. _kato-command-ref-<%= cmd[:argv].join("-") %>:
@@ -83,6 +93,14 @@ Commands
     <%= keyword %> - <%= description %><% # TODO: format wrap80 with indent %>
 %     end
 %   end
+
+----
+
 %
 % end
+
+.. _kato-command-ref-end:
+
+
+
 

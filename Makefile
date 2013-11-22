@@ -44,12 +44,12 @@ PREV_TARGET = $(stackato target)
 
 # Variables used for extracting docopts from kato.
 
-KATO_REPO=git://gitolite.activestate.com/kato.git
+KATO_REPO=https://github.com/ActiveState/kato.git
 
 UPDATE=docopts
 KATO_DIR=$(UPDATE)/kato
+GEN_KATOREF_DIR=generator/katoref
 GEM_HOME=$(UPDATE)/gems
-DOCOPT_LIB=$(GEM_HOME)/gems/docopt-*/lib
 
 # The targets "all", "install", and "uninstall", as well as the variables
 # DESTDIR, prefix and PKG_GITDESCRIBE, are used by packaging systems.
@@ -200,18 +200,22 @@ update:
 	rm -rf $(UPDATE)
 	git clone $(BRANCH_OPT) $(KATO_REPO) $(KATO_DIR)
 	gem install --install-dir $(GEM_HOME) docopt --no-rdoc --no-ri
-	( RUBYLIB=$(KATO_DIR)/lib:`eval echo $(DOCOPT_LIB)` \
+	( RUBYLIB=$(GEN_KATOREF_DIR)/lib \
 	  GEM_HOME=$(GEM_HOME) \
-	  ruby -e 'require "kato/docs/sphinx"; render_kato_ref(ARGV.shift)' reference/kato-ref.rst.erb > reference/kato-ref.rst ; \
+	  ruby -e 'require "katoref/sphinx"; render_kato_ref(ARGV.shift)' admin/reference/kato-ref.rst.erb > admin/reference/kato-ref.rst ; \
 	)
-	rm -rf $(UPDATE) 
+	rm -rf $(UPDATE)
+
+client-update:
+	@echo "Generating user reference from Jinja2"
+	stackato help --json | python -c "import sys, json, os; from jinja2 import Environment, FileSystemLoader; help = json.loads(sys.stdin.read()); env = Environment(loader=FileSystemLoader('_templates'), trim_blocks=True, lstrip_blocks=True); template = env.get_template('client-ref.jinja'); print template.render(commands=help['commands'], sections=help['sections'])" > user/reference/client-ref.rst
 
 reupdate:	
 	@echo "Generating kato reference from EXISTING docopts."
 	@echo "Not a clean build. Use for debugging docopt only."
-	( RUBYLIB=$(KATO_DIR)/lib:`eval echo $(DOCOPT_LIB)` \
+	( RUBYLIB=$(GEN_KATOREF_DIR)/lib \
 	  GEM_HOME=$(GEM_HOME) \
-	  ruby -e 'require "kato/docs/sphinx"; render_kato_ref(ARGV.shift)' reference/kato-ref.rst.erb > reference/kato-ref.rst ; \
+	  ruby -e 'require "katoref/sphinx"; render_kato_ref(ARGV.shift)' admin/reference/kato-ref.rst.erb > admin/reference/kato-ref.rst ; \
 	)
 
 publicdocs:

@@ -15,22 +15,110 @@ Release Notes
   See `release-notes.rst` in git for the up-to-date version of this file.
         `<https://github.com/ActiveState/stackato-doc>`_
 
-  dev (UNRELEASED)
-  ----------------
 
-  * Replace Doozer with Redis (TODO: details)
+.. only:: not public
 
-  * Logyard updates:
+  v3.0.0 FINAL
+  ------------
 
-    * [98998] Build with Go 1.1
-    * [98325] Move drains from doozer to redis
-    * [98687] Add "AppGroup" field to app log stream
-    * [98836] Add "HumanTime" field to systail log stream
-    * [98870] Add app crashes/exits (eg: OOM killer) to cloud events
-    * [98686] Add harbor service provision events to cloud events
-    * [96827] Cloud Events patterns are now configurable (kato config)
-    
-  * [98649] ``kato process stop fence`` now correctly stops fence process.
+  * [101560] Enable rotation of some log files
+  * [101081]
+  * Upgrade to Docker 0.6.6
+  * Logyard:
+    * [101635] Fix inotify panic in systail
+  * [101692] Remove appstore containers after use
+
+v3.0.0 Beta (November 6, 2013)
+------------------------------
+
+* [93889] Update core components to Cloud Foundry v2 API
+* [99842] Update AOK replacement of UAA to new CFv2 API compatibility
+* [101162] Update NATS message bus to use gnatsd
+* [97026,98612] Replaced Doozer with Redis
+* [100386,100732] Update Linux kernel to Raring backport
+* [100215] prevent crontab breakage caused by newlines in environment variables
+* [99604] New X-Frame header configuration option for router
+* [96349] Separate user and admin documentation
+
+* Containerization updates:
+
+  * [100352,101383] Use Docker for containerization
+  * [96266] Improve app startup flapping prevention under high-load
+  * [99614] New default limit of 50 processes per container. Configurable with ``kato config`` under ``fence max_container_processes``
+  * [98668] Memory consumption during staging is now limited to 1.5 times the application's allocated memory by default. Configurable with ``kato config`` under ``stager app_memory_multiplier``
+
+* Kato updates:
+
+  * Add ``kato node retire`` to gracefully shut down a DEA, moving its application instances on other available nodes first.
+  * ``kato admin ...`` commands removed; use the corresponding ``stackato admin ...`` commands or the web console
+  * [93195,101079,101195] New ``kato node upgrade`` command to support node-level upgrades
+  * [98649] ``kato process stop fence`` now correctly stops fence process
+  * [98390] ``kato node attach`` now checks for version compatibility when adding a node to a cluster
+  * [99521] ``--no-stop`` option removed from ``kato role remove`` command.
+  * [99745] ``kato config`` no longer supports node-specific config; ``--node`` option removed.
+  * [100861] Extend ``kato node setup firstuser`` to require default organization
+
+* Languages updates:
+
+  * [99429] Add Ruby 2.0 runtime and remove Ruby 1.8.7 (EOL)
+  * [99368] Fixed problem building Nokogiri 1.6 gem. Stager now uses using system libraries (``NOKOGIRI_USE_SYSTEM_LIBRARIES=true``).
+  * [94620] ActivePerl 5.14 removed
+  * Update to ActivePython 2.7.5.6 and ActivePython 3.3.2.0
+  * [99977] Update PHP to 5.4 for default runtime
+  * [99840] Support legacy frameworks with built-in buildpack
+
+* Logyard updates:
+
+  * [99435] New ``kato log drain status`` command for showing drain status
+  * [98325] Move drains from doozer to redis
+  * [98687] Add "AppGroup" field to app log stream
+  * [98836] Add "HumanTime" field to systail log stream
+  * [98870] Add app crashes/exits (eg: OOM killer) to cloud events
+  * [98686] Add harbor service provision events to cloud events
+  * [96827] Cloud Events patterns are now configurable (via ``kato config``)
+  * [99534] New ``read_limit`` setting for apptail (default 16MB) to cope with extremely large application log files
+  * [99571] Application log drain URLs now properly sanitized (v2.10.6 'logdrain-sanitize' patch)
+  * [100512] Fix a leak in growing TCP connections causing systail to crash (inotify panic), and logyard drains to malfunction.
+  * [100507] New WARNING log message on drain retries
+  * [98214] Improve handling of drain state transitions
+  * [98998] Compile with Go 1.1
+  * systail now works with logrotate managed files (eg: router2g-access.log)
+  
+* Management Console updates:
+
+  * Update look and feel, improve inline loading and responsiveness using websockets
+  * [99505] New Activity Stream API and timeline
+  * [94745,94274] New disk activity and disk space graphs
+  * [98737] New dashboard for router metrics
+  * [99452,100047] Updated App Store to use new API and YAML format
+
+* Services updates:
+
+  * [99874] Core services ported to CFv2 API
+  * [97164] Micro cloud starts with Memcached, Redis, PostrgreSQL, RabbitMQ, and MongoDB roles disabled by default (enable via Managment Console).
+  * [98930] RabbitMQ updated to 2.8.7
+  * [98457] RabbitMQ 3.1.3 available (disabled by default). Enable with ``kato role add rabbit3``
+  * [99518] Increased default filesystem service size to 500MB
+  * [99444] Make mysql service compatible with Amazon RDS
+  * [98902] MongoDB client updated to 2.4.1 in application container 
+
+* Client updates:
+
+  * [96623] Full support for CFv2 API, maintained CFv1 compatibility
+  * Updated command set for CFv2 terminology changes
+  * [96061] Enforce stricter interpretation of positional options and commands to disambiguate some commands
+  * [98509] Support array of applications in manifest.yml
+  * [100564] Support user provided service instances
+  * [99376] Show status of user drains
+  * [100254] Removed ``host`` subcommand
+
+v2.10.x Patches
+---------------
+
+See `Stackato FAQs tagged 'patch'
+<http://community.activestate.com/taxonomy/term/547>`__ on the
+ActiveState Community Site.
+
   
 v2.10.6 (June 10, 2013)
 -----------------------

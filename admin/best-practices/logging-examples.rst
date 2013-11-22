@@ -49,6 +49,13 @@ Enable system logging (via udp) by executing the following kato command:
 
     kato log drain add *drain-name* udp://logs.papertrailapp.com:*port#*
 
+.. note::
+    Papertrail requires systail log lines to have ``<13>l`` at the
+    beginnging of each line. Make sure the drain you are forwarding is
+    formatted this way (see example in :ref:`Saving Custom Log Formats
+    <logging-drains-save-format>`).
+
+
 .. _logging-examples-loggly:
 
 Loggly

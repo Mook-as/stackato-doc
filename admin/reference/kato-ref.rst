@@ -17,45 +17,86 @@ Usage
 Commands
 --------
 
-* :ref:`admin <kato-command-ref-admin>` DEPRECATED: Use "kato config" instead
 * :ref:`config <kato-command-ref-config>` Manipulate configuration values of Stackato components.
 * :ref:`data <kato-command-ref-data-export>` Import or export Stackato system data to or from clusters/nodes.
+
+  * :ref:`data export <kato-command-ref-data-export>`
+
+  * :ref:`data import <kato-command-ref-data-import>`
+
+  * :ref:`data users <kato-command-ref-data-users>`
 * :ref:`debug <kato-command-ref-debug-configwatch>` Commands for debugging for Stackato internals.
+
+  * :ref:`debug configwatch <kato-command-ref-debug-configwatch>`
+
+  * :ref:`debug redis <kato-command-ref-debug-redis>`
 * :ref:`history <kato-command-ref-history>` Show the kato commands that have been run
 * :ref:`info <kato-command-ref-info>` Show information about this node or cluster including assigned and
 * :ref:`inspect <kato-command-ref-inspect>` Detect common problems with your Stackato install using 'kato inspect'
-* :ref:`log <kato-command-ref-log-drain-add>` Logging utilities for Stackato
+* :ref:`log <kato-command-ref-log-stream>` Logging utilities for Stackato
+
+  * :ref:`log drain <kato-command-ref-log-drain-add>`
+
+  * :ref:`log stream <kato-command-ref-log-stream>`
+
+  * :ref:`log tail <kato-command-ref-log-tail>`
 * :ref:`node <kato-command-ref-node-attach>` Node management
+
+  * :ref:`node attach <kato-command-ref-node-attach>`
+
+  * :ref:`node detach <kato-command-ref-node-detach>`
+
+  * :ref:`node list <kato-command-ref-node-list>`
+
+  * :ref:`node migrate <kato-command-ref-node-migrate>`
+
+  * :ref:`node remove <kato-command-ref-node-remove>`
+
+  * :ref:`node rename <kato-command-ref-node-rename>`
+
+  * :ref:`node reset <kato-command-ref-node-reset>`
+
+  * :ref:`node retire <kato-command-ref-node-retire>`
+
+  * :ref:`node setup <kato-command-ref-node-setup-core>`
+
+  * :ref:`node upgrade <kato-command-ref-node-upgrade>`
+
+  * :ref:`node version <kato-command-ref-node-version>`
 * :ref:`op <kato-command-ref-op>` Various operational commands
 * :ref:`patch <kato-command-ref-patch>` Update a Stackato cluster with post-release fixes.
 * :ref:`process <kato-command-ref-process-list>` Start, stop, or restart individual processes. Generally not required;
+
+  * :ref:`process list <kato-command-ref-process-list>`
+
+  * :ref:`process ready <kato-command-ref-process-ready>`
+
+  * :ref:`process restart <kato-command-ref-process-restart>`
+
+  * :ref:`process start <kato-command-ref-process-start>`
+
+  * :ref:`process stop <kato-command-ref-process-stop>`
 * :ref:`relocate <kato-command-ref-relocate>` Move containers, application droplets, or services to a new mount point
 * :ref:`report <kato-command-ref-report>` Generate a report that can be sent to Stackato support.
 * :ref:`restart <kato-command-ref-restart>` Restart Stackato or individual roles.
 * :ref:`role <kato-command-ref-role-add>` Management of node roles
+
+  * :ref:`role add <kato-command-ref-role-add>`
+
+  * :ref:`role info <kato-command-ref-role-info>`
+
+  * :ref:`role remove <kato-command-ref-role-remove>`
 * :ref:`shell <kato-command-ref-shell>` Interactive shell for kato
 * :ref:`start <kato-command-ref-start>` Start Stackato or individual roles.
 * :ref:`status <kato-command-ref-status>` List configured roles and their current status across the cluster.
 * :ref:`stop <kato-command-ref-stop>` Stop Stackato or individual roles.
 * :ref:`version <kato-command-ref-version>` Display the version of Stackato being run.
 
-----
+.. _kato-command-ref-details:
 
-.. _kato-command-ref-admin:
+Command Usage Details
+---------------------
 
-**admin** [**options**] **grant** *<email>...*
-
-**admin** [**options**] **revoke** *<email>...*
-
-  DEPRECATED: Use "kato config" instead
-    
-    kato config (push|pop) cloud_controller admins <email>
-
-  **-h** **--help**                       Show help information
-
-
-
-----
 
 .. _kato-command-ref-config:
 
@@ -65,9 +106,9 @@ Commands
 
 **config** **del** [**options**] *<component>* *<key-path>*
 
-**config** **push** [**options**] *<component>* *<key-path>* *<list-value>*
+**config** **push** [**options**] *<component>* *<key-path>* *<value>*
 
-**config** **pop** [**options**] *<component>* *<key-path>* *<list-value>*
+**config** **pop** [**options**] *<component>* *<key-path>* *<value>*
 
   Manipulate configuration values of Stackato components.
 
@@ -88,13 +129,12 @@ Commands
 
   **-f** **--flat**                       Use a flat output format "<full-config-path> <value>"
 
-  **-n** **--node** *<node-IP>*           Take action on a specific cluster node
-
   **--force**                             Force updating value to different type.
 
 
 
 ----
+
 
 .. _kato-command-ref-data-export:
 
@@ -132,6 +172,10 @@ Commands
 
   **--exclude-droplets**                  Do not include droplets (uploaded apps)
 
+  **--packages**                          Include app packages
+
+  **--exclude-packages**                  Do not include app packages
+
   **--resources**                         Include the upload cache
 
   **--exclude-resources**                 Do not include the upload cache (default)
@@ -140,9 +184,9 @@ Commands
 
   **--exclude-license**                   Do not include the Stackato license
 
-  **--admins-list**                       Include the list of users that are admins
+  **--db-encryption-key**                 Include the key used to encrypt the Stackato DB (recommended)
 
-  **--exclude-admins-list**               Do not include the list of users that are admins
+  **--exclude-db-encryption-key**         Do not include the key
 
   **--main-db**                           Include the cloud controller's main database
 
@@ -155,6 +199,10 @@ Commands
   **--aok-config**                        Include AOK's configuration 
 
   **--exclude-aok-config**                Do not include AOK's configuration (default)
+
+  **--stackato-rest-db**                  Include Stackato Rest's database
+
+  **--exclude-stackato-rest-db**          Do not include Stackato Rest's database
 
   **--filesystem**                        Include the filesystem service
 
@@ -220,9 +268,18 @@ Commands
 
   **--exclude-rabbit-metadata**           Do not include the RabbitMQ service's metadata
 
+  **--rabbit3**                           Include the RabbitMQ service
+
+  **--exclude-rabbit3**                   Do not include the RabbitMQ service
+
+  **--exclude-rabbit3-data**              Do not include the RabbitMQ service's data
+
+  **--exclude-rabbit3-metadata**          Do not include the RabbitMQ service's metadata
+
 
 
 ----
+
 
 .. _kato-command-ref-data-import:
 
@@ -260,6 +317,10 @@ Commands
 
   **--exclude-droplets**                  Do not include droplets (uploaded apps)
 
+  **--packages**                          Include app packages
+
+  **--exclude-packages**                  Do not include app packages
+
   **--resources**                         Include the upload cache
 
   **--exclude-resources**                 Do not include the upload cache (default)
@@ -268,9 +329,9 @@ Commands
 
   **--exclude-license**                   Do not include the Stackato license
 
-  **--admins-list**                       Include the list of users that are admins
+  **--db-encryption-key**                 Include the key used to encrypt the Stackato DB (recommended)
 
-  **--exclude-admins-list**               Do not include the list of users that are admins
+  **--exclude-db-encryption-key**         Do not include the key
 
   **--main-db**                           Include the cloud controller's main database
 
@@ -283,6 +344,10 @@ Commands
   **--aok-config**                        Include AOK's configuration 
 
   **--exclude-aok-config**                Do not include AOK's configuration (default)
+
+  **--stackato-rest-db**                  Include Stackato Rest's database
+
+  **--exclude-stackato-rest-db**          Do not include Stackato Rest's database
 
   **--filesystem**                        Include the filesystem service
 
@@ -348,9 +413,18 @@ Commands
 
   **--exclude-rabbit-metadata**           Do not include the RabbitMQ service's metadata
 
+  **--rabbit3**                           Include the RabbitMQ service
+
+  **--exclude-rabbit3**                   Do not include the RabbitMQ service
+
+  **--exclude-rabbit3-data**              Do not include the RabbitMQ service's data
+
+  **--exclude-rabbit3-metadata**          Do not include the RabbitMQ service's metadata
+
 
 
 ----
+
 
 .. _kato-command-ref-data-users:
 
@@ -372,35 +446,31 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-debug-configwatch:
 
-**debug** **configwatch** [**options**]
+**debug** **configwatch** [**options**] [*<process-name>...*]
 
-  Watch changes to doozer config
-
-  **-n** **--node** *<node-IP>*           Watch config changes for a specific cluster node
-
-  **-p** **--process** *<process-name>*   The name of process to watch config for
-
-  **-g** **--global**                     Config is global and not specific to any node
+  Watch changes to cluster config
 
   **-d** **--dump-tree**                  Dump the config tree seen since starting
 
-  **-i** **--ignore-ctl**                 Ignore doozer tree under /ctl
-
-  **-a** **--show-applied**               Exit once we see this value is seen
-
-  **-w** **--with-revs**                  Show the revisions of config entries
-
   **-s** **--no-value**                   Do not print the value of path
-
-  **-u** **--until-path** *<path>*        Exit once we see this path
-
-  **-v** **--until-value** *<value>*      Exit once we see this value
 
 
 
 ----
+
+
+.. _kato-command-ref-debug-redis:
+
+**debug** **redis**
+
+  Connect to the Redis server used for cluster config via redis-cli
+
+
+----
+
 
 .. _kato-command-ref-history:
 
@@ -417,6 +487,7 @@ Commands
 
 
 ----
+
 
 .. _kato-command-ref-info:
 
@@ -436,6 +507,7 @@ Commands
 
 
 ----
+
 
 .. _kato-command-ref-inspect:
 
@@ -464,6 +536,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-log-drain-add:
 
 **log** **drain** **add** [**options**] *<name>* *<uri>* [*<param>...*]
@@ -476,23 +549,29 @@ Commands
     
     kato log drain add system_splunk udp://logs.splunk.com:1234/
     
-    # Add a drain to forward all application logs as json
+    # Add a drain to forward all application and system logs as json
+  
+    kato log drain add -f json -p apptail,systail app_sys_splunk udp://logs.splunk.com:1235/
     
-    kato log drain add -f json -p apptail app_splunk udp://logs.splunk.com:1235/
-    
-    # Add a drain with custom format,
+    # Add a drain with a custom or named format,
     
     kato log drain add -f "{{.Name}}: {{.Text}}"  system_splunk_2 udp://logs.splunk.com:1236/
+    kato log drain add -f systail-syslog  system_splunk_2 udp://logs.splunk.com:1236/
+  
+    # Passing custom parameters to a drain
+  
+    kato log drain add mydrain redis://localhost:6379 key=logdata 
 
   **-h** **--help**                       Show help information
 
   **-f** **--format** *<format>*          Message format
 
-  **-p** **--prefix** *<prefix>*          Message key prefix; possible values: systail, event, apptail
+  **-p** **--prefix** *<prefix>*          Message key prefix; possible values: systail, event, apptail (comma-separated, no spaces)
 
 
 
 ----
+
 
 .. _kato-command-ref-log-drain-delete:
 
@@ -506,6 +585,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-log-drain-list:
 
 **log** **drain** **list** [**options**]
@@ -514,8 +594,73 @@ Commands
 
   **-h** **--help**                       Show help information
 
+  **-y** **--yaml**                       Output at YAML
+
+  **-j** **--json**                       Output at JSON
+
+
 
 ----
+
+
+.. _kato-command-ref-log-drain-status:
+
+**log** **drain** **status** [**options**] [*<drain>...*]
+
+  Show the status of all or specified log drains
+
+  **-h** **--help**                       Show help information
+
+  **-n** **--not-running**                Show only drains not running
+
+  **-y** **--yaml**                       Output at YAML
+
+  **-j** **--json**                       Output at JSON
+
+
+
+----
+
+
+.. _kato-command-ref-log-stream:
+
+**log** **stream** [**options**] *<key>...*
+
+  Examples:
+  
+    # stream cloud events
+    
+    kato log stream event
+  
+    # stream DEA and app log stream
+    
+    kato log stream systail.dea systail.stager apptail
+  
+    # stream system logs (equivalent to 'kato log tail')
+    
+    kato log stream systail
+
+  *<key>*                                 Logyard stream key prefix (eg: systail.dea)
+
+
+  **-h** **--help**                       Show help information
+
+  **--no-color**                          Turn off color
+
+  **--raw**                               Show unformatted logs, including logyard INFO records (skipped by default)
+
+  **--json**                              Show the original JSON
+
+  **--time**                              Show timestamp
+
+  **-n** **--node** *<node-IP>*           Only show logs from a specific cluster node
+
+  **-l** **--local**                      Only show logs from the current node
+
+
+
+----
+
 
 .. _kato-command-ref-log-tail:
 
@@ -542,6 +687,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-node-attach:
 
 **node** **attach** [**options**] *<core-ip>*
@@ -556,21 +702,46 @@ Commands
 
   **-v** **--verbose**                    Show process information when starting/stopping roles
 
+  **-f** **--force**                      Forces this node to attach to a core node, ignoring any version mismatches
+
 
 
 ----
 
+
+.. _kato-command-ref-node-detach:
+
+**node** **detach** [**options**]
+
+  Detach this node from a stackato core node
+
+  **-h** **--help**                       Show help information
+
+  **-s** **--start**                      Automatically start processes after detaching
+
+  **-v** **--verbose**                    Show process information when starting/stopping roles
+
+
+
+----
+
+
 .. _kato-command-ref-node-list:
 
-**node** **list**
+**node** **list** [**options**]
 
   List all nodes known to this cluster
 
   **-h** **--help**                       Show help information
 
+  **-j** **--json**                       Use JSON format for displaying output
+
+  **-y** **--yaml**                       Use YAML format for displaying output
+
 
 
 ----
+
 
 .. _kato-command-ref-node-migrate:
 
@@ -580,9 +751,12 @@ Commands
 
   **-h** **--help**                       Show help information
 
+  **-r** **--no-restart**                 Do not restart roles after migration
+
 
 
 ----
+
 
 .. _kato-command-ref-node-remove:
 
@@ -596,6 +770,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-node-rename:
 
 **node** **rename** [**options**] *<hostname>*
@@ -606,6 +781,8 @@ Commands
 
                                           new domain.
 
+  **-l** **--skip-ssl-regeneration**      Skip regenerating the SSL keys
+
   **-r** **--no-restart**                 Do not restart roles.
 
   **-v** **--verbose**                    Show process information when restarting roles.
@@ -613,6 +790,7 @@ Commands
 
 
 ----
+
 
 .. _kato-command-ref-node-reset:
 
@@ -634,6 +812,26 @@ Commands
 
 ----
 
+
+.. _kato-command-ref-node-retire:
+
+**node** **retire** [**options**]
+
+  Gracefully retires a DEA node from the cluster. New instances of the
+  apps are started on other available DEAs before the retiring DEA is shut
+  down. 
+
+  **-h** **--help**                       Show help information
+
+  **-n** **--node** *<node-id>*           Retire the specified DEA node, local node is
+
+                                          used if not specified
+
+
+
+----
+
+
 .. _kato-command-ref-node-setup-core:
 
 **node** **setup** **core** [*<endpoint>*]
@@ -650,15 +848,18 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-node-setup-firstuser:
 
-**node** **setup** **firstuser** [**options**] *<email>*
+**node** **setup** **firstuser** [**options**] *<email>* *<org>*
 
 **setup** **--help**
 
   First user setup.
 
   *<email>*                               First user's email.
+
+  *<org>*                                 First user's organization.
 
 
   **-h** **--help**                       Show help information
@@ -671,9 +872,14 @@ Commands
 
                                           Will be prompted for if not given.
 
+  **-u** **--username** *<username>*      First user's username.
+
+                                          Will be the provided email if not given.
+
 
 
 ----
+
 
 .. _kato-command-ref-node-setup-load_balancer:
 
@@ -690,6 +896,7 @@ Commands
 
 
 ----
+
 
 .. _kato-command-ref-node-setup-micro:
 
@@ -711,57 +918,128 @@ Commands
 
 ----
 
+
+.. _kato-command-ref-node-upgrade:
+
+**node** **upgrade** [**options**]
+
+  Upgrades Stackato
+
+  **-h** **--help**                       Show help information
+
+  **-f** **--file** *<file>*              Performs the Stackato upgrade using the local provided file. Otherwise the upgrade is
+
+                                          gathered from the ActiveState website.
+
+  **-n** **--node** *<node>*              Targets the provided node.
+
+  **-v** **--version** *<version>*        The version of Stackato to upgrade to. The latest version is used if this isn't supplied.
+
+  **--rollback**                          Rolls Stackato back to the previous version.
+
+  **--skip-confirmation**                 Skips initial confirmation of upgrade.
+
+  **--resume**                            Resumes an upgrade process, used internally by Kato and should only be called manually when
+
+                                          requested.
+
+  **--all**                               Targets all nodes in the cluster.
+
+  **--status**                            Shows the status of upgrades on a node.
+
+  **--force**                             Forces an upgrade to run.
+
+
+
+----
+
+
+.. _kato-command-ref-node-version:
+
+**node** **version** [**options**] [*<node-IP>*]
+
+  **-h** **--help**                       Show help information.
+
+
+
+----
+
+
 .. _kato-command-ref-op:
 
 **op** **--help**
 
-**op** **remap_hosts** *<old-hostname>* *<new-hostname>*
+**op** **custom_ssl_cert** **install** *<key-path>* *<cert-path>* *<domain>* [**--wildcard-subdomains**] [**--update**]
 
-**op** **max_client_upload** *<max-size>*
+**op** **custom_ssl_cert** **remove** *<domain>*
 
-**op** **upstream_proxy** **set** *<proxy-address>* [**-u** *<user>*] [**-p** *<pass>*]
-
-**op** **upstream_proxy** **delete**
-
-**op** **regenerate** **nginx**
-
-**op** **regenerate** **mysql**
-
-**op** **regenerate** **postgresql** [**--no-restart**]
-
-**op** **update_hostsfile**
-
-**op** **static_ip**
+**op** **custom_ssl_cert** **list**
 
 **op** **dhcp**
 
 **op** **defer** *<command>* [**--run-as-root**] [**--reset**]
 
+**op** **import_from_yaml_files** [**--upgrade**]
+
+**op** **max_client_upload** *<max-size>*
+
+**op** **regenerate** **ssl_cert**
+
+**op** **regenerate** **mysql**
+
+**op** **regenerate** **postgresql** [**--no-restart**]
+
+**op** **regenerate** **stackato-rest-auth**
+
+**op** **regenerate** **cloud-controller-client-auth**
+
+**op** **regenerate** **token-signing-secret**
+
+**op** **remap_hosts** *<old-hostname>* *<new-hostname>*
+
 **op** **run_deferred**
+
+**op** **set_timezone** [**--timezone** *<TZ>*]
+
+**op** **static_ip** [**--no-restart**]
+
+**op** **upstream_proxy** **set** *<proxy-address>* [**-u** *<user>*] [**-p** *<pass>*]
+
+**op** **upstream_proxy** **delete**
+
+**op** **update_hostsfile**
 
   Various operational commands
 
-  **remap_hosts**                         Change the hostname to look for when remapping
+  **custom_ssl_cert**                     Allows admin configuration of custom SSL certificates
 
-  **max_client_upload**                   Set the maximum upload size in MB
+                                          to be used in conjunction with router2g and deployed
 
-  **upstream_proxy**                      Configure Stackato to use an external or upstream proxy
-
-                                          server
-
-  **regenerate**                          Regenerate the configuration for a process
-
-  **update_hostsfile**                    Updates the /etc/hosts file with the endpoint URI mapped
-
-                                          to the CC's internal IP
-
-  **static_ip**                           Configures this node to use a static IP
+                                          applications.
 
   **dhcp**                                Configures this node's networking to use DHCP
 
   **defer**                               Defers a kato command to be run by 'op run_deferred'
 
+  **max_client_upload**                   Set the maximum upload size in MB
+
+  **regenerate**                          Regenerate the configuration for a process
+
+  **remap_hosts**                         Change the hostname to look for when remapping
+
   **run_deferred**                        Runs any previously deferred kato commands
+
+  **set_timezone**                        Change the default system timezone for the host machine
+
+  **static_ip**                           Configures this node to use a static IP
+
+  **upstream_proxy**                      Configure Stackato to use an external or upstream proxy
+
+                                          server and deployed apps.
+
+  **update_hostsfile**                    Updates the /etc/hosts file with the endpoint URI mapped
+
+                                          to the CC's internal IP
 
 
   **-h** **--help**                       Show help information
@@ -776,6 +1054,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-patch:
 
 **patch** **status**
@@ -787,6 +1066,10 @@ Commands
 **patch** **install** *<patchname>*
 
 **patch** **reset**
+
+**patch** **update**
+
+**patch** **reinstall** *<patchname>*
 
   Update a Stackato cluster with post-release fixes.
 
@@ -802,9 +1085,10 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-process-list:
 
-**process** **list** [**--help**] [**-a**] [**--node** *<node-IP>*] [*<process>...*]
+**process** **list** [**options**] [*<process>...*]
 
   Lists configured processes and their current running status.
 
@@ -814,9 +1098,14 @@ Commands
 
   **-a** **--all**                        Include status of all cluster nodes
 
+  **-j** **--json**                       Use JSON format for displaying output
+
+  **-y** **--yaml**                       Use YAML format for displaying output
+
 
 
 ----
+
 
 .. _kato-command-ref-process-ready:
 
@@ -834,6 +1123,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-process-restart:
 
 **process** **restart** [**options**] [*<process>...*]
@@ -845,6 +1135,7 @@ Commands
 
 
 ----
+
 
 .. _kato-command-ref-process-start:
 
@@ -858,6 +1149,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-process-stop:
 
 **process** **stop** [**options**] [*<process>...*]
@@ -869,6 +1161,7 @@ Commands
 
 
 ----
+
 
 .. _kato-command-ref-relocate:
 
@@ -886,6 +1179,7 @@ Commands
 
 
 ----
+
 
 .. _kato-command-ref-report:
 
@@ -909,6 +1203,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-restart:
 
 **restart** [**options**] [*<role>...*]
@@ -917,7 +1212,7 @@ Commands
 
   Restart Stackato or individual roles.
 
-  **-a** **--all**                        Also restart doozerd
+  **-a** **--all**                        Also restart core processes
 
   **-n** **--node** *<node-IP>*           Restart a specific cluster node
 
@@ -926,6 +1221,7 @@ Commands
 
 
 ----
+
 
 .. _kato-command-ref-role-add:
 
@@ -959,15 +1255,35 @@ Commands
 
 ----
 
+
+.. _kato-command-ref-role-info:
+
+**role** **info** **--help**
+
+**role** **info** [*<role>...*]
+
+**role** **remove** [**-v**] [**--node** *<node-IP>*] **--all**
+
+**role** **remove** [**-v**] [**--node** *<node-IP>*] **--all-but** *<role>...*
+
+  Display info on roles
+
+  **-h** **--help**                       Show help information
+
+
+
+----
+
+
 .. _kato-command-ref-role-remove:
 
 **role** **remove** **--help**
 
-**role** **remove** [**-v**] [**--node** *<node-IP>*] [**--no-stop**] *<role>...*
+**role** **remove** [**-v**] [**--node** *<node-IP>*] *<role>...*
 
-**role** **remove** [**-v**] [**--node** *<node-IP>*] [**--no-stop**] **--all**
+**role** **remove** [**-v**] [**--node** *<node-IP>*] **--all**
 
-**role** **remove** [**-v**] [**--node** *<node-IP>*] [**--no-stop**] **--all-but** *<role>...*
+**role** **remove** [**-v**] [**--node** *<node-IP>*] **--all-but** *<role>...*
 
   Disable roles for a node
 
@@ -981,11 +1297,10 @@ Commands
 
   **-v** **--verbose**                    Show process information
 
-  **-s** **--no-stop**                    Do not stop processes
-
 
 
 ----
+
 
 .. _kato-command-ref-shell:
 
@@ -998,6 +1313,7 @@ Commands
 
 
 ----
+
 
 .. _kato-command-ref-start:
 
@@ -1017,6 +1333,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-status:
 
 **status** [**options**]
@@ -1035,6 +1352,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-stop:
 
 **stop** [**options**] [*<role>...*]
@@ -1042,8 +1360,6 @@ Commands
 **stop** **--help**
 
   Stop Stackato or individual roles.
-
-  **-a** **--all**                        Also stop doozerd
 
   **-n** **--node** *<node-IP>*           Stop a specific cluster node
 
@@ -1053,6 +1369,7 @@ Commands
 
 ----
 
+
 .. _kato-command-ref-version:
 
 **version** [**--help**]
@@ -1060,6 +1377,14 @@ Commands
   Display the version of Stackato being run.
 
   **-h** **--help**                       Show help information
+
+
+
+----
+
+
+.. _kato-command-ref-end:
+
 
 
 

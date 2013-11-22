@@ -52,22 +52,24 @@ The Standalone framework uses a custom command specified in the
 process. 
 
 The example below shows *stackato.yml* configuration for an application
-running a simple Ruby worker.
+running a simple Python worker script.
 ::
 
+    name: worker
     framework:
-        type: standalone
-        runtime: ruby18
-    command: ruby worker.rb
+      type: standalone
+      runtime: python27
+    command: python main.py
 
-The command must start a long-running child process. If this process
+
+The ``command`` must start a long-running child process. If this process
 exits for any reason, the Health Manager will restart the application
 instance.
 
 Stackato will not assign URLs to apps deployed with the standalone
 framework, as it is intended for background worker processes. The
 ``stackato`` client includes a heuristic that will automatically
-suppress the mapping of a URL to applications using this framework.
+suppress URL mapping for applications using this framework.
     
 .. note::
 
@@ -75,3 +77,7 @@ suppress the mapping of a URL to applications using this framework.
   Management Console or ``stackato apps`` command as not running. To
   verify a non-web application is actually running, use ``stackato
   logs`` or ``stackato ssh``.
+
+See the `stackato-worker
+<https://github.com/stackato-apps/stackato-worker/tree/master>`_ sample
+for a simple working example.

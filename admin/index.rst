@@ -1,3 +1,5 @@
+.. _stackato-admin-guide:
+
 Stackato Admin Guide
 ====================
 
@@ -33,6 +35,7 @@ Management Console
 
    console/index
    console/app-store
+   console/customize
 
 
 VM Setup
@@ -55,7 +58,8 @@ Server Configuration
    :maxdepth: 2
 
    server/index
-   server/router2g
+   server/router
+   server/docker
    server/logging
    server/aok
 
@@ -71,7 +75,7 @@ Cluster Configuration
   cluster/cloud-init
   cluster/external-db
   cluster/harbor
-  cluster/dotnet
+  cluster/cpbm
 
 Best Practices
 --------------
@@ -92,7 +96,6 @@ Reference
    reference/kato-ref
    reference/groups
    reference/architecture
-   reference/customize
    reference/glossary
    reference/troubleshoot
    reference/add-service

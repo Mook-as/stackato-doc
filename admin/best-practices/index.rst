@@ -269,8 +269,8 @@ this is necessary.
 For the example above, the ``mount`` step might look like this::  
 
     $ sudo mount -o remount,usrjquota=aquota.user,grpjquota=aquota.group,jqfmt=vfsv0 /mnt/containers
-    $ sudo quotacheck -vgumb mountpoint /mnt/containers
-    $ sudo quotaon -v mountpoint /mnt/containers
+    $ sudo quotacheck -vgumb /mnt/containers
+    $ sudo quotaon -v /mnt/containers
 
 To ensure the quotas are preserved after reboot, edit
 */etc/init.d/setup_stackato_lxc* to include mount commands for each

@@ -5,7 +5,8 @@
 VMware Fusion/Player
 ====================
 
-*Recommended version*: **VMware Fusion / VMware Player 4** or newer
+*Recommended version*: **VMware Fusion / VMware Player 6** or newer
+
 
 Initial Setup
 -------------
@@ -18,7 +19,7 @@ Initial Setup
 #. When prompted with the question "Did you move this virtual machine, or did you copy it?" select "I copied it".
 #. Click Settings or Edit virtual machine settings:
 	* Optional: Change the Network settings from "NAT" to "Bridged"
-	  (see :ref:`NAT vs. Bridged Networking <server-config-nat>`.)
+	  (see :ref:`NAT vs. Bridged Networking <quickstart-config-nat>`.)
 	* Optional: Increase the memory allocated to the VM
 	  (necessary if you plan on running Java applications.)
 #. Start the VM.

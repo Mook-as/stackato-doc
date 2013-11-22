@@ -325,7 +325,7 @@ Using dbshell
 The ``stackato dbshell`` command creates an SSH tunnel to database
 services. To open an interactive shell to a service::
 
-	$ stackato dbshell <service_name>
+	$ stackato dbshell <application_name> <service_name>
 	
 The command will automatically open the appropriate database client for
 the database you're connecting to, provided that client is installed on

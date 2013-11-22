@@ -9,7 +9,7 @@ Host system requirements:
 
 * x86_64 processor with **VT-x enabled** (x86 virtualization).
 * 3GB+ memory
-* 3GB+ disk space
+* 20GB+ disk space
 
 .. note::
   The Stackato VM uses 2GB of memory by default. Ensure that there is

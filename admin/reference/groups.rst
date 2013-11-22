@@ -7,6 +7,10 @@
 Managing Groups, Users & Limits
 ===============================
 
+.. warning:: 
+  Stackato Groups have been replaced by :ref:`Organizations and Spaces <orgs-spaces>`.
+
+
 Stackato users can be assigned to specific groups, and each group can have a set of limits
 assigned to it regarding apps, services, and memory usage.
 

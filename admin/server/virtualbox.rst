@@ -20,7 +20,7 @@ Initial Setup
    Check the "Reinitialize the MAC address of all network cards" box, then press the Import button.
 #. Once the VM is imported, select it and click the Settings button, and then the Network tab.
 	* Change Adapter 1 from "NAT" to "Bridged Adapter"
-	  (see :ref:`NAT vs. Bridged Networking <server-config-nat>`.)
+	  (see :ref:`NAT vs. Bridged Networking <quickstart-config-nat>`.)
 	* Optional: Under Advanced, Press the "Refresh" icon beside the MAC Address field.
 	  This could be necessary if multiple cloned VMs are being installed.
 #. Start the VM.

@@ -1,3 +1,5 @@
 _build
 *.komodoproject
 .komodotools/
+*.sublime-*
+/docopts

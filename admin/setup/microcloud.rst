@@ -46,10 +46,20 @@ Console <management-console>` in a browser or connect with the
     Once you've set up the primary Stackato admin account, use that
     account's password when logging in at the command line.
 
+.. _quickstart-config-nat:
+
+.. index:: NAT
+
+NAT vs. Bridged Networking
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. include:: ../common/nat.inc
+
+
 .. _quickstart-dns-mdns:
 
 DNS vs. mDNS
-------------
+^^^^^^^^^^^^
 
 By default, the Stackato VM broadcasts its generated hostname via
 multicast DNS. This mDNS/DNS-SD broadcast address (e.g.
@@ -102,12 +112,32 @@ Adding Users
 ------------
 
 The easiest way to add additional users is in the :ref:`Users section
-<console-users>` of the :ref:`Management Console <management-console>`, but you can also use the ``stackato`` client:
+<console-users>` of the :ref:`Management Console <management-console>`,
+but you can also use the ``stackato`` client:
 
 .. parsed-literal::
   
-    $ stackato add-user *email@example.com* [--passwd *password*]
+    $ stackato add-user *username* [--passwd *password*]
 
+
+.. _quickstart-enable-services:
+
+Enabling Services
+-----------------
+
+In order to leave as much memory as possible available for user
+applications, the micro cloud starts with a number of services
+disabled by default:
+
+* Filesystem
+* Memcached
+* Redis
+* RabbitMQ
+* MongoDB
+
+You can enable them individually in the Management Console under **Admin
+> Cluster > Node Settings** (cog icon button), or use :ref:`kato role
+add <kato-command-ref-role-add>`.
 
 Using Stackato
 --------------
@@ -188,3 +218,14 @@ endpoint is ``api.stackato-xxxx.local`` and you have an app called
     192.168.68.54 api.stackato-xxxx.local
     192.168.68.54 myapp.stackato-xxxx.local
 
+
+.. _quickstart-uninstall:
+
+Uninstalling the VM
+-------------------
+
+Using the Stackato VM makes no changes to the underlying host operating
+system.
+
+If you wish to remove it, simply select the VM in your hypervisor and
+select **Remove...** or **Delete...** as appropriate.

@@ -65,6 +65,38 @@ The ``--json`` flag can be used to return each log line as a JSON object.
     log :ref:`drain <application_logs-drain>` preemptively (where
     possible).
 
+
+.. _application_logs-adding:
+
+Adding Files to the Stream
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+By default, ``stackato logs`` streams log data from *staging_tasks.log*
+(while staging), *stdout.log* and *stderr.log* (while running). 
+
+You can add up to five additonal files to the log stream by modifying the 
+**STACKATO_LOG_FILES** environment variable (in :ref:`stackato.yml
+<stackato_yml-env>` or using :ref:`stackato set-env <command-set-env>`).
+
+The variable should contain a list of named files separated with ":" in
+the following format:
+
+    name=/path/to/file.log:name=/path/to/another.log
+  
+The *name* used in the value or individual variable name becomes part of
+each log line, and can be used for filtering the stream.
+
+For example, to add a specific Tomcat log file to the default
+$STACKATO_LOG_FILES variable, you might set the following in
+*stackato.yml*::
+  
+    env:
+      STACKATO_LOG_FILES: tomcat=/app/app/.tomcat/logs/catalina.2013-11-04.log:$STACKATO_LOG_FILES
+      
+Paths can be specified fully, or relative to $STACKATO_APP_ROOT.
+
+
+
 .. _application_logs-drain:
 
 stackato drain
@@ -80,6 +112,14 @@ This creates a UDP drain called "appdrain" for the application "myapp"
 which forwards all log messages and events for that application to
 `Loggly <http://loggly.com/>`_ on port 12345.
 
+The log drain URL can contain only:
+
+* **scheme**: "udp://" or "tcp://"
+* **host**: IP address or hostname
+* **port**: number
+
+Any additional parameters are discarded.
+
 To delete the drain::
 
   $ stackato drain delete appdrain
@@ -88,6 +128,8 @@ Use the `--json` option send the log lines in JSON format::
 
   $ stackato drain add myapp jsondrain --json udp://logs.loggly.com:12346
   
+To check the status of your application drains, use the ``stackato drain
+list`` command.
   
 .. note::
 
@@ -274,7 +316,10 @@ using ``cron`` and ``logrotate``:
     env:
       STACKATO_CRON_INSTANCES: all
     cron:
-      - 0 1 * * * /usr/sbin/logrotate /app/app/app-logrotate.conf
+      - 0 1 * * * /usr/sbin/logrotate --status /app/app/logrotate-status /app/app/app-logrotate.conf
+      
+   The ``--status`` option must be set because the ``stackato`` user
+   does not have permission to update the default status file.
 
 2. Add an *app-logrotate.conf* file to the base directory of your
    application to specify which log files to rotate, and and which

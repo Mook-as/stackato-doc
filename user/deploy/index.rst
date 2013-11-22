@@ -4,35 +4,96 @@
 General Deployment
 ==================
 
+Applications are typically deployed to Stackato by pushing source code
+and configuration to the system's API endpoint using the :ref:`stackato
+cli client <client>` or other clients that use the Stackato or Cloud
+Foundry API. 
+
 The steps for deploying applications will be slightly different
-depending on the application. Instructions for deploying the `Stackato
-sample applications <https://github.com/Stackato-Apps>`_ can be found in
-the `README.md` file of each app.
+depending on the application and its requirements. Instructions for
+deploying the `Stackato sample applications
+<https://github.com/Stackato-Apps>`_ can be found in the `README.md`
+file of each app.
 
-To deploy an app to the Server VM, target the api endpoint URL with the
-:ref:`stackato client <client>`::
+.. note::
+  In Stackato 3.0 and later (Cloud Foundry v2 API), application
+  deployment is done primarily using :ref:`Buildpacks <buildpacks>`. A
+  special built-in 'Legacy' buildpack handles Stackato v2 frameworks for
+  existing application configurations.
 
-  $ stackato target api.stackato-xxxx.local
+Targeting & Authenticating
+--------------------------
+
+Before deploying an app, the client must first target Stackato's API
+endpoint URL. This will generally be the same URL that exposes the
+Management Console. For example::
+
+  $ stackato target api.stacka.to
+  Successfully targeted to [https://api.stacka.to]
+  ...
 
 Use the ``stackato login`` command to authenticate with your username
-and password, then use the command::
+and password::
 
-	$ stackato push
+  $ stackato login <username>
+  Attempting login to [https://api.stacka.to]
+  Password: ******
+  Successfully logged into [https://api.stacka.to]
+
+Selecting Org & Space
+---------------------
+
+If your account is a member of multiple :ref:`organizations
+<orgs-spaces>`, choose which one you want to operate under::
+
+  $ stackato switch-org exampleco
+
+Likewise, if you are a member of more than one space, choose a default
+space::
+
+  $ stackato switch-space devel-example
+
+Pushing Application Code
+------------------------
+
+Change to the root directory of your source code project, and use the
+``stackato push`` command to deploy your application. If you have a
+:ref:`stackato.yml <stackato_yml>` or :ref:`manifest.yml <manifest_yml>`
+config file in this directory, you can use just::
+
+	$ stackato push -n
+
+The "-n" option is an alias for "--no-prompt", which takes options from
+the config YAML file instead of prompting for them.
 
 The output of the push command will be something like::
-	
-	$ stackato push -n
-	Application Url: myapp.stackato-xxxx.local
-	Creating Application [myapp]: OK
-	Creating mysql Service [mydb]: OK
-	Binding Service [mydb]: OK
-	Uploading Application [myapp]:
-		Checking for available resources: OK
-		Packing application: OK
-		Uploading (30K): 100% OK
-	Push Status: OK
-	Staging Application [myapp]: OK                                          
-	Starting Application [myapp]: OK 
+
+  $ stackato push -n
+  Using manifest file "stackato.yml"
+  Application Url: env.stacka.to
+  Creating Application [env] as [https://api.stacka.to -> exampleco -> devel-example -> env] ... OK
+    Map env.stacka.to ... OK
+  Uploading Application [env] ... 
+    Checking for bad links ... 80 OK
+    Copying to temp space ... 79 OK
+    Checking for available resources ...  OK
+    Processing resources ... OK
+    Packing application ... OK
+    Uploading (223K) ... 100% OK
+  Push Status: OK
+  ...
+  stackato.dea_ng: [STAGED_APP] Completed staging application
+  stackato.dea_ng.0: [SPAWNING_APP] Spawning app web process: node server.js
+  app.0: Server running at
+  app.0:   => http://0.0.0.0:50932/
+  app.0: CTRL + C to shutdown
+  OK
+  http://env.stacka.to/ deployed
+
+The ``stackato`` client will show staging and running logs for the
+deployment process. To inspect these logs after deployment has finished,
+use the :ref:`stackato logs <command-logs>` command.
+
 
 .. _language-specific-deploy:
 
@@ -44,7 +105,6 @@ See each of these sections for language specific deployment details and examples
 .. toctree::
    :maxdepth: 1
 
-   languages/aspdotnet
    languages/clojure
    languages/go
    languages/java
@@ -95,23 +155,26 @@ Most applications should be able to run under Stackato with only a few changes.
   See the :ref:`Environment Variables <environment-variables>` section
   for a complete list.
 
-Stackato push and update
-------------------------
+Stackato push
+-------------
 
-The :ref:`stackato push <command-push>` and :ref:`stackato update
-<command-updates>` commands will prompt the user for input or use
-options from the :ref:`stackato.yml <stackato_yml>` and
-:ref:`manifest.yml <manifest_yml>` files. 
+The :ref:`stackato push <command-push>` command creates (or updates)
+applications on Stackato. It negotiates with the API endpoint to reserve
+application URLs, allocate application instances, provision data
+services, upload application code, and optionally stage and start the
+application.
 
-* stackato push: Create, push, map, and start a new application
-* stackato update: Update the application bits
+The command will prompt for options or use those specified in a
+:ref:`stackato.yml <stackato_yml>` or :ref:`manifest.yml <manifest_yml>`
+file. 
 
 .. note::
     
     The application name must be a valid `hostname label
     <http://en.wikipedia.org/wiki/Hostname#Restrictions_on_valid_host_names>`_
     (i.e. containing only alphanumeric characters and hyphens).
-    
+
+
 The ``push`` command implicitly stages and starts the application unless
 the ``--no-start`` option is used. With this option, applications are
 pushed in a pre-staged, stopped state where variables can be added (e.g.
@@ -144,26 +207,27 @@ Naming and URLs
 ---------------
 
 To prevent confusion or collisions, Stackato enforces uniqueness for
-URLs, application names, and service names at two different levels of
-scope (global and user/group):
+URLs, application names, and service names:
 
 * **URLs** (auto-generated or :ref:`manually mapped <deploy-map-url>`)
   must be globally unique, and are allocated on a "first come, first
   serve" basis.
 
-* **Application names** must be unique within the scope of the user or
-  group. Applications deployed by different users or groups can have the
-  same name, but a globally unique URL must be specified during
-  deployment (overriding the auto-generated URL, which would conflict).
+* **Application names** must be unique within the scope of the
+  :ref:`space <orgs-spaces>`. Applications deployed in different spaces
+  can have the same name, but the full application URL must be globally
+  unique URL.
 
-* **Service names** must be unique within the scope of the user or
-  group. The name given to a service during creation is a pointer to a
-  globally unique string (i.e. the *actual* database name in the system
-  as shown by STACKATO_SERVICES), so there is no possiblility of naming
-  conflicts with services created by other users or groups.
+* **Service names** must be unique within the scope of the :ref:`space
+  <orgs-spaces>`. The name given to a service during creation is a
+  pointer to a globally unique string (i.e. the *actual* database name
+  in the system as shown by STACKATO_SERVICES), so there is no
+  possiblility of naming conflicts with services created in other orgs
+  and spaces.
 
 
 .. index:: Crontab Support
+
 .. _deploy-crontab:
 
 Crontab Support
@@ -186,6 +250,15 @@ commands will be included in the crontab file.
 After setting up environment variables, we copy the *$HOME/crontab* file, and finally the commands 
 from the ``cron:`` section in *stackato.yml*. The resulting file is stored at 
 *$STACKATO_APP_ROOT/crontab*.
+
+Whitespace & Newlines in Environment Variables
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To prevent breakage in cron, embedded newlines ("\\n") in environent
+variable values will be replaced with "\\\\n" when generating the
+crontab. Any leading and trailing spaces in environment variable values
+are also stripped.
+
 
 .. index:: Map Application Url
 .. _deploy-map-url:
@@ -359,45 +432,6 @@ the following methods:
 	
     $ unset STACKATO_TARGET
 
-
-.. index:: Staging cache
-
-.. _caching-staging-assets:
-
-Caching Staging Assets
-----------------------
-
-For apps using Python and Buildpack, it is possible to cache assets required for staging.  This
-speeds up the deployment of updates because the resources do not need
-to be downloaded and/or compiled each time.
-
-In order to make this happen, add a ``filesystem:`` service named
-``${name}-cache`` to your *stackato.yml* file where ``${name}`` is your
-application name::
-
-    name: FOO
-    services:
-        ${name}-cache: filesystem
-
-This will create a filesystem service named FOO-cache.  If this filesystem service
-exists during the staging process, resources are copied to it and used when updates
-to the app are pushed.  Using :ref:`variable key substitution <stackato_yml-key-substitution>`,
-allows you to push multiple instances of the same app with their own bound services.
-Find an example of this process in the provided link above.
-.. warning::   
-
-    Key substitution for yaml key names is only available for client 1.4.3 and up.
-    See :ref:`min_version <stackato_yml-version>` section on how to enforce minimum client
-    versioning your stackato.yml file.
-    
-You can also manually set the caching service name in the *stackato.yml* file.  Any application
-created using this stackato.yml file will then share a FOO-cache filesystem.  **This is NOT
-recommended.  See below.**
-
-.. note::
-    To use this feature, the size of the application must not exceed the
-    the maximum size of the filesystem service. The default filesystem
-    size is 100MB, but this can be expanded by a Stackato admin.
 
 .. index:: Persistent Sessions
 .. index:: Session Persistence

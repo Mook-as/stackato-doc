@@ -65,10 +65,12 @@ There are currently two supported strategies:
   LDAP groups are not currently supported as a visible construct in
   Stackato.
   
-* **google_apps**: Authenticates users on a `Google Apps for Business
-  <http://www.google.com/enterprise/apps/business/>`_ domain.
-  ``stackato`` clients will need to authenticate using the
-  :ref:`stackato token <command-token>` command.
+.. only:: not public
+
+  * **google_apps**: Authenticates users on a `Google Apps for Business
+    <http://www.google.com/enterprise/apps/business/>`_ domain.
+    ``stackato`` clients will need to authenticate using the
+    :ref:`stackato token <command-token>` command.
       
 The `use` key in the configuration file controls the strategy that AOK
 will use. This value must correspond exactly to one of the supported
@@ -84,10 +86,9 @@ config set <kato-command-ref-config>`:
 
 * strategy:
 
-  * use: set to either 'builtin', 'ldap', or 'google_apps'. The builtin
-    strategy requires no further modification. The ldap and google_apps
-    strategies requires setting options in the corresponding blocks
-    below.
+  * use: set to either 'builtin' or 'ldap'. The builtin
+    strategy requires no further modification. The ldap strategy
+    requires setting options in the corresponding block below.
   
   * ldap:
   
@@ -109,11 +110,15 @@ config set <kato-command-ref-config>`:
        * email
        * userPrincipalName
        
-    * bind_dn: (optional) default credentials for user lookup
+    * bind_dn: (optional) credentials for user lookup (e.g.
+      'cn=Administrator,cn=Users,dc=example,dc=com'). LDAP servers that
+      allow anonymous binding will not require this setting.
     * password: (optional) default credentials for user lookup
     * try_sasl: (optional) when set to true attempts a SASL connection
       to the LDAP server
     * sasl_mechanims: (optional) 'DIGEST-MD5' or 'GSS-SPNEGO'
+
+.. only:: not public
 
   * google_apps:
   
@@ -121,7 +126,7 @@ config set <kato-command-ref-config>`:
 
 .. note::
 
-  An aditional 'name_proc' option in the 'ldap' block allows users to
+  An additional 'name_proc' option in the 'ldap' block allows users to
   enter email addresses instead of LDAP user names, matching the user name
   entered with the format of the uid attributes. For example, value of
   'sAMAccountName' in AD contains only the Windows user name. If your
@@ -209,15 +214,23 @@ under the *aok/ca_file* key in the Cloud Controller's configuration.
 AOK with a Load Balancer
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-In clusters with multiple Routers (specifically if the :ref:`Load
+In clusters with multiple Routers (specifically if a :ref:`Load
 Balancer <cluster-load-balancer>` is used), the following steps will
 correctly configure SSL certificates.
+  
 
-1. Take copies of the cert in */etc/ssl/certs/stackato.crt* from the Load Balancer node to each of the Controller nodes running AOK. This can be done with scp:
+1. Take copies of the cert in */etc/ssl/certs/stackato.crt* from the Stackato Load Balancer node to each of the Controller nodes running AOK. This can be done with scp:
 
   ::
   
     $ scp stackato@<Load Balancer node>:/etc/ssl/certs/stackato.crt /tmp/aok.crt
+
+
+  .. note::
+    If you are using a third-party hardware load balancer or load
+    balancing service, consult its documentation to find the SSL
+    certificate. You may need to convert the certificate to PEM format if
+    its native format is different.
 
 2. Move the newly copied cert on your Controller into */etc/ssl/certs/* as 'root' or using sudo. Do not overwrite the existing */etc/ssl/certs/stackato.crt*:
 
@@ -225,9 +238,9 @@ correctly configure SSL certificates.
   
     $ sudo mv /tmp/aok.crt /etc/ssl/certs/
 
-.. note::
-  These first two steps need to be repeated for *all* Controller nodes in
-  the cluster.
+  .. note::
+    These first two steps need to be repeated for *all* Controller nodes in
+    the cluster.
 
 3. Update Stackato's configuration with the following command:
 
