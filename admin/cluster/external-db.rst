@@ -69,6 +69,32 @@ Once these have been set, restart mysql::
 
     $ kato restart mysql
 
+.. _external-db-rds-mysql:
+
+Amazon RDS for MySQL
+--------------------
+
+If you are using Stackato on Amazon EC2, you can set up the Stackato
+MySQL service to use `Amazon RDS for MySQL
+<http://aws.amazon.com/rds/mysql/>`__ as the database back end.
+
+Launch the RDS instance on Amazon with a security group granting access
+to the Stackato service node (or wherever the 'mysql' role will be
+running). Set the host, port and credentials for the RDS instance in the
+configuration for mysql_service via :ref:`kato config
+<kato-command-ref-config>`, then set the ``aws_rds_compat`` option to
+``true``.
+
+For example::
+
+  $ kato config set mysql_node mysql/host <rds-endpoint>
+  $ kato config set mysql_node mysql/user <rds-username>
+  $ kato config set mysql_node mysql/pass <rds-password>
+  $ kato config set mysql_node mysql/port <rds-port>
+  $ kato config set mysql_node aws_rds_compat true
+  $ kato restart mysql
+
+
 .. _external-db-postgresql:
 
 PostgreSQL
