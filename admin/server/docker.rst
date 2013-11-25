@@ -39,13 +39,13 @@ role**:
    template::
   
     $ kato config get fence docker/image
-    stackato/app-holophonor
+    stackato/stack/alsek
   
 3. Create a `Dockerfile <http://docs.docker.io/en/latest/use/builder/>`_
    which inherits the current Docker image, then runs an update or
    installation command. For example::
 
-    FROM stackato/app-holophonor
+    FROM stackato/stack/alsek
     RUN apt-get -y install libgraphite2-dev
 
    * `FROM <http://docs.docker.io/en/latest/use/builder/#from>`__:
@@ -118,7 +118,7 @@ the Container Image <docker-modify-container>` ) would use the ADD
 directive to put a local *hooks* directory in the Docker image's
 */etc/stackato/* directory::
 
-  FROM stackato/app-holophonor
+  FROM stackato/stack/alsek
   ADD hooks /etc/stackato/hooks
 
 
