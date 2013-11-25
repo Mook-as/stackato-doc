@@ -350,7 +350,7 @@ contain something similar to::
 	*.stackato-test.example.com        IN    CNAME    stackato-test.example.com
 
 If you intend to expose your applications at URLs other than this wildcard through the
-use of :ref:`stackato map <command-map>` or :ref:`stackato push --url <command-push-url>`
+use of :ref:`stackato map <command-map>` or :ref:`stackato push --url <command-push>`
 then you will want to add the name information to the DNS zone file as well.
 Firewalls and load balancers at your site may require corresponding adjustments::
 
@@ -717,8 +717,7 @@ within application containers.
 You can manage groups, users, and limits in the :ref:`Users
 <console-users>` and :ref:`Groups <console-groups>` sections of the
 :ref:`Management Console <management-console>` or by using the
-``stackato`` client :ref:`administration commands
-<command-administration>`.
+:ref:`stackato <command-ref-client>` client .
 
 The :ref:`kato data users <kato-command-ref-data-users>` command is
 available to :ref:`import or export <user-import-export>` user lists in

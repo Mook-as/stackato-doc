@@ -102,7 +102,7 @@ Paths can be specified fully, or relative to $STACKATO_APP_ROOT.
 stackato drain
 --------------
 
-The :ref:`stackato drain <command-drain>` command is used to create a
+The :ref:`stackato drain add <command-drain add>` command is used to create a
 log drain which forwards application logs to external log aggregation
 services, log analysis tools, or Redis databases. For example::
 

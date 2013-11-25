@@ -195,7 +195,7 @@ This could be forwarded to the Papertrail log analysis service::
   
 You can also change the default apptail, event, and systail drain
 formats to modify the output of any drains using these prefixes (e.g.
-:ref:`stackato drain <command-drain>`, Cloud Events in the Management
+:ref:`stackato drain <command-drain add>`, Cloud Events in the Management
 Console, and :ref:`kato log tail <kato-command-ref-log-tail>`
 respectively).
 
@@ -217,7 +217,7 @@ Application Drains
 ^^^^^^^^^^^^^^^^^^
 
 Drains for application log streams can be added by end users with the
-:ref:`stackato log drain <command-drain>` command. See the
+:ref:`stackato log drain add <command-drain add>` command. See the
 :ref:`Application Logs <application_logs>` section of the User Guide for
 an example.
 

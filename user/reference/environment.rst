@@ -22,7 +22,7 @@ You can set your own environment variables:
 
 * in an ``env:`` block in :ref:`stackato.yml <stackato_yml-env>`,
 * via the application's Details page in the :ref:`Management Console <management-console>`, or
-* using the :ref:`stackato env-add <command-app-env>` command. 
+* using the :ref:`stackato env-add <command-env-add>` command. 
 
 .. note::
     

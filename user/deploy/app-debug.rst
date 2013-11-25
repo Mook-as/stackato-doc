@@ -18,7 +18,7 @@ automatically.
 See the :ref:`JPDA Debugging <java-web-debug>` section of the Java
 deployment documentation for an example.
 
-.. _app-debug-stackato-debug-command
+.. _app-debug-stackato-debug-command:
 
 STACKATO_DEBUG_COMMAND
 ----------------------

@@ -194,10 +194,9 @@ in the Windows *hosts* file.
 
   :ref:`Using xip.io <quickstart-xip-io>` for hostname resolution is the
   easiest way to set up a Stackato micro cloud VM if mDNS is not an
-  option. 
+  option. Try this method before modifying the *hosts* file. 
 
-To modify the *hosts* file use the :ref:`stackato host
-<command-host-file>` command or open the file located at::
+To modify the *hosts* file open::
 
     %SystemRoot%\System32\drivers\etc\hosts
     
