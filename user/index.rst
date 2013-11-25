@@ -42,6 +42,7 @@ Deploying Applications
   deploy/stackatoyml
   deploy/manifestyml
   deploy/groups
+  deploy/app-debug
 
 * :ref:`Languages & Frameworks <language-specific-deploy>`
 

@@ -130,6 +130,11 @@ Use the 'hostname' (or 'host' for an IP address) and 'port' values in
 the 'credentials' section of the output to configure your local
 debugging client.
 
+The :ref:`STACKATO_DEBUG_COMMAND <app-debug-stackato-debug-command>`
+environment variable can be used to automatically start a debugger or
+IDE instance with the appropriate host and port values.
+
+
 .. note::
   Though the ``stackato -d`` option is similar to ``vmc -d``, the
   internal implementation is different. ``vmc -d`` cannot be used to
