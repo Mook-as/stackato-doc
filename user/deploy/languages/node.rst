@@ -42,17 +42,17 @@ application is not allowed to arbitrarily choose which port it runs on.
 It must use the one assigned by Stackato with the ``PORT``
 variable. To access this in a node application::
 
-    process.env.PORT
+  process.env.PORT
 
 Likewise, the host IP address is exposed by ``VCAP_APP_HOST``::
 
-    process.env.VCAP_APP_HOST
+  process.env.VCAP_APP_HOST
     
 To make the application usable in both local and Stackato deployments,
 use structures such as::
 
-    var port = process.env.PORT || 1337;
-    var host = process.env.VCAP_APP_HOST || "127.0.0.1";
+  var port = process.env.PORT || 1337;
+  var host = process.env.VCAP_APP_HOST || "127.0.0.1";
 
 
 Using Data Services

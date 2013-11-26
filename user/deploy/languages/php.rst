@@ -25,9 +25,9 @@ Application URL
 
 Some applications require the user to specify the APP_URL. Below is an example on how to obtain the correct urls::
 
-    $appinfo = getenv("VCAP_APPLICATION");
-    $appinfo_json = json_decode($appinfo,true);
-    $admin = $appinfo_json['uris'][0];
+  $appinfo = getenv("VCAP_APPLICATION");
+  $appinfo_json = json_decode($appinfo,true);
+  $admin = $appinfo_json['uris'][0];
 
 .. _php-worker-apps:
 
@@ -37,11 +37,11 @@ Example
 ^^^^^^^
 ::
 
-    name: php-app
-    framework: php
-    command: php worker.php
-    processes:
-        web: ~
+  name: php-app
+  framework: php
+  command: php worker.php
+  processes:
+    web: ~
 
 .. _php-data-services:
 
@@ -56,37 +56,37 @@ under ``DATABASE_URL``. Here is an example of getting the correct credentials.
 
 .. code-block:: php
 
-    <?php
-        $url_parts = parse_url($_SERVER['DATABASE_URL']);
-        $db_name = substr( $url_parts['path'], 1 );
-        $db_connection_string = $url_parts['host'] . ':' . $url_parts['port'];
-        
-        // ** MySQL settings from resource descriptor ** //
-        echo $db_name;
-        echo $url_parts['user'];
-        echo $url_parts['pass'];
-        echo $url_parts['host'];
-        echo $url_parts['port'];
-    ?>
+  <?php
+      $url_parts = parse_url($_SERVER['DATABASE_URL']);
+      $db_name = substr( $url_parts['path'], 1 );
+      $db_connection_string = $url_parts['host'] . ':' . $url_parts['port'];
+      
+      // ** MySQL settings from resource descriptor ** //
+      echo $db_name;
+      echo $url_parts['user'];
+      echo $url_parts['pass'];
+      echo $url_parts['host'];
+      echo $url_parts['port'];
+  ?>
 
 VCAP_SERVICES
 ^^^^^^^^^^^^^
 
 .. code-block:: php
 
-    <?php
-        $services = getenv("VCAP_SERVICES");
-        $services_json = json_decode($services,true);
-        $mysql_config = $services_json["mysql"][0]["credentials"];
+  <?php
+      $services = getenv("VCAP_SERVICES");
+      $services_json = json_decode($services,true);
+      $mysql_config = $services_json["mysql"][0]["credentials"];
 
-        // ** MySQL settings from resource descriptor ** //
-        echo $mysql_config["name"];
-        echo $mysql_config["user"];
-        echo $mysql_config["password"];
-        echo $mysql_config["hostname"];
-        echo $mysql_config["port"];
-        );
-    ?>
+      // ** MySQL settings from resource descriptor ** //
+      echo $mysql_config["name"];
+      echo $mysql_config["user"];
+      echo $mysql_config["password"];
+      echo $mysql_config["hostname"];
+      echo $mysql_config["port"];
+      );
+  ?>
 
 .. index:: PHP.ini
 
@@ -147,20 +147,20 @@ following *stackato.yml* snippet creates a persistent filesystem
 service, creates a directory for sessions, and writes a PHP config file
 to set the path to the session directory::
 
-    services:
-        ${name}-fs: filesystem
-    hooks:
-      post-staging:
-      - mkdir -p "$STACKATO_FILESYSTEM"/sessions
-      - echo "session.save_path = $STACKATO_FILESYSTEM/sessions" > "$STACKATO_APP_ROOT"/apache/php/sessions.ini
+  services:
+    ${name}-fs: filesystem
+  hooks:
+    post-staging:
+    - mkdir -p "$STACKATO_FILESYSTEM"/sessions
+    - echo "session.save_path = $STACKATO_FILESYSTEM/sessions" > "$STACKATO_APP_ROOT"/apache/php/sessions.ini
 
 For better performance, use a :ref:`Memcached <memcached>` service for
 session storage instead::
 
-    services:
-        ${name}-cache: memcached
-    hooks:
-      post-staging:
-      - echo "session.save_handler = memcached" > "$STACKATO_APP_ROOT"/apache/php/sessions.ini
-      - echo "session.save_path = $MEMCACHE_URL" >> "$STACKATO_APP_ROOT"/apache/php/sessions.ini
+  services:
+    ${name}-cache: memcached
+  hooks:
+    post-staging:
+    - echo "session.save_handler = memcached" > "$STACKATO_APP_ROOT"/apache/php/sessions.ini
+    - echo "session.save_path = $MEMCACHE_URL" >> "$STACKATO_APP_ROOT"/apache/php/sessions.ini
 

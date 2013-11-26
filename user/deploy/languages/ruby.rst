@@ -18,8 +18,8 @@ Using Ruby 2.0
 
 The `stackato.yml` must specify the Ruby runtime version and Rails as the framework type::
 
-    framework:
-        runtime: ruby20
+  framework:
+    runtime: ruby20
 
 Default Ruby version is Ruby 1.9
 
@@ -49,15 +49,15 @@ Ruby on Rails 3.1+
 To get the asset pipeline working on Stackato, precompile your assets in your development 
 environment, which compiles them into public/assets::
 
-    bundle exec rake assets:precompile
+  bundle exec rake assets:precompile
 
 Gems and Libraries
 ^^^^^^^^^^^^^^^^^^
 
 A *Gemfile* must be included in your app that lists all required gems.  Run::
 
-    $ bundle install
-    $ bundle package
+  $ bundle install
+  $ bundle package
 
 any time you modify the *Gemfile* and prior to pushing an app to Stackato.
 
@@ -83,13 +83,13 @@ Example
 ^^^^^^^
 ::
 
-    name: ruby-app
-    framework:
-        type: rails3
-        runtime: ruby19
-    command: ruby worker.rb
-    processes:
-        web: ~
+  name: ruby-app
+  framework:
+    type: rails3
+    runtime: ruby19
+  command: ruby worker.rb
+  processes:
+    web: ~
 
 General Guidelines
 ------------------
@@ -106,7 +106,7 @@ Bundler
 
 First, you need bundler and rails installed locally. This can be done via::
 
-    $ sudo gem install rails bundler --no-ri --no-rdoc
+  $ sudo gem install rails bundler --no-ri --no-rdoc
 
 Running rake commands
 ^^^^^^^^^^^^^^^^^^^^^   
@@ -116,7 +116,7 @@ are installed through Gemfile/bundler.
 
 To run ``rake stats``, for instance, use the ``stackato run`` command::
 
-    $ stackato run *appname* bundle exec rake stats
+  $ stackato run *appname* bundle exec rake stats
 
 See the :ref:`Command Reference <command-ref-client>` for details on the use of ``stackato run``.
 

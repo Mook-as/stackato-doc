@@ -207,11 +207,11 @@ For JavaEE applications, you must create a ``persistence-unit`` in your
 
 For example in *stackato.yml*::
 
-    services:
-        service-1:
-            type: mysql
-        service-2:
-            type: mysql
+  services:
+    service-1:
+      type: mysql
+    service-2:
+      type: mysql
 
 To use ``service-1`` in your persistence.xml::
 

@@ -59,9 +59,9 @@ buildpack:
 The Git repository URL for the specific :ref:`buildpack <buildpacks>`
 used to deploy the application. For example::
 
-    name: java-app
-    mem: 512M
-    buildpack: https://github.com/heroku/heroku-buildpack-java.git
+  name: java-app
+  mem: 512M
+  buildpack: https://github.com/heroku/heroku-buildpack-java.git
 
 If unset, Stackato will check to see if the application triggers the
 ``detect`` scripts in any of its :ref:`built-in buildpacks
@@ -240,39 +240,39 @@ separate databases. For example::
 Using the name specified in *stackato.yml*, a data service is created to
 match that name::
 
-    $ stackato push -n
-    Pushing application 'sample'...
-    Framework:       node
-    Runtime:         <framework-specific default>
-    Application Url: sample.stackato-pjw3.local
-    Creating Application [sample]: OK
-    Binding service [sample-db]: OK
-    ...
-    Starting Application [sample]: ...OK
+  $ stackato push -n
+  Pushing application 'sample'...
+  Framework:       node
+  Runtime:         <framework-specific default>
+  Application Url: sample.stackato-pjw3.local
+  Creating Application [sample]: OK
+  Binding service [sample-db]: OK
+  ...
+  Starting Application [sample]: ...OK
 
 
 If you specify a new name for the application as an argument to
 ``stackato push``, a new service with a matching name is created rather
 than binding to the existing 'sample-db' service::
 
-    $ stackato push sample-2 -n
-    Pushing application 'sample-2'...
-    Framework:       node
-    Runtime:         <framework-specific default>
-    Application Url: sample-2.stackato-pjw3.local
-    Creating Application [sample-2]: OK
-    Binding service [sample-2-db]: OK
-    ...
-    Starting Application [sample-2]: ..OK
-    
-    $ stackato apps
+  $ stackato push sample-2 -n
+  Pushing application 'sample-2'...
+  Framework:       node
+  Runtime:         <framework-specific default>
+  Application Url: sample-2.stackato-pjw3.local
+  Creating Application [sample-2]: OK
+  Binding service [sample-2-db]: OK
+  ...
+  Starting Application [sample-2]: ..OK
+  
+  $ stackato apps
 
-    +-------------+---+---------+------------------------------+-------------+
-    | Application | # | Health  | URLS                         | Services    |
-    +-------------+---+---------+------------------------------+-------------+
-    | sample      | 1 | RUNNING | sample.stackato-pjw3.local   | sample-db   |
-    | sample-2    | 1 | RUNNING | sample-2.stackato-pjw3.local | sample-2-db |
-    +-------------+---+---------+------------------------------+-------------+
+  +-------------+---+---------+------------------------------+-------------+
+  | Application | # | Health  | URLS                         | Services    |
+  +-------------+---+---------+------------------------------+-------------+
+  | sample      | 1 | RUNNING | sample.stackato-pjw3.local   | sample-db   |
+  | sample-2    | 1 | RUNNING | sample-2.stackato-pjw3.local | sample-2-db |
+  +-------------+---+---------+------------------------------+-------------+
 
 requirements:
 ^^^^^^^^^^^^^
@@ -564,7 +564,7 @@ to ``0.0.0.0`` host and ``$PORT`` port.
 and not provisioned with a URL. For example, an application that just runs 
 a background Perl script might look like this::
 
-  name: 
+  name: perlwork
   framework:
     type: perl
   command: perl worker.pl

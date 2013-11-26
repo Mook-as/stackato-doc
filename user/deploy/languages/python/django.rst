@@ -18,16 +18,16 @@ copy of it needs to be in the root directory in order for Stackato recognize it:
 
 Typically, the *wsgi.py* file is just three lines of code::
 
-    import os
-    import django.core.handlers.wsgi
-    application = django.core.handlers.wsgi.WSGIHandler()
+  import os
+  import django.core.handlers.wsgi
+  application = django.core.handlers.wsgi.WSGIHandler()
 
 Your project must also have a *requirements.txt* file containing at least
 the ``django`` project::
 
-    $ cat requirements.txt
-    django==1.4
-    mysql-python
+  $ cat requirements.txt
+  django==1.4
+  mysql-python
 
 
 Configuring database
@@ -79,12 +79,12 @@ Initializing database
 
 Run the ``syncdb`` command to initialize the database tables::
 
-    $ stackato run <appname> python manage.py syncdb
+  $ stackato run <appname> python manage.py syncdb
 
 If you use a data migration library such as `South
 <http://south.aeracode.org/>`_, also run::
 
-    $ stackato run <appname> python manage.py migrate
+  $ stackato run <appname> python manage.py migrate
 
 
 
@@ -120,9 +120,9 @@ sub-directories.
 To persist such environment changes (across wsgi.py, settings.py,
 manage.py, etc.), add the following to stackato.yml::
 
-    env:
-      DJANGO_SETTINGS_MODULE: myproject.settings
-      PYTHONPATH: myproject
+  env:
+    DJANGO_SETTINGS_MODULE: myproject.settings
+    PYTHONPATH: myproject
 
 This assumes that your Django project lives under the ``myproject/``
 sub-directory.
