@@ -1,4 +1,4 @@
-# Makefile for stackato-doc
+# Makefile for stackato-doc-ng
 #
 # Sphinx documentation for Stackato.
 # Used by packaging system and also manually during development and testing.
