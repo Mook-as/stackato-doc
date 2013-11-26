@@ -27,6 +27,8 @@ load. The Console is supported on the following browsers:
 
 * IE 10+
 
+Using a browser which fully support WebSockets is recommended.
+
 .. note::
 	The SSL certificate for the Stackato Management Console is
 	self-signed. You will need to manually accept this certificate
