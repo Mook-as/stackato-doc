@@ -681,6 +681,21 @@ hooks:
 Hooks are commands that are run at various point of the staging and running 
 process of an app.
 
+pre-push:
+~~~~~~~~~
+
+Commands run **on the local system** before pushing the code to
+Stackato. This can be useful for building source files (e.g. with
+``make``) or performing configuration steps that need to be done on the
+local system before the application code can be pushed. Commands are
+executed between application creation (when the URL and application
+resources are reserved) and the actual upload of the local code.
+
+The client will set the STACKATO_HOOK_ACTION variable to "create" if the
+application is new, or "update" if it detects the application already
+exists. You can use this variable to run hooks differently in either
+context.
+
 pre-staging:
 ~~~~~~~~~~~~~
 
