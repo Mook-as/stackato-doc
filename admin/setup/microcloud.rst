@@ -211,10 +211,12 @@ the command::
     $ ifconfig
     
 Then, if for example your IP address is ``192.168.68.54``, the API
-endpoint is ``api.stackato-xxxx.local`` and you have an app called
-``myapp.stackato-xxxx.local``, you would enter the following two lines::
+endpoint is ``api.stackato-xxxx.local``, the AOK (authentication)
+endpoint is ``aok.stackato-xxxx.local``, and you have an app called
+``myapp.stackato-xxxx.local``, you would enter the following lines::
 
     192.168.68.54 api.stackato-xxxx.local
+    192.168.68.54 aok.stackato-xxxx.local
     192.168.68.54 myapp.stackato-xxxx.local
 
 
