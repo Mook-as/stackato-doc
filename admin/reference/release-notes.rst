@@ -23,7 +23,7 @@ Release Notes
 
   * [101560] Enable rotation of some log files
   * [101081]
-  * Upgrade to Docker 0.6.6
+  * Upgrade to Docker 0.7
   * Logyard:
     * [101635] Fix inotify panic in systail
     * [100670] Avoid camel-case in stream JSON keys
