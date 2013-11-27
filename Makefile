@@ -54,8 +54,6 @@ GEM_HOME=$(UPDATE)/gems
 # The targets "all", "install", and "uninstall", as well as the variables
 # DESTDIR, prefix and PKG_GITDESCRIBE, are used by packaging systems.
 
-PKG_GITDESCRIBE=GITDESCRIBE-PKG
-
 all:		publicdocs-production
 
 install:
