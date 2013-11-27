@@ -130,7 +130,7 @@ config set <kato-command-ref-config>`:
       Proc.new {|name| name.gsub(/@.*$/,'')}
   
   Value must be valid ruby code. Since the provided code will be
-  accepting arbitrary user input. Administrators are urged to use this
+  accepting arbitrary user input, administrators are urged to use this
   setting only when absolutely necessary, and to check the code
   thoroughly for possible security implications.
   
