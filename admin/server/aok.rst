@@ -5,10 +5,11 @@
 AOK Authentication Server
 =========================
 
-Stackato's Cloud Controller has a built-in system for authenticating
-users which it uses by default. It also has an authentication server
-called "AOK" which supports using external systems such as LDAP.
-
+AOK is Stackato's authentication management service (replacing Cloud
+Foundry's UAA Server). It issues tokens via OAuth2 for client
+applications such as the ``stackato`` client and the Management Console.
+AOK can connect to other back-end SSO services such as LDAP by using
+different :ref:`Strategies <aok-strategies>`.
 
 End User Login
 --------------
@@ -16,24 +17,22 @@ End User Login
 Web
 ^^^
 
-In order to adapt to the login UI of various authentication systems,
-users are redirected away from the Management Console to a page served
-by AOK during Management Console login. Users should be notified of this
-change in behavior if they have previously used the default interface.
+Users log in to the web Management Console as they would with any other
+web application. The Managemet Console checks with the AOK endpoint (e.g.
+https://aok.stackato.example.com) in the background. 
 
 Client
 ^^^^^^
 
 Users connecting with the :ref:`stackato <client>` client should be aware that:
 
-* Though prompted for ``Email:``, the user may need to enter their
-  identifier in the format expected by the :ref:`strategy
-  <aok-strategies>` used by AOK. For example, many LDAP systems require
-  the user to enter a username rather than an email address.
+* The user must to enter their identifier in the format expected by the
+  :ref:`strategy <aok-strategies>` used by AOK (e.g. username or email
+  address).
   
 * When using an existing authentication token to log in as a second user
   (e.g. an admin connecting as another user), use the second user's
-  email address, *not the identifier used by AOK's strategy*.
+  identifier, *not the identifier used by AOK's strategy*.
 
 These caveats also apply when using other Cloud-Foundry-compatible clients.
 
@@ -45,22 +44,17 @@ Strategies
 The term *strategy* refers to the method used to authenticate users.
 There are currently two supported strategies:
 
-* **builtin**: The `builtin` strategy uses a local database of email
-  addresses and passwords to authenticate users. *This strategy and
-  database is distinct from the Cloud Controller's internal
-  email/password database that is used when AOK is disabled.* If you
-  wish to start using this strategy with the existing user login
-  credentials, run the following in the */s/aok/* directory ::
+* **builtin**: The default `builtin` strategy uses a local database of
+  users and passwords to authenticate. 
 
-    bundle exec rake import_users_from_cloud_controller
-
-* **ldap**: The `ldap` strategy authenticates users using the LDAP server
-  specified in *config/aok.yml*. **Any user that can successfully
-  authenticate with the LDAP server will be allowed to use Stackato and
-  will have a (non-admin) user account created for them automatically.**
-  The LDAP server must return an email address for the user to allow
-  them to log in to Stackato. AOK will look for the email
-  address under the ``mail``, ``email``, and ``userPrincipalName`` attributes.
+* **ldap**: The `ldap` strategy authenticates using the LDAP server
+  specified in :ref:`kato config <aok-configuration>`. Any user that can
+  successfully authenticate with the LDAP server will be allowed to use
+  Stackato and will have a (non-admin) user account created for them
+  automatically. The LDAP server must return an email address for the
+  user to allow them to log in to Stackato. AOK will look for the email
+  address under the ``mail``, ``email``, and ``userPrincipalName``
+  attributes.
   
   LDAP groups are not currently supported as a visible construct in
   Stackato.
@@ -72,7 +66,7 @@ There are currently two supported strategies:
     ``stackato`` clients will need to authenticate using the
     :ref:`stackato token <command-token>` command.
       
-The `use` key in the configuration file controls the strategy that AOK
+The `use` key in the configuration controls the strategy that AOK
 will use. This value must correspond exactly to one of the supported
 strategy names.
 
@@ -86,7 +80,7 @@ config set <kato-command-ref-config>`:
 
 * strategy:
 
-  * use: set to either 'builtin' or 'ldap'. The builtin
+  * use: set to either 'builtin' (default) or 'ldap'. The builtin
     strategy requires no further modification. The ldap strategy
     requires setting options in the corresponding block below.
   
@@ -157,21 +151,6 @@ To set the entire array in one step, use the ``--json`` option::
 
   kato config set --json aok strategy/ldap/email '["mail","ADMailAcct", "email"]'
 
-
-Enabling
---------
-
-AOK is disabled by default. While disabled, the Cloud Controller uses
-its internal email/password database to authenticate. Execute the
-following commands to enable AOK::
-    
-  kato config set cloud_controller aok/enabled true
-  kato restart controller
-
-If AOK is enabled before the initial admin account has been set up via
-the Management Console welcome page, the ``stackato`` system user will
-still have the default password. Change this as soon as possible using
-the ``passwd`` command.
 
 User Management
 ---------------
@@ -246,7 +225,7 @@ correctly configure SSL certificates.
 
   ::
     
-    $ kato config set cloud_controller aok/ca_file /etc/ssl/certs/aok.crt
+    $ kato config set cloud_controller_ng aok/ca_file /etc/ssl/certs/aok.crt
 
 4. Run ``kato restart controller``
 
