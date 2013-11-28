@@ -29,6 +29,7 @@ Release Notes
     * [100670] Avoid camel-case in stream JSON keys
   * [101692] Remove appstore containers after use
   * [101648] ``kato report`` and ``kato cluster`` ``--all`` (``-a``) options changed to ``--cluster`` (``-c``)
+  * [101872] Deleting an app will now delete its drains
 
 v3.0.0 Beta (November 6, 2013)
 ------------------------------
