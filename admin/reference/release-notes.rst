@@ -21,6 +21,7 @@ Release Notes
   v3.0.0 FINAL
   ------------
 
+  * [101893] Fix a growing docker container leak
   * [101560] Enable rotation of some log files
   * [101081]
   * Upgrade to Docker 0.7
