@@ -171,7 +171,7 @@ section.
 DATABASE_URL
 ^^^^^^^^^^^^
 
-**If only one database service** is bound to an application, use the
+**If only one relational database service** is bound to an application, use the
 DATABASE_URL environment variable. It contains the connection string for
 the bound database in the following format::
  
@@ -185,8 +185,6 @@ The "protocol" portion specifies the type of database. For example:
 
 * mysql://
 * postgresql://
-* mongodb://
-* redis://
 
 .. note::
   The "database name" portion of the URL is the *actual* database name
@@ -198,16 +196,20 @@ The "protocol" portion specifies the type of database. For example:
 Database-Specific URLs
 ^^^^^^^^^^^^^^^^^^^^^^
 
-**If more than one database service type** is bound to the application
-(e.g. MySQL and MongoDB services), the DATABASE_URL variable will not be
-set, but the following database-specific variables will still be
-available:
+**If a non-relational data service type** is bound to the
+application, use the corresponding named environment variable:
+
+* MONGODB_URL 
+* REDIS_URL
+* RABBITMQ_URL
+
+**If more than one relational database service type** is bound to the
+application (e.g. MySQL and PostgreSQL), the DATABASE_URL variable will
+not be set but the following database-specific variables will:
 
 * MYSQL_URL
 * POSTGRESQL_URL
-* REDIS_URL
-* MONGODB_URL
-* RABBITMQ_URL
+* ORACLE_URL (with Oracle Database add-on)
 
 These have the same format as DATABASE_URL.
 
