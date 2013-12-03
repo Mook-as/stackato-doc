@@ -37,9 +37,6 @@ PAPEROPT_a4     = -D latex_paper_size=a4
 PAPEROPT_letter = -D latex_paper_size=letter
 ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 
-STACKATO_LIVE_TARGET = api.stackato1-prod.activestate.com
-STACKATO_LIVE_USER = deploy@activestate.com
-
 PREV_TARGET = $(stackato target)
 
 # Variables used for extracting docopts from kato.
@@ -69,7 +66,6 @@ uninstall:
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
-	@echo "  push-live  to push update the live docs on docs.stackato.activestate.com"
 	@echo "  update     clone kato repo and generate kato-ref.rst"
 	@echo "  reupdate   regenerate kato-ref.rst from existing clone (e.g. to test changes)"
 	@echo "  html       to make standalone HTML files"
@@ -224,14 +220,4 @@ publicdocs:
 
 publicdocs-production:
 	$(SPHINXBUILD) -b html -t public $(ALLSPHINXOPTS) ../$(PUBLICDIR)
-
-push-live: 
-	cp -rf web-server/* $(BUILDDIR)/public-docs/
-	@echo "Updating docs at current stackato target: $(STACKATO_LIVE_TARGET)" 
-	@echo "...as current user: $(STACKATO_LIVE_USER)" 
-	stackato target $(STACKATO_LIVE_TARGET)
-	stackato login $(STACKATO_LIVE_USER) --passwd $(STACKATO_DOCS_PASSWD) --group demos
-	stackato update -n --path $(BUILDDIR)/public-docs/.
-	@echo "Docs updated, resetting to original target..."
-	stackato target $(PREV_TARGET)
 
