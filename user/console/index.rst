@@ -22,7 +22,7 @@ Welcome
 -------
 
 The top-level page of the Management Console displays quick links to the
-most used resources and functional pages:
+most used resources and views:
 
 * Read the Documentation: By default, a link to `docs.stackato.com <http://docs.stackato.com/>`__
 
