@@ -18,6 +18,8 @@ Organizations and Spaces are the main organizational units in Stackato.
 * Spaces have Users, Applications, and Service Instances
 * Applications have Routes (which are derived from Domains)
 
+.. _orgs-spaces-organizations:
+
 Organizations
 -------------
 
@@ -25,12 +27,16 @@ An organization is a top-level group of users, spaces, and domains. Only
 Stackato admins (accounts with global superuser privileges) can manage
 Organizations.
 
+.. _orgs-spaces-spaces:
+
 Spaces
 ------
 
 An organization can contain multiple spaces (e.g. **development**,
 **test**, and **production**). A domain can be mapped to multiple spaces
 but a route can be mapped to only one space.
+
+.. _orgs-spaces-domains:
 
 Domains
 -------
@@ -45,6 +51,9 @@ associated with one or more spaces within that organization, but are not
 directly bound to apps. Apps are assigned a "hostname + domain"
 combination called a Route. 
 
+
+.. _orgs-spaces-routes:
+
 Routes
 ------
 
@@ -55,8 +64,9 @@ Management
 ----------
 
 You can manage spaces and organizations with the :ref:`stackato client
-<client>` or the :ref:`Management Console <user-console-overview>`.
+<client>` or the :ref:`Management Console <user-console-organizations>`.
 
+.. _orgs-spaces-roles:
   
 Users & Roles
 -------------
