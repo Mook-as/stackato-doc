@@ -72,8 +72,12 @@ Tabs:
 
 * Users: A list of Users who are members of the Organization, showing
   the Email address and Organization :ref:`Roles <orgs-spaces-roles>` of
-  each. A user with the Manager role can add Spaces to an Organization,
-  but not Users.
+  each.
+  
+  * Users: can view organization quotas, domains, spaces and users.
+  
+  * Manager: can add domains and spaces to the organization, but not
+    users.
   
 .. note::
   There is currently no interface in the Management Console for
