@@ -4,12 +4,14 @@
 .. index:: Limits
 .. index:: Users
 
-Managing Groups, Users & Limits
-===============================
+Managing Groups, Users & Limits (DEPRECATED)
+============================================
 
 .. warning:: 
-  Stackato Groups have been replaced by :ref:`Organizations and Spaces <orgs-spaces>`.
-
+  Stackato Groups have been replaced by :ref:`Organizations and Spaces
+  <orgs-spaces>`. The following information applies to Stackato 2.10.x
+  releases and is included to provide context for admins migrating to
+  Stackato 3.0.
 
 Stackato users can be assigned to specific groups, and each group can have a set of limits
 assigned to it regarding apps, services, and memory usage.
