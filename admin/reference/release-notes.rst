@@ -16,53 +16,62 @@ Release Notes
         `<https://github.com/ActiveState/stackato-doc>`_
 
 
-.. only:: not public
+v3.0.1 (December 12, 2013)
+--------------------------
 
-  v3.0.1 (December 12, 2013)
-  --------------------------
-  
-  * [101893] Fix a growing docker container leak
-  * [101560] Enable rotation of some log files
-  * [101853] Upgrade to Docker 0.7
+* Management Console:
 
-  * Logyard:
+  * Updated Web Console for enhanced user and organization management
+  * [100376] Support line breaks in env variables in Web Console
   
-    * [101635] Fix inotify panic in systail
-    * [100670] Avoid camel-case in stream JSON keys
+* Logyard:
+
+  * [101635] Fix inotify panic in systail
+  * [100670] Avoid camel-case in stream JSON keys
+  * [101558] Limit the number of custom app logs
+  * [101863] ``max_user_drains`` quota replaced by ``max_drains_per_app``
   
-  * [101692] Remove appstore containers after use
-  * [101993] Fix shell escaping of arguments in app store deployments
+* Kato:
+  
   * [101648] ``kato report`` and ``kato cluster`` ``--all`` (``-a``) options changed to ``--cluster`` (``-c``)
-  * [101872] Deleting an app will now delete its drains
-  * [100396,101370] Added import/export support from both CFv1 and CFv2 based systems
-  * [101823] Upgrade Ruby and Rails components against reported vulnerabilities
-  * [102025] Revoke AOK token on logout
   * [101354] Add kato cluster upgrade functionality
-  * [101822] Address nginx CVE 2013-4547
-  * 
+  * [102106,101700] Fixes to ``kato node reset``
+  
+* [101993] App Store: use shell escaped args when calling stackato client 
+* [101853] Upgrade to Docker 0.7
+* [101560] Enable rotation of some log files
+* [101692] Remove appstore containers after use
+* [101893] Fix a Docker container memory leak
+* [101993] Fix shell escaping of arguments in app store deployments
+* [101872] Deleting an app will now delete its drains
+* [100396,101370] Added import/export support from both CFv1 and CFv2 based systems
+* [101823] Upgrade Ruby and Rails components against reported vulnerabilities
+* [101973] Upgrade ActiveRecord to 3.2.16
+* [102025] Revoke AOK token on logout
+* [101822] Address NGINX CVE 2013-4547
+* [101925] Remove passwords from cloud_controller_ng logs
+* [102003] Enhancements for web console rebranding
+* [101917] Account for different exit status returned by Fence
 
-  * Management Console:
 
-    * Updated Web Console for enhanced user and organization management
-    * [100376] Support line breaks in env variables in Web Console
 
-  * Stackato client updated to v3.0.0
+* Stackato client updated to v3.0.0
 
-    * [102085] Fix issues handlingcommunicating with Stackato server v2
-    * [101761] Improve handling of UPSI vs managed services
-    * [101763] Add configurable --timeout for ``start`` and ``push`` commands
-    * [101473] Warn about a BUILDPACK_URL without proper framework type
-    * [100929] Dropped ``--name`` alias for ``--as``
-    * [90686] Add ``stackato run --all`` option
-    * [101381] Improve semantic checking of yaml keys
-    * [101702] Allow the use of plain domains (without host) for ``(un)map``
-    * [94022] Add ``pre-push`` hooks
-    * [97575] Improve ``-d`` debug port handling
-    * [101507] Improve handling of multi-instance app startup
-    * [101443] Improve handling of ``switch`` commands against known orgs/spaces
-    * [101812] Improve handling of non-json responses
-    * [101859] Show events for spaces as well as applications
-    * [101949] Improve handling of default url based on current space
+  * [102085] Fix issues communicating with Stackato v2
+  * [101761] Improve handling of UPSI vs. managed services
+  * [101763] Add configurable ``--timeout`` for ``start`` and ``push`` commands
+  * [101473] Warn about a BUILDPACK_URL without proper framework type
+  * [100929] Dropped ``--name`` alias for ``--as``
+  * [90686] Add ``stackato run --all`` option
+  * [101381] Improve semantic checking of YAML keys
+  * [101702] Allow the use of plain domains (without host) for ``(un)map``
+  * [94022] Add ``pre-push`` hooks
+  * [97575] Improve ``-d`` debug port handling
+  * [101507] Improve handling of multi-instance app startup
+  * [101443] Improve handling of ``switch`` commands against known orgs/spaces
+  * [101812] Improve handling of non-json responses
+  * [101859] Show events for spaces as well as applications
+  * [101949] Default to URL based on current space
 
 v3.0.0 Beta (November 6, 2013)
 ------------------------------
