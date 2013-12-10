@@ -23,25 +23,47 @@ v3.0.1 (December 12, 2013)
 
   * Updated Web Console for enhanced user and organization management
   * [100376] Support line breaks in env variables in Web Console
+  * [99914] App Store: Apps with missing requirements (e.g. services) have disabled deploy buttons
+  * [101029] UI for creating routes and associating them with applications
+  * [101031, 101738, 101739] UI for managing domains
+  * [101786] Added route management UI to application view
+  * [101840] Update web console browser requirements
+  * [101910] App Store offers options for which Domain to push to
+  * [101942] Fixed Organization quota usage bar
+  * [102013] Prevent deletion of reserved URIs
+  * [102023] Removed "Allow non-local URLs" setting. Domains are now attached to Organizations.
+
+
+* Docker (Containerization):
+
+  * [101853] Upgrade to Docker 0.7
+  * [101893] Fix a Docker container memory leak
+  * [101772] New naming scheme for app images (stacks)
+  * [101813] Added networking tools (net-tools package) in app image
+  
   
 * Logyard:
 
   * [101635] Fix inotify panic in systail
+  * [101616] Updated inotify
   * [100670] Avoid camel-case in stream JSON keys
   * [101558] Limit the number of custom app logs
-  * [101863] ``max_user_drains`` quota replaced by ``max_drains_per_app``
+  * [101863,101887] ``max_user_drains`` quota replaced by ``max_drains_per_app``
   
 * Kato:
   
   * [101648] ``kato report`` and ``kato cluster`` ``--all`` (``-a``) options changed to ``--cluster`` (``-c``)
   * [101354] Add kato cluster upgrade functionality
   * [102106,101700] Fixes to ``kato node reset``
+  * [101798] Fixed ``kato process stop config_redis`` (and ``sup stop config_redis``) hang
+  * [101081] Config changes force a process restart
+  * [101188] ``kato report`` no longer asks for sudo password
   
+  
+* [99950] In-place node and cluster upgrade
 * [101993] App Store: use shell escaped args when calling stackato client 
-* [101853] Upgrade to Docker 0.7
 * [101560] Enable rotation of some log files
 * [101692] Remove appstore containers after use
-* [101893] Fix a Docker container memory leak
 * [101993] Fix shell escaping of arguments in app store deployments
 * [101872] Deleting an app will now delete its drains
 * [100396,101370] Added import/export support from both CFv1 and CFv2 based systems
@@ -52,6 +74,15 @@ v3.0.1 (December 12, 2013)
 * [101925] Remove passwords from cloud_controller_ng logs
 * [102003] Enhancements for web console rebranding
 * [101917] Account for different exit status returned by Fence
+* [97541,101449] Made libpq-dev and bundler available in container
+* [99476] Improve security of router SSL handling
+* [100687] Add max length validation to org and space names (64 chars) 
+* [100900] Deny non-SSL requests to AOK
+* [101254] Update java-buildpack from v1.0 to v1.5
+* [101590] ``--env`` settings are always written
+* [101750] Add ``--url`` to appstore push API
+* [101980] DATABASE_URL and POSTGRESQL_URL env variables now uses "postgres://" instead of "postgresql://" 
+* [101980] JDBC_DATABASE_URL env variable now available ("jdbc:postgresql://") 
 
 
 
@@ -72,6 +103,9 @@ v3.0.1 (December 12, 2013)
   * [101812] Improve handling of non-json responses
   * [101859] Show events for spaces as well as applications
   * [101949] Default to URL based on current space
+  * [100346] Fixed hang in ``stackato tunnel`` with CF v1 targets
+  
+  
 
 v3.0.0 Beta (November 6, 2013)
 ------------------------------
@@ -85,14 +119,14 @@ v3.0.0 Beta (November 6, 2013)
 * [99604] New X-Frame header configuration option for router
 * [96349] Separate user and admin documentation
 
-* Containerization updates:
+* Containerization:
 
   * [100352,101383] Use Docker for containerization
   * [96266] Improve app startup flapping prevention under high-load
   * [99614] New default limit of 50 processes per container. Configurable with ``kato config`` under ``fence max_container_processes``
   * [98668] Memory consumption during staging is now limited to 1.5 times the application's allocated memory by default. Configurable with ``kato config`` under ``stager app_memory_multiplier``
 
-* Kato updates:
+* Kato:
 
   * Add ``kato node retire`` to gracefully shut down a DEA, moving its application instances on other available nodes first.
   * ``kato admin ...`` commands removed; use the corresponding ``stackato admin ...`` commands or the web console
@@ -103,7 +137,7 @@ v3.0.0 Beta (November 6, 2013)
   * [99745] ``kato config`` no longer supports node-specific config; ``--node`` option removed.
   * [100861] Extend ``kato node setup firstuser`` to require default organization
 
-* Languages updates:
+* Languages:
 
   * [99429] Add Ruby 2.0 runtime and remove Ruby 1.8.7 (EOL)
   * [99368] Fixed problem building Nokogiri 1.6 gem. Stager now uses using system libraries (``NOKOGIRI_USE_SYSTEM_LIBRARIES=true``).
@@ -112,7 +146,7 @@ v3.0.0 Beta (November 6, 2013)
   * [99977] Update PHP to 5.4 for default runtime
   * [99840] Support legacy frameworks with built-in buildpack
 
-* Logyard updates:
+* Logyard:
 
   * [99435] New ``kato log drain status`` command for showing drain status
   * [98325] Move drains from doozer to redis
@@ -129,7 +163,7 @@ v3.0.0 Beta (November 6, 2013)
   * [98998] Compile with Go 1.1
   * systail now works with logrotate managed files (eg: router2g-access.log)
   
-* Management Console updates:
+* Management Console:
 
   * Update look and feel, improve inline loading and responsiveness using websockets
   * [99505] New Activity Stream API and timeline
@@ -137,7 +171,7 @@ v3.0.0 Beta (November 6, 2013)
   * [98737] New dashboard for router metrics
   * [99452,100047] Updated App Store to use new API and YAML format
 
-* Services updates:
+* Services:
 
   * [99874] Core services ported to CFv2 API
   * [97164] Micro cloud starts with Memcached, Redis, PostrgreSQL, RabbitMQ, and MongoDB roles disabled by default (enable via Managment Console).
@@ -147,7 +181,7 @@ v3.0.0 Beta (November 6, 2013)
   * [99444] Make mysql service compatible with Amazon RDS
   * [98902] MongoDB client updated to 2.4.1 in application container 
 
-* Client updates:
+* Client:
 
   * [96623] Full support for CFv2 API, maintained CFv1 compatibility
   * Updated command set for CFv2 terminology changes
