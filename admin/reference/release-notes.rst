@@ -25,7 +25,7 @@ v3.0.1 (December 12, 2013)
   * [100376] Support line breaks in env variables in Web Console
   * [99914] App Store: Apps with missing requirements (e.g. services) have disabled deploy buttons
   * [101029] UI for creating routes and associating them with applications
-  * [101031, 101738, 101739] UI for managing domains
+  * [101031, 101738, 101739, 102081] UI for managing domains
   * [101786] Added route management UI to application view
   * [101840] Update web console browser requirements
   * [101910] App Store offers options for which Domain to push to
@@ -33,14 +33,12 @@ v3.0.1 (December 12, 2013)
   * [102013] Prevent deletion of reserved URIs
   * [102023] Removed "Allow non-local URLs" setting. Domains are now attached to Organizations.
 
-
 * Docker (Containerization):
 
   * [101853] Upgrade to Docker 0.7
   * [101893] Fix a Docker container memory leak
   * [101772] New naming scheme for app images (stacks)
   * [101813] Added networking tools (net-tools package) in app image
-  
   
 * Logyard:
 
@@ -59,7 +57,7 @@ v3.0.1 (December 12, 2013)
   * [101081] Config changes force a process restart
   * [101188] ``kato report`` no longer asks for sudo password
   
-  
+* [98724] Added global :ref:`admin hooks <docker-admin-hooks>`
 * [99950] In-place node and cluster upgrade
 * [101993] App Store: use shell escaped args when calling stackato client 
 * [101560] Enable rotation of some log files
@@ -72,7 +70,7 @@ v3.0.1 (December 12, 2013)
 * [102025] Revoke AOK token on logout
 * [101822] Address NGINX CVE 2013-4547
 * [101925] Remove passwords from cloud_controller_ng logs
-* [102003] Enhancements for web console rebranding
+* [102003] Enhancements for web console re-branding
 * [101917] Account for different exit status returned by Fence
 * [97541,101449] Made libpq-dev and bundler available in container
 * [99476] Improve security of router SSL handling
