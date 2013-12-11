@@ -2,9 +2,13 @@
 require "erb"
 require "katoref/docopt/command"
 
-OLD_CLI_DIR=File.join(File.dirname(__FILE__), "../../../../docopts/kato/lib/kato/cli")
-NEW_CLI_DIR=File.join(File.dirname(__FILE__), "../../../../docopts/kato/cli/lib/kato/cli")
-KATO_CLI_DIR = File.exists?(NEW_CLI_DIR) ? NEW_CLI_DIR : OLD_CLI_DIR
+KATO_ROOT = File.join(File.dirname(__FILE__), "../../../../docopts/kato")
+
+# find cli cmds in the following kato lib directories
+$LOAD_PATH << File.join(KATO_ROOT, "lib")
+$LOAD_PATH << File.join(KATO_ROOT, "cli/lib")
+$LOAD_PATH << File.join(KATO_ROOT, "upgrade/lib")
+
 TEMPLATE_FILENAME = File.join(File.dirname(__FILE__), "..", "..", "..", "..", "doc", "reference", "kato-ref.rst.erb")
  
 class String
@@ -30,9 +34,9 @@ end
 def push_sub_cmds(cmds, argv)
   sibling_usage_cmds = []
   parent_argv = argv
-  KatoRef::Docopt::Command.new(KATO_CLI_DIR, parent_argv).sub_command_names.each do |cmd_name|
+  KatoRef::Docopt::Command.new(parent_argv).sub_command_names.each do |cmd_name|
     argv = parent_argv + [cmd_name]
-    command = KatoRef::Docopt::Command.new(KATO_CLI_DIR, argv)
+    command = KatoRef::Docopt::Command.new(argv)
     if command.has_specific_usage_file?
       cmd = {
         :name => argv.join(" "),
@@ -60,7 +64,7 @@ end
 def render_kato_ref(template_filename=TEMPLATE_FILENAME)
   cmds = []
   one_liners = {}
-  KatoRef::Docopt::Command.new(KATO_CLI_DIR).usage_sections[:commands].each do |command|
+  KatoRef::Docopt::Command.new.usage_sections[:commands].each do |command|
     one_liners[command[:arg].join(" ")] = command[:description].join(" ")
   end
   push_sub_cmds(cmds, [])
