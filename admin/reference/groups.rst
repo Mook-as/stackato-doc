@@ -189,7 +189,3 @@ format (as exported with ``--include-password-hashes``).
 A ``--dry-run`` option is available if you would like to test the
 import/export before actually running it.
 
-Working with Groups
--------------------
-
-See :ref:`Groups & Users <using-groups>` in the User Guide.
