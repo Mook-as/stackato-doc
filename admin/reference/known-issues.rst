@@ -3,44 +3,6 @@
 Known Issues
 ============
 
-First Admin User Setup using LDAP and AOK (3.0 Beta)
-----------------------------------------------------
-
-If you plan to set up LDAP authentication via AOK, it's best to complete
-the "Set Up First Admin User" form shown by the web Management Console
-before configuring LDAP authentication. This creates an administrative
-user, and changes the password of the 'stackato' user on the VM to match
-whatever was entered in the form.
-
-You may use either a temporary username (e.g. "firstuser") which will be
-deleted later, or use the LDAP username you will ultimately use once AOK
-is configured.
-
-Once the first user has been created:
-
-* Log in to the micro cloud VM or Core node as the 'stackato' user (with
-  the password set previously)
-
-* :ref:`Configure AOK <aok-configuration>` to use LDAP
-
-* Set the ``admin_user`` key with the desired LDAP admin username::
-
-    $ kato config set aok strategy/ldap/admin_user <username>
-
-  This user will be granted admin privileges when logging in for the
-  first time.
-  
-* If you created a temporary admin user, delete it at this point.
-
-
-Regular LDAP User Setup (3.0 Beta)
-----------------------------------
-
-New users logging in to the Management Console for the first time using
-LDAP authentication will not be a member of any organization (and won't
-be able to do anything). An admin will have to add each user to an
-organization after their initial login.
-
 
 Service Gateway Log Errors in Maintenance Mode
 ----------------------------------------------
