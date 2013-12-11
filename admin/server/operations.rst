@@ -134,7 +134,7 @@ through the VM :term:`tty console` (as the ``stackato`` user) and run
 
 Grant administrative privileges using ``kato config``::
 
-	$ kato config push cloud_controller admins superuser@example.net
+	$ kato config push cloud_controller_ng admins superuser@example.net
   
 Subsequent new users can be added remotely with the ``stackato``
 client by an admin user.

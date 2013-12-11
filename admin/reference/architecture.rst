@@ -60,7 +60,7 @@ Cloud Controller
 
 The Controller manages most of the operations of a Stackato
 system. It hosts the Management Console, provides the API endpoint for
-client access, manages the cloud_controller process, provisions services, 
+client access, manages the cloud_controller_ng process, provisions services, 
 dispatches applications for staging and deployment, and (with the Health Manager) 
 tracks the availability of DEA nodes.
 

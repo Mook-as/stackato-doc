@@ -184,16 +184,16 @@ vSphere
 
 ::
 
-  $ kato config set cloud_controller primary_scaling_platform vcenter
-  $ kato config set cloud_controller vcenter_config /home/stackato/stackato/etc/vcenter_config.yml
+  $ kato config set cloud_controller_ng primary_scaling_platform vcenter
+  $ kato config set cloud_controller_ng vcenter_config /home/stackato/stackato/etc/vcenter_config.yml
 
 EC2
 ^^^
 
 ::
 
-  $ kato config set cloud_controller primary_scaling_platform ec2
-  $ kato config set cloud_controller ec2_config /home/stackato/stackato/etc/ec2_config.yml
+  $ kato config set cloud_controller_ng primary_scaling_platform ec2
+  $ kato config set cloud_controller_ng ec2_config /home/stackato/stackato/etc/ec2_config.yml
 
 See the :ref:`cloud-init <cloudinit>` documentation for additional
 information on customizing EC2 instance initialization.
@@ -203,8 +203,8 @@ OpenStack
 
 ::
 
-  $ kato config set cloud_controller primary_scaling_platform openstack
-  $ kato config set cloud_controller openstack_config /home/stackato/stackato/etc/openstack_config.yml
+  $ kato config set cloud_controller_ng primary_scaling_platform openstack
+  $ kato config set cloud_controller_ng openstack_config /home/stackato/stackato/etc/openstack_config.yml
 
 
 See the :ref:`cloud-init <cloudinit>` documentation for additional
@@ -223,7 +223,7 @@ Cloud Controller processes::
 If you have additional nodes running the Controller role, log in to them
 and run::
 
-  $ kato process restart cloud_controller 
+  $ kato process restart cloud_controller_ng 
 
 You can then test scaling events by pushing an app with many instances,
 and at least 256MB assigned. For example::
