@@ -36,9 +36,7 @@ details for the `stackato.yml` file, please see :ref:`Configuration With stackat
 A simple example::
 
     name: cirrus
-    framework:
-        type: perl
-    mem: 64M
+    mem: 256M
     instances: 2
     services:
         cirrusdb: mysql
