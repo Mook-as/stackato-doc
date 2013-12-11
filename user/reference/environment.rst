@@ -158,7 +158,7 @@ You can set your own environment variables:
     ``STACKATO_FILESYSTEM_PLUGINS``.
   
   STACKATO_GROUP *(DEPRECATED: Stackato 2.x only)*
-    Can be set in the local shell to specify the :ref:`group <using-groups>`
+    Can be set in the local shell to specify the group
     for the ``stackato`` client. When set, the ``stackato group``
     command is ignored until the variable is explicitly unset. If empty,
     the client sets the group to 'none'. Can be overridden with the
