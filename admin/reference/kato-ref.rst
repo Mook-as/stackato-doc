@@ -60,6 +60,8 @@ Commands
 
   * :ref:`node setup <kato-command-ref-node-setup-core>`
 
+  * :ref:`node upgrade <kato-command-ref-node-upgrade>`
+
   * :ref:`node version <kato-command-ref-node-version>`
 * :ref:`op <kato-command-ref-op>` Various operational commands
 * :ref:`patch <kato-command-ref-patch>` Update a Stackato cluster with post-release fixes.
@@ -907,6 +909,45 @@ Command Usage Details
   **-s** **--no-start**                   Do not auto start processes
 
   **-v** **--verbose**                    Show process information
+
+
+
+----
+
+
+.. _kato-command-ref-node-upgrade:
+
+**node** **upgrade** [**options**]
+
+  Upgrades Stackato
+
+  **-h** **--help**                       Show help information
+
+  **-n** **--node** *<node>*              Targets the provided node.
+
+  **-v** **--version** *<version>*        The version of Stackato to upgrade to. The latest version is used if this isn't supplied.
+
+  **--rollback**                          Rolls Stackato back to the previous version.
+
+  **--skip-confirmation**                 Skips initial confirmation of upgrade.
+
+  **--resume**                            Resumes an upgrade process, used internally by Kato and should only be called manually when
+
+                                          requested.
+
+  **--cluster**                           Performs an upgrade of all nodes in the cluster.
+
+  **--status**                            Shows the status of upgrades on a node.
+
+  **--force**                             Forces an upgrade to run.
+
+  **-j** **--json**                       Shows the status in json format.
+
+  **-u** **--update-kato**                Updates kato node upgrade to the latest codebase.
+
+  **--role-order** *<role-order>*         Comma separated list of roles defining the order that roles should be upgraded in a cluster.
+
+  **--ignore-inspect-failures**           Display pre/post upgrade 'kato inspect' tests as warnings instead of upgrade failures.
 
 
 
