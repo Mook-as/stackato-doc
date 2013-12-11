@@ -157,7 +157,8 @@ Tabs:
   are excluded from this view.
 
 * Settings: The number of application instances, disk space, and memory
-  allotment. All are configurable within the Space and Group limits.
+  allotment used by the application. This usage counts against the
+  organizations's quota.
 
 .. _user-console-service:
 
