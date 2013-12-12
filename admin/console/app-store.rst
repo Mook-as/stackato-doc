@@ -144,6 +144,11 @@ apps
     Data services required by the app.
 
 
+.. note::
+  The store definition settings do not override settings in the
+  application's *stackato.yml* or *manifest.yml* file.
+
+
 Hosting the Store Definition Files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
