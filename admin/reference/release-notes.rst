@@ -58,7 +58,7 @@ v3.0.1 (December 12, 2013)
   * [101188] ``kato report`` no longer asks for sudo password
   
 * [98724] Added global :ref:`admin hooks <docker-admin-hooks>`
-* [99950] In-place node and cluster upgrade
+* [99950] In-place :ref:`node and cluster upgrade <upgrade>`
 * [101993] App Store: use shell escaped args when calling stackato client 
 * [101560] Enable rotation of some log files
 * [101692] Remove appstore containers after use
