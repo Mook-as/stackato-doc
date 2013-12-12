@@ -426,14 +426,14 @@ Drain Timeouts
 User Drain Limit
 ^^^^^^^^^^^^^^^^
 
-* **cloud_controller** **max_drains_per_app** (default 2): limits the
+* **cloud_controller_ng** **max_drains_per_app** (default 2): limits the
   number of drains an application can have. Once this limit is reached,
   users will see the following notificition when trying to add a new
   drain::
 
     Adding drain [fail] ... Error 123: Per-app drain limit (2) reached.
     
-  To change the limit, set ``max_drains_per_app`` in the cloud_controller
+  To change the limit, set ``max_drains_per_app`` in the cloud_controller_ng
   configuration. For example, to change this limit to 5 drains::
 
     $ kato config set cloud_controller_ng max_drains_per_app 5
