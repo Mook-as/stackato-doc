@@ -3,6 +3,21 @@
 Known Issues
 ============
 
+.. _known-issues-app-import:
+
+Importing Applications from Stackato 2.10
+-----------------------------------------
+
+Stackato 3.0 can import user applications from Stackato 2.10 systems,
+and redeploy them using the :ref:`Legacy Buildpack
+<buildpacks-built-in>`.
+
+On import from a 2.10 cluster, each application will be re-staged with
+the default runtime for its framework (e.g. Python 3.2 apps will be
+imported as Python 2.7 apps, Node 0.10 will be imported as 0.8, etc.).
+Applications that require the newer runtime versions will fail to
+redeploy, and need to be re-pushed by their owners.
+
 .. _known-issues-ruby-buildpack:
 
 Bundled Ruby Buildpack
