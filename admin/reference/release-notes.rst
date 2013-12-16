@@ -16,7 +16,7 @@ Release Notes
         `<https://github.com/ActiveState/stackato-doc>`_
 
 
-v3.0.1 (December 12, 2013)
+v3.0.1 (December 17, 2013)
 --------------------------
 
 * Management Console:
@@ -80,7 +80,7 @@ v3.0.1 (December 12, 2013)
 * [101590] ``--env`` settings are always written
 * [101750] Add ``--url`` to appstore push API
 * [101980] DATABASE_URL and POSTGRESQL_URL env variables now uses "postgres://" instead of "postgresql://" 
-* [101980] JDBC_DATABASE_URL env variable now available ("jdbc:postgresql://") 
+* [101980] JDBC_DATABASE_URL env variable now available ("jdbc\:postgresql\://") 
 
 
 
