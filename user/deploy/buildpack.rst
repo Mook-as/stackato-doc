@@ -12,7 +12,7 @@ to run applications. For a short introduction to writing buildpacks, see
 
 .. note::
   In Stackato 3.0 (Cloud Foundry v2 API) and later, application
-  deployment is done *primarily* using buildpacks, and the syntax for
+  deployment is done primarily using buildpacks, and the syntax for
   specifying which buildpack to use has changed. Instead of using a
   BUILDPACK_URL environment variable, set the buildpack's Git URL in
   a ``buildpack:`` key at the top level of *stackato.yml*.
@@ -37,7 +37,13 @@ bundled with Stackato.
 * `Python <https://github.com/ActiveState/stackato-buildpack-python>`__
 * `Java <https://github.com/cloudfoundry/java-buildpack>`__
 * `Node.js <https://github.com/cloudfoundry/heroku-buildpack-nodejs>`__
-* `Ruby <https://github.com/ActiveState/stackato-buildpack-ruby>`__
+* `Ruby <https://github.com/cloudfoundry/heroku-buildpack-ruby>`__
+
+.. note::
+  For Ruby 1.9 applications, use `Heroku's buildpack
+  <https://github.com/heroku/heroku-buildpack-ruby>`__ instead (see
+  :ref:`Known Issues: Bundled Ruby Buildpack
+  <known-issues-ruby-buildpack>`)
 
 To use the Legacy buildpack: specify the ``framework:`` ``type:`` for your
 application (e.g. php, play, rails3, sinatra, java_web, java_ee, etc.). You can
@@ -51,6 +57,8 @@ optionally set a specific ``runtime:`` as well. For example::
 To use one of the other built-in buildpacks: omit the ``framework:``
 key. Stackato will cycle through the ``detect`` scripts of the built-in
 buildpacks prior to staging to match the code you are pushing.
+
+.. _buildpacks-custom:
 
 Custom Buildpacks
 ^^^^^^^^^^^^^^^^^

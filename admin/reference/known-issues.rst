@@ -3,6 +3,21 @@
 Known Issues
 ============
 
+.. _known-issues-ruby-buildpack:
+
+Bundled Ruby Buildpack
+----------------------
+
+The bundled Cloud Foundry Ruby :ref:`buildpack <buildpacks>` installs an
+outdated build of Ruby (1.9.3p327) with a known vulnerability
+(`CVE-2013-4164
+<https://www.ruby-lang.org/en/news/2013/11/22/heap-overflow-in-floating-point-parsing-cve-2013-4164/>`__).
+
+For Ruby 1.9 applications, use `Heroku's version
+<https://github.com/heroku/heroku-buildpack-ruby>`__ instead, as
+specified in the :ref:`Custom Buildpacks <buildpacks-custom>`
+documentation. This does not affect Ruby 2.0 applications.
+
 
 Service Gateway Log Errors in Maintenance Mode
 ----------------------------------------------

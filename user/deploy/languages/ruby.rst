@@ -10,8 +10,10 @@ Deployment
 ----------
 
 .. note::
-	See :ref:`buildpacks` for an alternative way to deploy
-	Ruby on Rails applications.
+  The following instructions rely on the :ref:`Legacy Buildpack
+  <buildpacks-built-in>` to emulate Stackato 2.x deployment behavior.
+  See :ref:`buildpacks` for the new, recommended way to deploy Ruby
+  applications.
 
 Using Ruby 2.0
 ^^^^^^^^^^^^^^
