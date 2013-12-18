@@ -28,16 +28,26 @@ Stackato, replacing the built-in frameworks used in previous versions.
 Built-In Buildpacks
 ^^^^^^^^^^^^^^^^^^^
 
-For convenience and backwards compatibility, a few buildpacks are
-bundled with Stackato.
+For convenience a few buildpacks are bundled with Stackato:
 
-* **Legacy**: A special meta-buildpack for deploying applications configured
-  for Stackato 2.10 (Cloud Foundry v1 API) and earlier without the need
-  for extensive reconfiguration.
 * `Python <https://github.com/ActiveState/stackato-buildpack-python>`__
 * `Java <https://github.com/cloudfoundry/java-buildpack>`__
 * `Node.js <https://github.com/cloudfoundry/heroku-buildpack-nodejs>`__
 * `Ruby <https://github.com/ActiveState/stackato-buildpack-ruby>`__
+
+Stackato will cycle through the ``detect`` scripts of the built-in
+buildpacks prior to staging to match the code you are pushing.
+
+.. _buildpacks-legacy:
+
+Legacy Buildpack
+^^^^^^^^^^^^^^^^
+
+The legacy buildpack is is special meta-buildpack for deploying
+applications configured for Stackato 2.x (Cloud Foundry v1 API) without
+the need for extensive reconfiguration. This buildpack has updated
+versions of all the frameworks available in previous versions of
+Stackato.
 
 To use the Legacy buildpack: specify the ``framework:`` ``type:`` for your
 application (e.g. php, play, rails3, sinatra, java_web, java_ee, etc.). You can
@@ -48,9 +58,11 @@ optionally set a specific ``runtime:`` as well. For example::
       type: python
       runtime: python32  
 
-To use one of the other built-in buildpacks: omit the ``framework:``
-key. Stackato will cycle through the ``detect`` scripts of the built-in
-buildpacks prior to staging to match the code you are pushing.
+.. note::
+  When using the Legacy Buildpack, config-defined environment variable
+  values can only be updated by re-pushing the application with new
+  settings (see :ref:`Legacy Buildpack and Environment Variables
+  <known-issues-legacy-env>`).
 
 Custom Buildpacks
 ^^^^^^^^^^^^^^^^^

@@ -74,7 +74,7 @@ framework:
 
 Allows the app to specify a framework and runtime to be used. Specifying
 a value for the ``framework`` key triggers the use of the :ref:`Legacy
-Buildpack <buildpacks-built-in>`.
+Buildpack <buildpacks-legacy>`.
 
 type (DEPRECATED):
 ~~~~~~~~~~~~~~~~~~
@@ -537,7 +537,7 @@ web:
 
 .. note:: 
 
-  Used with the :ref:`Legacy buildpack <buildpacks-built-in>` only. When using
+  Used with the :ref:`Legacy buildpack <buildpacks-legacy>` only. When using
   other buildpacks, create a `Procfile <https://devcenter.heroku.com/articles/procfile>`__ 
   in the application's root directory.
 

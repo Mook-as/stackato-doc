@@ -117,7 +117,7 @@ apps
 
   **framework** 
     The framework, if the app is deploed using the :ref:`Legacy
-    Buildpack <buildpacks-built-in>` (e.g. ``perl``, ``python``,
+    Buildpack <buildpacks-legacy>` (e.g. ``perl``, ``python``,
     ``node``, ``rails3``).
 
   **icon** 
@@ -137,7 +137,7 @@ apps
 
   **runtime** 
     The runtime, if the app is deployed using the :ref:`Legacy Buildpack
-    <buildpacks-built-in>` (e.g. ``java``, ``python32``, ``ruby19``,
+    <buildpacks-legacy>` (e.g. ``java``, ``python32``, ``ruby19``,
     ``php``, ``perl518``).
 
   **services**

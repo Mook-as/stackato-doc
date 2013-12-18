@@ -3,6 +3,20 @@
 Known Issues
 ============
 
+.. _known-issues-legacy-env:
+
+Legacy Buildpack and Environment Variables
+------------------------------------------
+
+When using the :ref:`Legacy Buildpack <buildpacks>`, environment
+variable values defined in *stackato.yml* (``env:`` block) cannot be
+updated without re-pushing the application with new settings. Changes to
+variables made in the Management Console will be overwritten by the
+original ones defined at push when the application is restarted.
+
+To modify custom environment variables, re-push the application after
+changing the values in *stackato.yml*.
+
 
 Service Gateway Log Errors in Maintenance Mode
 ----------------------------------------------
