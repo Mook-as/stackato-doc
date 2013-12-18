@@ -16,7 +16,7 @@ Release Notes
         `<https://github.com/ActiveState/stackato-doc>`_
 
 
-v3.0.1 (December 17, 2013)
+v3.0.1 (December 18, 2013)
 --------------------------
 
 * Management Console:
