@@ -59,6 +59,7 @@ v3.0.1 (December 18, 2013)
   
 * [98724] Added global :ref:`admin hooks <docker-admin-hooks>`
 * [99950] In-place :ref:`node and cluster upgrade <upgrade>`
+* [98574] Added :ref:`SNI support <server-config-sni-support>` to Stackato router (SSL configuration)
 * [101993] App Store: use shell escaped args when calling stackato client 
 * [101560] Enable rotation of some log files
 * [101692] Remove appstore containers after use

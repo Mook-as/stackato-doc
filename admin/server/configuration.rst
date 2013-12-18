@@ -617,12 +617,32 @@ Using your own SSL certificate
 
 On all router nodes, upload your *.key* file to the */etc/ssl/private/*
 directory and your *.crt* file to */etc/ssl/certs/*. Change the following
-settings in */s/vcap/stackato-router/config/local.json* to point to
+settings in */s/code/stackato-router/config/local.json* to point to
 the new files::
 
   "sslKeyFile": "/etc/ssl/private/example.key",
   "sslCertFile": "/etc/ssl/certs/example.crt",
 
+.. _server-config-sni-support:
+
+Adding Custom SSL Certs (SNI)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The Stackato router supports `SNI
+<http://en.wikipedia.org/wiki/Server_Name_Indication>`__, and custom SSL
+certificates for domains resolving to the system can be added using the
+:ref:`kato op custom_ssl_cert install <kato-command-ref-op>` command.
+Usage::
+
+  kato op custom_ssl_cert install <key-path> <cert-path> <domain> [--wildcard-subdomains]
+
+This must be run on all router nodes in a cluster: the first one as
+above, subsequent routers using the ``--update`` flag.
+
+.. note::
+  SNI support with multiple Stackato routers works only with TCP load
+  balancers (e.g. HAProxy, iptables, F5) not HTTP load balancers (e.g.
+  Nginx, Stackato load balancer). 
 
 .. _server-config-ssl-cert-chain:
 
@@ -668,9 +688,13 @@ should see more than one number in the list. For example::
 Generating a self-signed SSL certificate
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can generate your own self-signed SSL certificate by running the
-following commands on the Stackato server, substituting
-"hostname.mydomain.com" with your own details::
+You can re-generate Stackato's self-signed SSL certificate by running
+the following command on the VM::
+
+  $ kato op regenerate ssl_cert
+  
+To do essentially the same operation manually (substituting
+"hostname.mydomain.com" with your own details)::
 
 	$ mkdir ~/hostname.mydomain.com
 	$ cd ~/hostname.mydomain.com
