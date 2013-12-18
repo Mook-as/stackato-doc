@@ -89,10 +89,10 @@ Alternatively, ``STACKATO_SERVICES`` contains information for all services::
 
     {
         "plugins": {
-            "dir": "/app/fs/plugins"
+            "dir": "/home/stackato/fs/plugins"
 		},
 		"my-data": {
-			"dir": "/app/fs/my-data"
+			"dir": "/home/stackato/fs/my-data"
 		},
 		"mydb": {
 			"name": "db76e25bc8fc142858653a6cb8c643204",

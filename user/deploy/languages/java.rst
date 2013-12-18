@@ -249,9 +249,9 @@ HOME Directories
 Java applications will have different HOME directories on Stackato
 depending on which Java framework is used:
 
-* Java Web, Java EE (WAR file), Spring, Lift and Grails: **/app/tomcat/webapps/ROOT**
-* Java EE (EAR file): **/app/jboss/standalone/deployments**
-* Buildpack - Java, Play: **/app/app**
+* Java Web, Java EE (WAR file), Spring, Lift and Grails: **/home/stackato/tomcat/webapps/ROOT**
+* Java EE (EAR file): **/home/stackato/jboss/standalone/deployments**
+* Buildpack - Java, Play: **/home/stackato/app**
 
 .. _catalina-opts:
 

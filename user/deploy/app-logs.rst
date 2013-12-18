@@ -17,7 +17,7 @@ filtered. Application log streams can be accessed via:
 * application log :ref:`drains <application_logs-drain>`
 
 Log streams are tailed output from actual log files in each application
-container, generally found in the */app/logs/* directory. These files
+container, generally found in the */home/stackato/logs/* directory. These files
 can be accessed with the :ref:`stackato files <command-files>` command or
 from the Application details page of the :ref:`Management Console
 <management-console>`.
@@ -91,7 +91,7 @@ $STACKATO_LOG_FILES variable, you might set the following in
 *stackato.yml*::
   
     env:
-      STACKATO_LOG_FILES: tomcat=/app/app/.tomcat/logs/catalina.2013-11-04.log:$STACKATO_LOG_FILES
+      STACKATO_LOG_FILES: tomcat=/home/stackato/tomcat/logs/catalina.2013-11-04.log:$STACKATO_LOG_FILES
       
 Paths can be specified fully, or relative to $STACKATO_APP_ROOT.
 
@@ -306,7 +306,7 @@ Rotating Application Log Files
 ------------------------------
 
 Stackato does not automatically rotate application log files in
-*/app/logs/*. However, you can add log rotation for these files yourself
+*/home/stackato/logs/*. However, you can add log rotation for these files yourself
 using ``cron`` and ``logrotate``:
 
 1. Add a cron key in *stackato.yml* to run ``logrotate``. Set
@@ -316,16 +316,16 @@ using ``cron`` and ``logrotate``:
     env:
       STACKATO_CRON_INSTANCES: all
     cron:
-      - 0 1 * * * /usr/sbin/logrotate --status /app/app/logrotate-status /app/app/app-logrotate.conf
+      - 0 1 * * * /usr/sbin/logrotate --state /home/stackato/app/logrotate-state /home/stackato/app/app-logrotate.conf
       
-   The ``--status`` option must be set because the ``stackato`` user
-   does not have permission to update the default status file.
+   The ``--state`` option must be set because the ``stackato`` user
+   does not have permission to update the default state file.
 
 2. Add an *app-logrotate.conf* file to the base directory of your
    application to specify which log files to rotate, and and which
    ``logrotate`` options to use. For example::
 
-    /app/logs/\*.log {
+    /home/stackato/logs/\*.log {
       daily
       compress
       copytruncate

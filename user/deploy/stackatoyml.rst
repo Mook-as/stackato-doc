@@ -120,7 +120,7 @@ Example::
     type: php
     document-root: web
 
-The document-root must always be specified relative to $HOME (/app/app).
+The document-root must always be specified relative to $HOME (/home/stackato/app).
 
 .. _stackato_yml-start-file:
 
@@ -159,7 +159,7 @@ hooks are run.
    
    The :term:`HOME` directory where all the pre-running code is run, as well as
    the HOME directory for cron and ssh sessions.  For most frameworks this
-   is the ``/app/app directory``, but slightly different for
+   is the */home/stackato/app* directory, but slightly different for
    :ref:`java deployments <java-home>`. For example::
 
     framework:
