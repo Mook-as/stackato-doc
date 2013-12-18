@@ -262,6 +262,10 @@ The CATALINA_OPTS environment variable can be set in the ``env:`` block
 of `stackato.yml` (or set in the Management Console) to override
 Stackato defaults.
 
+.. note::
+  CATALINA_OPTS settings cannot be modified without restaging.
+  Applications must be re-pushed with new settings to apply changes.
+  
 Stackato sets the CATALINA_OPTS environment variable for applications
 using Tomcat automatically, based on the ``mem:`` value specified for
 application instances. Stackato will always leave at least 64MB for
@@ -274,3 +278,4 @@ This means, for example, a 128MB application will end up with 64MB for
 the heap and 64MB for overhead, a 160MB application will still have 64MB for
 the heap but 96MB for overhead, and a 512MB application will get a
 416MB heap and allow 96MB for overhead.
+
