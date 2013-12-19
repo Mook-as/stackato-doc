@@ -43,7 +43,7 @@ require('http').createServer(function (request, response) {
                 }
             });
         }else{
-            return serveFile(request, response, err);
+            return serveFile(request, response);
         }
     });
     request.resume();
