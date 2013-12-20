@@ -6,7 +6,7 @@ Persistent File System
 The file system of application containers are ephemeral. Any application data or files stored 
 locally within these containers is lost when the instance is stopped or restarted. To solve this, 
 Stackato provides a ‘filesystem’ service that can be shared between application instances, and even 
-between applications deployed by the same user or group.
+between applications deployed to the same space.
 
 A persistent file system service allows apps to do the following:
 
@@ -89,10 +89,10 @@ Alternatively, ``STACKATO_SERVICES`` contains information for all services::
 
     {
         "plugins": {
-            "dir": "/app/fs/plugins"
+            "dir": "/home/stackato/fs/plugins"
 		},
 		"my-data": {
-			"dir": "/app/fs/my-data"
+			"dir": "/home/stackato/fs/my-data"
 		},
 		"mydb": {
 			"name": "db76e25bc8fc142858653a6cb8c643204",

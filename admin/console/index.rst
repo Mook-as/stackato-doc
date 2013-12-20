@@ -8,48 +8,83 @@ Management Console (Admin View)
 
 Stackato's web interface is called the Management Console. The interface
 displays more options and settings for Admin users than it does for
-regular end users. Many of the features described below are only
+regular end users. Some of the features described below are only
 available in the Admin view.
-
-.. note::
-  The Management Console in Stackato 3.0 Beta has changed significantly
-  and is still under active development. The documentation below
-  describes the Stackato 2.10 interface, but will be updated for the
-  3.0.0 release.
-
 
 .. include:: ../common/console-intro.inc
 
-.. _console-overview:
+.. _console-welcome:
 
-Overview
---------
+Welcome
+-------
 
-The Overview section shows high level details on components, services, roles, applications, and users configured on the server or cluster.
+The top-level page of the Management Console displays quick links to the
+most used resources and views. The blue buttons are for features also
+available for regular end users (see :ref:`Management Console (User View)
+<user-console-welcome>`).
 
-Cluster Roles
-^^^^^^^^^^^^^
+Green buttons expose Admin-only functionality:
 
-Displays the number of nodes serving each role. Clicking any of the roles opens the :ref:`Cluster Admin <console-cluster-admin>` page for that role.
+* **Configure Available Services**: Opens the :ref:`Cluster Nodes
+  <console-cluster-nodes>` view showing which roles are running on which
+  nodes. From this view you can add or remove Service roles on the
+  various nodes in the cluster (or on 127.0.0.1 for micro clouds).
 
-Cluster Configuration
-^^^^^^^^^^^^^^^^^^^^^
+* **Manage Organizations**: Opens the :ref:`Organizations
+  <console-organizations>` view.
 
-Displays the current configuration of the server/cluster.
+* **Manage Users**: Opens the :ref:`Users <console-users>` view.
 
-* **API Endpoint**: The URL for stackato clients to target. Normally also the URL for the Management Console.
+* **View All Deployed Applications**: Opens the :ref: `Applications
+  <console-applications>` view.
 
-* **MBUS IP**: The IP address that hosts the primary node. Cluster nodes (if any) will connect via this IP address. In a micro cloud setting, it will be 127.0.0.1.
+* **View Cloud Events**: Opens the `Cloud Events <console-cloud-events>` view.
 
-Usage
-^^^^^
+* **View Dashboard**: Opens the `Dashboard <console-dashboard>`.
 
-Total memory, app, and service usage on the system.
+System Information
+^^^^^^^^^^^^^^^^^^
 
-Administrators, Users & Groups
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* **Version**: Version (release) number of the system.
 
-The bottom of the Oveview page lists administrative users, regular users, and groups configured on the system. Clicking any of these will open its User or Group Details page.
+* **MBUS IP**: The IP address that hosts the primary node. Cluster nodes
+  (if any) will connect via this IP address. In a micro cloud setting,
+  it will be 127.0.0.1.
+
+* **API Endpoint**: The URL for stackato clients to target. Normally
+  also the URL for the Management Console.
+
+
+.. _console-cluster-nodes:
+
+Cluster Nodes
+-------------
+
+Displays a list of nodes in the current cluster, and what services are
+running on each node. In a micro cloud configuration, only the current
+local node ('127.0.0.1') is shown.
+
+To enable or disable services on a node, click the **Configure Roles**
+button (cog icon) to see the **Node Settings**, showing a list of all
+available roles and checkboxes to enable or disable each one. Click
+**Save** to apply changes.
+
+See also the :ref:`kato role <kato-command-ref-role-add>` and :ref:`kato
+info <kato-command-ref-info>` command documentation for the CLI
+equivalents, and the :ref:`Cluster Setup <cluster-setup>` section for
+information on adding nodes to the cluster.
+
+
+.. _console-organizations:
+
+Organizations
+-------------
+
+The top level Organizations page allows Admins to add and delete
+:ref:`Organizations <orgs-spaces>`. Clicking on an organization name
+opens its details. This view is the same as a regular :ref:`user's
+Organizations view <user-console-organizations>`, but admin users can
+edit quotas, and add/remove domains, spaces, and users.
 
 
 .. _console-users:
@@ -57,104 +92,23 @@ The bottom of the Oveview page lists administrative users, regular users, and gr
 Users
 -----
 
-The Users section displays a list of users and admins, and allows the management of all accounts. 
+The Users section displays a list of users and admins. 
 
-* Click **Add New User** to add users.
+* Click **+ Add User** to add users.
 
-* Click **Import Users** to import a user list (see :ref:`Importing/Exporting <user-import-export>` for CSV format)
+* Click on the user name or email address to view account details or
+  change the password.
 
-* Click **Export Users** to export a user list (see :ref:`Importing/Exporting <user-import-export>` for CSV format)
-
-* Click **Default User Settings** to modify the :ref:`account settings <console-settings-user>` for new users.
-
-* Use the **Search** field to filter the list of users. 
-
-.. _console-user-details:
-
-User Details
-^^^^^^^^^^^^
-
-For details on a specific user, click on the username in the list. The
-User Details page shows current usage information, group memberships,
-and lists of that user's applications and provisioned services.
-
-The following options can be set for the user by clicking **User Limits**:
-
-.. index:: Enable Sudo
-
-.. _console-user-details-sudo:
-
-* **Enable sudo**: Toggles 'sudo' (root) privileges within application containers. Though applications containers (LXC) are highly secure, there are potential vulnerabilities that could be exposed with sudo enabled, so this should only be enabled for trusted end users. Privileges are added to containers during creation, so changing this setting will only affect subsequently created containers (i.e. 'sudo' will not be enabled/disabled for the user in existing containers).
-
-* **Memory Allotted**: Sets the amount of memory allowed.
-
-* **Services Allotted**: Sets the number of services allowed.
-
-* **Applications Allotted**: Sets the number of apps allowed.
-
-* **Application URIs Allotted**: Sets the number of app URIs allowed.
-
-The default settings for new users are configured in the "Users" section
-of :ref:`Settings <console-settings>` page.
-
-.. _console-groups:
-
-Groups
-------
-
-Displays a list of groups that currently exist.  From the list, you can click on the number of
-assigned users to see the user list, as well as delete the group.
-
-* To create a new group, press the "Add New Group" button.
-
-* To view the details of a group, click on the name of the group.
-
-Group Details
-^^^^^^^^^^^^^
-
-The Group Details page displays an overview of the group's status, including the resource usage,
-applications and services, and a list of users that are part of the group.
-
-A group has limits attached to it that restrict the resources its
-members can use. Press the "Group Limits" button to configure these
-settings. The options exposed are the same as those on the User Details
-page (above). 
-
-
-For more information on Group limits, see the :ref:`Groups, Users, & Limits <admin-groups>` documentation.
 
 .. _console-applications:
 
 Applications
 ------------
 
-The Applications section displays a list of all apps on the server.  For details on the application,
-click on the name of the app.  By clicking the username for the app, you can view the details on the user 
-that pushed the app.  Under Actions are three buttons, to restart, stop, and view the app.
-
-.. _console-services:
-
-Services
---------
-
-Displays a list of services, their type, and the user that created each one.
-
-.. _console-features:
-
-Features
---------
-
-This page shows two tabs with details on the features available on the server.
-
-Runtimes & Frameworks
-^^^^^^^^^^^^^^^^^^^^^
-
-Displays a list of runtimes and frameworks available.
-
-Available Services
-^^^^^^^^^^^^^^^^^^
-
-Displays a list of services that can be created for use by apps.
+The Applications section displays a list of all apps on the server.
+Click anywhere on the line for an app to view its details. Admins have
+the same permissions in the :ref:`Application View <user-console-app>`
+as a Developer of the space it was deployed to.
 
 .. _console-cloud-events:
 
@@ -165,85 +119,120 @@ The Cloud Events section displays a list of events (including errors and
 warnings) on the Stackato server. The events can be filtered by Severity
 or Type, or by using a substring match in the Search field.
 
-.. _console-cluster-admin:
 
-Cluster Admin
--------------
+.. _console-dashboard:
 
-Displays a list of nodes in the current cluster, and what services are running on each node. The view can be filtered by IP Address and/or Role. In a micro cloud configuration, only the current local node ('127.0.0.1') is shown.
-
-To enable or disable services on a node, click the **Configure Roles** button to enter its **Role Configuration** page. This page shows a list of all available roles (see :ref:`kato info <kato-command-ref-info>` for the command line interface), and a toggle button to enable or disable each one (see also :ref:`kato role <kato-command-ref-role-add>`).
-
-To set up a Stackato cluster, or to add nodes to an existing cluster, see the :ref:`Cluster Setup <cluster-setup>` section.
-
-.. _console-status-graphs:
-
-Status Graphs
--------------
-
-Displays graphs for server statistics: CPU, Load, Memory, Disk Operations, Disk Space, Processes, and Swap (primary node or micro cloud only).
-
-.. _console-app-store:
-
-App Store
+Dashboard
 ---------
 
-Displays a list of apps ready for install to the server. Press the
-"Install" button to push an app to the server. Apps which require
-frameworks or services not available on the system will not be
-installable.
+Router
+^^^^^^
 
-For information on configuring the App Store, see the :ref:`App Store documentation <app-store>`.
+Shows realtime results for incoming requests (connections per second),
+routing errors (errors per second), and an overview of the cumulative
+requests to the system.
+
+
+Primary Node Status Graphs
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Displays graphs for server statistics: CPU, Load, Memory, Disk
+Operations, Disk Space, Processes, and Swap (primary node or micro cloud
+only).
+
 
 .. _console-settings:
 
 Settings
 --------
 
-Allows the user to manage the Stackato Server Settings. There are
-sub-menus separating the settings into the following groups.
+The Settings menu gives access to the following Console and system settings:
 
-System
-^^^^^^
+Console
+^^^^^^^
+
+Various settings and templates to customize the look and feel of the
+Management Console. The settings are divided into the following
+categories:
+
+* **Product**: Options to rename and reversion Stackato for OEM
+  deployments, change the default locale (currently only 'en' and 'de'
+  available), choose a different URL for documentation, or disable
+  console pingbacks.
+  
+* **Look and Feel**: Change the favicon, header, footer, or background
+  color.
+
+* **Welcome Page**: EJS templated HTML to display on the Welcome page
+  (see above).
+
+* **Support Page**: EJS templated HTML to display on the Support page.
+  Change this if you are supporting your end users directly.
+
+* **Eula Content**: End User License Agreement. Change this if you are
+  exposing Stackato to end users under specific terms.
+
+* **Custom Stylesheet**: A single CSS file used to override any existing
+  styling in the Management Console. Inspect the Console with browser
+  tools such as Firebug or Chrome Developer Tools to see the class names
+  and IDs.
+
+
+.. _console-settings-quota-definitions:
+
+Quota Definitions
+^^^^^^^^^^^^^^^^^
+
+.. note::
+  In Stackato 2.10 and earlier, every User and Group had a quota. In 3.0
+  (Cloud Foundry v2) Quota Definitions are applied at the Organization
+  level (i.e. members of an organizations share its quota). 
+
+Lists the Quota Definitions available to apply to Organizations on the system.
+
+* To edit a definition, click the edit button on the right.
+* To create a new definition use the :ref:`stackato quota create
+  <command-quota create>` command.
+ 
+.. _console-settings-cloud-controller:
+
+Cloud Controller
+^^^^^^^^^^^^^^^^
 
 .. index:: maintenance mode
 
-* **Maintenance Mode**: Shuts down API requests but continues to serve web requests, useful when performing system operations such as importing and exporting data for upgrades. When the primary node enters maintenance mode, the Management Console becomes "read only" with the exception of this toggle (to bring it back online).
+.. _console-settings-maintenance-mode:
 
-* **Logging Level**: Changes the verbosity of Stackato logs from 'debug2' (most verbose) through 'off' (silent).
+* **Maintenance Mode**: Shuts down API requests but continues to serve
+  web requests, useful when performing system operations such as
+  importing and exporting data for upgrades. When the primary node
+  enters maintenance mode, the Management Console becomes "read only"
+  with the exception of this toggle (to bring it back online).
 
-* **Support Email**: The email address displayed to end users when errors are encountered. Use an address which is monitored by Stackato administrators.
+* **Logging Level**: Changes the verbosity of Stackato logs from
+  'debug2' (most verbose) through 'off' (silent).
 
-* **App Store URLs**: URIs for JSON files which populate the :ref:`App Store <app-store>`. The URIs need not be public, but must be accessible from the controller node.
+* **Support Email**: The email address displayed to end users when
+  errors are encountered. Use an address which is monitored by Stackato
+  administrators.
 
-* **Allowed Repos**: Debian package repositories allowed in application containers. End users can install additional packages (e.g. with ``apt-get`` or ``aptitude``) only from these repositories.
+* **App Store URLs**: URIs for JSON files which populate the :ref:`App
+  Store <app-store>`. The URIs need not be public, but must be
+  accessible from the controller node.
+
+* **Allowed Repos**: Debian package repositories allowed in application
+  containers. End users can install additional packages (e.g. with
+  ``apt-get`` or ``aptitude``) only from these repositories.
 
 
-.. _console-settings-user:
+.. _console-settings-applications:
 
-User
-^^^^
-
-* **Default User Settings**: The defaults for new user account creation.
-
-  * **Enable sudo**: Toggles 'sudo' (root) privileges within application containers for new users (see :ref:`User Details <console-user-details>` above). 
-  
-  * **Memory Allotted**: The amount of memory in a default user's quota.
-  
-  * **Services Allotted**: The number of services a default user can request.
-  
-  * **Applications Allotted**: The number of applications a default user can push.
-  
-  * **Application URIs Allotted**: The number of URLs a default end user can use.
-  
-* **Administrators**: A list of active administrative accounts.
-
-Application
-^^^^^^^^^^^
-
-* **Allow non-local URLs**: Toggles whether end users can map external URLs (i.e. not on the Stackato system's domain) to their applications.
+Applications
+^^^^^^^^^^^^
 
 * **Reserved URIs**: URIs which cannot be used for end user applications.
+
+.. _console-settings-dea:
 
 DEA
 ^^^
@@ -257,7 +246,24 @@ DEA
   on a node with 8GB of RAM). Do not exceed 100% unless the system
   correctly supports swap space and has it enabled. Restart all DEA
   roles/nodes to apply the change.
+  
+* **Max Staging Duration**: The maximum time allowed for application
+  staging. 
 
+.. _console-settings-logyard:
+
+Logyard
+^^^^^^^
+
+Lists current log :ref:`Drains <logging-drains-system>` and the log
+drain retry limits.
+Drains and limits cannot be changed in this interface;
+use the :ref:`kato log drain ... <kato-command-ref-log-drain-add>`
+commands and :ref:`kato config ... <kato-command-ref-config>`
+commands.
+
+
+.. _console-settings-harbor:
 
 Harbor
 ^^^^^^
@@ -274,6 +280,9 @@ Settings for the :ref:`Harbor <harbor>` TCP/UDP port service.
 
 See :ref:`Harbor: Requirements & Setup <harbor-setup>` for more information.
 
+
+.. _console-settings-data-services:
+
 Data Services
 ^^^^^^^^^^^^^
 
@@ -288,3 +297,13 @@ Data Services
 * **Memcached Memory**: Maximum amount of physical memory to allocate for memcached instances.
 
 * **Max FS Size**: Maximum size on disk for filesystem services.
+
+
+.. _console-settings-filesystem:
+
+File System
+^^^^^^^^^^^
+
+* **Capacity**: Maximum number of service slots to allocate.
+* **Max FS Size**: Maximum size on disk for filesystem services in MB.
+* **Allow Over-provisioning**: Ignore the Capacity setting. 

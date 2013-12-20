@@ -21,11 +21,13 @@ someone else, supply the assigned hostname instead
 Enter the URL into your web browser, and the Management Console will
 load. The Console is supported on the following browsers:
 
-* Chrome (WebKit)
+* Chrome 30+ (WebKit)
 
-* Firefox 4+
+* Firefox 20+
 
-* IE9+
+* IE 10+
+
+Using a browser which fully support WebSockets is recommended.
 
 .. note::
 	The SSL certificate for the Stackato Management Console is

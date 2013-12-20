@@ -59,9 +59,9 @@ buildpack:
 The Git repository URL for the specific :ref:`buildpack <buildpacks>`
 used to deploy the application. For example::
 
-    name: java-app
-    mem: 512M
-    buildpack: https://github.com/heroku/heroku-buildpack-java.git
+  name: java-app
+  mem: 512M
+  buildpack: https://github.com/heroku/heroku-buildpack-java.git
 
 If unset, Stackato will check to see if the application triggers the
 ``detect`` scripts in any of its :ref:`built-in buildpacks
@@ -74,7 +74,7 @@ framework:
 
 Allows the app to specify a framework and runtime to be used. Specifying
 a value for the ``framework`` key triggers the use of the :ref:`Legacy
-Buildpack <buildpacks-built-in>`.
+Buildpack <buildpacks-legacy>`.
 
 type (DEPRECATED):
 ~~~~~~~~~~~~~~~~~~
@@ -120,7 +120,7 @@ Example::
     type: php
     document-root: web
 
-The document-root must always be specified relative to $HOME (/app/app).
+The document-root must always be specified relative to $HOME (/home/stackato/app).
 
 .. _stackato_yml-start-file:
 
@@ -159,7 +159,7 @@ hooks are run.
    
    The :term:`HOME` directory where all the pre-running code is run, as well as
    the HOME directory for cron and ssh sessions.  For most frameworks this
-   is the ``/app/app directory``, but slightly different for
+   is the */home/stackato/app* directory, but slightly different for
    :ref:`java deployments <java-home>`. For example::
 
     framework:
@@ -240,39 +240,39 @@ separate databases. For example::
 Using the name specified in *stackato.yml*, a data service is created to
 match that name::
 
-    $ stackato push -n
-    Pushing application 'sample'...
-    Framework:       node
-    Runtime:         <framework-specific default>
-    Application Url: sample.stackato-pjw3.local
-    Creating Application [sample]: OK
-    Binding service [sample-db]: OK
-    ...
-    Starting Application [sample]: ...OK
+  $ stackato push -n
+  Pushing application 'sample'...
+  Framework:       node
+  Runtime:         <framework-specific default>
+  Application Url: sample.stackato-pjw3.local
+  Creating Application [sample]: OK
+  Binding service [sample-db]: OK
+  ...
+  Starting Application [sample]: ...OK
 
 
 If you specify a new name for the application as an argument to
 ``stackato push``, a new service with a matching name is created rather
 than binding to the existing 'sample-db' service::
 
-    $ stackato push sample-2 -n
-    Pushing application 'sample-2'...
-    Framework:       node
-    Runtime:         <framework-specific default>
-    Application Url: sample-2.stackato-pjw3.local
-    Creating Application [sample-2]: OK
-    Binding service [sample-2-db]: OK
-    ...
-    Starting Application [sample-2]: ..OK
-    
-    $ stackato apps
+  $ stackato push sample-2 -n
+  Pushing application 'sample-2'...
+  Framework:       node
+  Runtime:         <framework-specific default>
+  Application Url: sample-2.stackato-pjw3.local
+  Creating Application [sample-2]: OK
+  Binding service [sample-2-db]: OK
+  ...
+  Starting Application [sample-2]: ..OK
+  
+  $ stackato apps
 
-    +-------------+---+---------+------------------------------+-------------+
-    | Application | # | Health  | URLS                         | Services    |
-    +-------------+---+---------+------------------------------+-------------+
-    | sample      | 1 | RUNNING | sample.stackato-pjw3.local   | sample-db   |
-    | sample-2    | 1 | RUNNING | sample-2.stackato-pjw3.local | sample-2-db |
-    +-------------+---+---------+------------------------------+-------------+
+  +-------------+---+---------+------------------------------+-------------+
+  | Application | # | Health  | URLS                         | Services    |
+  +-------------+---+---------+------------------------------+-------------+
+  | sample      | 1 | RUNNING | sample.stackato-pjw3.local   | sample-db   |
+  | sample-2    | 1 | RUNNING | sample-2.stackato-pjw3.local | sample-2-db |
+  +-------------+---+---------+------------------------------+-------------+
 
 requirements:
 ^^^^^^^^^^^^^
@@ -537,7 +537,7 @@ web:
 
 .. note:: 
 
-  Used with the :ref:`Legacy buildpack <buildpacks-built-in>` only. When using
+  Used with the :ref:`Legacy buildpack <buildpacks-legacy>` only. When using
   other buildpacks, create a `Procfile <https://devcenter.heroku.com/articles/procfile>`__ 
   in the application's root directory.
 
@@ -564,7 +564,7 @@ to ``0.0.0.0`` host and ``$PORT`` port.
 and not provisioned with a URL. For example, an application that just runs 
 a background Perl script might look like this::
 
-  name: 
+  name: perlwork
   framework:
     type: perl
   command: perl worker.pl
@@ -680,6 +680,21 @@ hooks:
 
 Hooks are commands that are run at various point of the staging and running 
 process of an app.
+
+pre-push:
+~~~~~~~~~
+
+Commands run **on the local system** before pushing the code to
+Stackato. This can be useful for building source files (e.g. with
+``make``) or performing configuration steps that need to be done on the
+local system before the application code can be pushed. Commands are
+executed between application creation (when the URL and application
+resources are reserved) and the actual upload of the local code.
+
+The client will set the STACKATO_HOOK_ACTION variable to "create" if the
+application is new, or "update" if it detects the application already
+exists. You can use this variable to run hooks differently in either
+context.
 
 pre-staging:
 ~~~~~~~~~~~~~

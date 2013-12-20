@@ -132,7 +132,7 @@ network administrator about this, starting with the MAC address
 configured for each VM in the hypervisor. If your site supports a
 significant number of VMs, DHCP may be set up to map MAC addresses to IP
 addresses in a particular way. For example, a certain range of MAC
-adddresses may be used for servers in the DMZ, and another range for
+addresses may be used for servers in the DMZ, and another range for
 internal servers. If you follow this convention, your Stackato server
 will obtain an appropriate IP address automatically. DNS at your site
 may establish a similar convention, which you will want to follow when
@@ -328,9 +328,9 @@ you can simply edit it as in the following example::
 DNS
 ^^^
 
-The Stackato :term:`micro cloud` server is configured to support :term:`multicast DNS`.
-The mDNS/DNS-SD broadcast address (``stackato-xxxx.local``) is intended for
-private micro clouds running on a local machine or a local subnet.
+The Stackato micro cloud uses :term:`multicast DNS`. to broadcast its
+generated hostname (e.g. ``stackato-xxxx.local``). This mechanism is
+intended for VMs running on a local machine or subnet.
 
 For production use, the server will need:
 
@@ -338,32 +338,34 @@ For production use, the server will need:
 * a wildcard CNAME record, and
 * a fixed IP address.
 
-The wildcard is particularly important for locating your installed apps,
-because each will run in its own :term:`container` for privilege separation,
-and each container is given a separate hostname.
+For example, a DNS zone file for "stackato.example.com" might
+contain::
 
-Detailed instructions for configuring DNS on various networks is beyond
-the scope of this guide, but in essense the resulting DNS zone file should
-contain something similar to::
+	stackato.example.com        IN    A        10.3.30.200
+	*.stackato.example.com      IN    CNAME    stackato.example.com
 
-	stackato-test.example.com          IN    A        10.0.0.1
-	*.stackato-test.example.com        IN    CNAME    stackato-test.example.com
+The wildcard CNAME record enables routing for the hostnames created for
+each application pushed to Stackato. If your networking policy forbids
+the use of wildcard records, you will need to add DNS records for each
+application pushed to Stackato as well as the following two hostnames:
 
-If you intend to expose your applications at URLs other than this wildcard through the
-use of :ref:`stackato map <command-map>` or :ref:`stackato push --url <command-push-url>`
-then you will want to add the name information to the DNS zone file as well.
-Firewalls and load balancers at your site may require corresponding adjustments::
+* **api.** - API endpoint for clients and the URL of the Management Console (e.g. api.stackato.example.com)
+* **aok.** - AOK authentication endpoint (e.g. aok.stackato.example.com)
 
-	app.domain.com                     IN    CNAME    stackato-test.example.com
+If you intend to expose your applications at URLs on other domains (e.g.
+using :ref:`stackato map <command-map>`) add these names to the DNS zone
+file as well. For example::
+
+	app.domain.com              IN    CNAME    stackato.example.com
+
+Firewalls and load balancers may require corresponding adjustments.
 
 .. note::
-	If your site uses DHCP to assign an IP address to the Stackato server,
-	you will want to configure the DHCP server to assign a fixed
-	address corresponding with the MAC address of the virtual
-	machine.  Be careful not to change the MAC address accidentally
-	through the hypervisor.  If the Stackato server is hosted on a cloud
-	provider, arrange to use a fixed IP address if possible.  For example,
-	Amazon EC2 supports this with Elastic IP.
+  If your site uses DHCP, configure a static binding to the MAC address
+  of the Stackato VM (and be careful not to change the MAC address
+  accidentally through the hypervisor). If Stackato is hosted on a cloud
+  provider, assign a fixed IP address using the platform's tools (e.g.
+  Elastic IP on Amazon EC2 or Floating IP on OpenStack).
 
 With DNS records in place, the multicast DNS broadcast is no longer necessary.
 To turn it off on the Stackato server, use the command::
@@ -490,7 +492,7 @@ In some cases, it may be a requirement that any HTTP request is first
 handled through an upstream or parent proxy (HTTP requests may not be
 directly routable otherwise).
 
-In this case it is neccesary to tell :term:`Polipo` about the proxy so
+In this case it is necessary to tell :term:`Polipo` about the proxy so
 it knows how to handle this correctly.
 
 Open the Polipo config file ``/etc/polipo/config`` and add the lines::
@@ -549,7 +551,7 @@ nodes. For example::
 VM Filesystem Setup
 -------------------
 
-The Stackato VM is distributed with a simple deafult partitioning
+The Stackato VM is distributed with a simple default partitioning
 scheme (i.e. everything but "/boot" mounted on "/").
 
 Additionally, some hypervisors (OpenStack/KVM) will start the VM with a
@@ -614,13 +616,33 @@ Using your own SSL certificate
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 On all router nodes, upload your *.key* file to the */etc/ssl/private/*
-dirctory and your *.crt* file to */etc/ssl/certs/*. Change the following
-settings in */s/vcap/stackato-router/config/local.json* to point to
+directory and your *.crt* file to */etc/ssl/certs/*. Change the following
+settings in */s/code/stackato-router/config/local.json* to point to
 the new files::
 
   "sslKeyFile": "/etc/ssl/private/example.key",
   "sslCertFile": "/etc/ssl/certs/example.crt",
 
+.. _server-config-sni-support:
+
+Adding Custom SSL Certs (SNI)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The Stackato router supports `SNI
+<http://en.wikipedia.org/wiki/Server_Name_Indication>`__, and custom SSL
+certificates for domains resolving to the system can be added using the
+:ref:`kato op custom_ssl_cert install <kato-command-ref-op>` command.
+Usage::
+
+  kato op custom_ssl_cert install <key-path> <cert-path> <domain> [--wildcard-subdomains]
+
+This must be run on all router nodes in a cluster: the first one as
+above, subsequent routers using the ``--update`` flag.
+
+.. note::
+  SNI support with multiple Stackato routers works only with TCP load
+  balancers (e.g. HAProxy, iptables, F5) not HTTP load balancers (e.g.
+  Nginx, Stackato load balancer). 
 
 .. _server-config-ssl-cert-chain:
 
@@ -666,9 +688,13 @@ should see more than one number in the list. For example::
 Generating a self-signed SSL certificate
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can generate your own self-signed SSL certificate by running the
-following commands on the Stackato server, substituting
-"hostname.mydomain.com" with your own details::
+You can re-generate Stackato's self-signed SSL certificate by running
+the following command on the VM::
+
+  $ kato op regenerate ssl_cert
+  
+To do essentially the same operation manually (substituting
+"hostname.mydomain.com" with your own details)::
 
 	$ mkdir ~/hostname.mydomain.com
 	$ cd ~/hostname.mydomain.com
@@ -697,45 +723,47 @@ messages. The certificate will need to be added to the browser
 exception rules, which you will be prompted to do so when visiting
 one of your apps via HTTPS for the first time.
 
-.. _server-config-router-legacy:
 
-.. index:: router_legacy
+.. _server-config-quota-definitions:
 
-.. index:: SPDY
+Quota Definitions
+-----------------
 
-.. index:: WebSockets
+.. note::
+  In Stackato 2.10 and earlier, every User and Group had a quota. In 3.0
+  (Cloud Foundry v2) Quota Definitions are applied at the Organization
+  level (i.e. members of an organizations share its quota).
+  
+Quota definitions define limits for:
 
-.. _server-config-limits:
+* physical memory (RAM) in MB
+* number of services
+* ``sudo`` privilege within application containers
 
-Users and Group Limits
-----------------------
+Each organization is assigned a quota definition, and all users of an
+organization share the defined limits.
 
-Limits for specific users and groups can be set for memory usage, number
-of apps, number of services, and the ability to run the ``sudo`` command
-within application containers.
+Use the ``stackato quota ...`` commands to modify quota definitions:
 
-You can manage groups, users, and limits in the :ref:`Users
-<console-users>` and :ref:`Groups <console-groups>` sections of the
-:ref:`Management Console <management-console>` or by using the
-``stackato`` client :ref:`administration commands
-<command-administration>`.
+* :ref:`stackato quota configure <command-quota configure>`
+* :ref:`stackato quota create <command-quota create>`
+* :ref:`stackato quota delete <command-quota delete>`
+* :ref:`stackato quota list <command-quota list>`
 
-The :ref:`kato data users <kato-command-ref-data-users>` command is
-available to :ref:`import or export <user-import-export>` user lists in
-CSV format.
+Existing quota definitions can also be viewed and edited in the
+Management Console :ref:`Quota Definitions settings
+<console-settings-quota-definitions>`
+
 
 .. _server-config-sudo:
 
 sudo
-----
+^^^^
 
-Users and Groups
-^^^^^^^^^^^^^^^^
-
-Both individual users and groups can have the use of the ``sudo``
-command limited (the default is to disallow its use). See the
-:ref:`Managing Groups, Users, & Limits <admin-groups>` documents for
-details on managing these limits.
+Quota Definitions can give all users in an Organization the use of the
+``sudo`` command within application containers. This option is disabled
+by default as a security precaution, and should only be enabled for
+Organizations where all users are trusted.
 
 
 Allowed Repositories

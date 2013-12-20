@@ -62,6 +62,7 @@ Server Configuration
    server/docker
    server/logging
    server/aok
+   server/upgrade
 
 
 Cluster Configuration

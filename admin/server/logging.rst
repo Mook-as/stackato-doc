@@ -105,7 +105,7 @@ Log drains can emit entries in a variety of formats:
 
 For example, to add a drain with just the timestamp, application name and message::
 
-  $ kato log drain add -p apptail -f '{{.HumanTime}} - {{.AppName}}: {{.Text}}' \
+  $ kato log drain add -p apptail -f '{{.human_time}} - {{.app_name}}: {{.text}}' \
   > all-apps file:///s/logs/apptail-short.log
 
 JSON keys are enclosed in double curly braces and prefixed with a
@@ -118,49 +118,49 @@ Different JSON keys are available in different :ref:`log streams <logging-keys>`
 
 **apptail.**:
 
-* Text: actual log line
-* UnixTime: timestamp (seconds since  1 January 1970)
-* HumanTime: formatted time
-* NodeID: DEA host IP of this app instance
-* LogFilename: log file from which this line originated
-* Source: e.g. app, staging, stackato.dea, stackato.stager, appstore
-* InstanceIndex: instance number
-* AppGUID: GUID of this app
-* AppName: application name
-* AppSpace: GUID of the space this app belongs to
-* Syslog.Priority: syslog priority
-* Syslog.Time: syslog formatted time
+* text: actual log line
+* unix_time: timestamp (seconds since  1 January 1970)
+* human_time: formatted time
+* node_id: DEA host IP of this app instance
+* filename: log file from which this line originated
+* source: e.g. app, staging, stackato.dea, stackato.stager, appstore
+* instance_index: instance number
+* app_guid: GUID of this app
+* app_name: application name
+* app_space: GUID of the space this app belongs to
+* syslog.priority: syslog priority
+* syslog.time: syslog formatted time
 
 **event.**:
 
-* Text: event description
-* UnixTime: timestamp
-* HumanTime: formatted time
-* NodeID: Node IP from which this event originated
-* Type: type of event (eg: process_stop) 
-* Severity: INFO, WARN, ERROR
-* Process: the process generating the event
-* Info: event-specific information as JSON
-* Syslog.Priority: syslog priority
-* Syslog.Time: syslog formatted time
+* text: event description
+* unix_time: timestamp
+* human_time: formatted time
+* node_id: Node IP from which this event originated
+* type: type of event (eg: process_stop) 
+* severity: INFO, WARN, ERROR
+* process: the process generating the event
+* info: event-specific information as JSON
+* syslog.priority: syslog priority
+* syslog.time: syslog formatted time
 
 **systail.**:
 
-* Text: actual log line
-* UnixTime: timestamp
-* HumanTime: formatted time
-* NodeID: Node IP from which this log line originated
-* Name: name of the component (eg: redis_gateway)
-* Syslog.Priority: syslog priority
-* Syslog.Time: syslog formatted time
+* text: actual log line
+* unix_time: timestamp
+* human_time: formatted time
+* node_id: Node IP from which this log line originated
+* name: name of the component (eg: redis_gateway)
+* syslog.priority: syslog priority
+* syslog.time: syslog formatted time
 
 You can see a list of the default drain formats using :ref:`kato config
 get <kato-command-ref-config>`::
 
   $ kato config get logyard drainformats
-  apptail: ! '{{.HumanTime}} {{.Source}}.{{.InstanceIndex}}: {{.Text}}'
-  event: ! '{{.Type}}@{{.NodeID}}: {{.Desc}} -- via {{.Process}}'
-  systail: ! '{{.Name}}@{{.NodeID}}: {{.Text}}'
+  apptail: ! '{{.human_time}} {{.source}}.{{.instance_index}}: {{.text}}'
+  event: ! '{{.type}}@{{.node_id}}: {{.desc}} -- via {{.process}}'
+  systail: ! '{{.name}}@{{.node_id}}: {{.text}}'
   [...]
 
 These default log formats are used when the corresponding prefix is used
@@ -178,7 +178,7 @@ configuration. To do this, add the formatting string to a new key in
 logyard/drainformats. For example, to save the log format used in the
 'all-apps' drain example above::
 
-  $ kato config set logyard drainformats/simplefmt "{{.HumanTime}} - {{.AppName}}: {{.Text}}"
+  $ kato config set logyard drainformats/simplefmt "{{.human_time}} - {{.app_name}}: {{.text}}"
 
 You can use this named format when setting up new drains. For example, a
 shorter command for creating the 'all-apps' drain would be::
@@ -187,7 +187,7 @@ shorter command for creating the 'all-apps' drain would be::
 
 A custom "systail" log stream might look like this::
 
-  $ kato config set logyard drainformats/systail-papertrail '<13>1 - {{.HumanTime}} - {{.Name}}@{{.NodeID}} -- {{.Text}}'
+  $ kato config set logyard drainformats/systail-papertrail '<13>1 - {{.human_time}} - {{.name}}@{{.node_id}} -- {{.text}}'
 
 This could be forwarded to the Papertrail log analysis service::
 
@@ -195,7 +195,7 @@ This could be forwarded to the Papertrail log analysis service::
   
 You can also change the default apptail, event, and systail drain
 formats to modify the output of any drains using these prefixes (e.g.
-:ref:`stackato drain <command-drain>`, Cloud Events in the Management
+:ref:`stackato drain <command-drain add>`, Cloud Events in the Management
 Console, and :ref:`kato log tail <kato-command-ref-log-tail>`
 respectively).
 
@@ -217,7 +217,7 @@ Application Drains
 ^^^^^^^^^^^^^^^^^^
 
 Drains for application log streams can be added by end users with the
-:ref:`stackato log drain <command-drain>` command. See the
+:ref:`stackato log drain add <command-drain add>` command. See the
 :ref:`Application Logs <application_logs>` section of the User Guide for
 an example.
 
@@ -268,19 +268,7 @@ event
 
   * kato_action
 
-  * cc_waiting_for_dea
-
-  * cc_app_update
-
-  * stager_start
-
-  * stager_end
-
-  * dea_start
-
-  * dea_stop
-
-  * dea_ready
+  * timeline
 
   * nginx_error
 
@@ -305,7 +293,6 @@ systail
   * kato
   * kernel
   * nginx_error
-  * stackato-lxc
   * supervisord
   * cc_nginx_error
   * app_mdns
@@ -314,10 +301,10 @@ systail
   * apptail
   * avahi_publisher
   * cc_nginx
-  * cloud_controller
+  * cloud_controller_ng
   * logyard_sieve
-  * dea
-  * doozerd
+  * dea_ng
+  * dockerd
   * aok
   * filesystem_gateway
   * filesystem_node
@@ -362,15 +349,15 @@ source for an existing key.
 
 * To retrieve the current list of log files being streamed::
 
-  $ kato config get logyard systail/log_files
+  $ kato config get systail log_files
 
 * To remove a log file from the stream::
 
-  $ kato config del logyard systail/log_files/dpkg
+  $ kato config del systail log_files/dpkg
 
 * To add a new log file to the stream::
 
-  $ kato config set logyard systail/log_files/dpkg /var/log/dpkg.log
+  $ kato config set systail log_files/dpkg /var/log/dpkg.log
 
 Restart the ``systail`` process after adding or removing log files::
 
@@ -439,18 +426,17 @@ Drain Timeouts
 User Drain Limit
 ^^^^^^^^^^^^^^^^
 
-* **cloud_controller** **max_user_drains** (default 200): limits the
-  total number of concurrent user application drains running on a
-  Stackato system. Once this limit is reached, users will see the
-  following notificition when trying to add a new drain::
+* **cloud_controller_ng** **max_drains_per_app** (default 2): limits the
+  number of drains an application can have. Once this limit is reached,
+  users will see the following notificition when trying to add a new
+  drain::
 
-    Error 22002: No more drains can be added; contact your cluster
-    admin.
+    Adding drain [fail] ... Error 123: Per-app drain limit (2) reached.
+    
+  To change the limit, set ``max_drains_per_app`` in the cloud_controller_ng
+  configuration. For example, to change this limit to 5 drains::
 
-  To change the limit, set ``max_user_drains`` in the cloud_controller
-  configuration. For example, to change this limit to 250 drains::
-
-    $ kato config set cloud_controller max_user_drains 250
+    $ kato config set cloud_controller_ng max_drains_per_app 5
 
 Apptail Limits
 ^^^^^^^^^^^^^^

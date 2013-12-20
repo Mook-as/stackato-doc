@@ -142,6 +142,8 @@ Command Usage Details
 
 **data** **export** **--cluster** [**options**] [*<filename>*]
 
+**data** **export** **--manual** [**options**] [*<filename>*]
+
   Export Stackato system data to or from clusters/nodes. With no
   options specified, includes all data except 'resources' and 'aok-config'.
 
@@ -161,8 +163,6 @@ Command Usage Details
                                           Requires --manual
 
                                           Implies --only-this-node
-
-  **--dry-run**                           Do not actually import/export anything
 
   **--remote**                            Remote import/export (internal use only)
 
@@ -287,6 +287,8 @@ Command Usage Details
 
 **data** **import** **--cluster** [**options**] *<source>*
 
+**data** **import** **--manual** [**options**] *<source>*
+
   Import Stackato system data to or from clusters/nodes. With no
   options specified, includes all data except 'resources' and 'aok-config'.
 
@@ -307,11 +309,11 @@ Command Usage Details
 
                                           Implies --only-this-node
 
-  **--dry-run**                           Do not actually import/export anything
-
   **--remote**                            Remote import/export (internal use only)
 
   **--base-dir** *<base-dir>*             Base directory for extracting temporary files
+
+  **--legacy**                            Treat import as a legacy services import (internal use only)
 
   **--droplets**                          Include droplets (uploaded apps)
 
@@ -677,8 +679,6 @@ Command Usage Details
 
   **--time**                              Show timestamp
 
-  **--legacy**                            Legacy "kato tail" behaviour (without logyard)
-
   **-n** **--node** *<node-IP>*           Only show logs from a specific cluster node
 
   **-l** **--local**                      Only show logs from the current node
@@ -853,8 +853,6 @@ Command Usage Details
 
 **node** **setup** **firstuser** [**options**] *<email>* *<org>*
 
-**setup** **--help**
-
   First user setup.
 
   *<email>*                               First user's email.
@@ -883,9 +881,7 @@ Command Usage Details
 
 .. _kato-command-ref-node-setup-load_balancer:
 
-**node** **setup** **load_balancer**
-
-**node** **setup** **load_balancer** *<IP>* [*<IP>...*]
+**node** **setup** **load_balancer** [*<IP>...*] [**--force**]
 
 **node** **setup** **load_balancer** **--help**
 
@@ -927,10 +923,6 @@ Command Usage Details
 
   **-h** **--help**                       Show help information
 
-  **-f** **--file** *<file>*              Performs the Stackato upgrade using the local provided file. Otherwise the upgrade is
-
-                                          gathered from the ActiveState website.
-
   **-n** **--node** *<node>*              Targets the provided node.
 
   **-v** **--version** *<version>*        The version of Stackato to upgrade to. The latest version is used if this isn't supplied.
@@ -943,11 +935,19 @@ Command Usage Details
 
                                           requested.
 
-  **--all**                               Targets all nodes in the cluster.
+  **--cluster**                           Performs an upgrade of all nodes in the cluster.
 
   **--status**                            Shows the status of upgrades on a node.
 
   **--force**                             Forces an upgrade to run.
+
+  **-j** **--json**                       Shows the status in json format.
+
+  **-u** **--update-kato**                Updates kato node upgrade to the latest codebase.
+
+  **--role-order** *<role-order>*         Comma separated list of roles defining the order that roles should be upgraded in a cluster.
+
+  **--ignore-inspect-failures**           Display pre/post upgrade 'kato inspect' tests as warnings instead of upgrade failures.
 
 
 
@@ -1009,6 +1009,8 @@ Command Usage Details
 
 **op** **update_hostsfile**
 
+**op** **generate_service_tokens**
+
   Various operational commands
 
   **custom_ssl_cert**                     Allows admin configuration of custom SSL certificates
@@ -1041,6 +1043,8 @@ Command Usage Details
 
                                           to the CC's internal IP
 
+  **generate_service_tokens**             Generates service auth tokens.
+
 
   **-h** **--help**                       Show help information
 
@@ -1057,19 +1061,15 @@ Command Usage Details
 
 .. _kato-command-ref-patch:
 
-**patch** **status**
+**patch** **status** [**--all**]
 
-**patch** **status** **--all**
-
-**patch** **install** [**--all**]
-
-**patch** **install** *<patchname>*
+**patch** **install** [**--only-this-node**] [**--no-restart**] *<patchname>*
 
 **patch** **reset**
 
 **patch** **update**
 
-**patch** **reinstall** *<patchname>*
+**patch** **reinstall** [**--only-this-node**] [**--no-restart**] *<patchname>*
 
   Update a Stackato cluster with post-release fixes.
 
@@ -1096,7 +1096,7 @@ Command Usage Details
 
   **-n** **--node** *<node-IP>*           Get status for a specific cluster node (defaults to local node)
 
-  **-a** **--all**                        Include status of all cluster nodes
+  **-c** **--cluster**                    Includes process status over all cluster nodes
 
   **-j** **--json**                       Use JSON format for displaying output
 
@@ -1131,6 +1131,8 @@ Command Usage Details
   **-h** **--help**                       Show help information
 
   **-n** **--node** *<node-IP>*           Restart process on a specific cluster node
+
+  **-c** **--cluster**                    Restarts process on all nodes in the cluster
 
 
 
@@ -1187,7 +1189,7 @@ Command Usage Details
 
 **report** **--node** *<node-IP>*
 
-**report** **--all**
+**report** **--cluster**
 
 **report** **--help**
 
@@ -1195,7 +1197,7 @@ Command Usage Details
 
   **-h** **--help**                       Show help information
 
-  **-a** **--all**                        Gather reports from entire cluster into one tarball
+  **-c** **--cluster**                    Gather reports from entire cluster into one tarball
 
   **-n** **--node** *<node-IP>*           Gather report from a specific cluster node
 
@@ -1261,10 +1263,6 @@ Command Usage Details
 **role** **info** **--help**
 
 **role** **info** [*<role>...*]
-
-**role** **remove** [**-v**] [**--node** *<node-IP>*] **--all**
-
-**role** **remove** [**-v**] [**--node** *<node-IP>*] **--all-but** *<role>...*
 
   Display info on roles
 

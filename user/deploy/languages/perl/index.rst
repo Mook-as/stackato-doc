@@ -103,11 +103,11 @@ Example
 ^^^^^^^
 ::
 
-    name: perl-app
-    framework: perl
-    command: perl worker.pl
-    processes:
-        web: ~
+  name: perl-app
+  framework: perl
+  command: perl worker.pl
+  processes:
+    web: ~
 
 Installing module dependencies
 ------------------------------
@@ -249,9 +249,9 @@ To disable testing for cpanm in staging, set `PERL_CPANM_OPT
 <http://search.cpan.org/dist/App-cpanminus/bin/cpanm#OPTIONS>`_ to
 '--notest' in :ref:`stackato.yml <stackato_yml>`::
 
-    name: myapp
-    env:
-      PERL_CPANM_OPT: --notest
+  name: myapp
+  env:
+    PERL_CPANM_OPT: --notest
 
 .. index:: Private CPAN Mirror
 
@@ -262,8 +262,8 @@ To make cpanminus use a specific CPAN repository (e.g. a local mirror or
 private repo), instead of the default public ones, set the ``--mirror``
 and ``--mirror-only`` options in PERL_CPANM_OPT::
 
-    env:
-      PERL_CPANM_OPT: --mirror http://cpan.example.com --mirror-only
+  env:
+    PERL_CPANM_OPT: --mirror http://cpan.example.com --mirror-only
 
 .. _uwsgi-perl-static-files:
 

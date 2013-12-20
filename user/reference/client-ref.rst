@@ -10,7 +10,7 @@ Usage
 
 **stackato** [*options*] *command* [*arguments*] [*command-options*]
 
-Try ``stackato help``, ``stackato help [command]``, and ``stackato options`` for more information.
+Try ``stackato help`` or ``stackato help [command]`` for more information.
 
 Many of the informational commands take a ``--json`` option if you wish to generate machine-parseable output.
 In some cases the  ``--json`` option reveals additional details.

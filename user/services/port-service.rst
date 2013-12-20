@@ -25,9 +25,7 @@ To request a port from Harbor in the *stackato.yml* file, add it in a
 :ref:`services <stackato_yml-services>` block. For example::
 
   name: port-test
-  framework:
-    type: node
-  mem: 64
+  mem: 256
   services:
     my-port: harbor
 

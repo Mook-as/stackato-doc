@@ -5,17 +5,24 @@ module KatoRef
   module Docopt
     class Command
 
-      DEPRECATED_COMMANDS = {
-      }
-
-      def initialize(cli_dir, argv=[])
-	@cli_dir = cli_dir
+      def initialize(argv=[])
         @argv = argv
       end
 
       def sub_command_names
-        dir = get_cmd_dir(@argv)
-        Dir.entries(dir).select {|entry| File.directory? File.join(dir, entry) and not entry.start_with? "." }.sort
+        commands = []
+        # Traverse through the LOAD_PATH to find all subcommands, which
+        # may be scattered throughout different packages
+        $LOAD_PATH.each do |lib_dir|
+          cmd_dir = File.join(lib_dir, "kato", "cli", "cmd", @argv.join("/"))
+          next unless Dir.exists? cmd_dir
+          Dir.entries(cmd_dir).each do |entry|
+            if File.directory? File.join(cmd_dir, entry) and not entry.start_with? "."
+              commands << entry
+            end
+          end
+        end
+        commands.sort.uniq
       end
 
       def tokenized
@@ -84,7 +91,12 @@ module KatoRef
       end
 
       def get_cmd_dir(argv=@argv)
-        File.join(@cli_dir, "cmd", argv.join("/"))
+        # Traverse through the LOAD_PATH to find the command dir
+        $LOAD_PATH.each do |lib_dir|
+          dir = File.join(lib_dir, "kato", "cli", "cmd", argv.join("/"))
+          return dir if Dir.exists? dir
+        end
+        nil
       end
 
       def has_specific_usage_file?(argv=@argv)
@@ -93,6 +105,9 @@ module KatoRef
 
       def get_cmd_usage(argv=@argv)
         cmd_dir = get_cmd_dir(argv)
+        if cmd_dir.nil?
+          raise "No cmd_dir for #{argv}"
+        end
         usage_path = File.join(cmd_dir, "usage")
         usage_erb_path = File.join(cmd_dir, "usage.erb")
         if File.file? usage_path
@@ -101,9 +116,6 @@ module KatoRef
           require "erb"
 
           cmds = {}
-          DEPRECATED_COMMANDS.each_pair do |old_cmd, new_cmd|
-            cmds[old_cmd] = "DEPRECATED: Use \"kato #{new_cmd}\"."
-          end
 
           # Get the first line from each sub-command
           Dir.foreach(cmd_dir) do |filename|

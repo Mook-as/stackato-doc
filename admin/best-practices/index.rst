@@ -113,6 +113,36 @@ nodes to new nodes. Instead, the application droplets (zip files
 containing staged applications) are re-deployed to new DEA nodes from
 the Controller.
 
+.. _bestpractices-migration-3.0:
+
+Migrating to 3.0
+^^^^^^^^^^^^^^^^
+
+The :ref:`kato data import <kato-command-ref-data-import>` command
+detects if you are upgrading from Stackato 2.x to 3.x and does some
+special processing to account for differences in the two versions:
+
+* Users will be imported, and each user will be added to their own
+  :ref:`Organization <orgs-spaces>`.
+
+* Existing admin users will have corresponding (global) admin privileges
+  in the new system.
+  
+* :ref:`Groups <admin-groups>` will be converted into :ref:`Organization
+  <orgs-spaces>`. All apps and users will be placed within a 'default'
+  :ref:`Space <orgs-spaces>` within each organization.
+
+* Services will be imported.
+
+* Apps will be automatically redeployed. Any apps which fail to do so
+  will be listed, and must be redeployed manually by their owners.
+  
+* :ref:`AOK <aok>` (e.g. LDAP) configuration will be imported.
+
+Otherwise, the migration will follow the same :ref:`Export
+<bestpractices-migration-export>` and :ref:`Import
+<bestpractices-migration-import>` steps outlined below.
+
 
 .. _bestpractices-migration-export:
 
@@ -143,6 +173,13 @@ Once the export completes, you can use `scp
 utility (e.g. sftp, rsync) to move the .tgz file to another system, or
 save the file directly to a mounted external filesystem by specifying
 the full path and filename during export (see backup example below). 
+  
+.. note::
+  Exporting data can take several minutes. For clusters with constant
+  usage or large numbers of users, apps, and databases, put the
+  exporting system in :ref:`Maintenance Mode <console-settings>` (e.g.
+  during a scheduled maintenance window) before exporting.
+  
   
 Scheduled backups
 ^^^^^^^^^^^^^^^^^
@@ -176,15 +213,24 @@ some shell commands need to be run locally for that service.
 Importing the server data
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To import a Stackato dump, transfer the file to the target VM.
+To import Stackato data, transfer the exported .tgz file to the target
+VM or note the hostname of the old VM / Core node.
 
-Login to the Stackato VM and run ``kato data import`` with the relevant
-options. For example, to import all data into a new cluster::
+.. note::
+  Before importing data to a new microcloud or cluster, make sure you
+  have completed first-user (admin) setup in the Stackato Web UI and
+  accepted the terms and conditions. All roles in the new cluster should
+  be started prior to proceeding with import. If you would like all
+  services to be imported, their corresponding roles must be enabled.
+
+Login to the Stackato VM (or Core node) and run ``kato data import``
+with the relevant options. For example, to import all data into a new
+cluster from a .tgz file::
 
 	$ kato data import --cluster stackato-export-xxxxxxxxxx.tgz
 
-The command can also import data remotely from a running Stackato
-system. For example::
+To import data from a running Stackato system instead, specify the
+hostname of the old Core node::
 
     $ kato data import --cluster stackato-host.example.com
 

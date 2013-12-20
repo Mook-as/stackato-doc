@@ -100,20 +100,42 @@ Console. Enter this URL into your web browser.
   Admin Guide for information on using your own certificate.
 
 The Management Console will load, and you will be prompted to create the
-first administrative user for the system. Use these account credentials
-to push applications, create additional users, and configure the system.
+first administrative user (and the first :ref:`organization
+<orgs-spaces>`) for the system. Use these account credentials to push
+applications, create additional users, and configure the system.
 
 .. note::
   The password you set here will become the new password for the
   ``stackato`` system user for access via SSH or the hypervisor console.
 
+Adding Organizations
+--------------------
+
+Stackato will automatically create an :ref:`organization <orgs-spaces>`
+when the first admin user is set up, but you may wish to add more. Do
+this on in the :ref:`Organizations <console-organizations>` view in the
+:ref:`Management Console <management-console>`.
+
+Not that each organization has an assigned :ref:`quota definition
+<console-settings-quota-definitions>`, which should be changed or edited
+to reflect the resources available on the VM/cluster.
+
+Adding Spaces
+-------------
+
+Before members of an organization can deploy applications, one or more
+:ref:`spaces <orgs-spaces-spaces>` must be added to the organization.
+The Managment Console will prompt for creation of the first space, and
+subsequent spaces can be created by clicking the **+ Add Space** button
+in the Organization view (or the :ref:`stackato create-space
+<command-create-space>` command).
 
 Adding Users
 ------------
 
 The easiest way to add additional users is in the :ref:`Users section
-<console-users>` of the :ref:`Management Console <management-console>`,
-but you can also use the ``stackato`` client:
+<console-users>` of the Management Console (or the :ref:`stackato
+add-user <command-add_user>` command):
 
 .. parsed-literal::
   
@@ -194,10 +216,9 @@ in the Windows *hosts* file.
 
   :ref:`Using xip.io <quickstart-xip-io>` for hostname resolution is the
   easiest way to set up a Stackato micro cloud VM if mDNS is not an
-  option. 
+  option. Try this method before modifying the *hosts* file. 
 
-To modify the *hosts* file use the :ref:`stackato host
-<command-host-file>` command or open the file located at::
+To modify the *hosts* file open::
 
     %SystemRoot%\System32\drivers\etc\hosts
     
@@ -212,10 +233,12 @@ the command::
     $ ifconfig
     
 Then, if for example your IP address is ``192.168.68.54``, the API
-endpoint is ``api.stackato-xxxx.local`` and you have an app called
-``myapp.stackato-xxxx.local``, you would enter the following two lines::
+endpoint is ``api.stackato-xxxx.local``, the AOK (authentication)
+endpoint is ``aok.stackato-xxxx.local``, and you have an app called
+``myapp.stackato-xxxx.local``, you would enter the following lines::
 
     192.168.68.54 api.stackato-xxxx.local
+    192.168.68.54 aok.stackato-xxxx.local
     192.168.68.54 myapp.stackato-xxxx.local
 
 

@@ -25,14 +25,13 @@ audiences:
   charge of setting up, configuring, and maintaining the PaaS
 
 .. note::
-  Documentation of new features in Stackato 3.0 is still in progress.
-  Please note:
+  Stackato 3.0 is based on Cloud Foundry v2 and there are a number of
+  important differences to be aware of if you are moving from Stackato
+  2.x:
   
   * app deployment is now primarily done using :ref:`buildpacks <buildpacks>`
   * some keys in :ref:`stackato.yml <stackato_yml>` have changed
-  * :ref:`Groups <using-groups>` have been replaced with `Organizations and
-    Spaces
-    <http://docs.cloudfoundry.com/docs/using/managing-apps/orgs-and-spaces.html>`__
+  * Groups have been replaced with :ref:`Organizations and Spaces <orgs-spaces>`
   * the Stackato v3 API is not yet fully documented, but is compatible
     with the `Cloud Foundry v2 API
     <http://docs.cloudfoundry.com/docs/reference/cc-api.html>`__ 

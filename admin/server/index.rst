@@ -26,6 +26,7 @@ Instructions for common operations on the Stackato VM can be found here:
    :maxdepth: 3
    
    operations
+   upgrade
 
 Detailed Configuration
 ----------------------

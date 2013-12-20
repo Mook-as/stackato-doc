@@ -1,15 +1,15 @@
-# Package configuration for stackato-doc
+# Package configuration for stackato-doc-ng
 
 # Values here will override environment variables and will be overridden
 # by command options.  This is a shell file so you can use it to perform
 # arbitrary actions.  The main intent is to set up various PKG_*
 # variables used to configure and generate the package.
 
-PKG_NAME="stackato-doc"
+PKG_NAME="stackato-doc-ng"
 PKG_VERSION="auto"
 PKG_ARCH="all"
-PKG_DESCR_SHORT="stackato-doc"
+PKG_DESCR_SHORT="stackato-doc-ng"
 PKG_DESCR_LONG="Public documentation for Stackato"
-PKG_GITDESCRIBE="GITDESCRIBE-PKG"
+PKG_GITDESCRIBE=".pkg-gitdescribe"
 PKG_DEPENDS=""
-PKG_BUILD_DEPENDS="python, python-sphinx, ruby1.9.3"
+PKG_BUILD_DEPENDS="python, python-sphinx"

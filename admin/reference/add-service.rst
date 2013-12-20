@@ -34,20 +34,6 @@ The configuration files and instructions can be adapted (with reference
 to the built-in system services) to create and install more complex
 services to Stackato.
 
-Amazon RDS for MySQL
---------------------
-
-If you are using Stackato on Amazon EC2, you can set up the Stackato
-MySQL service to use `Amazon RDS for MySQL
-<http://aws.amazon.com/rds/mysql/>`__ as the database back end.
-
-Set the host, port and credentials for the RDS instance in the
-configuration for mysql_service via :ref:`kato config
-<kato-command-ref-config>`, then add the ``aws_rds_compat`` option (set
-to ``true``)::
-
-  $ kato config set mysql_node aws_rds_compat true
-  
 
 .. _oracle-db:
 
@@ -133,7 +119,7 @@ Some settings in the *config/oracledb_gateway.yml* file will need to be
 modified::
 
 * **cloud_controller_uri**: Needs to match the API endpoint of your system (e.g. api.stackato.example.com)
-* **token**: Can be any string. You will need to add this auth token to the cloud_controller config in a later step
+* **token**: Can be any string. You will need to add this auth token to the cloud_controller_ng config in a later step
 * **mbus**: This should match the setting for other services. You can check the correct setting using ``kato config get redis_node mbus``
 
 Set the credentials for the external Oracle database in
@@ -217,9 +203,9 @@ Add the service AUTH token
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The ``auth`` token set in *config/oracledb_gateway.yml* must be added to
-the cloud_controller settings::
+the cloud_controller_ng settings::
 
-    $ kato config set cloud_controller builtin_services/oracledb '{"token": "<oracledb_gateway.yml auth token>"}' --json
+    $ kato config set cloud_controller_ng builtin_services/oracledb '{"token": "<oracledb_gateway.yml auth token>"}' --json
 
 Replace the <oracledb_gateway.yml auth token> string above with the auth
 token you set up earlier.

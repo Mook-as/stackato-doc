@@ -39,15 +39,14 @@ role**:
    template::
   
     $ kato config get fence docker/image
-    stackato/app-holophonor
+    stackato/stack/alsek
   
 3. Create a `Dockerfile <http://docs.docker.io/en/latest/use/builder/>`_
    which inherits the current Docker image, then runs an update or
    installation command. For example::
 
-    FROM stackato/app-holophonor
+    FROM stackato/stack/alsek
     RUN apt-get -y install libgraphite2-dev
-    CMD ["start.sh"]
 
    * `FROM <http://docs.docker.io/en/latest/use/builder/#from>`__:
      inherits the environment and installed software from Stackato's app
@@ -61,7 +60,7 @@ role**:
 4. Build the image, setting the maintainer's name, an image name, and a
    version number (optional, but recommended)::
 
-    $ sudo docker build -t exampleco/newimg:1.0.0
+    $ sudo docker build -rm -t exampleco/newimg:1.0.0 .
 
 5. Configure Stackato to use the new image:
 
@@ -119,9 +118,8 @@ the Container Image <docker-modify-container>` ) would use the ADD
 directive to put a local *hooks* directory in the Docker image's
 */etc/stackato/* directory::
 
-  FROM stackato/app-holophonor
+  FROM stackato/stack/alsek
   ADD hooks /etc/stackato/hooks
-  CMD ["start.sh"]
 
 
 .. _docker-registry:
@@ -170,7 +168,7 @@ central repository for your container tempates.
    registry location for the organization name used in step 4. For
    example::
    
-    $ sudo docker build -t api.paas.example.com:49153/newimg:1.0.0
+    $ sudo docker build -rm -t api.paas.example.com:49153/newimg:1.0.0 .
    
 5. Push the newly built Docker image to the registry::
 
