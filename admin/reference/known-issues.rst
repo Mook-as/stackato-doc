@@ -17,6 +17,20 @@ original ones defined at push when the application is restarted.
 To modify custom environment variables, re-push the application after
 changing the values in *stackato.yml*.
 
+.. _known-issues-rabbit-import:
+
+Importing Apps using RabbitMQ 2.4
+---------------------------------
+
+Stackato 2.10 shipped with RabbitMQ 2.4 ('rabbitmq' service) enabled by
+default. Stackato 3.0 has RabbitMQ 2.4 and 3.1, ('rabbitmq' and
+'rabbitmq3' respectively) but both are disabled by default. If you are
+importing RabbitMQ 2.4 service data from a 2.10 cluster using ``kato
+data import`` be sure you have the 'rabbitmq' service enabled first.
+
+Note that there are `changes in RabbitMQ 3.0
+<http://www.rabbitmq.com/blog/2012/11/19/breaking-things-with-rabbitmq-3-0/>`__
+which are incompatible with version 2.4.
 
 Service Gateway Log Errors in Maintenance Mode
 ----------------------------------------------
