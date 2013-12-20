@@ -10,6 +10,11 @@
 
 # You can set these variables from the command line.
 SPHINXOPTS    =
+
+ifdef READTHEDOCS
+    SPHINXOPTS    = -t public
+endif
+
 ifndef SPHINXBUILD
     SPHINXBUILD = sphinx-build
 endif
