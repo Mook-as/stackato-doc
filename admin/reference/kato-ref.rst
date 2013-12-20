@@ -142,6 +142,8 @@ Command Usage Details
 
 **data** **export** **--cluster** [**options**] [*<filename>*]
 
+**data** **export** **--manual** [**options**] [*<filename>*]
+
   Export Stackato system data to or from clusters/nodes. With no
   options specified, includes all data except 'resources' and 'aok-config'.
 
@@ -161,8 +163,6 @@ Command Usage Details
                                           Requires --manual
 
                                           Implies --only-this-node
-
-  **--dry-run**                           Do not actually import/export anything
 
   **--remote**                            Remote import/export (internal use only)
 
@@ -287,6 +287,8 @@ Command Usage Details
 
 **data** **import** **--cluster** [**options**] *<source>*
 
+**data** **import** **--manual** [**options**] *<source>*
+
   Import Stackato system data to or from clusters/nodes. With no
   options specified, includes all data except 'resources' and 'aok-config'.
 
@@ -306,8 +308,6 @@ Command Usage Details
                                           Requires --manual
 
                                           Implies --only-this-node
-
-  **--dry-run**                           Do not actually import/export anything
 
   **--remote**                            Remote import/export (internal use only)
 
@@ -923,10 +923,6 @@ Command Usage Details
 
   **-h** **--help**                       Show help information
 
-  **-f** **--file** *<file>*              Performs the Stackato upgrade using the local provided file. Otherwise the upgrade is
-
-                                          gathered from the ActiveState website.
-
   **-n** **--node** *<node>*              Targets the provided node.
 
   **-v** **--version** *<version>*        The version of Stackato to upgrade to. The latest version is used if this isn't supplied.
@@ -939,11 +935,19 @@ Command Usage Details
 
                                           requested.
 
-  **-c** **--cluster**                    Targets all nodes in the cluster.
+  **--cluster**                           Performs an upgrade of all nodes in the cluster.
 
   **--status**                            Shows the status of upgrades on a node.
 
   **--force**                             Forces an upgrade to run.
+
+  **-j** **--json**                       Shows the status in json format.
+
+  **-u** **--update-kato**                Updates kato node upgrade to the latest codebase.
+
+  **--role-order** *<role-order>*         Comma separated list of roles defining the order that roles should be upgraded in a cluster.
+
+  **--ignore-inspect-failures**           Display pre/post upgrade 'kato inspect' tests as warnings instead of upgrade failures.
 
 
 
@@ -1057,19 +1061,15 @@ Command Usage Details
 
 .. _kato-command-ref-patch:
 
-**patch** **status**
+**patch** **status** [**--all**]
 
-**patch** **status** **--all**
-
-**patch** **install** [**--all**]
-
-**patch** **install** *<patchname>*
+**patch** **install** [**--only-this-node**] [**--no-restart**] *<patchname>*
 
 **patch** **reset**
 
 **patch** **update**
 
-**patch** **reinstall** *<patchname>*
+**patch** **reinstall** [**--only-this-node**] [**--no-restart**] *<patchname>*
 
   Update a Stackato cluster with post-release fixes.
 

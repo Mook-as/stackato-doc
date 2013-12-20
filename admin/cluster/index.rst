@@ -250,7 +250,7 @@ Role Configuration using the Management Console
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Once cluster nodes are connected to the Core node, roles can be enabled
-or disabled using the :ref:`Cluster Admin <console-cluster-admin>`
+or disabled using the :ref:`Cluster Admin <console-cluster-nodes>`
 interface in the :ref:`Management Console <management-console>`.
 
 Example Clusters

@@ -617,12 +617,32 @@ Using your own SSL certificate
 
 On all router nodes, upload your *.key* file to the */etc/ssl/private/*
 directory and your *.crt* file to */etc/ssl/certs/*. Change the following
-settings in */s/vcap/stackato-router/config/local.json* to point to
+settings in */s/code/stackato-router/config/local.json* to point to
 the new files::
 
   "sslKeyFile": "/etc/ssl/private/example.key",
   "sslCertFile": "/etc/ssl/certs/example.crt",
 
+.. _server-config-sni-support:
+
+Adding Custom SSL Certs (SNI)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The Stackato router supports `SNI
+<http://en.wikipedia.org/wiki/Server_Name_Indication>`__, and custom SSL
+certificates for domains resolving to the system can be added using the
+:ref:`kato op custom_ssl_cert install <kato-command-ref-op>` command.
+Usage::
+
+  kato op custom_ssl_cert install <key-path> <cert-path> <domain> [--wildcard-subdomains]
+
+This must be run on all router nodes in a cluster: the first one as
+above, subsequent routers using the ``--update`` flag.
+
+.. note::
+  SNI support with multiple Stackato routers works only with TCP load
+  balancers (e.g. HAProxy, iptables, F5) not HTTP load balancers (e.g.
+  Nginx, Stackato load balancer). 
 
 .. _server-config-ssl-cert-chain:
 
@@ -668,9 +688,13 @@ should see more than one number in the list. For example::
 Generating a self-signed SSL certificate
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can generate your own self-signed SSL certificate by running the
-following commands on the Stackato server, substituting
-"hostname.mydomain.com" with your own details::
+You can re-generate Stackato's self-signed SSL certificate by running
+the following command on the VM::
+
+  $ kato op regenerate ssl_cert
+  
+To do essentially the same operation manually (substituting
+"hostname.mydomain.com" with your own details)::
 
 	$ mkdir ~/hostname.mydomain.com
 	$ cd ~/hostname.mydomain.com
@@ -699,44 +723,47 @@ messages. The certificate will need to be added to the browser
 exception rules, which you will be prompted to do so when visiting
 one of your apps via HTTPS for the first time.
 
-.. _server-config-router-legacy:
 
-.. index:: router_legacy
+.. _server-config-quota-definitions:
 
-.. index:: SPDY
+Quota Definitions
+-----------------
 
-.. index:: WebSockets
+.. note::
+  In Stackato 2.10 and earlier, every User and Group had a quota. In 3.0
+  (Cloud Foundry v2) Quota Definitions are applied at the Organization
+  level (i.e. members of an organizations share its quota).
+  
+Quota definitions define limits for:
 
-.. _server-config-limits:
+* physical memory (RAM) in MB
+* number of services
+* ``sudo`` privilege within application containers
 
-Users and Group Limits
-----------------------
+Each organization is assigned a quota definition, and all users of an
+organization share the defined limits.
 
-Limits for specific users and groups can be set for memory usage, number
-of apps, number of services, and the ability to run the ``sudo`` command
-within application containers.
+Use the ``stackato quota ...`` commands to modify quota definitions:
 
-You can manage groups, users, and limits in the :ref:`Users
-<console-users>` and :ref:`Groups <console-groups>` sections of the
-:ref:`Management Console <management-console>` or by using the
-:ref:`stackato <command-ref-client>` client .
+* :ref:`stackato quota configure <command-quota configure>`
+* :ref:`stackato quota create <command-quota create>`
+* :ref:`stackato quota delete <command-quota delete>`
+* :ref:`stackato quota list <command-quota list>`
 
-The :ref:`kato data users <kato-command-ref-data-users>` command is
-available to :ref:`import or export <user-import-export>` user lists in
-CSV format.
+Existing quota definitions can also be viewed and edited in the
+Management Console :ref:`Quota Definitions settings
+<console-settings-quota-definitions>`
+
 
 .. _server-config-sudo:
 
 sudo
-----
+^^^^
 
-Users and Groups
-^^^^^^^^^^^^^^^^
-
-Both individual users and groups can have the use of the ``sudo``
-command limited (the default is to disallow its use). See the
-:ref:`Managing Groups, Users, & Limits <admin-groups>` documents for
-details on managing these limits.
+Quota Definitions can give all users in an Organization the use of the
+``sudo`` command within application containers. This option is disabled
+by default as a security precaution, and should only be enabled for
+Organizations where all users are trusted.
 
 
 Allowed Repositories

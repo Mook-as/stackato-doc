@@ -119,7 +119,7 @@ Some settings in the *config/oracledb_gateway.yml* file will need to be
 modified::
 
 * **cloud_controller_uri**: Needs to match the API endpoint of your system (e.g. api.stackato.example.com)
-* **token**: Can be any string. You will need to add this auth token to the cloud_controller config in a later step
+* **token**: Can be any string. You will need to add this auth token to the cloud_controller_ng config in a later step
 * **mbus**: This should match the setting for other services. You can check the correct setting using ``kato config get redis_node mbus``
 
 Set the credentials for the external Oracle database in
@@ -203,9 +203,9 @@ Add the service AUTH token
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The ``auth`` token set in *config/oracledb_gateway.yml* must be added to
-the cloud_controller settings::
+the cloud_controller_ng settings::
 
-    $ kato config set cloud_controller builtin_services/oracledb '{"token": "<oracledb_gateway.yml auth token>"}' --json
+    $ kato config set cloud_controller_ng builtin_services/oracledb '{"token": "<oracledb_gateway.yml auth token>"}' --json
 
 Replace the <oracledb_gateway.yml auth token> string above with the auth
 token you set up earlier.

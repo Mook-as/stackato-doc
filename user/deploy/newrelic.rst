@@ -159,10 +159,10 @@ directory of the application and make some modifications to *stackato.yml*.
 
     extension=newrelic.so
 
-    newrelic.daemon.logfile="/app/logs/newrelic-daemon.log"
+    newrelic.daemon.logfile="/home/stackato/logs/newrelic-daemon.log"
     newrelic.daemon.loglevel="warning"
 
-    newrelic.logfile="/app/logs/php_agent.log"
+    newrelic.logfile="/home/stackato/logs/php_agent.log"
     newrelic.loglevel="warning"
 
     newrelic.license="XXXXXXX-your-new-relic-key-XXXXXXXXXXX"

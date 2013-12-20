@@ -66,7 +66,7 @@ You can set your own environment variables:
   HOME
     Identifies the working directory assigned to a particular user on
     login. In a Stackato application container, this is generally set to
-    */app/app/* by default.
+    */home/stackato/app/* by default.
 
   HTTP_PROXY
     A variable recognized by many web applications to direct them to a proxy HTTP server.
@@ -136,7 +136,7 @@ You can set your own environment variables:
     *stackato.yml* and all the application files live.
 
   STACKATO_DOCUMENT_ROOT
-    This contains the root directory where the user can access. The document-root must always be specified relative to $HOME (/app/app).
+    This contains the root directory where the user can access. The document-root must always be specified relative to $HOME (/home/stackato/app).
 
   STACKATO_FILESYSTEM
     If the app uses a single ``filesystem`` service, then the local
@@ -157,8 +157,8 @@ You can set your own environment variables:
     and
     ``STACKATO_FILESYSTEM_PLUGINS``.
   
-  STACKATO_GROUP
-    Can be set in the local shell to specify the :ref:`group <using-groups>`
+  STACKATO_GROUP *(DEPRECATED: Stackato 2.x only)*
+    Can be set in the local shell to specify the group
     for the ``stackato`` client. When set, the ``stackato group``
     command is ignored until the variable is explicitly unset. If empty,
     the client sets the group to 'none'. Can be overridden with the

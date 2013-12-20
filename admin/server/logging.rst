@@ -426,18 +426,17 @@ Drain Timeouts
 User Drain Limit
 ^^^^^^^^^^^^^^^^
 
-* **cloud_controller** **max_user_drains** (default 200): limits the
-  total number of concurrent user application drains running on a
-  Stackato system. Once this limit is reached, users will see the
-  following notificition when trying to add a new drain::
+* **cloud_controller_ng** **max_drains_per_app** (default 2): limits the
+  number of drains an application can have. Once this limit is reached,
+  users will see the following notificition when trying to add a new
+  drain::
 
-    Error 22002: No more drains can be added; contact your cluster
-    admin.
+    Adding drain [fail] ... Error 123: Per-app drain limit (2) reached.
+    
+  To change the limit, set ``max_drains_per_app`` in the cloud_controller_ng
+  configuration. For example, to change this limit to 5 drains::
 
-  To change the limit, set ``max_user_drains`` in the cloud_controller
-  configuration. For example, to change this limit to 250 drains::
-
-    $ kato config set cloud_controller_ng max_user_drains 250
+    $ kato config set cloud_controller_ng max_drains_per_app 5
 
 Apptail Limits
 ^^^^^^^^^^^^^^

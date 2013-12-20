@@ -74,7 +74,7 @@ framework:
 
 Allows the app to specify a framework and runtime to be used. Specifying
 a value for the ``framework`` key triggers the use of the :ref:`Legacy
-Buildpack <buildpacks-built-in>`.
+Buildpack <buildpacks-legacy>`.
 
 type (DEPRECATED):
 ~~~~~~~~~~~~~~~~~~
@@ -120,7 +120,7 @@ Example::
     type: php
     document-root: web
 
-The document-root must always be specified relative to $HOME (/app/app).
+The document-root must always be specified relative to $HOME (/home/stackato/app).
 
 .. _stackato_yml-start-file:
 
@@ -159,7 +159,7 @@ hooks are run.
    
    The :term:`HOME` directory where all the pre-running code is run, as well as
    the HOME directory for cron and ssh sessions.  For most frameworks this
-   is the ``/app/app directory``, but slightly different for
+   is the */home/stackato/app* directory, but slightly different for
    :ref:`java deployments <java-home>`. For example::
 
     framework:
@@ -537,7 +537,7 @@ web:
 
 .. note:: 
 
-  Used with the :ref:`Legacy buildpack <buildpacks-built-in>` only. When using
+  Used with the :ref:`Legacy buildpack <buildpacks-legacy>` only. When using
   other buildpacks, create a `Procfile <https://devcenter.heroku.com/articles/procfile>`__ 
   in the application's root directory.
 
