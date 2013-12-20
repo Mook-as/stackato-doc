@@ -19,7 +19,7 @@ Web
 
 Users log in to the web Management Console as they would with any other
 web application. The Managemet Console checks with the AOK endpoint (e.g.
-https://aok.stackato.example.com) in the background. 
+\https://aok.stackato.example.com) in the background. 
 
 Client
 ^^^^^^

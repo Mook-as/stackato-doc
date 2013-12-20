@@ -56,8 +56,8 @@ If there is an HTTP/HTTPS proxy on your network between your client and
 the Stackato API endpoint, set the following environment variables in
 your shell as appropriate for your proxy:
 
-* https_proxy (e.g. "https://yourproxy.example.com:443/")
-* http_proxy (e.g. "http://yourproxy.example.com:8080/")
+* https_proxy (e.g. "\https://yourproxy.example.com:443/")
+* http_proxy (e.g. "\http://yourproxy.example.com:8080/")
 * http_proxy_user
 * http_proxy_pass
 
