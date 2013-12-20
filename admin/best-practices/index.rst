@@ -219,9 +219,13 @@ VM or note the hostname of the old VM / Core node.
 .. note::
   Before importing data to a new microcloud or cluster, make sure you
   have completed first-user (admin) setup in the Stackato Web UI and
-  accepted the terms and conditions. All roles in the new cluster should
-  be started prior to proceeding with import. If you would like all
-  services to be imported, their corresponding roles must be enabled.
+  accepted the terms and conditions.
+  
+.. note::
+  All roles in the new cluster should be started prior to proceeding
+  with import. If you would like all services to be imported, their
+  corresponding roles must be enabled (see also :ref:`Importing Apps
+  using RabbitMQ 2.4 <known-issues-rabbit-import>`).
 
 Login to the Stackato VM (or Core node) and run ``kato data import``
 with the relevant options. For example, to import all data into a new
