@@ -62,6 +62,10 @@ release = '3.0.1'
 # Else, today_fmt is used as the format for a strftime call.
 #today_fmt = '%B %d, %Y'
 
+# Exclude internal docs from readthedocs.org builds
+if os.environ.get('READTHEDOCS', None) == 'True':
+    tags.add('public')
+
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 exclude_patterns = ['_build']
