@@ -3,6 +3,20 @@
 Known Issues
 ============
 
+.. _known-issues-config_vars:
+
+Buildpack config_vars Deprecated
+--------------------------------
+
+Buildpacks used to rely on the ``config_vars`` feature of *bin/release*
+to set environment variables, but this has been deprecated by Heroku.
+
+The replacement mechanism is to `create a shell script in 
+$HOME/.profile.d <https://devcenter.heroku.com/articles/profiled>`__ to
+set environment variables. This mechanism is fully supported in Stackato
+3.0 / Cloud Foundry v2, and is used by all of the built-in buildpacks.
+
+
 .. _known-issues-legacy-env:
 
 Legacy Buildpack and Environment Variables

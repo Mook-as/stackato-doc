@@ -100,8 +100,12 @@ The following buildpacks are known to work with Stackato:
 
   * `Sphinx example <https://github.com/Stackato-Apps/sphinx-demo>`_
 
-
-Buildpack Examples
+.. note::
+  Using ``config_vars`` in a buildpack's *bin/release* to set
+  environment variables has been deprecated. `Use a shell script in
+  $HOME/.profile.d <https://devcenter.heroku.com/articles/profiled>`__
+  instead.
+  
 ------------------
 
 Pet-Clinic (Java)
