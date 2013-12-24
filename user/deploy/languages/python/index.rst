@@ -4,20 +4,49 @@
 Python
 ======
 
-.. note::
-      See :ref:`buildpacks` for an alternative way to deploy
-      Python (and PyPy) applications.
+By default, Stackato uses the built-in Python :ref:`Buildpack
+<buildpacks>` to deploy Python applications. To deploy applications
+using this buildpack, your application will need the following in the
+root directory of the application:
 
-All Python applications deployed to Stackato are, by default, run with
-`WSGI <http://en.wikipedia.org/wiki/Web_Server_Gateway_Interface>`_.
-Applications are started from a top-level script called
-``wsgi.py`` defining a global ``application`` variable
-containing the WSGI application object.
-For a minimal sample application, see
-`wsgi-helloworld <https://github.com/Stackato-Apps/wsgi-helloworld>`_.
+* a list of module requirements in a :ref:`stackato.yml <stackato_yml>`,
+  `requirements.txt (pip)
+  <http://www.pip-installer.org/en/latest/cookbook.html#requirements-files>`__,
+  or *requirements.pypm* (`pypm <http://code.activestate.com/pypm/>`__)
+  file.
+* a Procfile specifying the command to run the application server. For
+  example, the `example-python-django
+  <https://github.com/Stackato-Apps/example-python-django>`__ Stackato
+  sample has the following simple *Procfile*::
+  
+    web: gunicorn stackato.wsgi -b 0.0.0.0:$PORT
 
-By default, Python applications are served through
-`uWSGI <http://projects.unbit.it/uwsgi/>`_.
+
+This buildpack uses Python 2.7 by default. To specify Python 3.3, create
+a *runtime.txt* file setting the version (i.e. ``python-3.3``) and use
+the $PYTHON_VERSION environment variable in the Procfile ``web:``
+command. For example::
+
+  web: python$PYTHON_VERSION app.py
+
+See also: https://github.com/ActiveState/stackato-buildpack-python
+
+
+Python with the Legacy Buildpack
+--------------------------------
+
+If your Python application has configuration for running on Stackato
+2.10 or earlier, you can deploy it using the :ref:`Legacy Buildpack
+<buildpacks-legacy>`, which provides an updated version of the old
+Python framework.
+
+With the Legacy Buildpack, applications are run with `uWSGI
+<http://projects.unbit.it/uwsgi/>`_. Applications are started from a
+top-level script called ``wsgi.py`` defining a global ``application``
+variable containing the WSGI application object. For a minimal sample
+application, see `wsgi-helloworld
+<https://github.com/Stackato-Apps/wsgi-helloworld>`_.
+
 You may add additional arguments to uWSGI in your ``stackato.yml``, eg::
 
   processes:
