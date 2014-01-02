@@ -243,7 +243,7 @@ hostname of the old Core node::
 .. _bestpractices-upgrade:
 
 Upgrading (v3.0 and later)
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------
 
 The ``kato node upgrade`` command was added in Stackato 3.0 to allow
 upgrading Stackato systems in place. See :ref:`Upgrading Stackato
