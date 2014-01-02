@@ -13,12 +13,13 @@ Best Practices
 Applying Updates
 ----------------
 
-Major version upgrades of Stackato require a data :ref:`migration to a
-new VM or cluster <bestpractices-migration>`, but patch releases can be
-applied in place using the :ref:`kato patch <kato-command-ref-patch>`
-command.
+Major version upgrades of Stackato can be done using :ref:`kato node upgrade
+<upgrade>` or a :ref:`migration to a new VM or cluster
+<bestpractices-migration>`, but patch releases (normally minor fixes to
+particular components) can be applied in place using the :ref:`kato
+patch <kato-command-ref-patch>` command.
 
-To see a list of updates available from ActiveState, run the following
+To see a list of patches available from ActiveState, run the following
 command on any Stackato VM::
 
   $ kato patch status
@@ -57,15 +58,16 @@ use the ``--only-this-node`` option.
 
 .. index:: Server Backup and Migration
 
-Backup, Migration and Upgrades
-------------------------------
+Backup & Migration
+------------------
 
 This section describes backing up Stackato data and importing it into a
 new Stackato system. The export/import cycle is required for:
 
 * backups of system data
-* upgrading from one version of Stackato to the next
 * moving a Stackato cluster to a new location
+* upgrading from Stackato 2.10.x to 3.0 (subsequent upgrades can be done
+  with :ref:`kato node upgrade <upgrade>`)
 
 .. _bestpractices-migration-limitations:
 
@@ -238,6 +240,14 @@ hostname of the old Core node::
 
     $ kato data import --cluster stackato-host.example.com
 
+.. _bestpractices-upgrade:
+
+Upgrading (v3.0 and later)
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The ``kato node upgrade`` command was added in Stackato 3.0 to allow
+upgrading Stackato systems in place. See :ref:`Upgrading Stackato
+<upgrade>` for full instructions.
 
 .. _bestpractices-nagios:
 
