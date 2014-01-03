@@ -753,6 +753,36 @@ needed and can be included on the same line::
     post-staging: python staging.py
     pre-running:  python running.py
 	
+  
+.. _stackato_yml-drain:
+
+drain:
+^^^^^^
+
+:ref:`Application log drains <application_logs-drain>` can be added to
+an application when it is deployed by describing them in a ``drain:``
+block with a drain name and URL::
+
+  drain:
+    drain_name: protocol://host.domain.tld:port/
+  
+To enable JSON logging, specify the URL separately along with a ``json:
+true`` line::
+
+  drain:
+    drain_name:
+      url: protocol://host.domain.tld:port/
+      json: true
+
+For example::
+
+  drain:
+    mytestdrain: udp://logs.loggly.com:12346/
+    otherdrain:
+      url: tcp://logs.papertrailapp.com:12345/
+      json: true
+  
+  
 .. _stackato_yml-version:
 
 min_version:
