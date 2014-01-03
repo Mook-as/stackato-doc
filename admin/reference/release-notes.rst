@@ -15,6 +15,13 @@ Release Notes
   See `release-notes.rst` in git for the up-to-date version of this file.
         `<https://github.com/ActiveState/stackato-doc>`_
 
+  dev (UNRELEASED)
+  ----------------
+
+  * Upgraded Docker to 0.7.2
+
+  * Upgraded Go to 1.2 (for logyard, appstore, appmdns)
+
 
 v3.0.1 (December 18, 2013)
 --------------------------
