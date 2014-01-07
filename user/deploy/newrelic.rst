@@ -168,14 +168,15 @@ directory of the application and make some modifications to *stackato.yml*.
     newrelic.license="XXXXXXX-your-new-relic-key-XXXXXXXXXXX"
     newrelic.appname="YourAppName"
 
-The ``license_key`` can be found in 'Account settings' section on the
-
-Set ``newrelic.appname`` to the actual name of your application as you
-would like it to appear in your New Relic dashboard. 
-
-The above settings are described in detail in the 
-`New Relic PHP Agent Settings documentation
-<http://newrelic.com/docs/php/php-agent-phpini-settings>`_.
+  The ``license_key`` can be found in your 'Account settings' page on New
+  Relic.
+  
+  Set ``newrelic.appname`` to the actual name of your application as you
+  would like it to appear in your New Relic dashboard. 
+  
+  The above settings are described in detail in the 
+  `New Relic PHP Agent Settings documentation
+  <http://newrelic.com/docs/php/php-agent-phpini-settings>`_.
 
 * Add the following section to a "hooks" section in *stackato.yml*::
 
@@ -183,19 +184,7 @@ The above settings are described in detail in the
         pre-running:
         - mv -f newrelic.ini $STACKATO_APP_ROOT/apache/php/newrelic.ini
 
-* Verify newrelic-daemon is writing logs to the specified location in newrelic.ini by running the following command: 
 
-.. parsed-literal::
-
-    $ stackato run -a *appname* "ps -ef | grep newrelic"
-
-The output should contain:
-
-.. parsed-literal::
-
-    /usr/bin/newrelic-daemon -l *log-location* -d *log-level*
-
-If it is writing to the incorrect location, try restart or update the application.
 
 WordPress Example
 ^^^^^^^^^^^^^^^^^
