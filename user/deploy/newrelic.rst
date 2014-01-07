@@ -187,7 +187,7 @@ The above settings are described in detail in the
 
 .. parsed-literal::
 
-    $ stackato run *appname* "ps -ef | grep newrelic"
+    $ stackato run -a *appname* "ps -ef | grep newrelic"
 
 The output should contain:
 
