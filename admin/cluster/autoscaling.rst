@@ -5,14 +5,14 @@
 DEA Auto Scaling
 ================
 
-Stackato can automaticaly add DEA nodes to a cluster to handle
+Stackato can automatically add DEA nodes to a cluster to handle
 increasing numbers of user application instances. This feature, called
-DEA Auto Scaling, is available for clusters running on HPCS, vSphere,
+Auto Scaling, is available for clusters running on HPCS, vSphere,
 EC2, or OpenStack.
 
-Scaling events are triggered by a predictive algorithm in the Health
-Manager which checks for potential exhaustion of DEA resources.
-
+When auto scaling is enabled, it will automatically grow the cluster to cater
+for new app deployments. Scaling events are triggered by keeping a buffer of
+DEAs in the memory pool that provide enough memory for new deployments.
 
 DEA Template
 ------------
@@ -54,18 +54,30 @@ The ``enabled_plugins`` key must be set to one of the following:
 * OpenStack
 * vSphere
 
-Blocks of configuration settings in the ``platform_config`` section will
-be loaded depending on which platform is set in ``enabled_plugins``.
+.. note::
 
+    While it is possible to enable multiple plugins at once, this is generally
+    not recommended. You could use this feature to implement a "ping" plugin
+    that doesn't provision a DEA, but instead sends a notification email,
+    or pings a remote API.
 
+Each platform has specific tunables under the ``platform`` key in the scaling
+configuration file, for setting authorization credentials, DEA template IDs
+and so forth. Your target platform should be configured there before proceeding.
 
 Enabling Auto-Scaling
--------------------------------------------
+---------------------
 
 Run the following command on the Primary node::
-    
+
     $ kato config set cloud_controller_ng autoscaling/enabled true
     $ kato config set health_manager autoscaling/enabled true
+
+.. note::
+
+    You should only enable scaling plugins in one of the cloud controllers
+    configuration file, otherwise a DEA will be provisioned per cloud controller
+    on each scaling event.
 
 After saving this change, restart the following processes::
 
@@ -76,6 +88,92 @@ Manager's log file::
 
     $ kato log tail health_manager
 
+Configuration and Tuning (Advanced)
+-----------------------------------
+
+There are numerous configuration options in the autoscaling file that can be
+customized to requirements.
+
+A few options are in ``/s/etc/autoscaling/autoscaling.yaml``:
+
+``scale_op_timeout``
+    This value specifies how long the scaler will wait for the plugin
+    to compelete a scale up operation (Default: 300, Unit: seconds).
+
+``cooldown_period``
+    All subsequent scaling requests until this period expires after the original
+    scaling operation (Default: 120, Unit: seconds)
+
+``vm_name_prefix``
+    Gives the VM a name with this prefix to easily identify autoscaled instances.
+
+A few other tunables are in the health_manager kato config
+``kato config get health_manager autoscaling``:
+
+``scaleup_threshold``
+    The health manager will monitor the DEA pool continually. If the forward
+    buffer is not maintained during the number of cycles indicated by this
+    value, the scaling event will finally be sent to the cloud controller.
+
+    Decrease this value to make autoscaling more aggressive.
+
+    Default: 3
+
+``forward_buffer``
+    The number of megabytes of free memory to maintain in the DEA pool.
+    Note that app memory usage on each DEA is also accounted for.
+
+    Default: 4096, Unit: MegaBytes
+
+``cooldown_period``
+    No scaling events will be triggered after a previous scaling event during
+    this period.
+
+    Default: 180, Unit: seconds
+
+``dea_staleness``
+    The DEA pool monitoring is maintained by only keeping DEAs which report
+    periodically to the health manager via NATS.
+    If a DEA fails to report in during this period, for example it has become
+    unresponsive, it will be removed which may subequently lead to a new scaling 
+    event being triggered.
+
+    Default: 180, Unit: seconds
+
+Writing custom scaling plugins (Advanced)
+-----------------------------------------
+
+A skeleton plugin that does nothing would look like the following:
+
+.. code-block:: ruby
+
+    require 'rubygems'
+
+    class SkeletonPlugin < Plugin
+
+      def platform_name
+        "Skeleton"
+      end
+
+      def scale_up
+        log "Scaling up..."
+        log platform_config.inspect
+      end
+
+      def handle_command
+        log "Handling command: #{cmd}"
+      end
+
+    end
+
+The ``log`` function is available to all plugins and operates at the cloud
+controllers global log level.
+
+Once you have written the plugin, it can be installed to
+``/s/etc/autoscaling/plugins/``. The configuration can be placed in
+``/s/etc/autoscaling/autoscaling.yaml`` under the ``platform`` key (in this case
+the key would be ``skeleton``) which is available the ``platform_config`` hash
+in the plugin.
 
 Troubleshooting
 ---------------
@@ -97,8 +195,11 @@ For EC2, you can monitor using the AWS console.  It can provide useful insights
 into the health of the instance such as network reachability and OS
 responsiveness, as well as setting administrative alerts.
 
-If you are testing scaling triggers, you can force a scale-up operation by
+Testing
+-------
+
+If you want to emulate a scaling trigger, you can force a scale-up operation by
 issuing the following on the cloud controller node::
 
-  $ nats-pub cloudcontrollers.hm.scalerequests '{"op": "scaleup"}'
+  $ nats-pub health.scale '{"op": "up"}'
 
