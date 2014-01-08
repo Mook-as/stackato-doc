@@ -1,10 +1,19 @@
 var fs = require('fs');
 var url = require('url');
 var path = require('path');
-var static = require('node-static');
+var static = require('lactate');
 
-var fileServer = new static.Server(process.env.HOME, { cache: 3600 });
+var docs_dir = process.env.STACKATO_DOCS_DIR || process.env.HOME;
 var port = process.env.VCAP_APP_PORT || 8080;
+
+var fileServer = static.dir(process.env.STACKATO_DOCS_DIR, {
+    cache: 3600,
+    autoindex: true
+});
+
+fileServer.notFound(function(request, response){
+    serve404(request, response);
+});
 
 function serverError(request, response, err) {
     console.error(err);
@@ -13,15 +22,19 @@ function serverError(request, response, err) {
 }
 
 function serve404(request, response) {
-    fileServer.serveFile('/404.html', 404, {}, request, response);
+    response.statusCode = 404;
+    var stream = fs.createReadStream(path.join(__dirname, '404.html'));
+    stream.pipe(response);
 }
 
 function serveFile(request, response) {
-    fileServer.serve(request, response, function(e, res) {
-        if (e && (e.status === 404)) {
-            return serve404(request, res);
-        } else if (e) {
-            return serverError(request, response, e);
+    var parsedUrl = url.parse(request.url);
+    var indexFile = path.join(parsedUrl.pathname, 'index.html');
+    fs.lstat(path.join(docs_dir, indexFile), function(err, stats) {
+        if (!err) {
+            fileServer.serve(indexFile, request, response);
+        } else {
+            fileServer.serve(request, response);
         }
     });
 }
@@ -31,13 +44,13 @@ require('http').createServer(function (request, response) {
         var parsedUrl = url.parse(request.url);
         if (parsedUrl.pathname.slice(-1) !== '/') {
 
-            fs.lstat(path.join(process.env.HOME, parsedUrl.pathname), function(err, stats) {
+            fs.lstat(path.join(docs_dir, parsedUrl.pathname), function(err, stats) {
                 if (!err && stats.isDirectory()) {
                     response.statusCode = 302;
                     response.setHeader("Location", request.url + '/');
                     response.end();
                 } else if (err && err.code == 'ENOENT') {
-                    return serve404(request, response, err);
+                    return serve404(request, response);
                 } else {
                     return serveFile(request, response);
                 }

@@ -48,6 +48,8 @@ KATO_DIR=$(UPDATE)/kato
 GEN_KATOREF_DIR=generator/katoref
 GEM_HOME=$(UPDATE)/gems
 
+LOCALSERVER = node ./web-server/server.js
+
 # The targets "all", "install", and "uninstall", as well as the variables
 # DESTDIR, prefix and PKG_GITDESCRIBE, are used by packaging systems.
 
@@ -84,6 +86,7 @@ help:
 	@echo "  changes    to make an overview of all changed/added/deprecated items"
 	@echo "  linkcheck  to check all external links for integrity"
 	@echo "  doctest    to run all doctests embedded in the documentation (if enabled)"
+	@echo "  localserver to build and run the docs via a local HTTP server"
 
 open:
 	open _build/html/index.html
@@ -221,3 +224,6 @@ publicdocs:
 publicdocs-production:
 	$(SPHINXBUILD) -b html -t public $(ALLSPHINXOPTS) ../$(PUBLICDIR)
 
+localserver: html
+	cd ./web-server && npm install
+	STACKATO_DOCS_DIR=$(CURDIR)/_build/html $(LOCALSERVER)
