@@ -117,14 +117,6 @@ Windows, OS X and Linux (x86 and x86_64). Zip files containing
 executables for each platform can be found in the ``~/stackato/static``
 directory.
 
-The binaries can be renamed arbitrarily, and the command line help
-will use the file name as the application name. For example::
-
-    $ cp stackato mypaas
-    $ ./mypaas
-    Usage: mypaas [options] command [<args>] [command_options]
-    Try 'mypaas help [command]' or 'mypaas help options' for more information.
-
 After renaming the executable, you can re-package them in .zip files
 and modify the
 *~/stackato/code/console/js/views/client/templates/client.html*
