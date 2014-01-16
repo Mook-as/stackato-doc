@@ -18,9 +18,11 @@ Release Notes
   dev (UNRELEASED)
   ----------------
 
-  * Upgraded Docker to 0.7.2
+  * Upgraded Docker to 0.7.???
 
   * Upgraded Go to 1.2 (for logyard, appstore, appmdns)
+  
+  * [102472] - ???
 
 
 v3.0.1 (December 18, 2013)
