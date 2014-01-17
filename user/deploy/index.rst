@@ -336,73 +336,83 @@ Best Practices
 Reducing downtime during app updates
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Updating an app can create downtime while the new code is being staged.  URL mapping can be used
-to reduce this downtime by switching between two running versions of an app.
+Updating an app can create downtime while the new code is being staged.
+URL mapping can be used to reduce this downtime by switching between two
+running versions of an app.
 
-For example, we have the ``customertracker`` app::
+For example, we have an application called "customertracker". The pushed
+application name will include a version or build number, but it is
+mapped to a "production" URL as well::
 
 	$ stackato apps
 	
-	+-----------------+---+---------+-------------------------------------+------------+
-	| Application     | # | Health  | URLS                                | Services   |
-	+-----------------+---+---------+-------------------------------------+------------+
-	| customertracker | 1 | RUNNING | customertracker.stackato-xxxx.local | customerdb |
-	+-----------------+---+---------+-------------------------------------+------------+
-
-The first time you do this, map a new URL to the existing app to ensure it continues to run once
-the main URL has been remapped (for future updates you will already have two)::
-
-	$ stackato map customertracker customertracker1.stackato-xxxx.local
+	+--------------------+---+---------+------------------------------+------------+
+	| Application        | # | Health  | URLS                         | Services   |
+	+--------------------+---+---------+------------------------------+------------+
+	| customertracker-v1 | 1 | RUNNING | customertracker-v1.stacka.to | customerdb |
+	|                    |   |         | customertracker.example.com  |            |
+	+--------------------+---+---------+------------------------------+------------+
 
 Push the updated code with a new application name::
 
-	$ stackato push customertracker2
+	$ stackato push --as customertracker-v2
 	
 	...
 	
 	$ stackato apps
 
-	+------------------+---+---------+--------------------------------------+------------+
-	| Application      | # | Health  | URLS                                 | Services   |
-	+------------------+---+---------+--------------------------------------+------------+
-	| customertracker  | 1 | RUNNING | customertracker.stackato-xxxx.local  | customerdb |
-	|                  |   |         | customertracker1.stackato-xxxx.local |            |
-	| customertracker2 | 1 | RUNNING | customertracker2.stackato-xxxx.local | customerdb |
-	+------------------+---+---------+--------------------------------------+------------+
+	+--------------------+---+---------+------------------------------+------------+
+	| Application        | # | Health  | URLS                         | Services   |
+	+--------------------+---+---------+------------------------------+------------+
+	| customertracker-v1 | 1 | RUNNING | customertracker-v1.stacka.to | customerdb |
+	|                    |   |         | customertracker.example.com  |            |
+	| customertracker-v2 | 1 | RUNNING | customertracker-v2.stacka.to | customerdb |
+	+--------------------+---+---------+------------------------------+------------+
 
-Note that the configured service(s) should be named the same, which will be automatically connected 
-to the existing service(s).
-
-Next, unmap the URL from the current app::
-
-	$ stackato unmap customertracker customertracker.stackato-xxxx.local
+.. note::
+  In this example, the configured service has the same name, so it is
+  bound to both versions of the application. This will only work if
+  there are no database schema changes or differences in the filesystem
+  layout on a persistent filesystem service. If there are such
+  differences, use distinct data services for the new version.
+  
+Map the "production" URL to the new app::	
 	
-And immediately map it to the new app::	
-	
-	$ stackato map customertracker2 customertracker.stackato-xxxx.local
+	$ stackato map customertracker-v2 customertracker.example.com
 
 	$ stackato apps
 	
-	+------------------+---+---------+--------------------------------------+------------+
-	| Application      | # | Health  | URLS                                 | Services   |
-	+------------------+---+---------+--------------------------------------+------------+
-	| customertracker  | 1 | RUNNING | customertracker1.stackato-xxxx.local | customerdb |
-	| customertracker2 | 1 | RUNNING | customertracker.stackato-xxxx.local  | customerdb |
-	|                  |   |         | customertracker2.stackato-xxxx.local |            |
-	+------------------+---+---------+--------------------------------------+------------+
+	+--------------------+---+---------+------------------------------+------------+
+	| Application        | # | Health  | URLS                         | Services   |
+	+--------------------+---+---------+------------------------------+------------+
+	| customertracker-v1 | 1 | RUNNING | customertracker-v1.stacka.to | customerdb |
+	|                    |   |         | customertracker.example.com  |            |
+	| customertracker-v2 | 1 | RUNNING | customertracker-v2.stacka.to | customerdb |
+	|                    |   |         | customertracker.example.com  |            |
+	+--------------------+---+---------+------------------------------+------------+
 
-Lastly, delete the old app::
+While both versions of the application are live and mapped to the same
+production URL, the router will round-robin web requests to this URL
+betweeen both versions.
 
-	$ stackato delete customertracker
+Next, unmap the production URL from the first app::
+
+	$ stackato unmap customertracker-v1 customertracker.example.com
+  
+The old version is still available in case it's needed for rollback. If
+everything works as expected with the newer code, delete the old app::
+
+	$ stackato delete customertracker-v1
 
 	$ stackato apps
 	
-	+------------------+---+---------+--------------------------------------+------------+
-	| Application      | # | Health  | URLS                                 | Services   |
-	+------------------+---+---------+--------------------------------------+------------+
-	| customertracker2 | 1 | RUNNING | customertracker.stackato-xxxx.local  | customerdb |
-	|                  |   |         | customertracker2.stackato-xxxx.local |            |
-	+------------------+---+---------+--------------------------------------+------------+
+	+--------------------+---+---------+------------------------------+------------+
+	| Application        | # | Health  | URLS                         | Services   |
+	+--------------------+---+---------+------------------------------+------------+
+	| customertracker-v2 | 1 | RUNNING | customertracker-v2.stacka.to | customerdb |
+	|                    |   |         | customertracker.example.com  |            |
+	+--------------------+---+---------+------------------------------+------------+
+  
 
 .. _bestpractices-manage-multiple-targets:
 
