@@ -10,7 +10,7 @@ Usage
 
 **stackato** [*options*] *command* [*arguments*] [*command-options*]
 
-Try ``stackato help`` or ``stackato help [command]`` for more information.
+Try ``stackato help``, ``stackato help [command]``, and ``stackato options`` for more information.
 
 Many of the informational commands take a ``--json`` option if you wish to generate machine-parseable output.
 In some cases the  ``--json`` option reveals additional details.
@@ -23,9 +23,9 @@ Getting Started
 ^^^^^^^^^^^^^^^^^^^^^
 
     
-.. _command-login:
+.. _command-stackato login:
   
-  login  *<email>* 
+  stackato login  *<email>* 
     Log in to the current or specified target with the named user.
 
     .. raw:: html
@@ -41,12 +41,10 @@ Getting Started
 	
     -n
       Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
     --passwd
       Alias of --password.
-    --ignore-missing
-      
-		Disable errors generated for missing organization and/or space.
-	    
     --trace
       
 	    Activate tracing of the issued REST requests and responses.
@@ -55,8 +53,10 @@ Getting Started
 	
     -t
       Alias of --trace.
-    --noprompt
-      Alias of --no-prompt.
+    --ignore-missing
+      
+		Disable errors generated for missing organization and/or space.
+	    
     --target
       
 	    The once-off target to use for the current operation.
@@ -69,7 +69,7 @@ Getting Started
     --space
       
 		The space (in the organization) to use.
-		This is a stackato/CFv2 specific option.
+		This is a Stackato 3 specific option.
 		If not specified the user is asked interactively
 		to choose among the possible spaces in
 		either the chosen organization, or all
@@ -77,12 +77,12 @@ Getting Started
 	    
     --non-interactive
       Alias of --no-prompt.
-    --organization
+    --credentials
       
-		The organization to use.
-		This is a stackato/CFv2 specific option.
-		If not specified the user is asked interactively
-		to choose an organization.
+		The credentials to use.
+		Each use of the option declares a single element,
+		using the form "key: value" for the argument.
+		This is a Stackato 3 specific option.
 	    
     --no-trace
       Complementary alias of --trace.
@@ -92,17 +92,26 @@ Getting Started
 	
     --password
       
-		The password to use.
+		The password to use. 
+		For Stackato 3 this is a shorthand
+		for --credentials 'password: ...'.
 	    
     --group
       
 		The group to use for the login.
-		This is a stackato/CFv1 specific option.
+		This is a Stackato 2 specific option.
+	    
+    --organization
+      
+		The organization to use.
+		This is a Stackato 3 specific option.
+		If not specified the user is asked interactively
+		to choose an organization.
 	    
     
-.. _command-logout:
+.. _command-stackato logout:
   
-  logout  *<target>* 
+  stackato logout  *<target>* 
     Log out of the current, specified, or all targets.
 
     .. raw:: html
@@ -142,9 +151,9 @@ Getting Started
 		Cannot be used together with a target.
 	    
     
-.. _command-target:
+.. _command-stackato target:
   
-  target  *<url>* 
+  stackato target  *<url>* 
     Set the target API endpoint for the client, or report the current target.
 
     .. raw:: html
@@ -168,14 +177,14 @@ Getting Started
     --space
       
 	    The space to set as current for this target.
-	    This is a stackato/CFv2 specific option.
+	    This is a Stackato 3 specific option.
 	
     --non-interactive
       Alias of --no-prompt.
     --organization
       
 	    The organization to set as current for this target.
-	    This is a stackato/CFv2 specific option.
+	    This is a Stackato 3 specific option.
 	
     -s
       Alias of --space.
@@ -195,9 +204,88 @@ Applications
 ^^^^^^^^^^^^^^^^^^^^^
 
     
-.. _command-app:
+.. _command-stackato apps:
   
-  app  *<application>* 
+  stackato apps 
+    List the applications deployed to the target.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    -n
+      Alias of --no-prompt.
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -t
+      Alias of --trace.
+    -o
+      Alias of --organization.
+    --noprompt
+      Alias of --no-prompt.
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --json
+      
+	    Print raw json as output, not human-formatted data.
+	
+    --space
+      
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --non-interactive
+      Alias of --no-prompt.
+    --space-guid
+      
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+    --organization
+      
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --all
+      
+		Show all applications instead of just those
+		associated with the current space.
+	    
+    --group
+      
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
+	
+    
+.. _command-stackato app:
+  
+  stackato app  *<application>* 
     Show the information of the specified application.
 
     .. raw:: html
@@ -246,7 +334,7 @@ Applications
     --space
       
 	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
+	    by name. This is a Stackato 3 option.
 	    Cannot be used together with --space-guid.
 	
     --token
@@ -259,13 +347,13 @@ Applications
     --space-guid
       
 	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
+	    by guid. This is a Stackato 3 option.
 	    Cannot be used together with --space.
 	
     --organization
       
 	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
+	    This is a Stackato 3 option.
 	
     --no-trace
       Complementary alias of --trace.
@@ -276,12 +364,12 @@ Applications
     --group
       
 	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
+	    This is a Stackato 2 option.
 	
     
-.. _command-apps:
+.. _command-stackato list:
   
-  apps 
+  stackato list 
     List the applications deployed to the target.
 
     .. raw:: html
@@ -320,7 +408,7 @@ Applications
     --space
       
 	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
+	    by name. This is a Stackato 3 option.
 	    Cannot be used together with --space-guid.
 	
     --token
@@ -333,13 +421,13 @@ Applications
     --space-guid
       
 	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
+	    by guid. This is a Stackato 3 option.
 	    Cannot be used together with --space.
 	
     --organization
       
 	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
+	    This is a Stackato 3 option.
 	
     --no-trace
       Complementary alias of --trace.
@@ -355,86 +443,7 @@ Applications
     --group
       
 	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
-    
-.. _command-list:
-  
-  list 
-    List the applications deployed to the target.
-
-    .. raw:: html
-    
-      <div class="spoiler">
-      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-      <div class="inner" style="display:none;">
-
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    -o
-      Alias of --organization.
-    --noprompt
-      Alias of --no-prompt.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --space
-      
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --non-interactive
-      Alias of --no-prompt.
-    --space-guid
-      
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-    --organization
-      
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    --all
-      
-		Show all applications instead of just those
-		associated with the current space.
-	    
-    --group
-      
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
+	    This is a Stackato 2 option.
 	
 
       </div></div>
@@ -444,9 +453,9 @@ Applications
     
   **Information**
       
-.. _command-crashes:
+.. _command-stackato crashes:
 
-      crashes  *<application>*       
+      stackato crashes  *<application>*       
         List recent application crashes.
 
         .. raw:: html
@@ -455,90 +464,89 @@ Applications
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --token-file
+        --group
           
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
-        -n
-          Alias of --no-prompt.
-        --path
+        --json
           
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        -t
-          Alias of --trace.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
+	    Print raw json as output, not human-formatted data.
 	
         --manifest
           
 	    Path of the manifest file to use.
 	    If not specified a search is done.
 	
-        -o
-          Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
-        --target
+        --no-prompt
           
-	    The once-off target to use for the current operation.
-	
-        --json
-          
-	    Print raw json as output, not human-formatted data.
+	    Disable interactive queries.
 	
         --no-tail
           Complementary alias of --tail.
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
+        --no-trace
+          Complementary alias of --trace.
         --non-interactive
           Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
+        --noprompt
+          Alias of --no-prompt.
         --organization
           
 	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
 	
         --tail
           
 	    Request target to stream the log.
 	
-        --no-prompt
+        --target
           
-	    Disable interactive queries.
+	    The once-off target to use for the current operation.
 	
-        --no-trace
-          Complementary alias of --trace.
-        --space
+        --token
           
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
+	    The once-off authentication token to use for the
+	    current operation.
 	
-        --group
+        --token-file
           
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
+          Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
 
-            </div></div>
 
-.. _command-crashlogs:
+.. _command-stackato crashlogs:
 
-      crashlogs  *<application>*       
+      stackato crashlogs  *<application>*       
         Display log information for the application. An alias of 'logs'.
 
         .. raw:: html
@@ -547,92 +555,72 @@ Applications
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
+        --all
+          
+		Retrieve the logs from all instances. Before 2.3 only.
+	    
         --filename
           
 		Filter the log stream by origin file (glob pattern).
 		Target version 2.4+ only.
 	    
-        --no-tail
-          Complementary alias of --tail.
-        --path
+        --follow
           
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
+		Tail -f the log stream. Target version 2.4+ only.
+	    
+        --group
+          
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
         --instance
           
 		The id of the instance to filter the log stream for,
 		or (before 2.3), to retrieve the logs of.
 	    
+        --json
+          
+		Print the raw json log stream, not human-formatted data.
+	    
+        --manifest
+          
+	    Path of the manifest file to use.
+	    If not specified a search is done.
+	
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-tail
+          Complementary alias of --tail.
         --no-trace
           Complementary alias of --trace.
-        -n
+        --non-interactive
+          Alias of --no-prompt.
+        --noprompt
           Alias of --no-prompt.
         --num
           
 		Show the last num entries of the log stream.
 		Target version 2.4+ only.
 	    
-        --text
+        --organization
           
-		Filter the log stream by log entry text (glob pattern).
-		Target version 2.4+ only.
-	    
-        -o
-          Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
         --prefix
           
 		Put instance information before each line of a
 		shown log file. Before 2.3 only.
 	    
-        --follow
-          
-		Tail -f the log stream. Target version 2.4+ only.
-	    
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --all
-          
-		Retrieve the logs from all instances. Before 2.3 only.
-	    
-        -t
-          Alias of --trace.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
         --prefix-logs
           Alias of --prefix.
-        --target
-          
-	    The once-off target to use for the current operation.
-	
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --tail
-          
-	    Request target to stream the log.
-	
         --prefixlogs
           Alias of --prefix.
         --source
@@ -643,36 +631,55 @@ Applications
         --space
           
 	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
+	    by name. This is a Stackato 3 option.
 	    Cannot be used together with --space-guid.
 	
-        --group
+        --space-guid
           
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --tail
+          
+	    Request target to stream the log.
+	
+        --target
+          
+	    The once-off target to use for the current operation.
+	
+        --text
+          
+		Filter the log stream by log entry text (glob pattern).
+		Target version 2.4+ only.
+	    
+        --token
+          
+	    The once-off authentication token to use for the
+	    current operation.
 	
         --token-file
           
 	    Path to an existing and readable file containing
 	    the targets and authorization tokens.
 	
-        --manifest
+        --trace
           
-	    Path of the manifest file to use.
-	    If not specified a search is done.
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
 	
-        --json
-          
-		Print the raw json log stream, not human-formatted data.
-	    
-        --non-interactive
+        -n
           Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
 
-            </div></div>
 
-.. _command-disk:
+.. _command-stackato disk:
 
-      disk  *<application>*       
+      stackato disk  *<application>*       
         Show the disk reservation for a deployed application.
 
         .. raw:: html
@@ -681,35 +688,54 @@ Applications
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --token-file
+        --group
           
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-        -n
-          Alias of --no-prompt.
-        --path
-          
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        -t
-          Alias of --trace.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
         --manifest
           
 	    Path of the manifest file to use.
 	    If not specified a search is done.
 	
-        -o
-          Alias of --organization.
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-tail
+          Complementary alias of --tail.
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
         --noprompt
           Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --tail
+          
+	    Request target to stream the log.
+	
         --target
           
 	    The once-off target to use for the current operation.
@@ -719,48 +745,28 @@ Applications
 	    The once-off authentication token to use for the
 	    current operation.
 	
-        --no-tail
-          Complementary alias of --tail.
-        --non-interactive
+        --token-file
+          
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
           Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --tail
-          
-	    Request target to stream the log.
-	
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
 
-            </div></div>
 
-.. _command-drains:
+.. _command-stackato drain list:
 
-      drains  *<application>*       
+      stackato drain list  *<application>*       
         Show the list of drains attached to the application.
 
         .. raw:: html
@@ -769,90 +775,180 @@ Applications
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --token-file
+        --group
           
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
-        -n
-          Alias of --no-prompt.
-        --path
+        --json
           
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        -t
-          Alias of --trace.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
+	    Print raw json as output, not human-formatted data.
 	
         --manifest
           
 	    Path of the manifest file to use.
 	    If not specified a search is done.
 	
-        -o
-          Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
-        --target
+        --no-prompt
           
-	    The once-off target to use for the current operation.
-	
-        --json
-          
-	    Print raw json as output, not human-formatted data.
+	    Disable interactive queries.
 	
         --no-tail
           Complementary alias of --tail.
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
+        --no-trace
+          Complementary alias of --trace.
         --non-interactive
           Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
+        --noprompt
+          Alias of --no-prompt.
         --organization
           
 	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
 	
         --tail
           
 	    Request target to stream the log.
 	
+        --target
+          
+	    The once-off target to use for the current operation.
+	
+        --token
+          
+	    The once-off authentication token to use for the
+	    current operation.
+	
+        --token-file
+          
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
+          Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
+
+
+.. _command-stackato drains:
+
+      stackato drains  *<application>*       
+        Show the list of drains attached to the application.
+
+        .. raw:: html
+
+          <div class="spoiler">
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+          <div class="inner" style="display:none;">
+
+        --group
+          
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
+	
+        --json
+          
+	    Print raw json as output, not human-formatted data.
+	
+        --manifest
+          
+	    Path of the manifest file to use.
+	    If not specified a search is done.
+	
         --no-prompt
           
 	    Disable interactive queries.
 	
+        --no-tail
+          Complementary alias of --tail.
         --no-trace
           Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
+        --noprompt
+          Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
         --space
           
 	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
+	    by name. This is a Stackato 3 option.
 	    Cannot be used together with --space-guid.
 	
-        --group
+        --space-guid
           
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
 	
+        --tail
+          
+	    Request target to stream the log.
+	
+        --target
+          
+	    The once-off target to use for the current operation.
+	
+        --token
+          
+	    The once-off authentication token to use for the
+	    current operation.
+	
+        --token-file
+          
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
+          Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
 
-            </div></div>
 
-.. _command-env:
+.. _command-stackato env:
 
-      env  *<application>*       
+      stackato env  *<application>*       
         List the application's environment variables.
 
         .. raw:: html
@@ -861,91 +957,90 @@ Applications
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --token-file
+        --group
           
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
-        -n
-          Alias of --no-prompt.
-        --path
+        --json
           
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        -t
-          Alias of --trace.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
+	    Print raw json as output, not human-formatted data.
 	
         --manifest
           
 	    Path of the manifest file to use.
 	    If not specified a search is done.
 	
-        -o
-          Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
-        --target
+        --no-prompt
           
-	    The once-off target to use for the current operation.
-	
-        --json
-          
-	    Print raw json as output, not human-formatted data.
+	    Disable interactive queries.
 	
         --no-tail
           Complementary alias of --tail.
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
+        --no-trace
+          Complementary alias of --trace.
         --non-interactive
           Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
+        --noprompt
+          Alias of --no-prompt.
         --organization
           
 	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
 	
         --tail
           
 	    Request target to stream the log.
 	
-        --no-prompt
+        --target
           
-	    Disable interactive queries.
+	    The once-off target to use for the current operation.
 	
-        --no-trace
-          Complementary alias of --trace.
-        --space
+        --token
           
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
+	    The once-off authentication token to use for the
+	    current operation.
 	
-        --group
+        --token-file
           
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
+          Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
 
-            </div></div>
 
-.. _command-events:
+.. _command-stackato events:
 
-      events  *<application>*       
-        Show the application's events as recorded so far.
+      stackato events  *<application>*       
+        Show recorded application events, for application or space. Without an application given the current or specified space is used, otherwise that application. This is a Stackato 3 specific command.
 
         .. raw:: html
 
@@ -953,90 +1048,89 @@ Applications
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --token-file
+        --group
           
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
-        -n
-          Alias of --no-prompt.
-        --path
+        --json
           
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        -t
-          Alias of --trace.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
+	    Print raw json as output, not human-formatted data.
 	
         --manifest
           
 	    Path of the manifest file to use.
 	    If not specified a search is done.
 	
-        -o
-          Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
-        --target
+        --no-prompt
           
-	    The once-off target to use for the current operation.
-	
-        --json
-          
-	    Print raw json as output, not human-formatted data.
+	    Disable interactive queries.
 	
         --no-tail
           Complementary alias of --tail.
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
+        --no-trace
+          Complementary alias of --trace.
         --non-interactive
           Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
+        --noprompt
+          Alias of --no-prompt.
         --organization
           
 	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
 	
         --tail
           
 	    Request target to stream the log.
 	
-        --no-prompt
+        --target
           
-	    Disable interactive queries.
+	    The once-off target to use for the current operation.
 	
-        --no-trace
-          Complementary alias of --trace.
-        --space
+        --token
           
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
+	    The once-off authentication token to use for the
+	    current operation.
 	
-        --group
+        --token-file
           
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
+          Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
 
-            </div></div>
 
-.. _command-file:
+.. _command-stackato files:
 
-      file  *<application>*  *<apath>*       
+      stackato files  *<application>*  *<apath>*       
         Display directory listing or file.
 
         .. raw:: html
@@ -1045,14 +1139,15 @@ Applications
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        -n
-          Alias of --no-prompt.
-        --no-tail
-          Complementary alias of --tail.
-        --path
+        --all
           
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
+		When present, access all instances for the file or directory.
+		Cannot be used together with --instance.
+	    
+        --group
+          
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
         --instance
           
@@ -1060,42 +1155,59 @@ Applications
 		Cannot be used together with --all.
 		Defaults to 0 (except when --all is present).
 	    
+        --manifest
+          
+	    Path of the manifest file to use.
+	    If not specified a search is done.
+	
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-tail
+          Complementary alias of --tail.
         --no-trace
           Complementary alias of --trace.
-        -o
-          Alias of --organization.
+        --non-interactive
+          Alias of --no-prompt.
         --noprompt
           Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
         --prefix
           
 		Put instance information before each line of a
 		shown file or directory listing. Effective only
 		for --all.
 	    
-        -t
-          Alias of --trace.
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --all
-          
-		When present, access all instances for the file or directory.
-		Cannot be used together with --instance.
-	    
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
         --prefix-logs
           Alias of --prefix.
+        --prefixlogs
+          Alias of --prefix.
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --tail
+          
+	    Request target to stream the log.
+	
         --target
           
 	    The once-off target to use for the current operation.
@@ -1105,47 +1217,28 @@ Applications
 	    The once-off authentication token to use for the
 	    current operation.
 	
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --tail
-          
-	    Request target to stream the log.
-	
-        --prefixlogs
-          Alias of --prefix.
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
         --token-file
           
 	    Path to an existing and readable file containing
 	    the targets and authorization tokens.
 	
-        --manifest
+        --trace
           
-	    Path of the manifest file to use.
-	    If not specified a search is done.
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
 	
-        --non-interactive
+        -n
           Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
 
-            </div></div>
 
-.. _command-files:
+.. _command-stackato file:
 
-      files  *<application>*  *<apath>*       
+      stackato file  *<application>*  *<apath>*       
         Display directory listing or file.
 
         .. raw:: html
@@ -1154,14 +1247,15 @@ Applications
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        -n
-          Alias of --no-prompt.
-        --no-tail
-          Complementary alias of --tail.
-        --path
+        --all
           
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
+		When present, access all instances for the file or directory.
+		Cannot be used together with --instance.
+	    
+        --group
+          
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
         --instance
           
@@ -1169,42 +1263,59 @@ Applications
 		Cannot be used together with --all.
 		Defaults to 0 (except when --all is present).
 	    
+        --manifest
+          
+	    Path of the manifest file to use.
+	    If not specified a search is done.
+	
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-tail
+          Complementary alias of --tail.
         --no-trace
           Complementary alias of --trace.
-        -o
-          Alias of --organization.
+        --non-interactive
+          Alias of --no-prompt.
         --noprompt
           Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
         --prefix
           
 		Put instance information before each line of a
 		shown file or directory listing. Effective only
 		for --all.
 	    
-        -t
-          Alias of --trace.
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --all
-          
-		When present, access all instances for the file or directory.
-		Cannot be used together with --instance.
-	    
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
         --prefix-logs
           Alias of --prefix.
+        --prefixlogs
+          Alias of --prefix.
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --tail
+          
+	    Request target to stream the log.
+	
         --target
           
 	    The once-off target to use for the current operation.
@@ -1214,47 +1325,28 @@ Applications
 	    The once-off authentication token to use for the
 	    current operation.
 	
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --tail
-          
-	    Request target to stream the log.
-	
-        --prefixlogs
-          Alias of --prefix.
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
         --token-file
           
 	    Path to an existing and readable file containing
 	    the targets and authorization tokens.
 	
-        --manifest
+        --trace
           
-	    Path of the manifest file to use.
-	    If not specified a search is done.
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
 	
-        --non-interactive
+        -n
           Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
 
-            </div></div>
 
-.. _command-health:
+.. _command-stackato health:
 
-      health  *<application>*       
+      stackato health  *<application>*       
         Report the health of the specified application(s).
 
         .. raw:: html
@@ -1263,47 +1355,46 @@ Applications
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        -n
+        --all
+          
+		Report on all applications in the current space.
+		Cannot be used together with application names.
+	    
+        --manifest
+          
+	    Path of the manifest file to use.
+	    If not specified a search is done.
+	
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
           Alias of --no-prompt.
-        -t
-          Alias of --trace.
+        --noprompt
+          Alias of --no-prompt.
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
         --trace
           
 	    Activate tracing of the issued REST requests and responses.
 	    This option is a no-op now. Tracing is always active. See
 	    the 'trace' command to print the saved trace to stdout.
 	
-        --manifest
-          
-	    Path of the manifest file to use.
-	    If not specified a search is done.
-	
-        --noprompt
+        -n
           Alias of --no-prompt.
-        --non-interactive
-          Alias of --no-prompt.
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --all
-          
-		Report on all applications in the current space.
-		Cannot be used together with application names.
-	    
-        --path
-          
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
+        -t
+          Alias of --trace.
 
-            </div></div>
 
-.. _command-instances:
+.. _command-stackato instances:
 
-      instances  *<application>*       
+      stackato instances  *<application>*       
         List application instances for a deployed application.
 
         .. raw:: html
@@ -1312,91 +1403,90 @@ Applications
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --token-file
+        --group
           
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
-        -n
-          Alias of --no-prompt.
-        --path
+        --json
           
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        -t
-          Alias of --trace.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
+	    Print raw json as output, not human-formatted data.
 	
         --manifest
           
 	    Path of the manifest file to use.
 	    If not specified a search is done.
 	
-        -o
-          Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
-        --target
+        --no-prompt
           
-	    The once-off target to use for the current operation.
-	
-        --json
-          
-	    Print raw json as output, not human-formatted data.
+	    Disable interactive queries.
 	
         --no-tail
           Complementary alias of --tail.
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
+        --no-trace
+          Complementary alias of --trace.
         --non-interactive
           Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
+        --noprompt
+          Alias of --no-prompt.
         --organization
           
 	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
 	
         --tail
           
 	    Request target to stream the log.
 	
-        --no-prompt
+        --target
           
-	    Disable interactive queries.
+	    The once-off target to use for the current operation.
 	
-        --no-trace
-          Complementary alias of --trace.
-        --space
+        --token
           
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
+	    The once-off authentication token to use for the
+	    current operation.
 	
-        --group
+        --token-file
           
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
+          Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
 
-            </div></div>
 
-.. _command-logs:
+.. _command-stackato logs:
 
-      logs  *<application>*       
-        Display log information for the application.
+      stackato logs  *<application>*       
+        Display the application log stream.
 
         .. raw:: html
 
@@ -1404,92 +1494,72 @@ Applications
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
+        --all
+          
+		Retrieve the logs from all instances. Before 2.3 only.
+	    
         --filename
           
 		Filter the log stream by origin file (glob pattern).
 		Target version 2.4+ only.
 	    
-        --no-tail
-          Complementary alias of --tail.
-        --path
+        --follow
           
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
+		Tail -f the log stream. Target version 2.4+ only.
+	    
+        --group
+          
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
         --instance
           
 		The id of the instance to filter the log stream for,
 		or (before 2.3), to retrieve the logs of.
 	    
+        --json
+          
+		Print the raw json log stream, not human-formatted data.
+	    
+        --manifest
+          
+	    Path of the manifest file to use.
+	    If not specified a search is done.
+	
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-tail
+          Complementary alias of --tail.
         --no-trace
           Complementary alias of --trace.
-        -n
+        --non-interactive
+          Alias of --no-prompt.
+        --noprompt
           Alias of --no-prompt.
         --num
           
 		Show the last num entries of the log stream.
 		Target version 2.4+ only.
 	    
-        --text
+        --organization
           
-		Filter the log stream by log entry text (glob pattern).
-		Target version 2.4+ only.
-	    
-        -o
-          Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
         --prefix
           
 		Put instance information before each line of a
 		shown log file. Before 2.3 only.
 	    
-        --follow
-          
-		Tail -f the log stream. Target version 2.4+ only.
-	    
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --all
-          
-		Retrieve the logs from all instances. Before 2.3 only.
-	    
-        -t
-          Alias of --trace.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
         --prefix-logs
           Alias of --prefix.
-        --target
-          
-	    The once-off target to use for the current operation.
-	
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --tail
-          
-	    Request target to stream the log.
-	
         --prefixlogs
           Alias of --prefix.
         --source
@@ -1500,36 +1570,55 @@ Applications
         --space
           
 	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
+	    by name. This is a Stackato 3 option.
 	    Cannot be used together with --space-guid.
 	
-        --group
+        --space-guid
           
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --tail
+          
+	    Request target to stream the log.
+	
+        --target
+          
+	    The once-off target to use for the current operation.
+	
+        --text
+          
+		Filter the log stream by log entry text (glob pattern).
+		Target version 2.4+ only.
+	    
+        --token
+          
+	    The once-off authentication token to use for the
+	    current operation.
 	
         --token-file
           
 	    Path to an existing and readable file containing
 	    the targets and authorization tokens.
 	
-        --manifest
+        --trace
           
-	    Path of the manifest file to use.
-	    If not specified a search is done.
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
 	
-        --json
-          
-		Print the raw json log stream, not human-formatted data.
-	    
-        --non-interactive
+        -n
           Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
 
-            </div></div>
 
-.. _command-mem:
+.. _command-stackato mem:
 
-      mem  *<application>*       
+      stackato mem  *<application>*       
         Show the memory reservation for a deployed application.
 
         .. raw:: html
@@ -1538,35 +1627,54 @@ Applications
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --token-file
+        --group
           
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-        -n
-          Alias of --no-prompt.
-        --path
-          
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        -t
-          Alias of --trace.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
         --manifest
           
 	    Path of the manifest file to use.
 	    If not specified a search is done.
 	
-        -o
-          Alias of --organization.
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-tail
+          Complementary alias of --tail.
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
         --noprompt
           Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --tail
+          
+	    Request target to stream the log.
+	
         --target
           
 	    The once-off target to use for the current operation.
@@ -1576,48 +1684,28 @@ Applications
 	    The once-off authentication token to use for the
 	    current operation.
 	
-        --no-tail
-          Complementary alias of --tail.
-        --non-interactive
+        --token-file
+          
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
           Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --tail
-          
-	    Request target to stream the log.
-	
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
 
-            </div></div>
 
-.. _command-stats:
+.. _command-stackato stats:
 
-      stats  *<application>*       
+      stackato stats  *<application>*       
         Display the resource usage for a deployed application.
 
         .. raw:: html
@@ -1626,90 +1714,89 @@ Applications
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --token-file
+        --group
           
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
-        -n
-          Alias of --no-prompt.
-        --path
+        --json
           
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        -t
-          Alias of --trace.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
+	    Print raw json as output, not human-formatted data.
 	
         --manifest
           
 	    Path of the manifest file to use.
 	    If not specified a search is done.
 	
-        -o
-          Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
-        --target
+        --no-prompt
           
-	    The once-off target to use for the current operation.
-	
-        --json
-          
-	    Print raw json as output, not human-formatted data.
+	    Disable interactive queries.
 	
         --no-tail
           Complementary alias of --tail.
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
+        --no-trace
+          Complementary alias of --trace.
         --non-interactive
           Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
+        --noprompt
+          Alias of --no-prompt.
         --organization
           
 	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
 	
         --tail
           
 	    Request target to stream the log.
 	
-        --no-prompt
+        --target
           
-	    Disable interactive queries.
+	    The once-off target to use for the current operation.
 	
-        --no-trace
-          Complementary alias of --trace.
-        --space
+        --token
           
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
+	    The once-off authentication token to use for the
+	    current operation.
 	
-        --group
+        --token-file
           
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
+          Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
 
-            </div></div>
 
-.. _command-tail:
+.. _command-stackato tail:
 
-      tail  *<application>*  *<apath>*       
+      stackato tail  *<application>*  *<apath>*       
         Monitor file for changes and stream them.
 
         .. raw:: html
@@ -1718,68 +1805,10 @@ Applications
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --token-file
+        --group
           
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-        -n
-          Alias of --no-prompt.
-        --path
-          
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        -t
-          Alias of --trace.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-        --manifest
-          
-	    Path of the manifest file to use.
-	    If not specified a search is done.
-	
-        -o
-          Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
-        --no-trace
-          Complementary alias of --trace.
-        --target
-          
-	    The once-off target to use for the current operation.
-	
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
-        --no-tail
-          Complementary alias of --tail.
-        --non-interactive
-          Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --tail
-          
-	    Request target to stream the log.
-	
-        --no-prompt
-          
-	    Disable interactive queries.
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
         --instance
           
@@ -1787,120 +1816,85 @@ Applications
 		Cannot be used together with --all.
 		Defaults to 0 (except when --all is present).
 	    
-        --space
+        --manifest
           
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
+	    Path of the manifest file to use.
+	    If not specified a search is done.
 	
-        --group
+        --no-prompt
           
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
+	    Disable interactive queries.
 	
-
-            </div></div>
-
-.. _command-drain list:
-
-      drain list  *<application>*       
-        Show the list of drains attached to the application.
-
-        .. raw:: html
-
-          <div class="spoiler">
-          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-          <div class="inner" style="display:none;">
-
-        --token-file
-          
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-        -n
+        --no-tail
+          Complementary alias of --tail.
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
           Alias of --no-prompt.
+        --noprompt
+          Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
         --path
           
 	    Path of the directory holding the application files to push.
 	    Defaults to the current working directory.
 	
-        -t
-          Alias of --trace.
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --tail
+          
+	    Request target to stream the log.
+	
+        --target
+          
+	    The once-off target to use for the current operation.
+	
+        --token
+          
+	    The once-off authentication token to use for the
+	    current operation.
+	
+        --token-file
+          
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
         --trace
           
 	    Activate tracing of the issued REST requests and responses.
 	    This option is a no-op now. Tracing is always active. See
 	    the 'trace' command to print the saved trace to stdout.
 	
-        --manifest
-          
-	    Path of the manifest file to use.
-	    If not specified a search is done.
-	
+        -n
+          Alias of --no-prompt.
         -o
           Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
-        --target
-          
-	    The once-off target to use for the current operation.
-	
-        --json
-          
-	    Print raw json as output, not human-formatted data.
-	
-        --no-tail
-          Complementary alias of --tail.
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
-        --non-interactive
-          Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --tail
-          
-	    Request target to stream the log.
-	
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --no-trace
-          Complementary alias of --trace.
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
+        -t
+          Alias of --trace.
 
-            </div></div>
 
     
 .. _command-Applications-Management:
     
   **Management**
       
-.. _command-create-app:
+.. _command-stackato create-app:
 
-      create-app  *<application>*       
+      stackato create-app  *<application>*       
         Create an empty application with the specified configuration.
 
         .. raw:: html
@@ -1909,80 +1903,136 @@ Applications
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --instances
+        --buildpack
           
-		The number of application instances to create.
-		Defaults to 1, if not specified by a stackato.yml.
+		Url of a custom buildpack.
+		This is a Stackato 3 specific option.
 	    
-        -n
-          Alias of --no-prompt.
-        --env-mode
-          
-		Environment replacement mode. One of preserve, or replace.
-		The default for create and push is "replace", and for
-		update it is "preserve". Replace-mode also implies --reset.
-	    
-        --env
-          
-		Environment variable overrides for declarations in
-		the stackato.yml. Ignored without environment variable
-		declarations in the manifest.
-	    
-        --no-tail
-          Complementary alias of --tail.
-        --path
-          
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        --json
-          
-	    Print raw json as output, not human-formatted data.
-	
-        --no-trace
-          Complementary alias of --trace.
-        -d
-          
-		Set up debugging through an application-specific
-		harbor (port) service. Target version 2.8+ only.
-	    
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
         --command
           
 		The application's start command.
 		Defaults to a framework-specific value if required
 		and not specified by stackato.yml.
 	    
-        -o
-          Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
-        -t
-          Alias of --trace.
-        --organization
+        --disk
           
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
+		The application's per-instance disk allocation.
+		Defaults to a framework-specific value if not
+		specified by stackato.yml.
+	    
+        --env
+          
+		Environment variable overrides. These are always applied
+		regardless of --env-mode. The mode is restricted to the
+		variable declarations found in the manifest.
+	    
+        --env-mode
+          
+		Environment replacement mode. One of preserve, or replace.
+		The default is "preserve". Using mode "replace" implies
+		--reset as well, for push. Note that new variables are always
+		set. Preserve only prevents update of existing variables.
+		This setting applies only to the variable declarations found
+		in the manifest.  Overrides made with --env are always applied.
+	    
+        --framework
+          
+		Specify the framework to use.
+		Cannot be used together with --no-framework.
+		Defaults to a heuristically chosen value if
+		not specified, and none for --no-framework.
+		This is a Stackato 2 specific option.
+	    
+        --group
+          
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
-        --no-prompt
+        --instances
           
-	    Disable interactive queries.
+		The number of application instances to create.
+		Defaults to 1, if not specified by a stackato.yml.
+	    
+        --json
+          
+	    Print raw json as output, not human-formatted data.
 	
-        --stackato-debug
+        --manifest
           
-		host:port of the Komodo debugger listener to inject
-		into the application as environment variables.
+	    Path of the manifest file to use.
+	    If not specified a search is done.
+	
+        --mem
+          
+		The application's per-instance memory allocation.
+		Defaults to a framework-specific value if not
+		specified by stackato.yml.
 	    
         --no-framework
           
 		Create application without any framework.
 		Cannot be used together with --framework.
+		This is a Stackato 2 specific option.
 	    
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-tail
+          Complementary alias of --tail.
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
+        --noprompt
+          Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
+        --reset
+          
+		Analogue of --env-mode, for the regular settings.
+	    
+        --runtime
+          
+		The name of the runtime to use.
+		Default is framework specific, if not specified
+		by a stackato.yml.
+		This is a Stackato 2 specific option.
+	    
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --stack
+          
+		The OS foundation the application will run on.
+		This is a Stackato 3 specific option.
+	    
+        --stackato-debug
+          
+		host:port of the Komodo debugger listener to inject
+		into the application as environment variables.
+	    
+        --tail
+          
+	    Request target to stream the log.
+	
         --target
           
 	    The once-off target to use for the current operation.
@@ -1992,87 +2042,38 @@ Applications
 	    The once-off authentication token to use for the
 	    current operation.
 	
-        --url
-          
-		The urls to map the application to.
-		I.e. can be specified muliple times.
-	    
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --tail
-          
-	    Request target to stream the log.
-	
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
         --token-file
           
 	    Path to an existing and readable file containing
 	    the targets and authorization tokens.
 	
-        --manifest
+        --trace
           
-	    Path of the manifest file to use.
-	    If not specified a search is done.
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
 	
-        --runtime
+        --url
           
-		The name of the runtime to use.
-		Default is framework specific, if not specified
-		by a stackato.yml.
+		The urls to map the application to.
+		I.e. can be specified muliple times.
 	    
-        --reset
+        -d
           
-		Analogue of --env-mode, for the regular settings.
+		Set up debugging through an application-specific
+		harbor (port) service. Target version 2.8+ only.
 	    
-        --stack
-          
-		The OS foundation the application will run on.
-	    
-        --buildpack
-          
-		Url of a custom buildpack.
-	    
-        --non-interactive
+        -n
           Alias of --no-prompt.
-        --framework
-          
-		Specify the framework to use.
-		Cannot be used together with --no-framework.
-		Defaults to a heuristically chosen value if
-		not specified, and none for --no-framework.
-	    
-        --mem
-          
-		The application's per-instance memory allocation.
-		Defaults to a framework-specific value if not
-		specified by stackato.yml.
-	    
-        --disk
-          
-		The application's per-instance disk allocation.
-		Defaults to a framework-specific value if not
-		specified by stackato.yml.
-	    
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
 
-            </div></div>
 
-.. _command-dbshell:
+.. _command-stackato dbshell:
 
-      dbshell  *<application>*  *<service>*       
+      stackato dbshell  *<application>*  *<service>*       
         Invoke interactive db shell for a bound service.
 
         .. raw:: html
@@ -2081,40 +2082,61 @@ Applications
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --token-file
+        --dry
           
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Print the low-level ssh command to stdout
+	    instead of executing it.
 	
-        -n
-          Alias of --no-prompt.
-        --path
+        --dry-run
+          Alias of --dry.
+        --group
           
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        -t
-          Alias of --trace.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
         --manifest
           
 	    Path of the manifest file to use.
 	    If not specified a search is done.
 	
-        --dry
+        --no-prompt
           
-		Print the low-level ssh command to stdout
-		instead of executing it.
-	    
-        -o
-          Alias of --organization.
+	    Disable interactive queries.
+	
+        --no-tail
+          Complementary alias of --tail.
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
         --noprompt
           Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --tail
+          
+	    Request target to stream the log.
+	
         --target
           
 	    The once-off target to use for the current operation.
@@ -2124,50 +2146,28 @@ Applications
 	    The once-off authentication token to use for the
 	    current operation.
 	
-        --no-tail
-          Complementary alias of --tail.
-        --non-interactive
+        --token-file
+          
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
           Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --dry-run
-          Alias of --dry.
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --tail
-          
-	    Request target to stream the log.
-	
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
 
-            </div></div>
 
-.. _command-delete:
+.. _command-stackato delete:
 
-      delete  *<application>*       
+      stackato delete  *<application>*       
         Delete the specified application(s).
 
         .. raw:: html
@@ -2176,970 +2176,63 @@ Applications
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --force
-          
-		Force deletion.
-	    
-        --token-file
-          
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-        -n
-          Alias of --no-prompt.
-        --path
-          
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        -t
-          Alias of --trace.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-        --manifest
-          
-	    Path of the manifest file to use.
-	    If not specified a search is done.
-	
-        -o
-          Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
-        --target
-          
-	    The once-off target to use for the current operation.
-	
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
-        --no-tail
-          Complementary alias of --tail.
-        --non-interactive
-          Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --tail
-          
-	    Request target to stream the log.
-	
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
-          
-	    Disable interactive queries.
-	
         --all
           
 		Delete all applications.
 		Cannot be used together with application names.
 	    
-        --space
+        --force
           
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
+		Force deletion.
+	    
         --group
           
 	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
-
-            </div></div>
-
-.. _command-env-add:
-
-      env-add  *<application>*  *<varname>*  *<value>*       
-        Add the specified environment variable to the named application.
-
-        .. raw:: html
-
-          <div class="spoiler">
-          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-          <div class="inner" style="display:none;">
-
-        --token-file
-          
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-        -n
-          Alias of --no-prompt.
-        --path
-          
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        -t
-          Alias of --trace.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
+	    This is a Stackato 2 option.
 	
         --manifest
           
 	    Path of the manifest file to use.
 	    If not specified a search is done.
 	
-        -o
-          Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
-        --target
-          
-	    The once-off target to use for the current operation.
-	
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
-        --no-tail
-          Complementary alias of --tail.
-        --non-interactive
-          Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --tail
-          
-	    Request target to stream the log.
-	
-        --no-trace
-          Complementary alias of --trace.
         --no-prompt
           
 	    Disable interactive queries.
 	
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
-
-            </div></div>
-
-.. _command-env-del:
-
-      env-del  *<application>*  *<varname>*       
-        Remove the specified environment variable from the named application.
-
-        .. raw:: html
-
-          <div class="spoiler">
-          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-          <div class="inner" style="display:none;">
-
-        --token-file
-          
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-        -n
+        --no-tail
+          Complementary alias of --tail.
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
           Alias of --no-prompt.
+        --noprompt
+          Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
         --path
           
 	    Path of the directory holding the application files to push.
 	    Defaults to the current working directory.
 	
-        -t
-          Alias of --trace.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-        --manifest
-          
-	    Path of the manifest file to use.
-	    If not specified a search is done.
-	
-        -o
-          Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
-        --target
-          
-	    The once-off target to use for the current operation.
-	
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
-        --no-tail
-          Complementary alias of --tail.
-        --non-interactive
-          Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --tail
-          
-	    Request target to stream the log.
-	
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
-          
-	    Disable interactive queries.
-	
         --space
           
 	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
+	    by name. This is a Stackato 3 option.
 	    Cannot be used together with --space-guid.
 	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
-
-            </div></div>
-
-.. _command-map:
-
-      map  *<application>*  *<url>*       
-        Make the application accessible through the specified URL (a route consisting of host and domain)
-
-        .. raw:: html
-
-          <div class="spoiler">
-          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-          <div class="inner" style="display:none;">
-
-        --token-file
-          
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-        -n
-          Alias of --no-prompt.
-        --path
-          
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        -t
-          Alias of --trace.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-        --manifest
-          
-	    Path of the manifest file to use.
-	    If not specified a search is done.
-	
-        -o
-          Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
-        --target
-          
-	    The once-off target to use for the current operation.
-	
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
-        --no-tail
-          Complementary alias of --tail.
-        --non-interactive
-          Alias of --no-prompt.
         --space-guid
           
 	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --tail
-          
-	    Request target to stream the log.
-	
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
-
-            </div></div>
-
-.. _command-open:
-
-      open  *<application>*       
-        Open the application|URL|target (web console) in a browser
-
-        .. raw:: html
-
-          <div class="spoiler">
-          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-          <div class="inner" style="display:none;">
-
-        --token-file
-          
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-        -n
-          Alias of --no-prompt.
-        --path
-          
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        -t
-          Alias of --trace.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-        --manifest
-          
-	    Path of the manifest file to use.
-	    If not specified a search is done.
-	
-        -o
-          Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
-        --target
-          
-	    The once-off target to use for the current operation.
-	
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --non-interactive
-          Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
-
-            </div></div>
-
-.. _command-push:
-
-      push  *<application>*       
-        Configure, create, push, map, and start a new application.
-
-        .. raw:: html
-
-          <div class="spoiler">
-          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-          <div class="inner" style="display:none;">
-
-        --instances
-          
-		The number of application instances to create.
-		Defaults to 1, if not specified by a stackato.yml.
-	    
-        -n
-          Alias of --no-prompt.
-        --copy-unsafe-links
-          
-		Links pointing outside of the application directory
-		are copied into the application.
-	    
-        --env
-          
-		Environment variable overrides for declarations in
-		the stackato.yml. Ignored without environment variable
-		declarations in the manifest.
-	    
-        --no-tail
-          Complementary alias of --tail.
-        --path
-          
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        --stackato-debug
-          
-		host:port of the Komodo debugger listener to inject
-		into the application as environment variables.
-	    
-        --no-trace
-          Complementary alias of --trace.
-        -d
-          
-		Set up debugging through an application-specific
-		harbor (port) service. Target version 2.8+ only.
-	    
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-        --non-interactive
-          Alias of --no-prompt.
-        --no-resources
-          
-		Do not optimize upload by checking for existing file resources.
-	    
-        --as
-          
-		The name of the application to push/update the selected application as.
-		Possible only if a single application is pushed or updated.
-	    
-        --noprompt
-          Alias of --no-prompt.
-        --force-start
-          
-		Push, and start the application, even when stopped.
-	    
-        --noresources
-          Alias of --no-resources.
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        -t
-          Alias of --trace.
-        --no-framework
-          
-		Create application without any framework.
-		Cannot be used together with --framework.
-	    
-        --target
-          
-	    The once-off target to use for the current operation.
-	
-        --no-start
-          
-		Push, but do not start the application.
-	    
-        --url
-          
-		The urls to map the application to.
-		I.e. can be specified muliple times.
-	    
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --nostart
-          Alias of --no-start.
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
-        --tail
-          
-	    Request target to stream the log.
-	
-        --name
-          Alias of --as.
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
-        --token-file
-          
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-        --manifest
-          
-	    Path of the manifest file to use.
-	    If not specified a search is done.
-	
-        --runtime
-          
-		The name of the runtime to use.
-		Default is framework specific, if not specified
-		by a stackato.yml.
-	    
-        --reset
-          
-		Analogue of --env-mode, for the regular settings.
-	    
-        --stack
-          
-		The OS foundation the application will run on.
-	    
-        --buildpack
-          
-		Url of a custom buildpack.
-	    
-        --env-mode
-          
-		Environment replacement mode. One of preserve, or replace.
-		The default for create and push is "replace", and for
-		update it is "preserve". Replace-mode also implies --reset.
-	    
-        --framework
-          
-		Specify the framework to use.
-		Cannot be used together with --no-framework.
-		Defaults to a heuristically chosen value if
-		not specified, and none for --no-framework.
-	    
-        --command
-          
-		The application's start command.
-		Defaults to a framework-specific value if required
-		and not specified by stackato.yml.
-	    
-        --mem
-          
-		The application's per-instance memory allocation.
-		Defaults to a framework-specific value if not
-		specified by stackato.yml.
-	    
-        -o
-          Alias of --organization.
-        --disk
-          
-		The application's per-instance disk allocation.
-		Defaults to a framework-specific value if not
-		specified by stackato.yml.
-	    
-
-            </div></div>
-
-.. _command-rename:
-
-      rename  *<application>*  *<name>*       
-        Rename the specified application.
-
-        .. raw:: html
-
-          <div class="spoiler">
-          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-          <div class="inner" style="display:none;">
-
-        --token-file
-          
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-        -n
-          Alias of --no-prompt.
-        --path
-          
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        -t
-          Alias of --trace.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-        --manifest
-          
-	    Path of the manifest file to use.
-	    If not specified a search is done.
-	
-        -o
-          Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
-        --target
-          
-	    The once-off target to use for the current operation.
-	
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
-        --no-tail
-          Complementary alias of --tail.
-        --non-interactive
-          Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --tail
-          
-	    Request target to stream the log.
-	
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
-
-            </div></div>
-
-.. _command-restart:
-
-      restart  *<application>*       
-        Stop and restart a deployed application.
-
-        .. raw:: html
-
-          <div class="spoiler">
-          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-          <div class="inner" style="display:none;">
-
-        --token-file
-          
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-        -n
-          Alias of --no-prompt.
-        --path
-          
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        -t
-          Alias of --trace.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-        --manifest
-          
-	    Path of the manifest file to use.
-	    If not specified a search is done.
-	
-        -o
-          Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
-        --target
-          
-	    The once-off target to use for the current operation.
-	
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
-        --no-tail
-          Complementary alias of --tail.
-        --non-interactive
-          Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --tail
-          
-	    Request target to stream the log.
-	
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
-
-            </div></div>
-
-.. _command-run:
-
-      run  *<command>*       
-        Run an arbitrary command on a running instance.
-
-        .. raw:: html
-
-          <div class="spoiler">
-          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-          <div class="inner" style="display:none;">
-
-        --noprompt
-          Alias of --no-prompt.
-        --dry
-          
-		Print the low-level ssh command to stdout
-		instead of executing it.
-	    
-        --no-tail
-          Complementary alias of --tail.
-        --path
-          
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        --instance
-          
-		The instance to access with the command.
-		Defaults to 0.
-	    
-        --no-trace
-          Complementary alias of --trace.
-        -a
-          Alias of --application.
-        -o
-          Alias of --organization.
-        -n
-          Alias of --no-prompt.
-        -t
-          Alias of --trace.
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-        --target
-          
-	    The once-off target to use for the current operation.
-	
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
-        --application
-          
-		Name of the application to operate on.
-	    
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
+	    by guid. This is a Stackato 3 option.
 	    Cannot be used together with --space.
 	
         --tail
           
 	    Request target to stream the log.
 	
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
-        --token-file
-          
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-        --manifest
-          
-	    Path of the manifest file to use.
-	    If not specified a search is done.
-	
-        --non-interactive
-          Alias of --no-prompt.
-        --dry-run
-          Alias of --dry.
-
-            </div></div>
-
-.. _command-scale:
-
-      scale  *<application>*       
-        Update the number of instances, memory and/or disk reservation for a deployed application.
-
-        .. raw:: html
-
-          <div class="spoiler">
-          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-          <div class="inner" style="display:none;">
-
-        --instances
-          
-		Absolute number of instances to scale to, or
-		relative change.
-	    
-        -n
-          Alias of --no-prompt.
-        --no-tail
-          Complementary alias of --tail.
-        --path
-          
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        --no-trace
-          Complementary alias of --trace.
-        -d
-          Alias of --disk.
-        -m
-          Alias of --mem.
-        -o
-          Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
-        -i
-          Alias of --instances.
-        -t
-          Alias of --trace.
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
         --target
           
 	    The once-off target to use for the current operation.
@@ -3149,93 +2242,10 @@ Applications
 	    The once-off authentication token to use for the
 	    current operation.
 	
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --tail
-          
-	    Request target to stream the log.
-	
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
         --token-file
           
 	    Path to an existing and readable file containing
 	    the targets and authorization tokens.
-	
-        --manifest
-          
-	    Path of the manifest file to use.
-	    If not specified a search is done.
-	
-        --non-interactive
-          Alias of --no-prompt.
-        --mem
-          
-		The new memory reservation to use.
-	    
-        --disk
-          
-		The new disk reservation to use.
-	    
-
-            </div></div>
-
-.. _command-scp:
-
-      scp  *<paths>*       
-        Copy source files and directories to the destination.
-
-        .. raw:: html
-
-          <div class="spoiler">
-          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-          <div class="inner" style="display:none;">
-
-        --noprompt
-          Alias of --no-prompt.
-        --no-tail
-          Complementary alias of --tail.
-        --path
-          
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        --instance
-          
-		The instance to access with the command.
-		Defaults to 0.
-	    
-        --no-trace
-          Complementary alias of --trace.
-        -a
-          Alias of --application.
-        -o
-          Alias of --organization.
-        -n
-          Alias of --no-prompt.
-        -t
-          Alias of --trace.
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --no-prompt
-          
-	    Disable interactive queries.
 	
         --trace
           
@@ -3243,605 +2253,17 @@ Applications
 	    This option is a no-op now. Tracing is always active. See
 	    the 'trace' command to print the saved trace to stdout.
 	
-        --target
-          
-	    The once-off target to use for the current operation.
-	
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
-        --application
-          
-		Name of the application to operate on.
-	    
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --tail
-          
-	    Request target to stream the log.
-	
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
-        --token-file
-          
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-        --manifest
-          
-	    Path of the manifest file to use.
-	    If not specified a search is done.
-	
-        --non-interactive
-          Alias of --no-prompt.
-
-            </div></div>
-
-.. _command-set-env:
-
-      set-env  *<application>*  *<varname>*  *<value>*       
-        Add the specified environment variable to the named application.
-
-        .. raw:: html
-
-          <div class="spoiler">
-          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-          <div class="inner" style="display:none;">
-
-        --token-file
-          
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
         -n
           Alias of --no-prompt.
-        --path
-          
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        -t
-          Alias of --trace.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-        --manifest
-          
-	    Path of the manifest file to use.
-	    If not specified a search is done.
-	
         -o
           Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
-        --target
-          
-	    The once-off target to use for the current operation.
-	
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
-        --no-tail
-          Complementary alias of --tail.
-        --non-interactive
-          Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --tail
-          
-	    Request target to stream the log.
-	
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
-
-            </div></div>
-
-.. _command-ssh:
-
-      ssh  *<command>*       
-        SSH to a running instance (or target), or run an arbitrary command.
-
-        .. raw:: html
-
-          <div class="spoiler">
-          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-          <div class="inner" style="display:none;">
-
-        --noprompt
-          Alias of --no-prompt.
-        --dry
-          
-		Print the low-level ssh command to stdout
-		instead of executing it.
-	    
-        --no-tail
-          Complementary alias of --tail.
-        --path
-          
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        --instance
-          
-		The instance to access with the command.
-		Defaults to 0.
-	    
-        --no-trace
-          Complementary alias of --trace.
-        -a
-          Alias of --application.
-        -o
-          Alias of --organization.
-        -n
-          Alias of --no-prompt.
         -t
           Alias of --trace.
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-        --target
-          
-	    The once-off target to use for the current operation.
-	
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
-        --application
-          
-		Name of the application to operate on, or
-		"api" to talk to the cloud controller node.
-	    
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --tail
-          
-	    Request target to stream the log.
-	
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
-        --token-file
-          
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-        --manifest
-          
-	    Path of the manifest file to use.
-	    If not specified a search is done.
-	
-        --non-interactive
-          Alias of --no-prompt.
-        --dry-run
-          Alias of --dry.
 
-            </div></div>
 
-.. _command-start:
+.. _command-stackato drain add:
 
-      start  *<application>*       
-        Start a deployed application.
-
-        .. raw:: html
-
-          <div class="spoiler">
-          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-          <div class="inner" style="display:none;">
-
-        --token-file
-          
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-        -n
-          Alias of --no-prompt.
-        --path
-          
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        -t
-          Alias of --trace.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-        --manifest
-          
-	    Path of the manifest file to use.
-	    If not specified a search is done.
-	
-        -o
-          Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
-        --target
-          
-	    The once-off target to use for the current operation.
-	
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
-        --no-tail
-          Complementary alias of --tail.
-        --non-interactive
-          Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --tail
-          
-	    Request target to stream the log.
-	
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
-
-            </div></div>
-
-.. _command-stop:
-
-      stop  *<application>*       
-        Stop a deployed application.
-
-        .. raw:: html
-
-          <div class="spoiler">
-          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-          <div class="inner" style="display:none;">
-
-        --token-file
-          
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-        -n
-          Alias of --no-prompt.
-        --path
-          
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        -t
-          Alias of --trace.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-        --manifest
-          
-	    Path of the manifest file to use.
-	    If not specified a search is done.
-	
-        -o
-          Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
-        --target
-          
-	    The once-off target to use for the current operation.
-	
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
-        --no-tail
-          Complementary alias of --tail.
-        --non-interactive
-          Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --tail
-          
-	    Request target to stream the log.
-	
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
-
-            </div></div>
-
-.. _command-unmap:
-
-      unmap  *<application>*  *<url>*       
-        Unregister the application from a URL.
-
-        .. raw:: html
-
-          <div class="spoiler">
-          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-          <div class="inner" style="display:none;">
-
-        --token-file
-          
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-        -n
-          Alias of --no-prompt.
-        --path
-          
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        -t
-          Alias of --trace.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-        --manifest
-          
-	    Path of the manifest file to use.
-	    If not specified a search is done.
-	
-        -o
-          Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
-        --target
-          
-	    The once-off target to use for the current operation.
-	
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
-        --no-tail
-          Complementary alias of --tail.
-        --non-interactive
-          Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --tail
-          
-	    Request target to stream the log.
-	
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
-
-            </div></div>
-
-.. _command-unset-env:
-
-      unset-env  *<application>*  *<varname>*       
-        Remove the specified environment variable from the named application.
-
-        .. raw:: html
-
-          <div class="spoiler">
-          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-          <div class="inner" style="display:none;">
-
-        --token-file
-          
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-        -n
-          Alias of --no-prompt.
-        --path
-          
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        -t
-          Alias of --trace.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-        --manifest
-          
-	    Path of the manifest file to use.
-	    If not specified a search is done.
-	
-        -o
-          Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
-        --target
-          
-	    The once-off target to use for the current operation.
-	
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
-        --no-tail
-          Complementary alias of --tail.
-        --non-interactive
-          Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --tail
-          
-	    Request target to stream the log.
-	
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
-
-            </div></div>
-
-.. _command-drain add:
-
-      drain add  *<application>*  *<drain>*  *<uri>*       
+      stackato drain add  *<application>*  *<drain>*  *<uri>*       
         Attach a new named drain to the application.
 
         .. raw:: html
@@ -3850,90 +2272,89 @@ Applications
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --token-file
+        --group
           
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
-        -n
+        --json
+          
+		    The drain target takes raw json log entries.
+		
+        --manifest
+          
+	    Path of the manifest file to use.
+	    If not specified a search is done.
+	
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-tail
+          Complementary alias of --tail.
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
           Alias of --no-prompt.
+        --noprompt
+          Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
         --path
           
 	    Path of the directory holding the application files to push.
 	    Defaults to the current working directory.
 	
-        -t
-          Alias of --trace.
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --tail
+          
+	    Request target to stream the log.
+	
+        --target
+          
+	    The once-off target to use for the current operation.
+	
+        --token
+          
+	    The once-off authentication token to use for the
+	    current operation.
+	
+        --token-file
+          
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
         --trace
           
 	    Activate tracing of the issued REST requests and responses.
 	    This option is a no-op now. Tracing is always active. See
 	    the 'trace' command to print the saved trace to stdout.
 	
-        --manifest
-          
-	    Path of the manifest file to use.
-	    If not specified a search is done.
-	
+        -n
+          Alias of --no-prompt.
         -o
           Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
-        --target
-          
-	    The once-off target to use for the current operation.
-	
-        --json
-          
-		    The drain target takes raw json log entries.
-		
-        --no-tail
-          Complementary alias of --tail.
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
-        --non-interactive
-          Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --tail
-          
-	    Request target to stream the log.
-	
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --no-trace
-          Complementary alias of --trace.
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
+        -t
+          Alias of --trace.
 
-            </div></div>
 
-.. _command-drain delete:
+.. _command-stackato drain delete:
 
-      drain delete  *<application>*  *<drain>*       
+      stackato drain delete  *<application>*  *<drain>*       
         Remove the named drain from the application.
 
         .. raw:: html
@@ -3942,35 +2363,54 @@ Applications
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --token-file
+        --group
           
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-        -n
-          Alias of --no-prompt.
-        --path
-          
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        -t
-          Alias of --trace.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
         --manifest
           
 	    Path of the manifest file to use.
 	    If not specified a search is done.
 	
-        -o
-          Alias of --organization.
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-tail
+          Complementary alias of --tail.
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
         --noprompt
           Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --tail
+          
+	    Request target to stream the log.
+	
         --target
           
 	    The once-off target to use for the current operation.
@@ -3980,128 +2420,1741 @@ Applications
 	    The once-off authentication token to use for the
 	    current operation.
 	
+        --token-file
+          
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
+          Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
+
+
+.. _command-stackato env-add:
+
+      stackato env-add  *<application>*  *<varname>*  *<value>*       
+        Add the specified environment variable to the named application.
+
+        .. raw:: html
+
+          <div class="spoiler">
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+          <div class="inner" style="display:none;">
+
+        --group
+          
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
+	
+        --manifest
+          
+	    Path of the manifest file to use.
+	    If not specified a search is done.
+	
+        --no-prompt
+          
+	    Disable interactive queries.
+	
         --no-tail
           Complementary alias of --tail.
+        --no-trace
+          Complementary alias of --trace.
         --non-interactive
           Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
+        --noprompt
+          Alias of --no-prompt.
         --organization
           
 	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
 	
         --tail
           
 	    Request target to stream the log.
 	
-        --no-trace
-          Complementary alias of --trace.
+        --target
+          
+	    The once-off target to use for the current operation.
+	
+        --timeout
+          
+	    The time the client waits for an application to
+	    start before giving up and returning, in seconds.
+	    Note that this is measured from the last entry
+	    seen in the log stream. While there is activity
+	    in the log the timeout is reset.
+
+	    The default is 2 minutes.
+
+	    Use the suffixes 'm', 'h', and 'd' for the convenient
+	    specification of minutes, hours, and days. The optional
+	    suffix 's' stands for seconds.
+	
+        --token
+          
+	    The once-off authentication token to use for the
+	    current operation.
+	
+        --token-file
+          
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
+          Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
+
+
+.. _command-stackato env-del:
+
+      stackato env-del  *<application>*  *<varname>*       
+        Remove the specified environment variable from the named application.
+
+        .. raw:: html
+
+          <div class="spoiler">
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+          <div class="inner" style="display:none;">
+
+        --group
+          
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
+	
+        --manifest
+          
+	    Path of the manifest file to use.
+	    If not specified a search is done.
+	
         --no-prompt
           
 	    Disable interactive queries.
 	
+        --no-tail
+          Complementary alias of --tail.
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
+        --noprompt
+          Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
         --space
           
 	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
+	    by name. This is a Stackato 3 option.
 	    Cannot be used together with --space-guid.
 	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --tail
+          
+	    Request target to stream the log.
+	
+        --target
+          
+	    The once-off target to use for the current operation.
+	
+        --timeout
+          
+	    The time the client waits for an application to
+	    start before giving up and returning, in seconds.
+	    Note that this is measured from the last entry
+	    seen in the log stream. While there is activity
+	    in the log the timeout is reset.
+
+	    The default is 2 minutes.
+
+	    Use the suffixes 'm', 'h', and 'd' for the convenient
+	    specification of minutes, hours, and days. The optional
+	    suffix 's' stands for seconds.
+	
+        --token
+          
+	    The once-off authentication token to use for the
+	    current operation.
+	
+        --token-file
+          
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
+          Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
+
+
+.. _command-stackato map:
+
+      stackato map  *<application>*  *<url>*       
+        Make the application accessible through the specified URL (a route consisting of host and domain)
+
+        .. raw:: html
+
+          <div class="spoiler">
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+          <div class="inner" style="display:none;">
+
         --group
           
 	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
+	    This is a Stackato 2 option.
 	
+        --manifest
+          
+	    Path of the manifest file to use.
+	    If not specified a search is done.
+	
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-tail
+          Complementary alias of --tail.
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
+        --noprompt
+          Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --tail
+          
+	    Request target to stream the log.
+	
+        --target
+          
+	    The once-off target to use for the current operation.
+	
+        --token
+          
+	    The once-off authentication token to use for the
+	    current operation.
+	
+        --token-file
+          
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
+          Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
 
-            </div></div>
+
+.. _command-stackato open:
+
+      stackato open  *<application>*       
+        Open the url of the specified application in the default web browser. If 'api' is specified as the app name, the Management Console is opened. With no arguments, the 'name' value from the stackato.yml/manifest.yml in the current directory is used (if present).
+
+        .. raw:: html
+
+          <div class="spoiler">
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+          <div class="inner" style="display:none;">
+
+        --group
+          
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
+	
+        --manifest
+          
+	    Path of the manifest file to use.
+	    If not specified a search is done.
+	
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
+        --noprompt
+          Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --target
+          
+	    The once-off target to use for the current operation.
+	
+        --token
+          
+	    The once-off authentication token to use for the
+	    current operation.
+	
+        --token-file
+          
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
+          Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
+
+
+.. _command-stackato push:
+
+      stackato push  *<application>*       
+        Configure, create, push, map, and start a new application.
+
+        .. raw:: html
+
+          <div class="spoiler">
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+          <div class="inner" style="display:none;">
+
+        --as
+          
+		The name of the application to push/update the selected application as.
+		Possible only if a single application is pushed or updated.
+	    
+        --buildpack
+          
+		Url of a custom buildpack.
+		This is a Stackato 3 specific option.
+	    
+        --command
+          
+		The application's start command.
+		Defaults to a framework-specific value if required
+		and not specified by stackato.yml.
+	    
+        --copy-unsafe-links
+          
+		Links pointing outside of the application directory
+		are copied into the application.
+	    
+        --disk
+          
+		The application's per-instance disk allocation.
+		Defaults to a framework-specific value if not
+		specified by stackato.yml.
+	    
+        --env
+          
+		Environment variable overrides. These are always applied
+		regardless of --env-mode. The mode is restricted to the
+		variable declarations found in the manifest.
+	    
+        --env-mode
+          
+		Environment replacement mode. One of preserve, or replace.
+		The default is "preserve". Using mode "replace" implies
+		--reset as well, for push. Note that new variables are always
+		set. Preserve only prevents update of existing variables.
+		This setting applies only to the variable declarations found
+		in the manifest.  Overrides made with --env are always applied.
+	    
+        --force-start
+          
+		Push, and start the application, even when stopped.
+	    
+        --framework
+          
+		Specify the framework to use.
+		Cannot be used together with --no-framework.
+		Defaults to a heuristically chosen value if
+		not specified, and none for --no-framework.
+		This is a Stackato 2 specific option.
+	    
+        --group
+          
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
+	
+        --instances
+          
+		The number of application instances to create.
+		Defaults to 1, if not specified by a stackato.yml.
+	    
+        --manifest
+          
+	    Path of the manifest file to use.
+	    If not specified a search is done.
+	
+        --mem
+          
+		The application's per-instance memory allocation.
+		Defaults to a framework-specific value if not
+		specified by stackato.yml.
+	    
+        --no-framework
+          
+		Create application without any framework.
+		Cannot be used together with --framework.
+		This is a Stackato 2 specific option.
+	    
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-resources
+          
+		Do not optimize upload by checking for existing file resources.
+	    
+        --no-start
+          
+		Push, but do not start the application.
+	    
+        --no-tail
+          Complementary alias of --tail.
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
+        --noprompt
+          Alias of --no-prompt.
+        --noresources
+          Alias of --no-resources.
+        --nostart
+          Alias of --no-start.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
+        --reset
+          
+		Analogue of --env-mode, for the regular settings.
+	    
+        --runtime
+          
+		The name of the runtime to use.
+		Default is framework specific, if not specified
+		by a stackato.yml.
+		This is a Stackato 2 specific option.
+	    
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --stack
+          
+		The OS foundation the application will run on.
+		This is a Stackato 3 specific option.
+	    
+        --stackato-debug
+          
+		host:port of the Komodo debugger listener to inject
+		into the application as environment variables.
+	    
+        --tail
+          
+	    Request target to stream the log.
+	
+        --target
+          
+	    The once-off target to use for the current operation.
+	
+        --timeout
+          
+	    The time the client waits for an application to
+	    start before giving up and returning, in seconds.
+	    Note that this is measured from the last entry
+	    seen in the log stream. While there is activity
+	    in the log the timeout is reset.
+
+	    The default is 2 minutes.
+
+	    Use the suffixes 'm', 'h', and 'd' for the convenient
+	    specification of minutes, hours, and days. The optional
+	    suffix 's' stands for seconds.
+	
+        --token
+          
+	    The once-off authentication token to use for the
+	    current operation.
+	
+        --token-file
+          
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        --url
+          
+		The urls to map the application to.
+		I.e. can be specified muliple times.
+	    
+        -d
+          
+		Set up debugging through an application-specific
+		harbor (port) service. Target version 2.8+ only.
+	    
+        -n
+          Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
+
+
+.. _command-stackato rename:
+
+      stackato rename  *<application>*  *<name>*       
+        Rename the specified application. This is a Stackato 3 specific command.
+
+        .. raw:: html
+
+          <div class="spoiler">
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+          <div class="inner" style="display:none;">
+
+        --group
+          
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
+	
+        --manifest
+          
+	    Path of the manifest file to use.
+	    If not specified a search is done.
+	
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-tail
+          Complementary alias of --tail.
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
+        --noprompt
+          Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --tail
+          
+	    Request target to stream the log.
+	
+        --target
+          
+	    The once-off target to use for the current operation.
+	
+        --token
+          
+	    The once-off authentication token to use for the
+	    current operation.
+	
+        --token-file
+          
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
+          Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
+
+
+.. _command-stackato restart:
+
+      stackato restart  *<application>*       
+        Stop and restart a deployed application.
+
+        .. raw:: html
+
+          <div class="spoiler">
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+          <div class="inner" style="display:none;">
+
+        --group
+          
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
+	
+        --manifest
+          
+	    Path of the manifest file to use.
+	    If not specified a search is done.
+	
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-tail
+          Complementary alias of --tail.
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
+        --noprompt
+          Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --tail
+          
+	    Request target to stream the log.
+	
+        --target
+          
+	    The once-off target to use for the current operation.
+	
+        --timeout
+          
+	    The time the client waits for an application to
+	    start before giving up and returning, in seconds.
+	    Note that this is measured from the last entry
+	    seen in the log stream. While there is activity
+	    in the log the timeout is reset.
+
+	    The default is 2 minutes.
+
+	    Use the suffixes 'm', 'h', and 'd' for the convenient
+	    specification of minutes, hours, and days. The optional
+	    suffix 's' stands for seconds.
+	
+        --token
+          
+	    The once-off authentication token to use for the
+	    current operation.
+	
+        --token-file
+          
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
+          Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
+
+
+.. _command-stackato run:
+
+      stackato run  *<command>*       
+        Run an arbitrary command on a running instance.
+
+        .. raw:: html
+
+          <div class="spoiler">
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+          <div class="inner" style="display:none;">
+
+        --all
+          
+		Run the command on all instances.
+		Cannot be used together with --instance.
+	    
+        --application
+          
+		Name of the application to operate on.
+	    
+        --banner
+          
+		Show the leading and trailing banner to separate
+		instance data. Applies only when --all is used.
+		Defaults to on.
+	    
+        --dry
+          
+	    Print the low-level ssh command to stdout
+	    instead of executing it.
+	
+        --dry-run
+          Alias of --dry.
+        --group
+          
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
+	
+        --instance
+          
+		The instance to access with the command.
+		Defaults to 0.
+		Cannot be used together with --all.
+	    
+        --manifest
+          
+	    Path of the manifest file to use.
+	    If not specified a search is done.
+	
+        --no-banner
+          Complementary alias of --banner.
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-tail
+          Complementary alias of --tail.
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
+        --noprompt
+          Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --tail
+          
+	    Request target to stream the log.
+	
+        --target
+          
+	    The once-off target to use for the current operation.
+	
+        --token
+          
+	    The once-off authentication token to use for the
+	    current operation.
+	
+        --token-file
+          
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -a
+          Alias of --application.
+        -n
+          Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
+
+
+.. _command-stackato scale:
+
+      stackato scale  *<application>*       
+        Update the number of instances, memory and/or disk reservation for a deployed application.
+
+        .. raw:: html
+
+          <div class="spoiler">
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+          <div class="inner" style="display:none;">
+
+        --disk
+          
+		The new disk reservation to use.
+	    
+        --group
+          
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
+	
+        --instances
+          
+		Absolute number of instances to scale to, or
+		relative change.
+	    
+        --manifest
+          
+	    Path of the manifest file to use.
+	    If not specified a search is done.
+	
+        --mem
+          
+		The new memory reservation to use.
+	    
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-tail
+          Complementary alias of --tail.
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
+        --noprompt
+          Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --tail
+          
+	    Request target to stream the log.
+	
+        --target
+          
+	    The once-off target to use for the current operation.
+	
+        --timeout
+          
+	    The time the client waits for an application to
+	    start before giving up and returning, in seconds.
+	    Note that this is measured from the last entry
+	    seen in the log stream. While there is activity
+	    in the log the timeout is reset.
+
+	    The default is 2 minutes.
+
+	    Use the suffixes 'm', 'h', and 'd' for the convenient
+	    specification of minutes, hours, and days. The optional
+	    suffix 's' stands for seconds.
+	
+        --token
+          
+	    The once-off authentication token to use for the
+	    current operation.
+	
+        --token-file
+          
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -d
+          Alias of --disk.
+        -i
+          Alias of --instances.
+        -m
+          Alias of --mem.
+        -n
+          Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
+
+
+.. _command-stackato scp:
+
+      stackato scp  *<paths>*       
+        Copy source files and directories to the destination.
+
+        .. raw:: html
+
+          <div class="spoiler">
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+          <div class="inner" style="display:none;">
+
+        --application
+          
+		Name of the application to operate on.
+	    
+        --group
+          
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
+	
+        --instance
+          
+		The instance to access with the command.
+		Defaults to 0.
+	    
+        --manifest
+          
+	    Path of the manifest file to use.
+	    If not specified a search is done.
+	
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-tail
+          Complementary alias of --tail.
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
+        --noprompt
+          Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --tail
+          
+	    Request target to stream the log.
+	
+        --target
+          
+	    The once-off target to use for the current operation.
+	
+        --token
+          
+	    The once-off authentication token to use for the
+	    current operation.
+	
+        --token-file
+          
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -a
+          Alias of --application.
+        -n
+          Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
+
+
+.. _command-stackato set-env:
+
+      stackato set-env  *<application>*  *<varname>*  *<value>*       
+        Add the specified environment variable to the named application.
+
+        .. raw:: html
+
+          <div class="spoiler">
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+          <div class="inner" style="display:none;">
+
+        --group
+          
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
+	
+        --manifest
+          
+	    Path of the manifest file to use.
+	    If not specified a search is done.
+	
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-tail
+          Complementary alias of --tail.
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
+        --noprompt
+          Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --tail
+          
+	    Request target to stream the log.
+	
+        --target
+          
+	    The once-off target to use for the current operation.
+	
+        --timeout
+          
+	    The time the client waits for an application to
+	    start before giving up and returning, in seconds.
+	    Note that this is measured from the last entry
+	    seen in the log stream. While there is activity
+	    in the log the timeout is reset.
+
+	    The default is 2 minutes.
+
+	    Use the suffixes 'm', 'h', and 'd' for the convenient
+	    specification of minutes, hours, and days. The optional
+	    suffix 's' stands for seconds.
+	
+        --token
+          
+	    The once-off authentication token to use for the
+	    current operation.
+	
+        --token-file
+          
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
+          Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
+
+
+.. _command-stackato ssh:
+
+      stackato ssh  *<command>*       
+        SSH to a running instance (or target), or run an arbitrary command.
+
+        .. raw:: html
+
+          <div class="spoiler">
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+          <div class="inner" style="display:none;">
+
+        --all
+          
+		Run the command on all instances.
+		Cannot be used together with --instance.
+	    
+        --application
+          
+		Name of the application to operate on, or
+		"api" to talk to the cloud controller node.
+	    
+        --banner
+          
+		Show the leading and trailing banner to separate
+		instance data. Applies only when --all is used.
+		Defaults to on.
+	    
+        --dry
+          
+	    Print the low-level ssh command to stdout
+	    instead of executing it.
+	
+        --dry-run
+          Alias of --dry.
+        --group
+          
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
+	
+        --instance
+          
+		The instance to access with the command.
+		Defaults to 0.
+		Cannot be used together with --all.
+	    
+        --manifest
+          
+	    Path of the manifest file to use.
+	    If not specified a search is done.
+	
+        --no-banner
+          Complementary alias of --banner.
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-tail
+          Complementary alias of --tail.
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
+        --noprompt
+          Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --tail
+          
+	    Request target to stream the log.
+	
+        --target
+          
+	    The once-off target to use for the current operation.
+	
+        --token
+          
+	    The once-off authentication token to use for the
+	    current operation.
+	
+        --token-file
+          
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -a
+          Alias of --application.
+        -n
+          Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
+
+
+.. _command-stackato start:
+
+      stackato start  *<application>*       
+        Start a deployed application.
+
+        .. raw:: html
+
+          <div class="spoiler">
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+          <div class="inner" style="display:none;">
+
+        --group
+          
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
+	
+        --manifest
+          
+	    Path of the manifest file to use.
+	    If not specified a search is done.
+	
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-tail
+          Complementary alias of --tail.
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
+        --noprompt
+          Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --tail
+          
+	    Request target to stream the log.
+	
+        --target
+          
+	    The once-off target to use for the current operation.
+	
+        --timeout
+          
+	    The time the client waits for an application to
+	    start before giving up and returning, in seconds.
+	    Note that this is measured from the last entry
+	    seen in the log stream. While there is activity
+	    in the log the timeout is reset.
+
+	    The default is 2 minutes.
+
+	    Use the suffixes 'm', 'h', and 'd' for the convenient
+	    specification of minutes, hours, and days. The optional
+	    suffix 's' stands for seconds.
+	
+        --token
+          
+	    The once-off authentication token to use for the
+	    current operation.
+	
+        --token-file
+          
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
+          Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
+
+
+.. _command-stackato stop:
+
+      stackato stop  *<application>*       
+        Stop a deployed application.
+
+        .. raw:: html
+
+          <div class="spoiler">
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+          <div class="inner" style="display:none;">
+
+        --group
+          
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
+	
+        --manifest
+          
+	    Path of the manifest file to use.
+	    If not specified a search is done.
+	
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-tail
+          Complementary alias of --tail.
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
+        --noprompt
+          Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --tail
+          
+	    Request target to stream the log.
+	
+        --target
+          
+	    The once-off target to use for the current operation.
+	
+        --token
+          
+	    The once-off authentication token to use for the
+	    current operation.
+	
+        --token-file
+          
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
+          Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
+
+
+.. _command-stackato unmap:
+
+      stackato unmap  *<application>*  *<url>*       
+        Unregister the application from a URL.
+
+        .. raw:: html
+
+          <div class="spoiler">
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+          <div class="inner" style="display:none;">
+
+        --group
+          
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
+	
+        --manifest
+          
+	    Path of the manifest file to use.
+	    If not specified a search is done.
+	
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-tail
+          Complementary alias of --tail.
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
+        --noprompt
+          Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --tail
+          
+	    Request target to stream the log.
+	
+        --target
+          
+	    The once-off target to use for the current operation.
+	
+        --token
+          
+	    The once-off authentication token to use for the
+	    current operation.
+	
+        --token-file
+          
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
+          Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
+
+
+.. _command-stackato unset-env:
+
+      stackato unset-env  *<application>*  *<varname>*       
+        Remove the specified environment variable from the named application.
+
+        .. raw:: html
+
+          <div class="spoiler">
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+          <div class="inner" style="display:none;">
+
+        --group
+          
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
+	
+        --manifest
+          
+	    Path of the manifest file to use.
+	    If not specified a search is done.
+	
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-tail
+          Complementary alias of --tail.
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
+        --noprompt
+          Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --tail
+          
+	    Request target to stream the log.
+	
+        --target
+          
+	    The once-off target to use for the current operation.
+	
+        --timeout
+          
+	    The time the client waits for an application to
+	    start before giving up and returning, in seconds.
+	    Note that this is measured from the last entry
+	    seen in the log stream. While there is activity
+	    in the log the timeout is reset.
+
+	    The default is 2 minutes.
+
+	    Use the suffixes 'm', 'h', and 'd' for the convenient
+	    specification of minutes, hours, and days. The optional
+	    suffix 's' stands for seconds.
+	
+        --token
+          
+	    The once-off authentication token to use for the
+	    current operation.
+	
+        --token-file
+          
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
+          Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
+
 
   
 Services
 ^^^^^^^^^^^^^^^^^^^^^
 
     
-.. _command-service:
+.. _command-stackato service-plans:
   
-  service  *<name>* 
-    Show the information about the named service.
-
-    .. raw:: html
-    
-      <div class="spoiler">
-      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-      <div class="inner" style="display:none;">
-
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    -o
-      Alias of --organization.
-    --noprompt
-      Alias of --no-prompt.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --space
-      
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --non-interactive
-      Alias of --no-prompt.
-    --space-guid
-      
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-    --organization
-      
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    --group
-      
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
-    
-.. _command-service-plans:
-  
-  service-plans 
-    List all available plans of the supported services.
+  stackato service-plans 
+    List all available plans of the supported services. This is a Stackato 3 specific command.
 
     .. raw:: html
     
@@ -4144,9 +4197,9 @@ Services
 	    Disable interactive queries.
 	
     
-.. _command-services:
+.. _command-stackato services:
   
-  services 
+  stackato services 
     List the supported and provisioned services of the target.
 
     .. raw:: html
@@ -4185,7 +4238,7 @@ Services
     --space
       
 	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
+	    by name. This is a Stackato 3 option.
 	    Cannot be used together with --space-guid.
 	
     --token
@@ -4198,13 +4251,13 @@ Services
     --space-guid
       
 	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
+	    by guid. This is a Stackato 3 option.
 	    Cannot be used together with --space.
 	
     --organization
       
 	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
+	    This is a Stackato 3 option.
 	
     --no-trace
       Complementary alias of --trace.
@@ -4215,7 +4268,81 @@ Services
     --group
       
 	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
+	    This is a Stackato 2 option.
+	
+    
+.. _command-stackato service:
+  
+  stackato service  *<name>* 
+    Show the information about the named service.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    -n
+      Alias of --no-prompt.
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -t
+      Alias of --trace.
+    -o
+      Alias of --organization.
+    --noprompt
+      Alias of --no-prompt.
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --json
+      
+	    Print raw json as output, not human-formatted data.
+	
+    --space
+      
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --non-interactive
+      Alias of --no-prompt.
+    --space-guid
+      
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+    --organization
+      
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --group
+      
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
 
       </div></div>
@@ -4225,10 +4352,10 @@ Services
     
   **Authentication Tokens**
       
-.. _command-create-service-auth-token:
+.. _command-stackato create-service-auth-token:
 
-      create-service-auth-token  *<label>*  *<provider>*       
-        Create a new service authentication token.
+      stackato create-service-auth-token  *<label>*  *<provider>*       
+        Create a new service authentication token. This is a Stackato 3 specific command.
 
         .. raw:: html
 
@@ -4236,29 +4363,42 @@ Services
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --token-file
-          
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-        -n
-          Alias of --no-prompt.
         --auth-token
           
 		    Value of the new token.
 		
-        --trace
+        --group
           
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
-        -t
-          Alias of --trace.
-        -o
-          Alias of --organization.
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
         --noprompt
           Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
         --target
           
 	    The once-off target to use for the current operation.
@@ -4268,43 +4408,29 @@ Services
 	    The once-off authentication token to use for the
 	    current operation.
 	
-        --space
+        --token-file
           
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
-        --non-interactive
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
           Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --no-trace
-          Complementary alias of --trace.
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
 
-            </div></div>
 
-.. _command-delete-service-auth-token:
+.. _command-stackato delete-service-auth-token:
 
-      delete-service-auth-token  *<label>*       
-        Delete the specified service authentication token.
+      stackato delete-service-auth-token  *<label>*       
+        Delete the specified service authentication token. This is a Stackato 3 specific command.
 
         .. raw:: html
 
@@ -4312,25 +4438,38 @@ Services
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --token-file
+        --group
           
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
-        -n
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
           Alias of --no-prompt.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-        -t
-          Alias of --trace.
-        -o
-          Alias of --organization.
         --noprompt
           Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
         --target
           
 	    The once-off target to use for the current operation.
@@ -4340,43 +4479,29 @@ Services
 	    The once-off authentication token to use for the
 	    current operation.
 	
-        --space
+        --token-file
           
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
-        --non-interactive
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
           Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
 
-            </div></div>
 
-.. _command-service-auth-tokens:
+.. _command-stackato service-auth-tokens:
 
-      service-auth-tokens       
-        Show all service authentication tokens knowns to the target.
+      stackato service-auth-tokens       
+        Show all service authentication tokens knowns to the target. This is a Stackato 3 specific command.
 
         .. raw:: html
 
@@ -4384,105 +4509,42 @@ Services
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --token-file
+        --group
           
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-        -n
-          Alias of --no-prompt.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-        -t
-          Alias of --trace.
-        -o
-          Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
-        --target
-          
-	    The once-off target to use for the current operation.
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
         --json
           
 	    Print raw json as output, not human-formatted data.
 	
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
-        --non-interactive
-          Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --no-trace
-          Complementary alias of --trace.
         --no-prompt
           
 	    Disable interactive queries.
 	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
-
-            </div></div>
-
-.. _command-update-service-auth-token:
-
-      update-service-auth-token  *<label>*       
-        Update the specified service authentication token.
-
-        .. raw:: html
-
-          <div class="spoiler">
-          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-          <div class="inner" style="display:none;">
-
-        --token-file
-          
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-        -n
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
           Alias of --no-prompt.
-        --auth-token
-          
-		    New value of the specified token.
-		
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-        -t
-          Alias of --trace.
-        -o
-          Alias of --organization.
         --noprompt
           Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
         --target
           
 	    The once-off target to use for the current operation.
@@ -4492,24 +4554,44 @@ Services
 	    The once-off authentication token to use for the
 	    current operation.
 	
-        --space
+        --token-file
           
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
-        --non-interactive
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
           Alias of --no-prompt.
-        --space-guid
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
+
+
+.. _command-stackato update-service-auth-token:
+
+      stackato update-service-auth-token  *<label>*       
+        Update the specified service authentication token. This is a Stackato 3 specific command.
+
+        .. raw:: html
+
+          <div class="spoiler">
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+          <div class="inner" style="display:none;">
+
+        --auth-token
           
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --organization
+		    New value of the specified token.
+		
+        --group
           
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
         --no-prompt
           
@@ -4517,23 +4599,64 @@ Services
 	
         --no-trace
           Complementary alias of --trace.
-        --group
+        --non-interactive
+          Alias of --no-prompt.
+        --noprompt
+          Alias of --no-prompt.
+        --organization
           
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
 	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --target
+          
+	    The once-off target to use for the current operation.
+	
+        --token
+          
+	    The once-off authentication token to use for the
+	    current operation.
+	
+        --token-file
+          
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
+          Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
 
-            </div></div>
 
     
 .. _command-Services-Brokers:
     
   **Brokers**
       
-.. _command-add-service-broker:
+.. _command-stackato add-service-broker:
 
-      add-service-broker  *<name>*       
-        Make the named service broker known.
+      stackato add-service-broker  *<name>*       
+        Make the named service broker known. This is a Stackato 3 specific command.
 
         .. raw:: html
 
@@ -4541,29 +4664,42 @@ Services
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --token-file
-          
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-        -n
-          Alias of --no-prompt.
-        --noprompt
-          Alias of --no-prompt.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-        -t
-          Alias of --trace.
-        -o
-          Alias of --organization.
         --broker-token
           
 		    Value of the broker's token.
 		
+        --group
+          
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
+	
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
+        --noprompt
+          Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
         --target
           
 	    The once-off target to use for the current operation.
@@ -4573,47 +4709,33 @@ Services
 	    The once-off authentication token to use for the
 	    current operation.
 	
-        --space
+        --token-file
           
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
 	
         --url
           
 		    Location of the broker.
 		
-        --non-interactive
+        -n
           Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
 
-            </div></div>
 
-.. _command-service-brokers:
+.. _command-stackato remove-service-broker:
 
-      service-brokers       
-        Show the list of known service brokers.
+      stackato remove-service-broker  *<name>*       
+        Remove the named service broker from the target. This is a Stackato 3 specific command.
 
         .. raw:: html
 
@@ -4621,79 +4743,228 @@ Services
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --token-file
+        --group
           
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
-        -n
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
           Alias of --no-prompt.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-        -t
-          Alias of --trace.
-        -o
-          Alias of --organization.
         --noprompt
           Alias of --no-prompt.
-        --target
+        --organization
           
-	    The once-off target to use for the current operation.
-	
-        --json
-          
-	    Print raw json as output, not human-formatted data.
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
 	
         --space
           
 	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
+	    by name. This is a Stackato 3 option.
 	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --target
+          
+	    The once-off target to use for the current operation.
 	
         --token
           
 	    The once-off authentication token to use for the
 	    current operation.
 	
-        --non-interactive
+        --token-file
+          
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
           Alias of --no-prompt.
-        --space-guid
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
+
+
+.. _command-stackato service-brokers:
+
+      stackato service-brokers       
+        Show the list of known service brokers. This is a Stackato 3 specific command.
+
+        .. raw:: html
+
+          <div class="spoiler">
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+          <div class="inner" style="display:none;">
+
+        --group
           
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
-        --organization
+        --json
           
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
+	    Print raw json as output, not human-formatted data.
 	
-        --no-trace
-          Complementary alias of --trace.
         --no-prompt
           
 	    Disable interactive queries.
 	
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
+        --noprompt
+          Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --target
+          
+	    The once-off target to use for the current operation.
+	
+        --token
+          
+	    The once-off authentication token to use for the
+	    current operation.
+	
+        --token-file
+          
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
+          Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
+
+
+.. _command-stackato update-service-broker:
+
+      stackato update-service-broker  *<name>*  *<newname>*       
+        Update the target's knowledge of the named service broker. This is a Stackato 3 specific command.
+
+        .. raw:: html
+
+          <div class="spoiler">
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+          <div class="inner" style="display:none;">
+
+        --broker-token
+          
+		    New value of the broker's token.
+		
         --group
           
 	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
+	    This is a Stackato 2 option.
 	
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
+        --noprompt
+          Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --target
+          
+	    The once-off target to use for the current operation.
+	
+        --token
+          
+	    The once-off authentication token to use for the
+	    current operation.
+	
+        --token-file
+          
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        --url
+          
+		    New location of the broker.
+		
+        -n
+          Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
 
-            </div></div>
 
     
 .. _command-Services-Management:
     
   **Management**
       
-.. _command-bind-service:
+.. _command-stackato bind-service:
 
-      bind-service  *<service>*  *<application>*       
+      stackato bind-service  *<service>*  *<application>*       
         Bind the named service to the specified application.
 
         .. raw:: html
@@ -4702,174 +4973,99 @@ Services
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --token-file
+        --group
           
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-        -n
-          Alias of --no-prompt.
-        --path
-          
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        -t
-          Alias of --trace.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
         --manifest
           
 	    Path of the manifest file to use.
 	    If not specified a search is done.
 	
-        -o
-          Alias of --organization.
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-tail
+          Complementary alias of --tail.
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
         --noprompt
           Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --tail
+          
+	    Request target to stream the log.
+	
         --target
           
 	    The once-off target to use for the current operation.
+	
+        --timeout
+          
+	    The time the client waits for an application to
+	    start before giving up and returning, in seconds.
+	    Note that this is measured from the last entry
+	    seen in the log stream. While there is activity
+	    in the log the timeout is reset.
+
+	    The default is 2 minutes.
+
+	    Use the suffixes 'm', 'h', and 'd' for the convenient
+	    specification of minutes, hours, and days. The optional
+	    suffix 's' stands for seconds.
 	
         --token
           
 	    The once-off authentication token to use for the
 	    current operation.
 	
-        --no-tail
-          Complementary alias of --tail.
-        --non-interactive
-          Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --tail
-          
-	    Request target to stream the log.
-	
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
-
-            </div></div>
-
-.. _command-bind_service:
-
-      bind_service  *<service>*  *<application>*       
-        Bind the named service to the specified application.
-
-        .. raw:: html
-
-          <div class="spoiler">
-          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-          <div class="inner" style="display:none;">
-
         --token-file
           
 	    Path to an existing and readable file containing
 	    the targets and authorization tokens.
 	
-        -n
-          Alias of --no-prompt.
-        --path
-          
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        -t
-          Alias of --trace.
         --trace
           
 	    Activate tracing of the issued REST requests and responses.
 	    This option is a no-op now. Tracing is always active. See
 	    the 'trace' command to print the saved trace to stdout.
 	
-        --manifest
-          
-	    Path of the manifest file to use.
-	    If not specified a search is done.
-	
+        -n
+          Alias of --no-prompt.
         -o
           Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
-        --target
-          
-	    The once-off target to use for the current operation.
-	
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
-        --no-tail
-          Complementary alias of --tail.
-        --non-interactive
-          Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --tail
-          
-	    Request target to stream the log.
-	
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
+        -t
+          Alias of --trace.
 
-            </div></div>
 
-.. _command-clone-services:
+.. _command-stackato clone-services:
 
-      clone-services  *<source>*  *<application>*       
+      stackato clone-services  *<source>*  *<application>*       
         Copy the service bindings of the source application to the destination application.
 
         .. raw:: html
@@ -4878,76 +5074,89 @@ Services
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --token-file
+        --group
           
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
-        -n
-          Alias of --no-prompt.
-        --trace
+        --no-prompt
           
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-        -t
-          Alias of --trace.
-        -o
-          Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
-        --target
-          
-	    The once-off target to use for the current operation.
-	
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
+	    Disable interactive queries.
 	
         --no-tail
           Complementary alias of --tail.
+        --no-trace
+          Complementary alias of --trace.
         --non-interactive
           Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
+        --noprompt
+          Alias of --no-prompt.
         --organization
           
 	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
+	    This is a Stackato 3 option.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
 	
         --tail
           
 	    Request target to stream the log.
 	
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
+        --target
           
-	    Disable interactive queries.
+	    The once-off target to use for the current operation.
 	
-        --space
+        --timeout
           
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
+	    The time the client waits for an application to
+	    start before giving up and returning, in seconds.
+	    Note that this is measured from the last entry
+	    seen in the log stream. While there is activity
+	    in the log the timeout is reset.
+
+	    The default is 2 minutes.
+
+	    Use the suffixes 'm', 'h', and 'd' for the convenient
+	    specification of minutes, hours, and days. The optional
+	    suffix 's' stands for seconds.
 	
-        --group
+        --token
           
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
+	    The once-off authentication token to use for the
+	    current operation.
 	
+        --token-file
+          
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
+          Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
 
-            </div></div>
 
-.. _command-create-service:
+.. _command-stackato create-service:
 
-      create-service  *<vendor>*  *<name>*  *<application>*       
+      stackato create-service  *<vendor>*  *<name>*  *<application>*       
         Create a new provisioned service, and optionally bind it to an application.
 
         .. raw:: html
@@ -4956,192 +5165,114 @@ Services
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --token-file
+        --credentials
           
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-        -n
-          Alias of --no-prompt.
-        --provider
-          
-		The service provider. Use this to disambiguate
-		between multiple providers of the same vendor/type.
-		This is a stackato/CFv2 specific option.
+		The credentials to use.
+		Each use of the option declares a single element,
+		using the form "key: value" for the argument.
+		This is a Stackato 3 specific option.
+		This is restricted to user-provided services.
 	    
-        -t
-          Alias of --trace.
-        --trace
+        --group
           
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
+	
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-tail
+          Complementary alias of --tail.
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
+        --noprompt
+          Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
 	
         --plan
           
 		The service plan to use.
-		This is a stackato/CFv2 specific option.
+		This is a Stackato 3 specific option.
 	    
-        -o
-          Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
+        --provider
+          
+		The service provider. Use this to disambiguate
+		between multiple providers of the same vendor/type.
+		This is a Stackato 3 specific option.
+	    
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --tail
+          
+	    Request target to stream the log.
+	
         --target
           
 	    The once-off target to use for the current operation.
+	
+        --timeout
+          
+	    The time the client waits for an application to
+	    start before giving up and returning, in seconds.
+	    Note that this is measured from the last entry
+	    seen in the log stream. While there is activity
+	    in the log the timeout is reset.
+
+	    The default is 2 minutes.
+
+	    Use the suffixes 'm', 'h', and 'd' for the convenient
+	    specification of minutes, hours, and days. The optional
+	    suffix 's' stands for seconds.
 	
         --token
           
 	    The once-off authentication token to use for the
 	    current operation.
 	
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --non-interactive
-          Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --credentials
-          
-		The credentials to use.
-		Each use of the option declares a single element,
-		using the form "key: value" for the argument.
-		This is a stackato/CFv2 specific option.
-		This is restricted to user-provided services.
-	    
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --version
-          
-		The service version. Use this to disambiguate
-		between multiple versions of the same vendor/type.
-		This is a stackato/CFv2 specific option.
-	    
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-
-            </div></div>
-
-.. _command-create_service:
-
-      create_service  *<vendor>*  *<name>*  *<application>*       
-        Create a new provisioned service, and optionally bind it to an application.
-
-        .. raw:: html
-
-          <div class="spoiler">
-          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-          <div class="inner" style="display:none;">
-
         --token-file
           
 	    Path to an existing and readable file containing
 	    the targets and authorization tokens.
 	
-        -n
-          Alias of --no-prompt.
-        --provider
-          
-		The service provider. Use this to disambiguate
-		between multiple providers of the same vendor/type.
-		This is a stackato/CFv2 specific option.
-	    
-        -t
-          Alias of --trace.
         --trace
           
 	    Activate tracing of the issued REST requests and responses.
 	    This option is a no-op now. Tracing is always active. See
 	    the 'trace' command to print the saved trace to stdout.
 	
-        --plan
-          
-		The service plan to use.
-		This is a stackato/CFv2 specific option.
-	    
-        -o
-          Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
-        --target
-          
-	    The once-off target to use for the current operation.
-	
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --non-interactive
-          Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --credentials
-          
-		The credentials to use.
-		Each use of the option declares a single element,
-		using the form "key: value" for the argument.
-		This is a stackato/CFv2 specific option.
-		This is restricted to user-provided services.
-	    
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
-          
-	    Disable interactive queries.
-	
         --version
           
 		The service version. Use this to disambiguate
 		between multiple versions of the same vendor/type.
-		This is a stackato/CFv2 specific option.
+		This is a Stackato 3 specific option.
 	    
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
+        -n
+          Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
 
-            </div></div>
 
-.. _command-delete-service:
+.. _command-stackato delete-service:
 
-      delete-service  *<service>*       
+      stackato delete-service  *<service>*       
         Delete the named provisioned service.
 
         .. raw:: html
@@ -5150,62 +5281,6 @@ Services
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --token-file
-          
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-        -n
-          Alias of --no-prompt.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-        -t
-          Alias of --trace.
-        --unbind
-          
-		Unbind service from applications before deleting.
-		By default bound services are skipped and not deleted.
-	    
-        --noprompt
-          Alias of --no-prompt.
-        --target
-          
-	    The once-off target to use for the current operation.
-	
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --non-interactive
-          Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
-          
-	    Disable interactive queries.
-	
         --all
           
 		Delete all services.
@@ -5214,99 +5289,73 @@ Services
         --group
           
 	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
+	    This is a Stackato 2 option.
 	
-        -o
-          Alias of --organization.
-
-            </div></div>
-
-.. _command-delete_service:
-
-      delete_service  *<service>*       
-        Delete the named provisioned service.
-
-        .. raw:: html
-
-          <div class="spoiler">
-          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-          <div class="inner" style="display:none;">
-
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
+        --noprompt
+          Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --target
+          
+	    The once-off target to use for the current operation.
+	
+        --token
+          
+	    The once-off authentication token to use for the
+	    current operation.
+	
         --token-file
           
 	    Path to an existing and readable file containing
 	    the targets and authorization tokens.
 	
-        -n
-          Alias of --no-prompt.
         --trace
           
 	    Activate tracing of the issued REST requests and responses.
 	    This option is a no-op now. Tracing is always active. See
 	    the 'trace' command to print the saved trace to stdout.
 	
-        -t
-          Alias of --trace.
         --unbind
           
 		Unbind service from applications before deleting.
 		By default bound services are skipped and not deleted.
+		This is a Stackato 3 specific option.
 	    
-        --noprompt
+        -n
           Alias of --no-prompt.
-        --target
-          
-	    The once-off target to use for the current operation.
-	
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --non-interactive
-          Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --all
-          
-		Delete all services.
-		Cannot be used together with named service instances.
-	    
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
         -o
           Alias of --organization.
+        -t
+          Alias of --trace.
 
-            </div></div>
 
-.. _command-rename-service:
+.. _command-stackato rename-service:
 
-      rename-service  *<service>*  *<name>*       
-        Rename the specified service instance.
+      stackato rename-service  *<service>*  *<name>*       
+        Rename the specified service instance. This is a Stackato 3 specific command.
 
         .. raw:: html
 
@@ -5314,25 +5363,38 @@ Services
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --token-file
+        --group
           
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
-        -n
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
           Alias of --no-prompt.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-        -t
-          Alias of --trace.
-        -o
-          Alias of --organization.
         --noprompt
           Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
         --target
           
 	    The once-off target to use for the current operation.
@@ -5342,114 +5404,28 @@ Services
 	    The once-off authentication token to use for the
 	    current operation.
 	
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --non-interactive
-          Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
-
-            </div></div>
-
-.. _command-rename_service:
-
-      rename_service  *<service>*  *<name>*       
-        Rename the specified service instance.
-
-        .. raw:: html
-
-          <div class="spoiler">
-          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-          <div class="inner" style="display:none;">
-
         --token-file
           
 	    Path to an existing and readable file containing
 	    the targets and authorization tokens.
 	
-        -n
-          Alias of --no-prompt.
         --trace
           
 	    Activate tracing of the issued REST requests and responses.
 	    This option is a no-op now. Tracing is always active. See
 	    the 'trace' command to print the saved trace to stdout.
 	
-        -t
-          Alias of --trace.
+        -n
+          Alias of --no-prompt.
         -o
           Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
-        --target
-          
-	    The once-off target to use for the current operation.
-	
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --non-interactive
-          Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
+        -t
+          Alias of --trace.
 
-            </div></div>
 
-.. _command-tunnel:
+.. _command-stackato tunnel:
 
-      tunnel  *<service>*  *<tunnelclient>*       
+      stackato tunnel  *<service>*  *<tunnelclient>*       
         Create a local tunnel to a service, optionally start a local client as well.
 
         .. raw:: html
@@ -5458,29 +5434,52 @@ Services
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --token-file
+        --allow-http
           
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Required to prevent the client from rejecting http urls.
 	
-        -n
+        --group
+          
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
+	
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-tail
+          Complementary alias of --tail.
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
           Alias of --no-prompt.
+        --noprompt
+          Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
         --port
           
 		Port used for the tunnel.
 	    
-        --trace
+        --space
           
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
 	
-        -t
-          Alias of --trace.
-        -o
-          Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --tail
+          
+	    Request target to stream the log.
+	
         --target
           
 	    The once-off target to use for the current operation.
@@ -5490,58 +5489,34 @@ Services
 	    The once-off authentication token to use for the
 	    current operation.
 	
-        --no-tail
-          Complementary alias of --tail.
+        --token-file
+          
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
         --url
           
 		Url the tunnel helper application is mapped to and
 		listens on. Relevant if and only if the helper has
 		to be pushed,i.e. on first use of the tunnel command.
 	    
-        --non-interactive
+        -n
           Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --tail
-          
-	    Request target to stream the log.
-	
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --allow-http
-          
-	    Required to prevent the client from rejecting http urls.
-	
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
 
-            </div></div>
 
-.. _command-unbind-service:
+.. _command-stackato unbind-service:
 
-      unbind-service  *<service>*  *<application>*       
+      stackato unbind-service  *<service>*  *<application>*       
         Disconnect the named service from the specified application.
 
         .. raw:: html
@@ -5550,180 +5525,105 @@ Services
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --token-file
+        --group
           
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-        -n
-          Alias of --no-prompt.
-        --path
-          
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        -t
-          Alias of --trace.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
         --manifest
           
 	    Path of the manifest file to use.
 	    If not specified a search is done.
 	
-        -o
-          Alias of --organization.
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-tail
+          Complementary alias of --tail.
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
         --noprompt
           Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --path
+          
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --tail
+          
+	    Request target to stream the log.
+	
         --target
           
 	    The once-off target to use for the current operation.
+	
+        --timeout
+          
+	    The time the client waits for an application to
+	    start before giving up and returning, in seconds.
+	    Note that this is measured from the last entry
+	    seen in the log stream. While there is activity
+	    in the log the timeout is reset.
+
+	    The default is 2 minutes.
+
+	    Use the suffixes 'm', 'h', and 'd' for the convenient
+	    specification of minutes, hours, and days. The optional
+	    suffix 's' stands for seconds.
 	
         --token
           
 	    The once-off authentication token to use for the
 	    current operation.
 	
-        --no-tail
-          Complementary alias of --tail.
-        --non-interactive
-          Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --tail
-          
-	    Request target to stream the log.
-	
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
-
-            </div></div>
-
-.. _command-unbind_service:
-
-      unbind_service  *<service>*  *<application>*       
-        Disconnect the named service from the specified application.
-
-        .. raw:: html
-
-          <div class="spoiler">
-          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-          <div class="inner" style="display:none;">
-
         --token-file
           
 	    Path to an existing and readable file containing
 	    the targets and authorization tokens.
 	
-        -n
-          Alias of --no-prompt.
-        --path
-          
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-        -t
-          Alias of --trace.
         --trace
           
 	    Activate tracing of the issued REST requests and responses.
 	    This option is a no-op now. Tracing is always active. See
 	    the 'trace' command to print the saved trace to stdout.
 	
-        --manifest
-          
-	    Path of the manifest file to use.
-	    If not specified a search is done.
-	
+        -n
+          Alias of --no-prompt.
         -o
           Alias of --organization.
-        --noprompt
-          Alias of --no-prompt.
-        --target
-          
-	    The once-off target to use for the current operation.
-	
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
-        --no-tail
-          Complementary alias of --tail.
-        --non-interactive
-          Alias of --no-prompt.
-        --space-guid
-          
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
-	    Cannot be used together with --space.
-	
-        --organization
-          
-	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
-	
-        --tail
-          
-	    Request target to stream the log.
-	
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --space
-          
-	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
-	    Cannot be used together with --space-guid.
-	
-        --group
-          
-	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
-	
+        -t
+          Alias of --trace.
 
-            </div></div>
 
   
 Organizations
 ^^^^^^^^^^^^^^^^^^^^^
 
     
-.. _command-create-org:
+.. _command-stackato create-org:
   
-  create-org  *<name>* 
-    Create a new organization.
+  stackato create-org  *<name>* 
+    Create a new organization. This is a Stackato 3 specific command.
 
     .. raw:: html
     
@@ -5746,6 +5646,11 @@ Organizations
       
 		Add yourself to the new organization, as developer.
 		Done by default.
+	    
+    --quota
+      
+		The named quota of the new organization.
+		Default is the target's choice.
 	    
     --trace
       
@@ -5780,10 +5685,10 @@ Organizations
     --no-trace
       Complementary alias of --trace.
     
-.. _command-delete-org:
+.. _command-stackato delete-org:
   
-  delete-org  *<name>* 
-    Delete the named organization.
+  stackato delete-org  *<name>* 
+    Delete the named organization. This is a Stackato 3 specific command.
 
     .. raw:: html
     
@@ -5832,10 +5737,10 @@ Organizations
 	    Disable interactive queries.
 	
     
-.. _command-link-user-org:
+.. _command-stackato link-user-org:
   
-  link-user-org  *<user>*  *<org>* 
-    Add the specified user to the named organization, in various roles. This is a CFv2 specific command
+  stackato link-user-org  *<user>*  *<org>* 
+    Add the specified user to the named organization, in various roles. This is a Stackato 3 specific command.
 
     .. raw:: html
     
@@ -5883,13 +5788,11 @@ Organizations
 	
     --no-trace
       Complementary alias of --trace.
-    --developer
-       Affect the developer role 
     
-.. _command-org:
+.. _command-stackato orgs:
   
-  org  *<name>* 
-    Show the named organization's information.
+  stackato orgs 
+    List the available organizations. This is a Stackato 3 specific command.
 
     .. raw:: html
     
@@ -5940,10 +5843,10 @@ Organizations
 		Show more details.
 	    
     
-.. _command-orgs:
+.. _command-stackato org:
   
-  orgs 
-    List the available organizations.
+  stackato org  *<name>* 
+    Show the named organization's information. This is a Stackato 3 specific command.
 
     .. raw:: html
     
@@ -5994,10 +5897,10 @@ Organizations
 		Show more details.
 	    
     
-.. _command-quota-org:
+.. _command-stackato quota-org:
   
-  quota-org  *<name>*  *<quota>* 
-    Set the quotas for the current or named organization.
+  stackato quota-org  *<name>*  *<quota>* 
+    Set the quotas for the current or named organization. This is a Stackato 3 specific command.
 
     .. raw:: html
     
@@ -6040,10 +5943,10 @@ Organizations
 	    Disable interactive queries.
 	
     
-.. _command-rename-org:
+.. _command-stackato rename-org:
   
-  rename-org  *<name>*  *<newname>* 
-    Rename the named organization.
+  stackato rename-org  *<name>*  *<newname>* 
+    Rename the named organization. This is a Stackato 3 specific command.
 
     .. raw:: html
     
@@ -6086,10 +5989,10 @@ Organizations
 	    Disable interactive queries.
 	
     
-.. _command-switch-org:
+.. _command-stackato switch-org:
   
-  switch-org  *<name>* 
-    Switch the current organization to the named organization. This invalidates the current space.
+  stackato switch-org  *<name>* 
+    Switch the current organization to the named organization. This invalidates the current space. This is a Stackato 3 specific command.
 
     .. raw:: html
     
@@ -6132,10 +6035,10 @@ Organizations
 	    Disable interactive queries.
 	
     
-.. _command-unlink-user-org:
+.. _command-stackato unlink-user-org:
   
-  unlink-user-org  *<user>*  *<org>* 
-    Remove the specified user from the named organization, in various roles. This is a CFv2 specific command
+  stackato unlink-user-org  *<user>*  *<org>* 
+    Remove the specified user from the named organization, in various roles. This is a Stackato 3 specific command.
 
     .. raw:: html
     
@@ -6183,8 +6086,6 @@ Organizations
 	
     --no-trace
       Complementary alias of --trace.
-    --developer
-       Affect the developer role 
 
       </div></div>
 
@@ -6193,10 +6094,10 @@ Spaces
 ^^^^^^^^^^^^^^^^^^^^^
 
     
-.. _command-create-space:
+.. _command-stackato create-space:
   
-  create-space  *<name>* 
-    Create a new space.
+  stackato create-space  *<name>* 
+    Create a new space. This is a Stackato 3 specific command.
 
     .. raw:: html
     
@@ -6279,10 +6180,10 @@ Spaces
 		Done by default.
 	    
     
-.. _command-delete-space:
+.. _command-stackato delete-space:
   
-  delete-space  *<name>* 
-    Delete the named space.
+  stackato delete-space  *<name>* 
+    Delete the named space. This is a Stackato 3 specific command.
 
     .. raw:: html
     
@@ -6343,10 +6244,10 @@ Spaces
 	    asking the user to choose among the possibilities.
 	
     
-.. _command-link-user-space:
+.. _command-stackato link-user-space:
   
-  link-user-space  *<user>*  *<space>* 
-    Add the specified user to the named space, in various roles. This is a CFv2 specific command
+  stackato link-user-space  *<user>*  *<space>* 
+    Add the specified user to the named space, in various roles. This is a Stackato 3 specific command.
 
     .. raw:: html
     
@@ -6407,10 +6308,10 @@ Spaces
     --developer
        Affect the developer role 
     
-.. _command-rename-space:
+.. _command-stackato rename-space:
   
-  rename-space  *<name>*  *<newname>* 
-    Rename the named space.
+  stackato rename-space  *<name>*  *<newname>* 
+    Rename the named space. This is a Stackato 3 specific command.
 
     .. raw:: html
     
@@ -6465,76 +6366,10 @@ Spaces
 	    Disable interactive queries.
 	
     
-.. _command-space:
+.. _command-stackato spaces:
   
-  space  *<name>* 
-    Show the named space's information.
-
-    .. raw:: html
-    
-      <div class="spoiler">
-      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-      <div class="inner" style="display:none;">
-
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    -o
-      Alias of --organization.
-    --noprompt
-      Alias of --no-prompt.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --non-interactive
-      Alias of --no-prompt.
-    --organization
-      
-	    The name of the parent organization to use as context.
-
-	    Defaults to the current organization.
-
-	    A current organization is automatically set if there is none,
-	    either by taking the one organization the user belongs to, or
-	    asking the user to choose among the possibilities.
-	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    --full
-      
-		Show more details.
-	    
-    
-.. _command-spaces:
-  
-  spaces 
-    List the available spaces in the specified organization. See --organization for details
+  stackato spaces 
+    List the available spaces in the specified organization. See --organization for details This is a Stackato 3 specific command.
 
     .. raw:: html
     
@@ -6597,10 +6432,76 @@ Spaces
 		Show more details.
 	    
     
-.. _command-switch-space:
+.. _command-stackato space:
   
-  switch-space  *<name>* 
-    Switch from the current space to the named space. This may switch the organization as well.
+  stackato space  *<name>* 
+    Show the named space's information. This is a Stackato 3 specific command.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    -n
+      Alias of --no-prompt.
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -t
+      Alias of --trace.
+    -o
+      Alias of --organization.
+    --noprompt
+      Alias of --no-prompt.
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --json
+      
+	    Print raw json as output, not human-formatted data.
+	
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --non-interactive
+      Alias of --no-prompt.
+    --organization
+      
+	    The name of the parent organization to use as context.
+
+	    Defaults to the current organization.
+
+	    A current organization is automatically set if there is none,
+	    either by taking the one organization the user belongs to, or
+	    asking the user to choose among the possibilities.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --full
+      
+		Show more details.
+	    
+    
+.. _command-stackato switch-space:
+  
+  stackato switch-space  *<name>* 
+    Switch from the current space to the named space. This may switch the organization as well. This is a Stackato 3 specific command.
 
     .. raw:: html
     
@@ -6655,10 +6556,10 @@ Spaces
 	    Disable interactive queries.
 	
     
-.. _command-unlink-user-space:
+.. _command-stackato unlink-user-space:
   
-  unlink-user-space  *<user>*  *<space>* 
-    Remove the specified user from the named space, in various roles. This is a CFv2 specific command
+  stackato unlink-user-space  *<user>*  *<space>* 
+    Remove the specified user from the named space, in various roles. This is a Stackato 3 specific command.
 
     .. raw:: html
     
@@ -6726,10 +6627,10 @@ Routes
 ^^^^^^^^^^^^^^^^^^^^^
 
     
-.. _command-delete-route:
+.. _command-stackato delete-route:
   
-  delete-route  *<name>* 
-    Delete the named route.
+  stackato delete-route  *<name>* 
+    Delete the named route. This is a Stackato 3 specific command.
 
     .. raw:: html
     
@@ -6794,10 +6695,10 @@ Routes
 	    Disable interactive queries.
 	
     
-.. _command-routes:
+.. _command-stackato routes:
   
-  routes 
-    List all available routes.
+  stackato routes 
+    List all available routes. This is a Stackato 3 specific command.
 
     .. raw:: html
     
@@ -6851,10 +6752,10 @@ Domains
 ^^^^^^^^^^^^^^^^^^^^^
 
     
-.. _command-domains:
+.. _command-stackato domains:
   
-  domains 
-    List the available domains in the specified space, or all.
+  stackato domains 
+    List the available domains in the specified space, or all. This is a Stackato 3 specific command.
 
     .. raw:: html
     
@@ -6926,10 +6827,10 @@ Domains
 		Cannot be used together with a space.
 	    
     
-.. _command-map-domain:
+.. _command-stackato map-domain:
   
-  map-domain  *<name>* 
-    Add the named domain to an organization or space.
+  stackato map-domain  *<name>* 
+    Add the named domain to an organization or space. This is a Stackato 3 specific command.
 
     .. raw:: html
     
@@ -6994,10 +6895,10 @@ Domains
 	    Disable interactive queries.
 	
     
-.. _command-unmap-domain:
+.. _command-stackato unmap-domain:
   
-  unmap-domain  *<name>* 
-    Remove the named domain from an organization or space.
+  stackato unmap-domain  *<name>* 
+    Remove the named domain from an organization or space. This is a Stackato 3 specific command.
 
     .. raw:: html
     
@@ -7069,10 +6970,42 @@ Administration
 ^^^^^^^^^^^^^^^^^^^^^
 
     
-.. _command-frameworks:
+.. _command-stackato admin grant:
   
-  frameworks 
-    List the supported frameworks of the target.
+  stackato admin grant  *<email>* 
+    Grant the named user administrator privileges for the current or specified target.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    --noprompt
+      Alias of --no-prompt.
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -t
+      Alias of --trace.
+    -n
+      Alias of --no-prompt.
+    --non-interactive
+      Alias of --no-prompt.
+    --no-trace
+      Complementary alias of --trace.
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    
+.. _command-stackato admin list:
+  
+  stackato admin list 
+    Show a list of the administrators for the current or specified target.
 
     .. raw:: html
     
@@ -7119,10 +7052,551 @@ Administration
 	    Disable interactive queries.
 	
     
-.. _command-group:
+.. _command-stackato admin patch:
   
-  group  *<name>* 
-    Report the current group, or (un)set it.
+  stackato admin patch  *<patch>* 
+    Apply a patch to the current or specified target.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    -n
+      Alias of --no-prompt.
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -t
+      Alias of --trace.
+    --dry
+      
+	    Print the low-level ssh command to stdout
+	    instead of executing it.
+	
+    --noprompt
+      Alias of --no-prompt.
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --non-interactive
+      Alias of --no-prompt.
+    --dry-run
+      Alias of --dry.
+    --no-trace
+      Complementary alias of --trace.
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    
+.. _command-stackato admin report:
+  
+  stackato admin report  *<destination>* 
+    Retrieve a report containing the logs of the current or specified target.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    -n
+      Alias of --no-prompt.
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -t
+      Alias of --trace.
+    --noprompt
+      Alias of --no-prompt.
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --non-interactive
+      Alias of --no-prompt.
+    --no-trace
+      Complementary alias of --trace.
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    
+.. _command-stackato admin revoke:
+  
+  stackato admin revoke  *<email>* 
+    Revoke administrator privileges for the named user at the current or specified target.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    --noprompt
+      Alias of --no-prompt.
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -t
+      Alias of --trace.
+    -n
+      Alias of --no-prompt.
+    --non-interactive
+      Alias of --no-prompt.
+    --no-trace
+      Complementary alias of --trace.
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    
+.. _command-stackato frameworks:
+  
+  stackato frameworks 
+    List the supported frameworks of the target. This is a Stackato 2 specific command.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    -n
+      Alias of --no-prompt.
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -t
+      Alias of --trace.
+    --noprompt
+      Alias of --no-prompt.
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --json
+      
+	    Print raw json as output, not human-formatted data.
+	
+    --non-interactive
+      Alias of --no-prompt.
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    
+.. _command-stackato groups add-user:
+  
+  stackato groups add-user  *<group>*  *<user>* 
+    Add the named user to the specified group. This is a Stackato 2 specific command.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    -n
+      Alias of --no-prompt.
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -t
+      Alias of --trace.
+    --noprompt
+      Alias of --no-prompt.
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --non-interactive
+      Alias of --no-prompt.
+    --no-trace
+      Complementary alias of --trace.
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    
+.. _command-stackato groups create:
+  
+  stackato groups create  *<name>* 
+    Create a new group with the specified name. This is a Stackato 2 specific command.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    -n
+      Alias of --no-prompt.
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -t
+      Alias of --trace.
+    --noprompt
+      Alias of --no-prompt.
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --non-interactive
+      Alias of --no-prompt.
+    --no-trace
+      Complementary alias of --trace.
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    
+.. _command-stackato groups delete-user:
+  
+  stackato groups delete-user  *<group>*  *<user>* 
+    Remove the named user from the specified group. This is a Stackato 2 specific command.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    -n
+      Alias of --no-prompt.
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -t
+      Alias of --trace.
+    --noprompt
+      Alias of --no-prompt.
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --non-interactive
+      Alias of --no-prompt.
+    --no-trace
+      Complementary alias of --trace.
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    
+.. _command-stackato groups delete:
+  
+  stackato groups delete  *<name>* 
+    Delete the named group. This is a Stackato 2 specific command.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    -n
+      Alias of --no-prompt.
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -t
+      Alias of --trace.
+    --noprompt
+      Alias of --no-prompt.
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --non-interactive
+      Alias of --no-prompt.
+    --no-trace
+      Complementary alias of --trace.
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    
+.. _command-stackato groups limits:
+  
+  stackato groups limits  *<group>* 
+    Show and/or modify the limits applying to applications in the named group. This is a Stackato 2 specific command.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    -n
+      Alias of --no-prompt.
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -t
+      Alias of --trace.
+    --services
+      
+	    Limit for the number of services in the group.
+	
+    --noprompt
+      Alias of --no-prompt.
+    --no-trace
+      Complementary alias of --trace.
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --json
+      
+	    Print raw json as output, not human-formatted data.
+	
+    --apps
+      
+	    Limit for the number of applications in the group.
+	
+    --non-interactive
+      Alias of --no-prompt.
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --no-sudo
+      Complementary alias of --sudo.
+    --appuris
+      
+	    Limit for the number of mapped uris per application.
+	
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --sudo
+      
+	    Applications can use sudo (or not).
+	
+    --mem
+      
+	    Amount of memory applications can use.
+	
+    --drains
+      
+	    Limit for the number of drains in the group.
+	
+    
+.. _command-stackato groups show:
+  
+  stackato groups show 
+    Show the list of groups known to the target. This is a Stackato 2 specific command.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    -n
+      Alias of --no-prompt.
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -t
+      Alias of --trace.
+    --noprompt
+      Alias of --no-prompt.
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --json
+      
+	    Print raw json as output, not human-formatted data.
+	
+    --non-interactive
+      Alias of --no-prompt.
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    
+.. _command-stackato groups users:
+  
+  stackato groups users  *<group>* 
+    Show the list of users in the named group. This is a Stackato 2 specific command.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    -n
+      Alias of --no-prompt.
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -t
+      Alias of --trace.
+    --noprompt
+      Alias of --no-prompt.
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --json
+      
+	    Print raw json as output, not human-formatted data.
+	
+    --non-interactive
+      Alias of --no-prompt.
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    
+.. _command-stackato group:
+  
+  stackato group  *<name>* 
+    Report the current group, or (un)set it. This is a Stackato 2 specific command.
 
     .. raw:: html
     
@@ -7174,9 +7648,9 @@ Administration
 	    Disable interactive queries.
 	
     
-.. _command-info:
+.. _command-stackato info:
   
-  info 
+  stackato info 
     Show the basic system and account information.
 
     .. raw:: html
@@ -7215,7 +7689,7 @@ Administration
     --space
       
 	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
+	    by name. This is a Stackato 3 option.
 	    Cannot be used together with --space-guid.
 	
     --token
@@ -7228,13 +7702,13 @@ Administration
     --space-guid
       
 	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
+	    by guid. This is a Stackato 3 option.
 	    Cannot be used together with --space.
 	
     --organization
       
 	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
+	    This is a Stackato 3 option.
 	
     --no-trace
       Complementary alias of --trace.
@@ -7245,13 +7719,13 @@ Administration
     --group
       
 	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
+	    This is a Stackato 2 option.
 	
     
-.. _command-limits:
+.. _command-stackato limits:
   
-  limits  *<group>* 
-    Show and/or modify the limits applying to applications in the named group.
+  stackato limits  *<group>* 
+    Show and/or modify the limits applying to applications in the named group. This is a Stackato 2 specific command.
 
     .. raw:: html
     
@@ -7324,10 +7798,200 @@ Administration
 	    Limit for the number of drains in the group.
 	
     
-.. _command-quotas:
+.. _command-stackato quota configure:
   
-  quotas 
-    List the available quota definitions.
+  stackato quota configure  *<name>* 
+    Reconfigure the named quota definition. This is a Stackato 3 specific command.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    -n
+      Alias of --no-prompt.
+    --trial-db-allowed
+      
+		Applications can use trial databases.
+	    
+    -t
+      Alias of --trace.
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    --paid-services-allowed
+      
+		Applications can use non-free services.
+	    
+    --services
+      
+		Limit for the number of services in the quota.
+	    
+    --noprompt
+      Alias of --no-prompt.
+    --no-trial-db-allowed
+      Complementary alias of --trial-db-allowed.
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --non-interactive
+      Alias of --no-prompt.
+    --no-allow-sudo
+      Complementary alias of --allow-sudo.
+    --no-trace
+      Complementary alias of --trace.
+    --allow-sudo
+      
+		Applications can use sudo in their container.
+	    
+    --mem
+      
+		Amount of memory applications can use.
+	    
+    --no-paid-services-allowed
+      Complementary alias of --paid-services-allowed.
+    
+.. _command-stackato quota create:
+  
+  stackato quota create  *<name>* 
+    Create a new quota definition. This is a Stackato 3 specific command.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    -n
+      Alias of --no-prompt.
+    --trial-db-allowed
+      
+		Applications can use trial databases.
+	    
+    -t
+      Alias of --trace.
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    --paid-services-allowed
+      
+		Applications can use non-free services.
+	    
+    --services
+      
+		Limit for the number of services in the quota.
+	    
+    --noprompt
+      Alias of --no-prompt.
+    --no-trial-db-allowed
+      Complementary alias of --trial-db-allowed.
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --non-interactive
+      Alias of --no-prompt.
+    --no-allow-sudo
+      Complementary alias of --allow-sudo.
+    --no-trace
+      Complementary alias of --trace.
+    --allow-sudo
+      
+		Applications can use sudo in their container.
+	    
+    --mem
+      
+		Amount of memory applications can use.
+	    
+    --no-paid-services-allowed
+      Complementary alias of --paid-services-allowed.
+    
+.. _command-stackato quota delete:
+  
+  stackato quota delete  *<name>* 
+    Delete the named quota definition. This is a Stackato 3 specific command.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    -n
+      Alias of --no-prompt.
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -t
+      Alias of --trace.
+    --noprompt
+      Alias of --no-prompt.
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --non-interactive
+      Alias of --no-prompt.
+    --no-trace
+      Complementary alias of --trace.
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    
+.. _command-stackato quota list:
+  
+  stackato quota list 
+    List the available quota definitions. This is a Stackato 3 specific command.
 
     .. raw:: html
     
@@ -7374,10 +8038,56 @@ Administration
 	    Disable interactive queries.
 	
     
-.. _command-runtimes:
+.. _command-stackato quota rename:
   
-  runtimes 
-    List the supported runtimes of the target.
+  stackato quota rename  *<name>*  *<newname>* 
+    Rename the named quota definition. This is a Stackato 3 specific command.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    -n
+      Alias of --no-prompt.
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -t
+      Alias of --trace.
+    --noprompt
+      Alias of --no-prompt.
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --non-interactive
+      Alias of --no-prompt.
+    --no-trace
+      Complementary alias of --trace.
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    
+.. _command-stackato quota show:
+  
+  stackato quota show  *<name>* 
+    Show the details of the named quota definition. If not specified it will be asked for interactively (menu). This is a Stackato 3 specific command.
 
     .. raw:: html
     
@@ -7424,10 +8134,10 @@ Administration
 	    Disable interactive queries.
 	
     
-.. _command-stacks:
+.. _command-stackato quotas:
   
-  stacks 
-    List the supported stacks of the target.
+  stackato quotas 
+    List the available quota definitions. This is a Stackato 3 specific command.
 
     .. raw:: html
     
@@ -7474,9 +8184,109 @@ Administration
 	    Disable interactive queries.
 	
     
-.. _command-targets:
+.. _command-stackato runtimes:
   
-  targets 
+  stackato runtimes 
+    List the supported runtimes of the target. This is a Stackato 2 specific command.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    -n
+      Alias of --no-prompt.
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -t
+      Alias of --trace.
+    --noprompt
+      Alias of --no-prompt.
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --json
+      
+	    Print raw json as output, not human-formatted data.
+	
+    --non-interactive
+      Alias of --no-prompt.
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    
+.. _command-stackato stacks:
+  
+  stackato stacks 
+    List the supported stacks of the target. This is a Stackato 3 specific command.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    -n
+      Alias of --no-prompt.
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -t
+      Alias of --trace.
+    --noprompt
+      Alias of --no-prompt.
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --json
+      
+	    Print raw json as output, not human-formatted data.
+	
+    --non-interactive
+      Alias of --no-prompt.
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    
+.. _command-stackato targets:
+  
+  stackato targets 
     List the available targets, and their authorization tokens, if any.
 
     .. raw:: html
@@ -7505,9 +8315,9 @@ Administration
 	    Disable interactive queries.
 	
     
-.. _command-tokens:
+.. _command-stackato tokens:
   
-  tokens 
+  stackato tokens 
     List the available targets, and their authorization tokens, if any.
 
     .. raw:: html
@@ -7536,10 +8346,10 @@ Administration
 	    Disable interactive queries.
 	
     
-.. _command-usage:
+.. _command-stackato usage:
   
-  usage  *<userOrGroup>* 
-    Show the current memory allocation and usage of the active or specified user/group (CFv1), or the specified or current space (CFv2).
+  stackato usage  *<userOrGroup>* 
+    Show the current memory allocation and usage of the active or specified user/group (Stackato 2), or the specified or current space (Stackato 3).
 
     .. raw:: html
     
@@ -7577,7 +8387,7 @@ Administration
     --space
       
 	    The once-off space to use for the current operation, specified
-	    by name. This is a stackato CF v2 option.
+	    by name. This is a Stackato 3 option.
 	    Cannot be used together with --space-guid.
 	
     --token
@@ -7590,13 +8400,13 @@ Administration
     --space-guid
       
 	    The once-off space to use for the current operation, specified
-	    by guid. This is a stackato CF v2 option.
+	    by guid. This is a Stackato 3 option.
 	    Cannot be used together with --space.
 	
     --organization
       
 	    The once-off organization to use for the current operation.
-	    This is a stackato CF v2 option.
+	    This is a Stackato 3 option.
 	
     --no-trace
       Complementary alias of --trace.
@@ -7612,12 +8422,62 @@ Administration
     --group
       
 	    The once-off group to use for the current operation.
-	    This is a stackato V1 option.
+	    This is a Stackato 2 option.
 	
     
-.. _command-user:
+.. _command-stackato user-info:
   
-  user 
+  stackato user-info  *<name>* 
+    Shows the information of a user in the current or specified target. Defaults to the current user. Naming a specific user requires a Stackato 3 target.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    -n
+      Alias of --no-prompt.
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -t
+      Alias of --trace.
+    --noprompt
+      Alias of --no-prompt.
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --json
+      
+	    Print raw json as output, not human-formatted data.
+	
+    --non-interactive
+      Alias of --no-prompt.
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    
+.. _command-stackato user:
+  
+  stackato user 
     Show the name of the current user in the current or specified target.
 
     .. raw:: html
@@ -7665,59 +8525,9 @@ Administration
 	    Disable interactive queries.
 	
     
-.. _command-user-info:
+.. _command-stackato version:
   
-  user-info  *<name>* 
-    Shows the information of a user in the current or specified target. Defaults to the current user. Naming a specific user requires a CFv2 target.
-
-    .. raw:: html
-    
-      <div class="spoiler">
-      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-      <div class="inner" style="display:none;">
-
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    --noprompt
-      Alias of --no-prompt.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --non-interactive
-      Alias of --no-prompt.
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    
-.. _command-version:
-  
-  version 
+  stackato version 
     Print the version number of the client.
 
     .. raw:: html
@@ -7736,896 +8546,6 @@ Administration
       Alias of --no-prompt.
     --non-interactive
       Alias of --no-prompt.
-    
-.. _command-admin grant:
-  
-  admin grant  *<email>* 
-    Grant the named user administrator privileges for the current or specified target.
-
-    .. raw:: html
-    
-      <div class="spoiler">
-      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-      <div class="inner" style="display:none;">
-
-    --noprompt
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    -n
-      Alias of --no-prompt.
-    --non-interactive
-      Alias of --no-prompt.
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    
-.. _command-admin list:
-  
-  admin list 
-    Show a list of the administrators for the current or specified target.
-
-    .. raw:: html
-    
-      <div class="spoiler">
-      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-      <div class="inner" style="display:none;">
-
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    --noprompt
-      Alias of --no-prompt.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --non-interactive
-      Alias of --no-prompt.
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    
-.. _command-admin patch:
-  
-  admin patch  *<patch>* 
-    Apply a patch to the current or specified target.
-
-    .. raw:: html
-    
-      <div class="spoiler">
-      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-      <div class="inner" style="display:none;">
-
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    --noprompt
-      Alias of --no-prompt.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --non-interactive
-      Alias of --no-prompt.
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    
-.. _command-admin report:
-  
-  admin report  *<destination>* 
-    Retrieve a report containing the logs of the current or specified target.
-
-    .. raw:: html
-    
-      <div class="spoiler">
-      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-      <div class="inner" style="display:none;">
-
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    --noprompt
-      Alias of --no-prompt.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --non-interactive
-      Alias of --no-prompt.
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    
-.. _command-admin revoke:
-  
-  admin revoke  *<email>* 
-    Revoke administrator privileges for the named user at the current or specified target.
-
-    .. raw:: html
-    
-      <div class="spoiler">
-      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-      <div class="inner" style="display:none;">
-
-    --noprompt
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    -n
-      Alias of --no-prompt.
-    --non-interactive
-      Alias of --no-prompt.
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    
-.. _command-groups add-user:
-  
-  groups add-user  *<group>*  *<user>* 
-    Add the named user to the specified group.
-
-    .. raw:: html
-    
-      <div class="spoiler">
-      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-      <div class="inner" style="display:none;">
-
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    --noprompt
-      Alias of --no-prompt.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --non-interactive
-      Alias of --no-prompt.
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    
-.. _command-groups create:
-  
-  groups create  *<name>* 
-    Create a new group with the specified name.
-
-    .. raw:: html
-    
-      <div class="spoiler">
-      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-      <div class="inner" style="display:none;">
-
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    --noprompt
-      Alias of --no-prompt.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --non-interactive
-      Alias of --no-prompt.
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    
-.. _command-groups delete-user:
-  
-  groups delete-user  *<group>*  *<user>* 
-    Remove the named user from the specified group.
-
-    .. raw:: html
-    
-      <div class="spoiler">
-      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-      <div class="inner" style="display:none;">
-
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    --noprompt
-      Alias of --no-prompt.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --non-interactive
-      Alias of --no-prompt.
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    
-.. _command-groups delete:
-  
-  groups delete  *<name>* 
-    Delete the named group.
-
-    .. raw:: html
-    
-      <div class="spoiler">
-      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-      <div class="inner" style="display:none;">
-
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    --noprompt
-      Alias of --no-prompt.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --non-interactive
-      Alias of --no-prompt.
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    
-.. _command-groups limits:
-  
-  groups limits  *<group>* 
-    Show and/or modify the limits applying to applications in the named group.
-
-    .. raw:: html
-    
-      <div class="spoiler">
-      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-      <div class="inner" style="display:none;">
-
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    --services
-      
-	    Limit for the number of services in the group.
-	
-    --noprompt
-      Alias of --no-prompt.
-    --no-trace
-      Complementary alias of --trace.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --apps
-      
-	    Limit for the number of applications in the group.
-	
-    --non-interactive
-      Alias of --no-prompt.
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --no-sudo
-      Complementary alias of --sudo.
-    --appuris
-      
-	    Limit for the number of mapped uris per application.
-	
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    --sudo
-      
-	    Applications can use sudo (or not).
-	
-    --mem
-      
-	    Amount of memory applications can use.
-	
-    --drains
-      
-	    Limit for the number of drains in the group.
-	
-    
-.. _command-groups show:
-  
-  groups show 
-    Show the list of groups known to the target.
-
-    .. raw:: html
-    
-      <div class="spoiler">
-      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-      <div class="inner" style="display:none;">
-
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    --noprompt
-      Alias of --no-prompt.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --non-interactive
-      Alias of --no-prompt.
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    
-.. _command-groups users:
-  
-  groups users  *<group>* 
-    Show the list of users in the named group.
-
-    .. raw:: html
-    
-      <div class="spoiler">
-      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-      <div class="inner" style="display:none;">
-
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    --noprompt
-      Alias of --no-prompt.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --non-interactive
-      Alias of --no-prompt.
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    
-.. _command-quota configure:
-  
-  quota configure  *<name>* 
-    Reconfigure the named quota definition.
-
-    .. raw:: html
-    
-      <div class="spoiler">
-      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-      <div class="inner" style="display:none;">
-
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    --trial-db-allowed
-      
-		Applications can use trial databases.
-	    
-    -n
-      Alias of --no-prompt.
-    -t
-      Alias of --trace.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    --paid-services-allowed
-      
-		Applications can use non-free services.
-	    
-    --services
-      
-		Limit for the number of services in the quota.
-	    
-    --noprompt
-      Alias of --no-prompt.
-    --no-trial-db-allowed
-      Complementary alias of --trial-db-allowed.
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --non-interactive
-      Alias of --no-prompt.
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    --mem
-      
-		Amount of memory applications can use.
-	    
-    --no-paid-services-allowed
-      Complementary alias of --paid-services-allowed.
-    
-.. _command-quota create:
-  
-  quota create  *<name>* 
-    Create a new quota definition.
-
-    .. raw:: html
-    
-      <div class="spoiler">
-      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-      <div class="inner" style="display:none;">
-
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    --trial-db-allowed
-      
-		Applications can use trial databases.
-	    
-    -n
-      Alias of --no-prompt.
-    -t
-      Alias of --trace.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    --paid-services-allowed
-      
-		Applications can use non-free services.
-	    
-    --services
-      
-		Limit for the number of services in the quota.
-	    
-    --noprompt
-      Alias of --no-prompt.
-    --no-trial-db-allowed
-      Complementary alias of --trial-db-allowed.
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --non-interactive
-      Alias of --no-prompt.
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    --mem
-      
-		Amount of memory applications can use.
-	    
-    --no-paid-services-allowed
-      Complementary alias of --paid-services-allowed.
-    
-.. _command-quota delete:
-  
-  quota delete  *<name>* 
-    Delete the named quota definition.
-
-    .. raw:: html
-    
-      <div class="spoiler">
-      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-      <div class="inner" style="display:none;">
-
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    --noprompt
-      Alias of --no-prompt.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --non-interactive
-      Alias of --no-prompt.
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    
-.. _command-quota list:
-  
-  quota list 
-    List the available quota definitions.
-
-    .. raw:: html
-    
-      <div class="spoiler">
-      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-      <div class="inner" style="display:none;">
-
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    --noprompt
-      Alias of --no-prompt.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --non-interactive
-      Alias of --no-prompt.
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    
-.. _command-quota rename:
-  
-  quota rename  *<name>*  *<newname>* 
-    Rename the named quota definition.
-
-    .. raw:: html
-    
-      <div class="spoiler">
-      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-      <div class="inner" style="display:none;">
-
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    --noprompt
-      Alias of --no-prompt.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --non-interactive
-      Alias of --no-prompt.
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    
-.. _command-quota show:
-  
-  quota show  *<name>* 
-    Show the details of the named quota definition. If not specified it will be asked for interactively (menu).
-
-    .. raw:: html
-    
-      <div class="spoiler">
-      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-      <div class="inner" style="display:none;">
-
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    --noprompt
-      Alias of --no-prompt.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --non-interactive
-      Alias of --no-prompt.
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
 
       </div></div>
 
@@ -8634,9 +8554,9 @@ Administration
     
   **User Management**
       
-.. _command-add-user:
+.. _command-stackato add-user:
 
-      add-user  *<name>*       
+      stackato add-user  *<name>*       
         Register a new user in the current or specified target. This operation requires administrator privileges, except if "allow_registration" is set server-side.
 
         .. raw:: html
@@ -8645,45 +8565,67 @@ Administration
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --noprompt
-          Alias of --no-prompt.
-        --passwd
-          Alias of --password.
+        --admin
+          
+		Give the newly created user administrator privileges.
+	    
         --apps
           
 	    Limit for the number of applications in the group.
-	
-        --no-trace
-          Complementary alias of --trace.
-        -o
-          Alias of --organization.
-        -n
-          Alias of --no-prompt.
-        -t
-          Alias of --trace.
-        --services
-          
-	    Limit for the number of services in the group.
 	
         --appuris
           
 	    Limit for the number of mapped uris per application.
 	
+        --drains
+          
+	    Limit for the number of drains in the group.
+	
+        --email
+          
+		The email of the user to create.
+		This is a Stackato 3 specific option.
+	    
+        --group
+          
+		The group to put the new user into.
+		This is a Stackato 2 specific option.
+	    
+        --mem
+          
+	    Amount of memory applications can use.
+	
         --no-prompt
           
 	    Disable interactive queries.
 	
+        --no-sudo
+          Complementary alias of --sudo.
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
+        --noprompt
+          Alias of --no-prompt.
         --organization
           
 		The organization to place the new user into.
 		Defaults to the current organization.
-		This is a stackato/CFv2 specific option.
+		This is a Stackato 3 specific option.
 	    
-        --trace
+        --passwd
+          Alias of --password.
+        --password
           
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
+		The password to use.
+	    
+        --services
+          
+	    Limit for the number of services in the group.
+	
+        --sudo
+          
+	    Applications can use sudo (or not).
 	
         --target
           
@@ -8694,357 +8636,28 @@ Administration
 	    The once-off authentication token to use for the
 	    current operation.
 	
-        --admin
-          
-		Give the newly created user administrator privileges.
-	    
-        --password
-          
-		The password to use.
-	    
-        --group
-          
-		The group to put the new user into.
-		This is a stackato/CFv1 specific option.
-	    
-        --sudo
-          
-	    Applications can use sudo (or not).
-	
         --token-file
           
 	    Path to an existing and readable file containing
 	    the targets and authorization tokens.
 	
-        --email
-          
-		The email of the user to create.
-		This is a stackato/CFv2 specific option.
-	    
-        --non-interactive
-          Alias of --no-prompt.
-        --no-sudo
-          Complementary alias of --sudo.
-        --mem
-          
-	    Amount of memory applications can use.
-	
-        --drains
-          
-	    Limit for the number of drains in the group.
-	
-
-            </div></div>
-
-.. _command-add_user:
-
-      add_user  *<name>*       
-        Register a new user in the current or specified target. This operation requires administrator privileges, except if "allow_registration" is set server-side.
-
-        .. raw:: html
-
-          <div class="spoiler">
-          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-          <div class="inner" style="display:none;">
-
-        --noprompt
-          Alias of --no-prompt.
-        --passwd
-          Alias of --password.
-        --apps
-          
-	    Limit for the number of applications in the group.
-	
-        --no-trace
-          Complementary alias of --trace.
-        -o
-          Alias of --organization.
-        -n
-          Alias of --no-prompt.
-        -t
-          Alias of --trace.
-        --services
-          
-	    Limit for the number of services in the group.
-	
-        --appuris
-          
-	    Limit for the number of mapped uris per application.
-	
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --organization
-          
-		The organization to place the new user into.
-		Defaults to the current organization.
-		This is a stackato/CFv2 specific option.
-	    
         --trace
           
 	    Activate tracing of the issued REST requests and responses.
 	    This option is a no-op now. Tracing is always active. See
 	    the 'trace' command to print the saved trace to stdout.
 	
-        --target
-          
-	    The once-off target to use for the current operation.
-	
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
-        --admin
-          
-		Give the newly created user administrator privileges.
-	    
-        --password
-          
-		The password to use.
-	    
-        --group
-          
-		The group to put the new user into.
-		This is a stackato/CFv1 specific option.
-	    
-        --sudo
-          
-	    Applications can use sudo (or not).
-	
-        --token-file
-          
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-        --email
-          
-		The email of the user to create.
-		This is a stackato/CFv2 specific option.
-	    
-        --non-interactive
-          Alias of --no-prompt.
-        --no-sudo
-          Complementary alias of --sudo.
-        --mem
-          
-	    Amount of memory applications can use.
-	
-        --drains
-          
-	    Limit for the number of drains in the group.
-	
-
-            </div></div>
-
-.. _command-create-user:
-
-      create-user  *<name>*       
-        Register a new user in the current or specified target. This operation requires administrator privileges, except if "allow_registration" is set server-side.
-
-        .. raw:: html
-
-          <div class="spoiler">
-          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-          <div class="inner" style="display:none;">
-
-        --noprompt
-          Alias of --no-prompt.
-        --passwd
-          Alias of --password.
-        --apps
-          
-	    Limit for the number of applications in the group.
-	
-        --no-trace
-          Complementary alias of --trace.
-        -o
-          Alias of --organization.
         -n
           Alias of --no-prompt.
-        -t
-          Alias of --trace.
-        --services
-          
-	    Limit for the number of services in the group.
-	
-        --appuris
-          
-	    Limit for the number of mapped uris per application.
-	
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --organization
-          
-		The organization to place the new user into.
-		Defaults to the current organization.
-		This is a stackato/CFv2 specific option.
-	    
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-        --target
-          
-	    The once-off target to use for the current operation.
-	
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
-        --admin
-          
-		Give the newly created user administrator privileges.
-	    
-        --password
-          
-		The password to use.
-	    
-        --group
-          
-		The group to put the new user into.
-		This is a stackato/CFv1 specific option.
-	    
-        --sudo
-          
-	    Applications can use sudo (or not).
-	
-        --token-file
-          
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-        --email
-          
-		The email of the user to create.
-		This is a stackato/CFv2 specific option.
-	    
-        --non-interactive
-          Alias of --no-prompt.
-        --no-sudo
-          Complementary alias of --sudo.
-        --mem
-          
-	    Amount of memory applications can use.
-	
-        --drains
-          
-	    Limit for the number of drains in the group.
-	
-
-            </div></div>
-
-.. _command-create_user:
-
-      create_user  *<name>*       
-        Register a new user in the current or specified target. This operation requires administrator privileges, except if "allow_registration" is set server-side.
-
-        .. raw:: html
-
-          <div class="spoiler">
-          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-          <div class="inner" style="display:none;">
-
-        --noprompt
-          Alias of --no-prompt.
-        --passwd
-          Alias of --password.
-        --apps
-          
-	    Limit for the number of applications in the group.
-	
-        --no-trace
-          Complementary alias of --trace.
         -o
           Alias of --organization.
-        -n
-          Alias of --no-prompt.
         -t
           Alias of --trace.
-        --services
-          
-	    Limit for the number of services in the group.
-	
-        --appuris
-          
-	    Limit for the number of mapped uris per application.
-	
-        --no-prompt
-          
-	    Disable interactive queries.
-	
-        --organization
-          
-		The organization to place the new user into.
-		Defaults to the current organization.
-		This is a stackato/CFv2 specific option.
-	    
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-        --target
-          
-	    The once-off target to use for the current operation.
-	
-        --token
-          
-	    The once-off authentication token to use for the
-	    current operation.
-	
-        --admin
-          
-		Give the newly created user administrator privileges.
-	    
-        --password
-          
-		The password to use.
-	    
-        --group
-          
-		The group to put the new user into.
-		This is a stackato/CFv1 specific option.
-	    
-        --sudo
-          
-	    Applications can use sudo (or not).
-	
-        --token-file
-          
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-        --email
-          
-		The email of the user to create.
-		This is a stackato/CFv2 specific option.
-	    
-        --non-interactive
-          Alias of --no-prompt.
-        --no-sudo
-          Complementary alias of --sudo.
-        --mem
-          
-	    Amount of memory applications can use.
-	
-        --drains
-          
-	    Limit for the number of drains in the group.
-	
 
-            </div></div>
 
-.. _command-delete-user:
+.. _command-stackato delete-user:
 
-      delete-user  *<email>*       
+      stackato delete-user  *<email>*       
         Delete the named user, and the user's applications and services from the current or specified target. This operation requires administrator privileges.
 
         .. raw:: html
@@ -9053,21 +8666,14 @@ Administration
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --token-file
+        --no-prompt
           
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Disable interactive queries.
 	
-        -n
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
           Alias of --no-prompt.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-        -t
-          Alias of --trace.
         --noprompt
           Alias of --no-prompt.
         --target
@@ -9079,21 +8685,27 @@ Administration
 	    The once-off authentication token to use for the
 	    current operation.
 	
-        --non-interactive
-          Alias of --no-prompt.
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
+        --token-file
           
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
+          Alias of --no-prompt.
+        -t
+          Alias of --trace.
 
-            </div></div>
 
-.. _command-delete_user:
+.. _command-stackato login-fields:
 
-      delete_user  *<email>*       
-        Delete the named user, and the user's applications and services from the current or specified target. This operation requires administrator privileges.
+      stackato login-fields       
+        Show the names of the credential fields needed for a login. This is a Stackato 3 specific command.
 
         .. raw:: html
 
@@ -9101,21 +8713,18 @@ Administration
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --token-file
+        --json
           
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Print raw json as output, not human-formatted data.
 	
-        -n
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
           Alias of --no-prompt.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-        -t
-          Alias of --trace.
         --noprompt
           Alias of --no-prompt.
         --target
@@ -9127,20 +8736,26 @@ Administration
 	    The once-off authentication token to use for the
 	    current operation.
 	
-        --non-interactive
-          Alias of --no-prompt.
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
+        --token-file
           
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
+          Alias of --no-prompt.
+        -t
+          Alias of --trace.
 
-            </div></div>
 
-.. _command-passwd:
+.. _command-stackato passwd:
 
-      passwd       
+      stackato passwd       
         Change the password of the current user in the current or specified target.
 
         .. raw:: html
@@ -9149,25 +8764,23 @@ Administration
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --token-file
+        --no-prompt
           
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Disable interactive queries.
 	
-        -n
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
+        --noprompt
           Alias of --no-prompt.
         --passwd
           Alias of --password.
-        --trace
+        --password
           
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-        -t
-          Alias of --trace.
-        --noprompt
-          Alias of --no-prompt.
+		The new password. If not present it will be interactively
+		asked for.
+	    
         --target
           
 	    The once-off target to use for the current operation.
@@ -9177,25 +8790,26 @@ Administration
 	    The once-off authentication token to use for the
 	    current operation.
 	
-        --non-interactive
-          Alias of --no-prompt.
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
+        --token-file
           
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
-        --password
+        --trace
           
-		The new password. If not present it will be interactively
-		asked for.
-	    
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
+          Alias of --no-prompt.
+        -t
+          Alias of --trace.
 
-            </div></div>
 
-.. _command-register:
+.. _command-stackato register:
 
-      register  *<name>*       
+      stackato register  *<name>*       
         Register a new user in the current or specified target. This operation requires administrator privileges, except if "allow_registration" is set server-side.
 
         .. raw:: html
@@ -9204,45 +8818,67 @@ Administration
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --noprompt
-          Alias of --no-prompt.
-        --passwd
-          Alias of --password.
+        --admin
+          
+		Give the newly created user administrator privileges.
+	    
         --apps
           
 	    Limit for the number of applications in the group.
-	
-        --no-trace
-          Complementary alias of --trace.
-        -o
-          Alias of --organization.
-        -n
-          Alias of --no-prompt.
-        -t
-          Alias of --trace.
-        --services
-          
-	    Limit for the number of services in the group.
 	
         --appuris
           
 	    Limit for the number of mapped uris per application.
 	
+        --drains
+          
+	    Limit for the number of drains in the group.
+	
+        --email
+          
+		The email of the user to create.
+		This is a Stackato 3 specific option.
+	    
+        --group
+          
+		The group to put the new user into.
+		This is a Stackato 2 specific option.
+	    
+        --mem
+          
+	    Amount of memory applications can use.
+	
         --no-prompt
           
 	    Disable interactive queries.
 	
+        --no-sudo
+          Complementary alias of --sudo.
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
+        --noprompt
+          Alias of --no-prompt.
         --organization
           
 		The organization to place the new user into.
 		Defaults to the current organization.
-		This is a stackato/CFv2 specific option.
+		This is a Stackato 3 specific option.
 	    
-        --trace
+        --passwd
+          Alias of --password.
+        --password
           
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
+		The password to use.
+	    
+        --services
+          
+	    Limit for the number of services in the group.
+	
+        --sudo
+          
+	    Applications can use sudo (or not).
 	
         --target
           
@@ -9253,51 +8889,28 @@ Administration
 	    The once-off authentication token to use for the
 	    current operation.
 	
-        --admin
-          
-		Give the newly created user administrator privileges.
-	    
-        --password
-          
-		The password to use.
-	    
-        --group
-          
-		The group to put the new user into.
-		This is a stackato/CFv1 specific option.
-	    
-        --sudo
-          
-	    Applications can use sudo (or not).
-	
         --token-file
           
 	    Path to an existing and readable file containing
 	    the targets and authorization tokens.
 	
-        --email
+        --trace
           
-		The email of the user to create.
-		This is a stackato/CFv2 specific option.
-	    
-        --non-interactive
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
           Alias of --no-prompt.
-        --no-sudo
-          Complementary alias of --sudo.
-        --mem
-          
-	    Amount of memory applications can use.
-	
-        --drains
-          
-	    Limit for the number of drains in the group.
-	
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
 
-            </div></div>
 
-.. _command-token:
+.. _command-stackato token:
 
-      token       
+      stackato token       
         Interactively set authentication token.
 
         .. raw:: html
@@ -9306,31 +8919,30 @@ Administration
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --token-file
+        --no-prompt
           
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Disable interactive queries.
 	
-        --noprompt
+        --non-interactive
           Alias of --no-prompt.
-        -n
+        --noprompt
           Alias of --no-prompt.
         --target
           
 	    The once-off target to use for the current operation.
 	
-        --non-interactive
-          Alias of --no-prompt.
-        --no-prompt
+        --token-file
           
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+        -n
+          Alias of --no-prompt.
 
-            </div></div>
 
-.. _command-unregister:
+.. _command-stackato unregister:
 
-      unregister  *<email>*       
+      stackato unregister  *<email>*       
         Delete the named user, and the user's applications and services from the current or specified target. This operation requires administrator privileges.
 
         .. raw:: html
@@ -9339,21 +8951,14 @@ Administration
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --token-file
+        --no-prompt
           
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Disable interactive queries.
 	
-        -n
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
           Alias of --no-prompt.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-        -t
-          Alias of --trace.
         --noprompt
           Alias of --no-prompt.
         --target
@@ -9365,20 +8970,26 @@ Administration
 	    The once-off authentication token to use for the
 	    current operation.
 	
-        --non-interactive
-          Alias of --no-prompt.
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
+        --token-file
           
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
+          Alias of --no-prompt.
+        -t
+          Alias of --trace.
 
-            </div></div>
 
-.. _command-users:
+.. _command-stackato users:
 
-      users       
+      stackato users       
         Show the list of users known to the current or specified target.
 
         .. raw:: html
@@ -9387,77 +8998,54 @@ Administration
           <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
           <div class="inner" style="display:none;">
 
-        --token-file
+        --json
           
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Print raw json as output, not human-formatted data.
 	
-        -n
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
           Alias of --no-prompt.
-        --trace
-          
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-        -t
-          Alias of --trace.
         --noprompt
           Alias of --no-prompt.
         --target
           
 	    The once-off target to use for the current operation.
 	
-        --json
-          
-	    Print raw json as output, not human-formatted data.
-	
-        --non-interactive
-          Alias of --no-prompt.
         --token
           
 	    The once-off authentication token to use for the
 	    current operation.
 	
-        --no-trace
-          Complementary alias of --trace.
-        --no-prompt
+        --token-file
           
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
+          Alias of --no-prompt.
+        -t
+          Alias of --trace.
 
-            </div></div>
 
   
 Convenience
 ^^^^^^^^^^^^^^^^^^^^^
 
     
-.. _command-alias:
+.. _command-stackato aliases:
   
-  alias  *<name>*  *<command>* 
-    Create a shortcut for a command (prefix).
-
-    .. raw:: html
-    
-      <div class="spoiler">
-      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-      <div class="inner" style="display:none;">
-
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    -n
-      Alias of --no-prompt.
-    --noprompt
-      Alias of --no-prompt.
-    --non-interactive
-      Alias of --no-prompt.
-    
-.. _command-aliases:
-  
-  aliases 
+  stackato aliases 
     List the known aliases (shortcuts).
 
     .. raw:: html
@@ -9481,9 +9069,31 @@ Convenience
     --non-interactive
       Alias of --no-prompt.
     
-.. _command-unalias:
+.. _command-stackato alias:
   
-  unalias  *<name>* 
+  stackato alias  *<name>*  *<command>* 
+    Create a shortcut for a command (prefix).
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    -n
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
+    --non-interactive
+      Alias of --no-prompt.
+    
+.. _command-stackato unalias:
+  
+  stackato unalias  *<name>* 
     Remove a shortcut by name.
 
     .. raw:: html
@@ -9510,9 +9120,81 @@ Miscellaneous
 ^^^^^^^^^^^^^^^^^^^^^
 
     
-.. _command-curl:
+.. _command-stackato admin exit:
   
-  curl  *<operation>*  *<path>*  *<header>* 
+  stackato admin exit 
+    Exit the shell. No-op if not in a shell.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    -n
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
+    --non-interactive
+      Alias of --no-prompt.
+    
+.. _command-stackato admin help:
+  
+  stackato admin help  *<cmdname>* 
+    Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    -n
+      Alias of --no-prompt.
+    --width
+      
+	    The line width to format the help for.
+	    Defaults to the terminal width, or 80 when
+	    no terminal is available.
+	
+    --noprompt
+      Alias of --no-prompt.
+    --json
+      
+		Activate json form of the help.
+	    
+    --short
+      
+		Activate short form of the help.
+	    
+    --non-interactive
+      Alias of --no-prompt.
+    -w
+      Alias of --width.
+    --list
+      
+		Activate list form of the help.
+	    
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --full
+      
+		Activate full form of the help.
+	    
+    --by-category
+      
+		Activate by-category form of the help.
+	    
+    
+.. _command-stackato curl:
+  
+  stackato curl  *<operation>*  *<path>*  *<header>* 
     Run a raw rest request against the chosen target
 
     .. raw:: html
@@ -9556,10 +9238,10 @@ Miscellaneous
 	    Disable interactive queries.
 	
     
-.. _command-guid:
+.. _command-stackato debug-packages:
   
-  guid  *<type>*  *<name>* 
-    Map the specified name into a uuid, given the type.
+  stackato debug-packages 
+    Show the packages used the client, and their versions.
 
     .. raw:: html
     
@@ -9582,9 +9264,31 @@ Miscellaneous
     --non-interactive
       Alias of --no-prompt.
     
-.. _command-help:
+.. _command-stackato drain exit:
   
-  help  *<cmdname>* 
+  stackato drain exit 
+    Exit the shell. No-op if not in a shell.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    -n
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
+    --non-interactive
+      Alias of --no-prompt.
+    
+.. _command-stackato drain help:
+  
+  stackato drain help  *<cmdname>* 
     Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
 
     .. raw:: html
@@ -9593,16 +9297,8 @@ Miscellaneous
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --query
-      
-		Activate query form of the help.
-	    
     -n
       Alias of --no-prompt.
-    --query-actor
-      
-		Activate query-actor form of the help.
-	    
     --width
       
 	    The line width to format the help for.
@@ -9640,9 +9336,179 @@ Miscellaneous
 		Activate by-category form of the help.
 	    
     
-.. _command-named-entities:
+.. _command-stackato exit:
   
-  named-entities 
+  stackato exit 
+    Exit the shell. No-op if not in a shell.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    -n
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
+    --non-interactive
+      Alias of --no-prompt.
+    
+.. _command-stackato groups exit:
+  
+  stackato groups exit 
+    Exit the shell. No-op if not in a shell.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    -n
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
+    --non-interactive
+      Alias of --no-prompt.
+    
+.. _command-stackato groups help:
+  
+  stackato groups help  *<cmdname>* 
+    Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    -n
+      Alias of --no-prompt.
+    --width
+      
+	    The line width to format the help for.
+	    Defaults to the terminal width, or 80 when
+	    no terminal is available.
+	
+    --noprompt
+      Alias of --no-prompt.
+    --json
+      
+		Activate json form of the help.
+	    
+    --short
+      
+		Activate short form of the help.
+	    
+    --non-interactive
+      Alias of --no-prompt.
+    -w
+      Alias of --width.
+    --list
+      
+		Activate list form of the help.
+	    
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --full
+      
+		Activate full form of the help.
+	    
+    --by-category
+      
+		Activate by-category form of the help.
+	    
+    
+.. _command-stackato guid:
+  
+  stackato guid  *<type>*  *<name>* 
+    Map the specified name into a uuid, given the type. This is a Stackato 3 specific command.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    -n
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
+    --json
+      
+	    Print raw json as output, not human-formatted data.
+	
+    --non-interactive
+      Alias of --no-prompt.
+    
+.. _command-stackato help:
+  
+  stackato help  *<cmdname>* 
+    Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    -n
+      Alias of --no-prompt.
+    --width
+      
+	    The line width to format the help for.
+	    Defaults to the terminal width, or 80 when
+	    no terminal is available.
+	
+    --noprompt
+      Alias of --no-prompt.
+    --json
+      
+		Activate json form of the help.
+	    
+    --short
+      
+		Activate short form of the help.
+	    
+    --non-interactive
+      Alias of --no-prompt.
+    -w
+      Alias of --width.
+    --list
+      
+		Activate list form of the help.
+	    
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --full
+      
+		Activate full form of the help.
+	    
+    --by-category
+      
+		Activate by-category form of the help.
+	    
+    
+.. _command-stackato named-entities:
+  
+  stackato named-entities 
     List the entity types usable for 'guid'. I.e. the types of the named entities known to the client.
 
     .. raw:: html
@@ -9666,9 +9532,81 @@ Miscellaneous
     --non-interactive
       Alias of --no-prompt.
     
-.. _command-trace:
+.. _command-stackato quota exit:
   
-  trace 
+  stackato quota exit 
+    Exit the shell. No-op if not in a shell.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    -n
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
+    --non-interactive
+      Alias of --no-prompt.
+    
+.. _command-stackato quota help:
+  
+  stackato quota help  *<cmdname>* 
+    Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
+
+    .. raw:: html
+    
+      <div class="spoiler">
+      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+      <div class="inner" style="display:none;">
+
+    -n
+      Alias of --no-prompt.
+    --width
+      
+	    The line width to format the help for.
+	    Defaults to the terminal width, or 80 when
+	    no terminal is available.
+	
+    --noprompt
+      Alias of --no-prompt.
+    --json
+      
+		Activate json form of the help.
+	    
+    --short
+      
+		Activate short form of the help.
+	    
+    --non-interactive
+      Alias of --no-prompt.
+    -w
+      Alias of --width.
+    --list
+      
+		Activate list form of the help.
+	    
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --full
+      
+		Activate full form of the help.
+	    
+    --by-category
+      
+		Activate by-category form of the help.
+	    
+    
+.. _command-stackato trace:
+  
+  stackato trace 
     Print the saved REST trace for the last client command to stdout.
 
     .. raw:: html
@@ -9687,238 +9625,6 @@ Miscellaneous
       Alias of --no-prompt.
     --non-interactive
       Alias of --no-prompt.
-    
-.. _command-admin help:
-  
-  admin help  *<cmdname>* 
-    Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
-
-    .. raw:: html
-    
-      <div class="spoiler">
-      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-      <div class="inner" style="display:none;">
-
-    --query
-      
-		Activate query form of the help.
-	    
-    -n
-      Alias of --no-prompt.
-    --query-actor
-      
-		Activate query-actor form of the help.
-	    
-    --width
-      
-	    The line width to format the help for.
-	    Defaults to the terminal width, or 80 when
-	    no terminal is available.
-	
-    --noprompt
-      Alias of --no-prompt.
-    --json
-      
-		Activate json form of the help.
-	    
-    --short
-      
-		Activate short form of the help.
-	    
-    --non-interactive
-      Alias of --no-prompt.
-    -w
-      Alias of --width.
-    --list
-      
-		Activate list form of the help.
-	    
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    --full
-      
-		Activate full form of the help.
-	    
-    --by-category
-      
-		Activate by-category form of the help.
-	    
-    
-.. _command-drain help:
-  
-  drain help  *<cmdname>* 
-    Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
-
-    .. raw:: html
-    
-      <div class="spoiler">
-      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-      <div class="inner" style="display:none;">
-
-    --query
-      
-		Activate query form of the help.
-	    
-    -n
-      Alias of --no-prompt.
-    --query-actor
-      
-		Activate query-actor form of the help.
-	    
-    --width
-      
-	    The line width to format the help for.
-	    Defaults to the terminal width, or 80 when
-	    no terminal is available.
-	
-    --noprompt
-      Alias of --no-prompt.
-    --json
-      
-		Activate json form of the help.
-	    
-    --short
-      
-		Activate short form of the help.
-	    
-    --non-interactive
-      Alias of --no-prompt.
-    -w
-      Alias of --width.
-    --list
-      
-		Activate list form of the help.
-	    
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    --full
-      
-		Activate full form of the help.
-	    
-    --by-category
-      
-		Activate by-category form of the help.
-	    
-    
-.. _command-groups help:
-  
-  groups help  *<cmdname>* 
-    Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
-
-    .. raw:: html
-    
-      <div class="spoiler">
-      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-      <div class="inner" style="display:none;">
-
-    --query
-      
-		Activate query form of the help.
-	    
-    -n
-      Alias of --no-prompt.
-    --query-actor
-      
-		Activate query-actor form of the help.
-	    
-    --width
-      
-	    The line width to format the help for.
-	    Defaults to the terminal width, or 80 when
-	    no terminal is available.
-	
-    --noprompt
-      Alias of --no-prompt.
-    --json
-      
-		Activate json form of the help.
-	    
-    --short
-      
-		Activate short form of the help.
-	    
-    --non-interactive
-      Alias of --no-prompt.
-    -w
-      Alias of --width.
-    --list
-      
-		Activate list form of the help.
-	    
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    --full
-      
-		Activate full form of the help.
-	    
-    --by-category
-      
-		Activate by-category form of the help.
-	    
-    
-.. _command-quota help:
-  
-  quota help  *<cmdname>* 
-    Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
-
-    .. raw:: html
-    
-      <div class="spoiler">
-      <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
-      <div class="inner" style="display:none;">
-
-    --query
-      
-		Activate query form of the help.
-	    
-    -n
-      Alias of --no-prompt.
-    --query-actor
-      
-		Activate query-actor form of the help.
-	    
-    --width
-      
-	    The line width to format the help for.
-	    Defaults to the terminal width, or 80 when
-	    no terminal is available.
-	
-    --noprompt
-      Alias of --no-prompt.
-    --json
-      
-		Activate json form of the help.
-	    
-    --short
-      
-		Activate short form of the help.
-	    
-    --non-interactive
-      Alias of --no-prompt.
-    -w
-      Alias of --width.
-    --list
-      
-		Activate list form of the help.
-	    
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    --full
-      
-		Activate full form of the help.
-	    
-    --by-category
-      
-		Activate by-category form of the help.
-	    
 
       </div></div>
 
