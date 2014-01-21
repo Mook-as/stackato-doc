@@ -18,21 +18,23 @@ Web
 ^^^
 
 Users log in to the web Management Console as they would with any other
-web application. The Managemet Console checks with the AOK endpoint (e.g.
+web application. The Management Console checks with the AOK endpoint (e.g.
 \https://aok.stackato.example.com) in the background. 
 
 Client
 ^^^^^^
 
-Users connecting with the :ref:`stackato <client>` client should be aware that:
+If the strategy has been changed to something other than `builtin` (see 
+below), then users connecting with the :ref:`stackato <client>` client 
+should be aware that:
 
-* The user must to enter their identifier in the format expected by the
+* The user must enter their identifier in the format expected by the
   :ref:`strategy <aok-strategies>` used by AOK (e.g. username or email
   address).
   
 * When using an existing authentication token to log in as a second user
   (e.g. an admin connecting as another user), use the second user's
-  identifier, *not the identifier used by AOK's strategy*.
+  stackato username, *not the identifier used by AOK's strategy*.
 
 These caveats also apply when using other Cloud-Foundry-compatible clients.
 
@@ -106,7 +108,7 @@ config set <kato-command-ref-config>`:
        
     * bind_dn: (optional) credentials for user lookup (e.g.
       'cn=Administrator,cn=Users,dc=example,dc=com'). LDAP servers that
-      allow anonymous binding will not require this setting.
+      allow anonymous bind will not require this setting.
     * password: (optional) default credentials for user lookup
     * try_sasl: (optional) when set to true attempts a SASL connection
       to the LDAP server
@@ -134,7 +136,7 @@ config set <kato-command-ref-config>`:
   setting only when absolutely necessary, and to check the code
   thoroughly for possible security implications.
   
-To see the the default AOK configuration (sample settings) run the command::
+To see the the default AOK configuration (default settings) run the command::
 
   $ kato config get aok
   
@@ -161,15 +163,11 @@ authenticates.
 
 Administrators can still use the functions as before, but should be
 aware of the following caveats:
-
-* Email addresses (used to identify users in Stackato) and group names
-  are (currently) case sensitive. Avoid using the same string with
-  different casing to refer to different entities.
   
 * Admins may manually create users if they wish. This may be useful if the 
   admin wants to pre-assign users to groups in Stackato before those users
   have logged in for the first time. The admin must create the user with the
-  same email address (case-sensitive) that AOK will receive from the strategy.
+  same username that AOK will receive from the strategy.
   
 * Passwords set while creating users or using the password-change function 
   will be disregarded - Stackato/AOK does not manage the external
@@ -216,54 +214,3 @@ New users logging in to the Management Console for the first time using
 LDAP authentication will not be a member of any organization (and won't
 be able to do anything). An admin will have to add each user to an
 organization after their initial login.
-
-
-SSL Certificate
----------------
-
-AOK by default uses the same self-signed certificate as the Cloud Controller. To
-prevent log warnings about the certificate, the Cloud Controller is configured 
-to use a CA file on the VM to validate AOK's certificate. This is set in Doozer 
-under the *aok/ca_file* key in the Cloud Controller's configuration.
-
-.. _aok-ssl-load-balancer:
-
-AOK with a Load Balancer
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-In clusters with multiple Routers (specifically if a :ref:`Load
-Balancer <cluster-load-balancer>` is used), the following steps will
-correctly configure SSL certificates.
-  
-
-1. Take copies of the cert in */etc/ssl/certs/stackato.crt* from the Stackato Load Balancer node to each of the Controller nodes running AOK. This can be done with scp:
-
-  ::
-  
-    $ scp stackato@<Load Balancer node>:/etc/ssl/certs/stackato.crt /tmp/aok.crt
-
-
-  .. note::
-    If you are using a third-party hardware load balancer or load
-    balancing service, consult its documentation to find the SSL
-    certificate. You may need to convert the certificate to PEM format if
-    its native format is different.
-
-2. Move the newly copied cert on your Controller into */etc/ssl/certs/* as 'root' or using sudo. Do not overwrite the existing */etc/ssl/certs/stackato.crt*:
-
-  ::
-  
-    $ sudo mv /tmp/aok.crt /etc/ssl/certs/
-
-  .. note::
-    These first two steps need to be repeated for *all* Controller nodes in
-    the cluster.
-
-3. Update Stackato's configuration with the following command:
-
-  ::
-    
-    $ kato config set cloud_controller_ng aok/ca_file /etc/ssl/certs/aok.crt
-
-4. Run ``kato restart controller``
-
