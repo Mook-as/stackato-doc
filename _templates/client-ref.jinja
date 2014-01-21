@@ -40,7 +40,7 @@ In some cases the  ``--json`` option reveals additional details.
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    {% for option in commands[command]['options'] %}
+    {% for option in commands[command]['options']|sort %}
     {{ option }}
       {{ commands[command]['options'][option] }}
     {% endfor %}

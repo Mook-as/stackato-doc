@@ -34,28 +34,55 @@ Getting Started
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --credentials
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --noprompt
-      Alias of --no-prompt.
-    --passwd
-      Alias of --password.
-    --trace
+		The credentials to use.
+		Each use of the option declares a single element,
+		using the form "key: value" for the argument.
+		This is a Stackato 3 specific option.
+	    
+    --group
       
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
+		The group to use for the login.
+		This is a Stackato 2 specific option.
+	    
     --ignore-missing
       
 		Disable errors generated for missing organization and/or space.
+	    
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
+    --organization
+      
+		The organization to use.
+		This is a Stackato 3 specific option.
+		If not specified the user is asked interactively
+		to choose an organization.
+	    
+    --passwd
+      Alias of --password.
+    --password
+      
+		The password to use. 
+		For Stackato 3 this is a shorthand
+		for --credentials 'password: ...'.
+	    
+    --space
+      
+		The space (in the organization) to use.
+		This is a Stackato 3 specific option.
+		If not specified the user is asked interactively
+		to choose among the possible spaces in
+		either the chosen organization, or all
+		organizations it belongs to.
 	    
     --target
       
@@ -66,48 +93,21 @@ Getting Started
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --space
+    --token-file
       
-		The space (in the organization) to use.
-		This is a Stackato 3 specific option.
-		If not specified the user is asked interactively
-		to choose among the possible spaces in
-		either the chosen organization, or all
-		organizations it belongs to.
-	    
-    --non-interactive
-      Alias of --no-prompt.
-    --credentials
-      
-		The credentials to use.
-		Each use of the option declares a single element,
-		using the form "key: value" for the argument.
-		This is a Stackato 3 specific option.
-	    
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
-      
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
-    --password
+    --trace
       
-		The password to use. 
-		For Stackato 3 this is a shorthand
-		for --credentials 'password: ...'.
-	    
-    --group
-      
-		The group to use for the login.
-		This is a Stackato 2 specific option.
-	    
-    --organization
-      
-		The organization to use.
-		This is a Stackato 3 specific option.
-		If not specified the user is asked interactively
-		to choose an organization.
-	    
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
     
 .. _command-stackato logout:
   
@@ -120,36 +120,36 @@ Getting Started
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
+    --all
+      
+		When present, log out of all targets we know.
+		Cannot be used together with a target.
+	    
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
     --token-file
       
 	    Path to an existing and readable file containing
 	    the targets and authorization tokens.
 	
-    -n
-      Alias of --no-prompt.
     --trace
       
 	    Activate tracing of the issued REST requests and responses.
 	    This option is a no-op now. Tracing is always active. See
 	    the 'trace' command to print the saved trace to stdout.
 	
+    -n
+      Alias of --no-prompt.
     -t
       Alias of --trace.
-    --noprompt
-      Alias of --no-prompt.
-    --non-interactive
-      Alias of --no-prompt.
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    --all
-      
-		When present, log out of all targets we know.
-		Cannot be used together with a target.
-	    
     
 .. _command-stackato target:
   
@@ -162,40 +162,40 @@ Getting Started
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    -n
-      Alias of --no-prompt.
-    -o
-      Alias of --organization.
-    --noprompt
-      Alias of --no-prompt.
-    --verbose
-       More verbose operation. 
+    --allow-http
+      
+	    Required to prevent the client from rejecting http urls.
+	
     --json
       
 	    Print raw json as output, not human-formatted data.
 	
-    --space
+    --no-prompt
       
-	    The space to set as current for this target.
-	    This is a Stackato 3 specific option.
+	    Disable interactive queries.
 	
     --non-interactive
+      Alias of --no-prompt.
+    --noprompt
       Alias of --no-prompt.
     --organization
       
 	    The organization to set as current for this target.
 	    This is a Stackato 3 specific option.
 	
+    --space
+      
+	    The space to set as current for this target.
+	    This is a Stackato 3 specific option.
+	
+    --verbose
+       More verbose operation. 
+    -n
+      Alias of --no-prompt.
+    -o
+      Alias of --organization.
     -s
       Alias of --space.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    --allow-http
-      
-	    Required to prevent the client from rejecting http urls.
-	
 
       </div></div>
 
@@ -215,63 +215,6 @@ Applications
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    -o
-      Alias of --organization.
-    --noprompt
-      Alias of --no-prompt.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --space
-      
-	    The once-off space to use for the current operation, specified
-	    by name. This is a Stackato 3 option.
-	    Cannot be used together with --space-guid.
-	
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --non-interactive
-      Alias of --no-prompt.
-    --space-guid
-      
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a Stackato 3 option.
-	    Cannot be used together with --space.
-	
-    --organization
-      
-	    The once-off organization to use for the current operation.
-	    This is a Stackato 3 option.
-	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
     --all
       
 		Show all applications instead of just those
@@ -282,6 +225,63 @@ Applications
 	    The once-off group to use for the current operation.
 	    This is a Stackato 2 option.
 	
+    --json
+      
+	    Print raw json as output, not human-formatted data.
+	
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
+    --organization
+      
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+    --space
+      
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+    --space-guid
+      
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -o
+      Alias of --organization.
+    -t
+      Alias of --trace.
     
 .. _command-stackato app:
   
@@ -294,42 +294,39 @@ Applications
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --group
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
-    -n
-      Alias of --no-prompt.
-    --path
+    --json
       
-	    Path of the directory holding the application files to push.
-	    Defaults to the current working directory.
-	
-    -t
-      Alias of --trace.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
+	    Print raw json as output, not human-formatted data.
 	
     --manifest
       
 	    Path of the manifest file to use.
 	    If not specified a search is done.
 	
-    -o
-      Alias of --organization.
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
+      Alias of --no-prompt.
     --noprompt
       Alias of --no-prompt.
-    --target
+    --organization
       
-	    The once-off target to use for the current operation.
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
 	
-    --json
+    --path
       
-	    Print raw json as output, not human-formatted data.
+	    Path of the directory holding the application files to push.
+	    Defaults to the current working directory.
 	
     --space
       
@@ -337,35 +334,38 @@ Applications
 	    by name. This is a Stackato 3 option.
 	    Cannot be used together with --space-guid.
 	
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --non-interactive
-      Alias of --no-prompt.
     --space-guid
       
 	    The once-off space to use for the current operation, specified
 	    by guid. This is a Stackato 3 option.
 	    Cannot be used together with --space.
 	
-    --organization
+    --target
       
-	    The once-off organization to use for the current operation.
-	    This is a Stackato 3 option.
+	    The once-off target to use for the current operation.
 	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token
       
-	    Disable interactive queries.
+	    The once-off authentication token to use for the
+	    current operation.
 	
-    --group
+    --token-file
       
-	    The once-off group to use for the current operation.
-	    This is a Stackato 2 option.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -o
+      Alias of --organization.
+    -t
+      Alias of --trace.
     
 .. _command-stackato list:
   
@@ -378,63 +378,6 @@ Applications
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    -o
-      Alias of --organization.
-    --noprompt
-      Alias of --no-prompt.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --space
-      
-	    The once-off space to use for the current operation, specified
-	    by name. This is a Stackato 3 option.
-	    Cannot be used together with --space-guid.
-	
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --non-interactive
-      Alias of --no-prompt.
-    --space-guid
-      
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a Stackato 3 option.
-	    Cannot be used together with --space.
-	
-    --organization
-      
-	    The once-off organization to use for the current operation.
-	    This is a Stackato 3 option.
-	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
     --all
       
 		Show all applications instead of just those
@@ -445,6 +388,63 @@ Applications
 	    The once-off group to use for the current operation.
 	    This is a Stackato 2 option.
 	
+    --json
+      
+	    Print raw json as output, not human-formatted data.
+	
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
+    --organization
+      
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+    --space
+      
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+    --space-guid
+      
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -o
+      Alias of --organization.
+    -t
+      Alias of --trace.
 
       </div></div>
 
@@ -4162,21 +4162,14 @@ Services
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --no-prompt
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Disable interactive queries.
 	
-    -n
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
       Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
     --noprompt
       Alias of --no-prompt.
     --target
@@ -4188,14 +4181,21 @@ Services
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --non-interactive
-      Alias of --no-prompt.
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token-file
       
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
     
 .. _command-stackato services:
   
@@ -4208,32 +4208,29 @@ Services
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --group
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    -o
-      Alias of --organization.
-    --noprompt
-      Alias of --no-prompt.
-    --target
-      
-	    The once-off target to use for the current operation.
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
     --json
       
 	    Print raw json as output, not human-formatted data.
+	
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
+    --organization
+      
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
 	
     --space
       
@@ -4241,35 +4238,38 @@ Services
 	    by name. This is a Stackato 3 option.
 	    Cannot be used together with --space-guid.
 	
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --non-interactive
-      Alias of --no-prompt.
     --space-guid
       
 	    The once-off space to use for the current operation, specified
 	    by guid. This is a Stackato 3 option.
 	    Cannot be used together with --space.
 	
-    --organization
+    --target
       
-	    The once-off organization to use for the current operation.
-	    This is a Stackato 3 option.
+	    The once-off target to use for the current operation.
 	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token
       
-	    Disable interactive queries.
+	    The once-off authentication token to use for the
+	    current operation.
 	
-    --group
+    --token-file
       
-	    The once-off group to use for the current operation.
-	    This is a Stackato 2 option.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -o
+      Alias of --organization.
+    -t
+      Alias of --trace.
     
 .. _command-stackato service:
   
@@ -4282,32 +4282,29 @@ Services
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --group
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    -o
-      Alias of --organization.
-    --noprompt
-      Alias of --no-prompt.
-    --target
-      
-	    The once-off target to use for the current operation.
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
     --json
       
 	    Print raw json as output, not human-formatted data.
+	
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
+    --organization
+      
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
 	
     --space
       
@@ -4315,35 +4312,38 @@ Services
 	    by name. This is a Stackato 3 option.
 	    Cannot be used together with --space-guid.
 	
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --non-interactive
-      Alias of --no-prompt.
     --space-guid
       
 	    The once-off space to use for the current operation, specified
 	    by guid. This is a Stackato 3 option.
 	    Cannot be used together with --space.
 	
-    --organization
+    --target
       
-	    The once-off organization to use for the current operation.
-	    This is a Stackato 3 option.
+	    The once-off target to use for the current operation.
 	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token
       
-	    Disable interactive queries.
+	    The once-off authentication token to use for the
+	    current operation.
 	
-    --group
+    --token-file
       
-	    The once-off group to use for the current operation.
-	    This is a Stackato 2 option.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -o
+      Alias of --organization.
+    -t
+      Alias of --trace.
 
       </div></div>
 
@@ -5631,37 +5631,35 @@ Organizations
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --activate
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    -n
-      Alias of --no-prompt.
+		Switch the current organization to the newly created one.
+		Done by default.
+	    
     --add-self
       
 		Add yourself to the new organization, as developer.
 		Done by default.
 	    
+    --no-activate
+      Complementary alias of --activate.
+    --no-add-self
+      Complementary alias of --add-self.
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
     --quota
       
 		The named quota of the new organization.
 		Default is the target's choice.
 	    
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    --noprompt
-      Alias of --no-prompt.
     --target
       
 	    The once-off target to use for the current operation.
@@ -5671,19 +5669,21 @@ Organizations
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --activate
+    --token-file
       
-		Switch the current organization to the newly created one.
-		Done by default.
-	    
-    --non-interactive
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
       Alias of --no-prompt.
-    --no-activate
-      Complementary alias of --activate.
-    --no-add-self
-      Complementary alias of --add-self.
-    --no-trace
-      Complementary alias of --trace.
+    -t
+      Alias of --trace.
     
 .. _command-stackato delete-org:
   
@@ -5696,25 +5696,20 @@ Organizations
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --no-prompt
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Disable interactive queries.
 	
-    -n
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
       Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    -r
-      Alias of --recursive.
     --noprompt
       Alias of --no-prompt.
+    --recursive
+      
+	    Remove all sub-ordinate parts, and relations.
+	
     --target
       
 	    The once-off target to use for the current operation.
@@ -5724,18 +5719,23 @@ Organizations
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --non-interactive
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
       Alias of --no-prompt.
-    --recursive
-      
-	    Remove all sub-ordinate parts, and relations.
-	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
+    -r
+      Alias of --recursive.
+    -t
+      Alias of --trace.
     
 .. _command-stackato link-user-org:
   
@@ -5748,25 +5748,20 @@ Organizations
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    --manager
-       Affect the manager role 
-    -t
-      Alias of --trace.
     --auditor
        Affect the auditor role 
+    --billing
+       Affect the billing manager role 
+    --manager
+       Affect the manager role 
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
+      Alias of --no-prompt.
     --noprompt
       Alias of --no-prompt.
     --target
@@ -5778,16 +5773,21 @@ Organizations
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --non-interactive
-      Alias of --no-prompt.
-    --billing
-       Affect the billing manager role 
-    --no-prompt
+    --token-file
       
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
-    --no-trace
-      Complementary alias of --trace.
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
     
 .. _command-stackato orgs:
   
@@ -5800,48 +5800,48 @@ Organizations
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --full
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+		Show more details.
+	    
+    --json
+      
+	    Print raw json as output, not human-formatted data.
 	
-    -n
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
       Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
     --noprompt
       Alias of --no-prompt.
     --target
       
 	    The once-off target to use for the current operation.
 	
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --non-interactive
-      Alias of --no-prompt.
     --token
       
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token-file
       
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
-    --full
+    --trace
       
-		Show more details.
-	    
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
     
 .. _command-stackato org:
   
@@ -5854,48 +5854,48 @@ Organizations
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --full
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+		Show more details.
+	    
+    --json
+      
+	    Print raw json as output, not human-formatted data.
 	
-    -n
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
       Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
     --noprompt
       Alias of --no-prompt.
     --target
       
 	    The once-off target to use for the current operation.
 	
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --non-interactive
-      Alias of --no-prompt.
     --token
       
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token-file
       
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
-    --full
+    --trace
       
-		Show more details.
-	    
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
     
 .. _command-stackato quota-org:
   
@@ -5908,21 +5908,14 @@ Organizations
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --no-prompt
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Disable interactive queries.
 	
-    -n
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
       Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
     --noprompt
       Alias of --no-prompt.
     --target
@@ -5934,14 +5927,21 @@ Organizations
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --non-interactive
-      Alias of --no-prompt.
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token-file
       
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
     
 .. _command-stackato rename-org:
   
@@ -5954,21 +5954,14 @@ Organizations
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --no-prompt
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Disable interactive queries.
 	
-    -n
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
       Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
     --noprompt
       Alias of --no-prompt.
     --target
@@ -5980,14 +5973,21 @@ Organizations
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --non-interactive
-      Alias of --no-prompt.
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token-file
       
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
     
 .. _command-stackato switch-org:
   
@@ -6000,21 +6000,14 @@ Organizations
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --no-prompt
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Disable interactive queries.
 	
-    -n
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
       Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
     --noprompt
       Alias of --no-prompt.
     --target
@@ -6026,14 +6019,21 @@ Organizations
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --non-interactive
-      Alias of --no-prompt.
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token-file
       
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
     
 .. _command-stackato unlink-user-org:
   
@@ -6046,25 +6046,20 @@ Organizations
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    --manager
-       Affect the manager role 
-    -t
-      Alias of --trace.
     --auditor
        Affect the auditor role 
+    --billing
+       Affect the billing manager role 
+    --manager
+       Affect the manager role 
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
+      Alias of --no-prompt.
     --noprompt
       Alias of --no-prompt.
     --target
@@ -6076,16 +6071,21 @@ Organizations
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --non-interactive
-      Alias of --no-prompt.
-    --billing
-       Affect the billing manager role 
-    --no-prompt
+    --token-file
       
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
-    --no-trace
-      Complementary alias of --trace.
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
 
       </div></div>
 
@@ -6105,56 +6105,43 @@ Spaces
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    --manager
-      
-		Add yourself to the new space, as manager.
-		Done by default.
-	    
-    -t
-      Alias of --trace.
-    --no-developer
-      Complementary alias of --developer.
-    --auditor
-      
-		Add yourself to the new space, as auditor.
-		By request.
-	    
-    -o
-      Alias of --organization.
-    --noprompt
-      Alias of --no-prompt.
-    --no-trace
-      Complementary alias of --trace.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --no-auditor
-      Complementary alias of --auditor.
     --activate
       
 		Switch the current space to the newly created one.
 		Done by default.
 	    
-    --token
+    --auditor
       
-	    The once-off authentication token to use for the
-	    current operation.
+		Add yourself to the new space, as auditor.
+		By request.
+	    
+    --developer
+      
+		Add yourself to the new space, as developer.
+		Done by default.
+	    
+    --manager
+      
+		Add yourself to the new space, as manager.
+		Done by default.
+	    
+    --no-activate
+      Complementary alias of --activate.
+    --no-auditor
+      Complementary alias of --auditor.
+    --no-developer
+      Complementary alias of --developer.
+    --no-manager
+      Complementary alias of --manager.
+    --no-prompt
+      
+	    Disable interactive queries.
 	
+    --no-trace
+      Complementary alias of --trace.
     --non-interactive
+      Alias of --no-prompt.
+    --noprompt
       Alias of --no-prompt.
     --organization
       
@@ -6166,19 +6153,32 @@ Spaces
 	    either by taking the one organization the user belongs to, or
 	    asking the user to choose among the possibilities.
 	
-    --no-activate
-      Complementary alias of --activate.
-    --no-manager
-      Complementary alias of --manager.
-    --no-prompt
+    --target
       
-	    Disable interactive queries.
+	    The once-off target to use for the current operation.
 	
-    --developer
+    --token
       
-		Add yourself to the new space, as developer.
-		Done by default.
-	    
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -o
+      Alias of --organization.
+    -t
+      Alias of --trace.
     
 .. _command-stackato delete-space:
   
@@ -6191,48 +6191,16 @@ Spaces
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -r
-      Alias of --recursive.
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    -o
-      Alias of --organization.
-    --noprompt
-      Alias of --no-prompt.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --non-interactive
-      Alias of --no-prompt.
-    --recursive
-      
-	    Remove all sub-ordinate parts, and relations.
-	
-    --no-trace
-      Complementary alias of --trace.
     --no-prompt
       
 	    Disable interactive queries.
 	
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
     --organization
       
 	    The name of the parent organization to use as context.
@@ -6243,6 +6211,38 @@ Spaces
 	    either by taking the one organization the user belongs to, or
 	    asking the user to choose among the possibilities.
 	
+    --recursive
+      
+	    Remove all sub-ordinate parts, and relations.
+	
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -o
+      Alias of --organization.
+    -r
+      Alias of --recursive.
+    -t
+      Alias of --trace.
     
 .. _command-stackato link-user-space:
   
@@ -6255,39 +6255,21 @@ Spaces
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    --manager
-       Affect the manager role 
-    -t
-      Alias of --trace.
     --auditor
        Affect the auditor role 
-    -o
-      Alias of --organization.
-    --noprompt
-      Alias of --no-prompt.
-    --target
+    --developer
+       Affect the developer role 
+    --manager
+       Affect the manager role 
+    --no-prompt
       
-	    The once-off target to use for the current operation.
+	    Disable interactive queries.
 	
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
+    --no-trace
+      Complementary alias of --trace.
     --non-interactive
+      Alias of --no-prompt.
+    --noprompt
       Alias of --no-prompt.
     --organization
       
@@ -6299,14 +6281,32 @@ Spaces
 	    either by taking the one organization the user belongs to, or
 	    asking the user to choose among the possibilities.
 	
-    --no-prompt
+    --target
       
-	    Disable interactive queries.
+	    The once-off target to use for the current operation.
 	
-    --no-trace
-      Complementary alias of --trace.
-    --developer
-       Affect the developer role 
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -o
+      Alias of --organization.
+    -t
+      Alias of --trace.
     
 .. _command-stackato rename-space:
   
@@ -6319,35 +6319,15 @@ Spaces
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --no-prompt
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Disable interactive queries.
 	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    -o
-      Alias of --organization.
-    --noprompt
-      Alias of --no-prompt.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
+    --no-trace
+      Complementary alias of --trace.
     --non-interactive
+      Alias of --no-prompt.
+    --noprompt
       Alias of --no-prompt.
     --organization
       
@@ -6359,12 +6339,32 @@ Spaces
 	    either by taking the one organization the user belongs to, or
 	    asking the user to choose among the possibilities.
 	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --target
       
-	    Disable interactive queries.
+	    The once-off target to use for the current operation.
 	
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -o
+      Alias of --organization.
+    -t
+      Alias of --trace.
     
 .. _command-stackato spaces:
   
@@ -6377,39 +6377,23 @@ Spaces
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --full
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    -o
-      Alias of --organization.
-    --noprompt
-      Alias of --no-prompt.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
+		Show more details.
+	    
     --json
       
 	    Print raw json as output, not human-formatted data.
 	
-    --token
+    --no-prompt
       
-	    The once-off authentication token to use for the
-	    current operation.
+	    Disable interactive queries.
 	
+    --no-trace
+      Complementary alias of --trace.
     --non-interactive
+      Alias of --no-prompt.
+    --noprompt
       Alias of --no-prompt.
     --organization
       
@@ -6421,16 +6405,32 @@ Spaces
 	    either by taking the one organization the user belongs to, or
 	    asking the user to choose among the possibilities.
 	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --target
       
-	    Disable interactive queries.
+	    The once-off target to use for the current operation.
 	
-    --full
+    --token
       
-		Show more details.
-	    
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -o
+      Alias of --organization.
+    -t
+      Alias of --trace.
     
 .. _command-stackato space:
   
@@ -6443,39 +6443,23 @@ Spaces
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --full
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    -o
-      Alias of --organization.
-    --noprompt
-      Alias of --no-prompt.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
+		Show more details.
+	    
     --json
       
 	    Print raw json as output, not human-formatted data.
 	
-    --token
+    --no-prompt
       
-	    The once-off authentication token to use for the
-	    current operation.
+	    Disable interactive queries.
 	
+    --no-trace
+      Complementary alias of --trace.
     --non-interactive
+      Alias of --no-prompt.
+    --noprompt
       Alias of --no-prompt.
     --organization
       
@@ -6487,16 +6471,32 @@ Spaces
 	    either by taking the one organization the user belongs to, or
 	    asking the user to choose among the possibilities.
 	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --target
       
-	    Disable interactive queries.
+	    The once-off target to use for the current operation.
 	
-    --full
+    --token
       
-		Show more details.
-	    
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -o
+      Alias of --organization.
+    -t
+      Alias of --trace.
     
 .. _command-stackato switch-space:
   
@@ -6509,35 +6509,15 @@ Spaces
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --no-prompt
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Disable interactive queries.
 	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    -o
-      Alias of --organization.
-    --noprompt
-      Alias of --no-prompt.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
+    --no-trace
+      Complementary alias of --trace.
     --non-interactive
+      Alias of --no-prompt.
+    --noprompt
       Alias of --no-prompt.
     --organization
       
@@ -6549,12 +6529,32 @@ Spaces
 	    either by taking the one organization the user belongs to, or
 	    asking the user to choose among the possibilities.
 	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --target
       
-	    Disable interactive queries.
+	    The once-off target to use for the current operation.
 	
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -o
+      Alias of --organization.
+    -t
+      Alias of --trace.
     
 .. _command-stackato unlink-user-space:
   
@@ -6567,39 +6567,21 @@ Spaces
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    --manager
-       Affect the manager role 
-    -t
-      Alias of --trace.
     --auditor
        Affect the auditor role 
-    -o
-      Alias of --organization.
-    --noprompt
-      Alias of --no-prompt.
-    --target
+    --developer
+       Affect the developer role 
+    --manager
+       Affect the manager role 
+    --no-prompt
       
-	    The once-off target to use for the current operation.
+	    Disable interactive queries.
 	
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
+    --no-trace
+      Complementary alias of --trace.
     --non-interactive
+      Alias of --no-prompt.
+    --noprompt
       Alias of --no-prompt.
     --organization
       
@@ -6611,14 +6593,32 @@ Spaces
 	    either by taking the one organization the user belongs to, or
 	    asking the user to choose among the possibilities.
 	
-    --no-prompt
+    --target
       
-	    Disable interactive queries.
+	    The once-off target to use for the current operation.
 	
-    --no-trace
-      Complementary alias of --trace.
-    --developer
-       Affect the developer role 
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -o
+      Alias of --organization.
+    -t
+      Alias of --trace.
 
       </div></div>
 
@@ -6638,45 +6638,15 @@ Routes
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --no-prompt
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Disable interactive queries.
 	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    -o
-      Alias of --organization.
-    --noprompt
-      Alias of --no-prompt.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --space
-      
-	    The name of the space to use as context.
-
-	    Defaults to the current space.
-
-	    A current space is automatically set if there is none,
-	    either by taking the one space the user has, or
-	    asking the user to choose among the possibilities.
-	
+    --no-trace
+      Complementary alias of --trace.
     --non-interactive
+      Alias of --no-prompt.
+    --noprompt
       Alias of --no-prompt.
     --organization
       
@@ -6688,12 +6658,42 @@ Routes
 	    either by taking the one organization the user belongs to, or
 	    asking the user to choose among the possibilities.
 	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --space
       
-	    Disable interactive queries.
+	    The name of the space to use as context.
+
+	    Defaults to the current space.
+
+	    A current space is automatically set if there is none,
+	    either by taking the one space the user has, or
+	    asking the user to choose among the possibilities.
 	
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -o
+      Alias of --organization.
+    -t
+      Alias of --trace.
     
 .. _command-stackato routes:
   
@@ -6706,44 +6706,44 @@ Routes
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --json
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Print raw json as output, not human-formatted data.
 	
-    -n
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
       Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
     --noprompt
       Alias of --no-prompt.
     --target
       
 	    The once-off target to use for the current operation.
 	
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --non-interactive
-      Alias of --no-prompt.
     --token
       
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token-file
       
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
 
       </div></div>
 
@@ -6763,33 +6763,30 @@ Domains
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --all
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+		Query information about all domains.
+		Cannot be used together with a space.
+	    
+    --no-prompt
+      
+	    Disable interactive queries.
 	
-    -n
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
       Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    -o
-      Alias of --organization.
     --noprompt
       Alias of --no-prompt.
-    --target
+    --organization
       
-	    The once-off target to use for the current operation.
-	
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
+	    The name of the parent organization to use as context.
+
+	    Defaults to the current organization.
+
+	    A current organization is automatically set if there is none,
+	    either by taking the one organization the user belongs to, or
+	    asking the user to choose among the possibilities.
 	
     --space
       
@@ -6803,29 +6800,32 @@ Domains
 
 		Cannot be used together with --all.
 	    
-    --non-interactive
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
       Alias of --no-prompt.
-    --organization
-      
-	    The name of the parent organization to use as context.
-
-	    Defaults to the current organization.
-
-	    A current organization is automatically set if there is none,
-	    either by taking the one organization the user belongs to, or
-	    asking the user to choose among the possibilities.
-	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    --all
-      
-		Query information about all domains.
-		Cannot be used together with a space.
-	    
+    -o
+      Alias of --organization.
+    -t
+      Alias of --trace.
     
 .. _command-stackato map-domain:
   
@@ -6838,45 +6838,15 @@ Domains
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --no-prompt
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Disable interactive queries.
 	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    -o
-      Alias of --organization.
-    --noprompt
-      Alias of --no-prompt.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --space
-      
-	    The name of the space to use as context.
-
-	    Defaults to the current space.
-
-	    A current space is automatically set if there is none,
-	    either by taking the one space the user has, or
-	    asking the user to choose among the possibilities.
-	
+    --no-trace
+      Complementary alias of --trace.
     --non-interactive
+      Alias of --no-prompt.
+    --noprompt
       Alias of --no-prompt.
     --organization
       
@@ -6888,12 +6858,42 @@ Domains
 	    either by taking the one organization the user belongs to, or
 	    asking the user to choose among the possibilities.
 	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --space
       
-	    Disable interactive queries.
+	    The name of the space to use as context.
+
+	    Defaults to the current space.
+
+	    A current space is automatically set if there is none,
+	    either by taking the one space the user has, or
+	    asking the user to choose among the possibilities.
 	
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -o
+      Alias of --organization.
+    -t
+      Alias of --trace.
     
 .. _command-stackato unmap-domain:
   
@@ -6906,45 +6906,15 @@ Domains
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --no-prompt
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Disable interactive queries.
 	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    -o
-      Alias of --organization.
-    --noprompt
-      Alias of --no-prompt.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --space
-      
-	    The name of the space to use as context.
-
-	    Defaults to the current space.
-
-	    A current space is automatically set if there is none,
-	    either by taking the one space the user has, or
-	    asking the user to choose among the possibilities.
-	
+    --no-trace
+      Complementary alias of --trace.
     --non-interactive
+      Alias of --no-prompt.
+    --noprompt
       Alias of --no-prompt.
     --organization
       
@@ -6956,12 +6926,42 @@ Domains
 	    either by taking the one organization the user belongs to, or
 	    asking the user to choose among the possibilities.
 	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --space
       
-	    Disable interactive queries.
+	    The name of the space to use as context.
+
+	    Defaults to the current space.
+
+	    A current space is automatically set if there is none,
+	    either by taking the one space the user has, or
+	    asking the user to choose among the possibilities.
 	
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -o
+      Alias of --organization.
+    -t
+      Alias of --trace.
 
       </div></div>
 
@@ -6981,6 +6981,14 @@ Administration
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
+      Alias of --no-prompt.
     --noprompt
       Alias of --no-prompt.
     --trace
@@ -6989,18 +6997,10 @@ Administration
 	    This option is a no-op now. Tracing is always active. See
 	    the 'trace' command to print the saved trace to stdout.
 	
-    -t
-      Alias of --trace.
     -n
       Alias of --no-prompt.
-    --non-interactive
-      Alias of --no-prompt.
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
+    -t
+      Alias of --trace.
     
 .. _command-stackato admin list:
   
@@ -7013,44 +7013,44 @@ Administration
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --json
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Print raw json as output, not human-formatted data.
 	
-    -n
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
       Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
     --noprompt
       Alias of --no-prompt.
     --target
       
 	    The once-off target to use for the current operation.
 	
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --non-interactive
-      Alias of --no-prompt.
     --token
       
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token-file
       
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
     
 .. _command-stackato admin patch:
   
@@ -7063,26 +7063,21 @@ Administration
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
     --dry
       
 	    Print the low-level ssh command to stdout
 	    instead of executing it.
 	
+    --dry-run
+      Alias of --dry.
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
+      Alias of --no-prompt.
     --noprompt
       Alias of --no-prompt.
     --target
@@ -7094,16 +7089,21 @@ Administration
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --non-interactive
-      Alias of --no-prompt.
-    --dry-run
-      Alias of --dry.
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token-file
       
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
     
 .. _command-stackato admin report:
   
@@ -7116,21 +7116,14 @@ Administration
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --no-prompt
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Disable interactive queries.
 	
-    -n
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
       Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
     --noprompt
       Alias of --no-prompt.
     --target
@@ -7142,14 +7135,21 @@ Administration
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --non-interactive
-      Alias of --no-prompt.
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token-file
       
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
     
 .. _command-stackato admin revoke:
   
@@ -7162,6 +7162,14 @@ Administration
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
+      Alias of --no-prompt.
     --noprompt
       Alias of --no-prompt.
     --trace
@@ -7170,18 +7178,10 @@ Administration
 	    This option is a no-op now. Tracing is always active. See
 	    the 'trace' command to print the saved trace to stdout.
 	
-    -t
-      Alias of --trace.
     -n
       Alias of --no-prompt.
-    --non-interactive
-      Alias of --no-prompt.
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
+    -t
+      Alias of --trace.
     
 .. _command-stackato frameworks:
   
@@ -7194,44 +7194,44 @@ Administration
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --json
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Print raw json as output, not human-formatted data.
 	
-    -n
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
       Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
     --noprompt
       Alias of --no-prompt.
     --target
       
 	    The once-off target to use for the current operation.
 	
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --non-interactive
-      Alias of --no-prompt.
     --token
       
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token-file
       
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
     
 .. _command-stackato groups add-user:
   
@@ -7244,21 +7244,14 @@ Administration
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --no-prompt
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Disable interactive queries.
 	
-    -n
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
       Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
     --noprompt
       Alias of --no-prompt.
     --target
@@ -7270,14 +7263,21 @@ Administration
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --non-interactive
-      Alias of --no-prompt.
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token-file
       
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
     
 .. _command-stackato groups create:
   
@@ -7290,21 +7290,14 @@ Administration
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --no-prompt
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Disable interactive queries.
 	
-    -n
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
       Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
     --noprompt
       Alias of --no-prompt.
     --target
@@ -7316,14 +7309,21 @@ Administration
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --non-interactive
-      Alias of --no-prompt.
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token-file
       
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
     
 .. _command-stackato groups delete-user:
   
@@ -7336,21 +7336,14 @@ Administration
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --no-prompt
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Disable interactive queries.
 	
-    -n
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
       Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
     --noprompt
       Alias of --no-prompt.
     --target
@@ -7362,14 +7355,21 @@ Administration
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --non-interactive
-      Alias of --no-prompt.
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token-file
       
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
     
 .. _command-stackato groups delete:
   
@@ -7382,21 +7382,14 @@ Administration
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --no-prompt
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Disable interactive queries.
 	
-    -n
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
       Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
     --noprompt
       Alias of --no-prompt.
     --target
@@ -7408,14 +7401,21 @@ Administration
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --non-interactive
-      Alias of --no-prompt.
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token-file
       
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
     
 .. _command-stackato groups limits:
   
@@ -7428,70 +7428,70 @@ Administration
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
+    --apps
+      
+	    Limit for the number of applications in the group.
+	
+    --appuris
+      
+	    Limit for the number of mapped uris per application.
+	
+    --drains
+      
+	    Limit for the number of drains in the group.
+	
+    --json
+      
+	    Print raw json as output, not human-formatted data.
+	
+    --mem
+      
+	    Amount of memory applications can use.
+	
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-sudo
+      Complementary alias of --sudo.
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
+    --services
+      
+	    Limit for the number of services in the group.
+	
+    --sudo
+      
+	    Applications can use sudo (or not).
+	
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
     --token-file
       
 	    Path to an existing and readable file containing
 	    the targets and authorization tokens.
 	
-    -n
-      Alias of --no-prompt.
     --trace
       
 	    Activate tracing of the issued REST requests and responses.
 	    This option is a no-op now. Tracing is always active. See
 	    the 'trace' command to print the saved trace to stdout.
 	
+    -n
+      Alias of --no-prompt.
     -t
       Alias of --trace.
-    --services
-      
-	    Limit for the number of services in the group.
-	
-    --noprompt
-      Alias of --no-prompt.
-    --no-trace
-      Complementary alias of --trace.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --apps
-      
-	    Limit for the number of applications in the group.
-	
-    --non-interactive
-      Alias of --no-prompt.
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --no-sudo
-      Complementary alias of --sudo.
-    --appuris
-      
-	    Limit for the number of mapped uris per application.
-	
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    --sudo
-      
-	    Applications can use sudo (or not).
-	
-    --mem
-      
-	    Amount of memory applications can use.
-	
-    --drains
-      
-	    Limit for the number of drains in the group.
-	
     
 .. _command-stackato groups show:
   
@@ -7504,44 +7504,44 @@ Administration
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --json
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Print raw json as output, not human-formatted data.
 	
-    -n
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
       Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
     --noprompt
       Alias of --no-prompt.
     --target
       
 	    The once-off target to use for the current operation.
 	
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --non-interactive
-      Alias of --no-prompt.
     --token
       
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token-file
       
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
     
 .. _command-stackato groups users:
   
@@ -7554,44 +7554,44 @@ Administration
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --json
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Print raw json as output, not human-formatted data.
 	
-    -n
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
       Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
     --noprompt
       Alias of --no-prompt.
     --target
       
 	    The once-off target to use for the current operation.
 	
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --non-interactive
-      Alias of --no-prompt.
     --token
       
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token-file
       
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
     
 .. _command-stackato group:
   
@@ -7604,21 +7604,18 @@ Administration
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --json
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Print raw json as output, not human-formatted data.
 	
-    -n
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
       Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
     --noprompt
       Alias of --no-prompt.
     --reset
@@ -7630,23 +7627,26 @@ Administration
       
 	    The once-off target to use for the current operation.
 	
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --non-interactive
-      Alias of --no-prompt.
     --token
       
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token-file
       
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
     
 .. _command-stackato info:
   
@@ -7659,32 +7659,29 @@ Administration
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --group
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    -o
-      Alias of --organization.
-    --noprompt
-      Alias of --no-prompt.
-    --target
-      
-	    The once-off target to use for the current operation.
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
 	
     --json
       
 	    Print raw json as output, not human-formatted data.
+	
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
+    --organization
+      
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
 	
     --space
       
@@ -7692,35 +7689,38 @@ Administration
 	    by name. This is a Stackato 3 option.
 	    Cannot be used together with --space-guid.
 	
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --non-interactive
-      Alias of --no-prompt.
     --space-guid
       
 	    The once-off space to use for the current operation, specified
 	    by guid. This is a Stackato 3 option.
 	    Cannot be used together with --space.
 	
-    --organization
+    --target
       
-	    The once-off organization to use for the current operation.
-	    This is a Stackato 3 option.
+	    The once-off target to use for the current operation.
 	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token
       
-	    Disable interactive queries.
+	    The once-off authentication token to use for the
+	    current operation.
 	
-    --group
+    --token-file
       
-	    The once-off group to use for the current operation.
-	    This is a Stackato 2 option.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -o
+      Alias of --organization.
+    -t
+      Alias of --trace.
     
 .. _command-stackato limits:
   
@@ -7733,70 +7733,70 @@ Administration
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
+    --apps
+      
+	    Limit for the number of applications in the group.
+	
+    --appuris
+      
+	    Limit for the number of mapped uris per application.
+	
+    --drains
+      
+	    Limit for the number of drains in the group.
+	
+    --json
+      
+	    Print raw json as output, not human-formatted data.
+	
+    --mem
+      
+	    Amount of memory applications can use.
+	
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-sudo
+      Complementary alias of --sudo.
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
+    --services
+      
+	    Limit for the number of services in the group.
+	
+    --sudo
+      
+	    Applications can use sudo (or not).
+	
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
     --token-file
       
 	    Path to an existing and readable file containing
 	    the targets and authorization tokens.
 	
-    -n
-      Alias of --no-prompt.
     --trace
       
 	    Activate tracing of the issued REST requests and responses.
 	    This option is a no-op now. Tracing is always active. See
 	    the 'trace' command to print the saved trace to stdout.
 	
+    -n
+      Alias of --no-prompt.
     -t
       Alias of --trace.
-    --services
-      
-	    Limit for the number of services in the group.
-	
-    --noprompt
-      Alias of --no-prompt.
-    --no-trace
-      Complementary alias of --trace.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --apps
-      
-	    Limit for the number of applications in the group.
-	
-    --non-interactive
-      Alias of --no-prompt.
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --no-sudo
-      Complementary alias of --sudo.
-    --appuris
-      
-	    Limit for the number of mapped uris per application.
-	
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    --sudo
-      
-	    Applications can use sudo (or not).
-	
-    --mem
-      
-	    Amount of memory applications can use.
-	
-    --drains
-      
-	    Limit for the number of drains in the group.
-	
     
 .. _command-stackato quota configure:
   
@@ -7809,56 +7809,6 @@ Administration
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    -n
-      Alias of --no-prompt.
-    --trial-db-allowed
-      
-		Applications can use trial databases.
-	    
-    -t
-      Alias of --trace.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    --paid-services-allowed
-      
-		Applications can use non-free services.
-	    
-    --services
-      
-		Limit for the number of services in the quota.
-	    
-    --noprompt
-      Alias of --no-prompt.
-    --no-trial-db-allowed
-      Complementary alias of --trial-db-allowed.
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --non-interactive
-      Alias of --no-prompt.
-    --no-allow-sudo
-      Complementary alias of --allow-sudo.
-    --no-trace
-      Complementary alias of --trace.
     --allow-sudo
       
 		Applications can use sudo in their container.
@@ -7867,8 +7817,58 @@ Administration
       
 		Amount of memory applications can use.
 	    
+    --no-allow-sudo
+      Complementary alias of --allow-sudo.
     --no-paid-services-allowed
       Complementary alias of --paid-services-allowed.
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --no-trial-db-allowed
+      Complementary alias of --trial-db-allowed.
+    --non-interactive
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
+    --paid-services-allowed
+      
+		Applications can use non-free services.
+	    
+    --services
+      
+		Limit for the number of services in the quota.
+	    
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    --trial-db-allowed
+      
+		Applications can use trial databases.
+	    
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
     
 .. _command-stackato quota create:
   
@@ -7881,56 +7881,6 @@ Administration
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    -n
-      Alias of --no-prompt.
-    --trial-db-allowed
-      
-		Applications can use trial databases.
-	    
-    -t
-      Alias of --trace.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    --paid-services-allowed
-      
-		Applications can use non-free services.
-	    
-    --services
-      
-		Limit for the number of services in the quota.
-	    
-    --noprompt
-      Alias of --no-prompt.
-    --no-trial-db-allowed
-      Complementary alias of --trial-db-allowed.
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --non-interactive
-      Alias of --no-prompt.
-    --no-allow-sudo
-      Complementary alias of --allow-sudo.
-    --no-trace
-      Complementary alias of --trace.
     --allow-sudo
       
 		Applications can use sudo in their container.
@@ -7939,8 +7889,58 @@ Administration
       
 		Amount of memory applications can use.
 	    
+    --no-allow-sudo
+      Complementary alias of --allow-sudo.
     --no-paid-services-allowed
       Complementary alias of --paid-services-allowed.
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --no-trial-db-allowed
+      Complementary alias of --trial-db-allowed.
+    --non-interactive
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
+    --paid-services-allowed
+      
+		Applications can use non-free services.
+	    
+    --services
+      
+		Limit for the number of services in the quota.
+	    
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    --trial-db-allowed
+      
+		Applications can use trial databases.
+	    
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
     
 .. _command-stackato quota delete:
   
@@ -7953,21 +7953,14 @@ Administration
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --no-prompt
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Disable interactive queries.
 	
-    -n
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
       Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
     --noprompt
       Alias of --no-prompt.
     --target
@@ -7979,14 +7972,21 @@ Administration
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --non-interactive
-      Alias of --no-prompt.
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token-file
       
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
     
 .. _command-stackato quota list:
   
@@ -7999,44 +7999,44 @@ Administration
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --json
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Print raw json as output, not human-formatted data.
 	
-    -n
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
       Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
     --noprompt
       Alias of --no-prompt.
     --target
       
 	    The once-off target to use for the current operation.
 	
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --non-interactive
-      Alias of --no-prompt.
     --token
       
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token-file
       
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
     
 .. _command-stackato quota rename:
   
@@ -8049,21 +8049,14 @@ Administration
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --no-prompt
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Disable interactive queries.
 	
-    -n
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
       Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
     --noprompt
       Alias of --no-prompt.
     --target
@@ -8075,14 +8068,21 @@ Administration
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --non-interactive
-      Alias of --no-prompt.
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token-file
       
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
     
 .. _command-stackato quota show:
   
@@ -8095,44 +8095,44 @@ Administration
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --json
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Print raw json as output, not human-formatted data.
 	
-    -n
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
       Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
     --noprompt
       Alias of --no-prompt.
     --target
       
 	    The once-off target to use for the current operation.
 	
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --non-interactive
-      Alias of --no-prompt.
     --token
       
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token-file
       
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
     
 .. _command-stackato quotas:
   
@@ -8145,44 +8145,44 @@ Administration
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --json
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Print raw json as output, not human-formatted data.
 	
-    -n
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
       Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
     --noprompt
       Alias of --no-prompt.
     --target
       
 	    The once-off target to use for the current operation.
 	
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --non-interactive
-      Alias of --no-prompt.
     --token
       
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token-file
       
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
     
 .. _command-stackato runtimes:
   
@@ -8195,44 +8195,44 @@ Administration
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --json
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Print raw json as output, not human-formatted data.
 	
-    -n
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
       Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
     --noprompt
       Alias of --no-prompt.
     --target
       
 	    The once-off target to use for the current operation.
 	
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --non-interactive
-      Alias of --no-prompt.
     --token
       
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token-file
       
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
     
 .. _command-stackato stacks:
   
@@ -8245,44 +8245,44 @@ Administration
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --json
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Print raw json as output, not human-formatted data.
 	
-    -n
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
       Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
     --noprompt
       Alias of --no-prompt.
     --target
       
 	    The once-off target to use for the current operation.
 	
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --non-interactive
-      Alias of --no-prompt.
     --token
       
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token-file
       
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
     
 .. _command-stackato targets:
   
@@ -8295,25 +8295,25 @@ Administration
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
+    --json
+      
+	    Print raw json as output, not human-formatted data.
+	
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --non-interactive
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
     --token-file
       
 	    Path to an existing and readable file containing
 	    the targets and authorization tokens.
 	
-    --noprompt
-      Alias of --no-prompt.
     -n
       Alias of --no-prompt.
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --non-interactive
-      Alias of --no-prompt.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
     
 .. _command-stackato tokens:
   
@@ -8326,25 +8326,25 @@ Administration
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
+    --json
+      
+	    Print raw json as output, not human-formatted data.
+	
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --non-interactive
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
     --token-file
       
 	    Path to an existing and readable file containing
 	    the targets and authorization tokens.
 	
-    --noprompt
-      Alias of --no-prompt.
     -n
       Alias of --no-prompt.
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --non-interactive
-      Alias of --no-prompt.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
     
 .. _command-stackato usage:
   
@@ -8357,63 +8357,6 @@ Administration
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
-      
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
-	
-    -n
-      Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
-    -o
-      Alias of --organization.
-    --noprompt
-      Alias of --no-prompt.
-    --target
-      
-	    The once-off target to use for the current operation.
-	
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --space
-      
-	    The once-off space to use for the current operation, specified
-	    by name. This is a Stackato 3 option.
-	    Cannot be used together with --space-guid.
-	
-    --token
-      
-	    The once-off authentication token to use for the
-	    current operation.
-	
-    --non-interactive
-      Alias of --no-prompt.
-    --space-guid
-      
-	    The once-off space to use for the current operation, specified
-	    by guid. This is a Stackato 3 option.
-	    Cannot be used together with --space.
-	
-    --organization
-      
-	    The once-off organization to use for the current operation.
-	    This is a Stackato 3 option.
-	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
-      
-	    Disable interactive queries.
-	
     --all
       
 		Query information about everything.
@@ -8424,6 +8367,63 @@ Administration
 	    The once-off group to use for the current operation.
 	    This is a Stackato 2 option.
 	
+    --json
+      
+	    Print raw json as output, not human-formatted data.
+	
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
+    --organization
+      
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+    --space
+      
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+    --space-guid
+      
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+    --target
+      
+	    The once-off target to use for the current operation.
+	
+    --token
+      
+	    The once-off authentication token to use for the
+	    current operation.
+	
+    --token-file
+      
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -o
+      Alias of --organization.
+    -t
+      Alias of --trace.
     
 .. _command-stackato user-info:
   
@@ -8436,44 +8436,44 @@ Administration
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --json
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Print raw json as output, not human-formatted data.
 	
-    -n
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
       Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
     --noprompt
       Alias of --no-prompt.
     --target
       
 	    The once-off target to use for the current operation.
 	
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --non-interactive
-      Alias of --no-prompt.
     --token
       
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token-file
       
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
     
 .. _command-stackato user:
   
@@ -8486,44 +8486,44 @@ Administration
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --json
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Print raw json as output, not human-formatted data.
 	
-    -n
+    --no-prompt
+      
+	    Disable interactive queries.
+	
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
       Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
     --noprompt
       Alias of --no-prompt.
     --target
       
 	    The once-off target to use for the current operation.
 	
-    --json
-      
-	    Print raw json as output, not human-formatted data.
-	
-    --non-interactive
-      Alias of --no-prompt.
     --token
       
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token-file
       
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
     
 .. _command-stackato version:
   
@@ -8540,11 +8540,11 @@ Administration
       
 	    Disable interactive queries.
 	
-    -n
+    --non-interactive
       Alias of --no-prompt.
     --noprompt
       Alias of --no-prompt.
-    --non-interactive
+    -n
       Alias of --no-prompt.
 
       </div></div>
@@ -9054,19 +9054,19 @@ Convenience
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    -n
-      Alias of --no-prompt.
-    --noprompt
-      Alias of --no-prompt.
     --json
       
 	    Print raw json as output, not human-formatted data.
 	
+    --no-prompt
+      
+	    Disable interactive queries.
+	
     --non-interactive
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
+    -n
       Alias of --no-prompt.
     
 .. _command-stackato alias:
@@ -9084,11 +9084,11 @@ Convenience
       
 	    Disable interactive queries.
 	
-    -n
+    --non-interactive
       Alias of --no-prompt.
     --noprompt
       Alias of --no-prompt.
-    --non-interactive
+    -n
       Alias of --no-prompt.
     
 .. _command-stackato unalias:
@@ -9106,11 +9106,11 @@ Convenience
       
 	    Disable interactive queries.
 	
-    -n
+    --non-interactive
       Alias of --no-prompt.
     --noprompt
       Alias of --no-prompt.
-    --non-interactive
+    -n
       Alias of --no-prompt.
 
       </div></div>
@@ -9135,11 +9135,11 @@ Miscellaneous
       
 	    Disable interactive queries.
 	
-    -n
+    --non-interactive
       Alias of --no-prompt.
     --noprompt
       Alias of --no-prompt.
-    --non-interactive
+    -n
       Alias of --no-prompt.
     
 .. _command-stackato admin help:
@@ -9153,28 +9153,18 @@ Miscellaneous
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    -n
-      Alias of --no-prompt.
-    --width
+    --by-category
       
-	    The line width to format the help for.
-	    Defaults to the terminal width, or 80 when
-	    no terminal is available.
-	
-    --noprompt
-      Alias of --no-prompt.
+		Activate by-category form of the help.
+	    
+    --full
+      
+		Activate full form of the help.
+	    
     --json
       
 		Activate json form of the help.
 	    
-    --short
-      
-		Activate short form of the help.
-	    
-    --non-interactive
-      Alias of --no-prompt.
-    -w
-      Alias of --width.
     --list
       
 		Activate list form of the help.
@@ -9183,14 +9173,24 @@ Miscellaneous
       
 	    Disable interactive queries.
 	
-    --full
+    --non-interactive
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
+    --short
       
-		Activate full form of the help.
+		Activate short form of the help.
 	    
-    --by-category
+    --width
       
-		Activate by-category form of the help.
-	    
+	    The line width to format the help for.
+	    Defaults to the terminal width, or 80 when
+	    no terminal is available.
+	
+    -n
+      Alias of --no-prompt.
+    -w
+      Alias of --width.
     
 .. _command-stackato curl:
   
@@ -9203,21 +9203,14 @@ Miscellaneous
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --token-file
+    --no-prompt
       
-	    Path to an existing and readable file containing
-	    the targets and authorization tokens.
+	    Disable interactive queries.
 	
-    -n
+    --no-trace
+      Complementary alias of --trace.
+    --non-interactive
       Alias of --no-prompt.
-    --trace
-      
-	    Activate tracing of the issued REST requests and responses.
-	    This option is a no-op now. Tracing is always active. See
-	    the 'trace' command to print the saved trace to stdout.
-	
-    -t
-      Alias of --trace.
     --noprompt
       Alias of --no-prompt.
     --target
@@ -9229,14 +9222,21 @@ Miscellaneous
 	    The once-off authentication token to use for the
 	    current operation.
 	
-    --non-interactive
-      Alias of --no-prompt.
-    --no-trace
-      Complementary alias of --trace.
-    --no-prompt
+    --token-file
       
-	    Disable interactive queries.
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
 	
+    --trace
+      
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+    -n
+      Alias of --no-prompt.
+    -t
+      Alias of --trace.
     
 .. _command-stackato debug-packages:
   
@@ -9249,19 +9249,19 @@ Miscellaneous
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    -n
-      Alias of --no-prompt.
-    --noprompt
-      Alias of --no-prompt.
     --json
       
 	    Print raw json as output, not human-formatted data.
 	
+    --no-prompt
+      
+	    Disable interactive queries.
+	
     --non-interactive
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
+    -n
       Alias of --no-prompt.
     
 .. _command-stackato drain exit:
@@ -9279,11 +9279,11 @@ Miscellaneous
       
 	    Disable interactive queries.
 	
-    -n
+    --non-interactive
       Alias of --no-prompt.
     --noprompt
       Alias of --no-prompt.
-    --non-interactive
+    -n
       Alias of --no-prompt.
     
 .. _command-stackato drain help:
@@ -9297,28 +9297,18 @@ Miscellaneous
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    -n
-      Alias of --no-prompt.
-    --width
+    --by-category
       
-	    The line width to format the help for.
-	    Defaults to the terminal width, or 80 when
-	    no terminal is available.
-	
-    --noprompt
-      Alias of --no-prompt.
+		Activate by-category form of the help.
+	    
+    --full
+      
+		Activate full form of the help.
+	    
     --json
       
 		Activate json form of the help.
 	    
-    --short
-      
-		Activate short form of the help.
-	    
-    --non-interactive
-      Alias of --no-prompt.
-    -w
-      Alias of --width.
     --list
       
 		Activate list form of the help.
@@ -9327,14 +9317,24 @@ Miscellaneous
       
 	    Disable interactive queries.
 	
-    --full
+    --non-interactive
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
+    --short
       
-		Activate full form of the help.
+		Activate short form of the help.
 	    
-    --by-category
+    --width
       
-		Activate by-category form of the help.
-	    
+	    The line width to format the help for.
+	    Defaults to the terminal width, or 80 when
+	    no terminal is available.
+	
+    -n
+      Alias of --no-prompt.
+    -w
+      Alias of --width.
     
 .. _command-stackato exit:
   
@@ -9351,11 +9351,11 @@ Miscellaneous
       
 	    Disable interactive queries.
 	
-    -n
+    --non-interactive
       Alias of --no-prompt.
     --noprompt
       Alias of --no-prompt.
-    --non-interactive
+    -n
       Alias of --no-prompt.
     
 .. _command-stackato groups exit:
@@ -9373,11 +9373,11 @@ Miscellaneous
       
 	    Disable interactive queries.
 	
-    -n
+    --non-interactive
       Alias of --no-prompt.
     --noprompt
       Alias of --no-prompt.
-    --non-interactive
+    -n
       Alias of --no-prompt.
     
 .. _command-stackato groups help:
@@ -9391,28 +9391,18 @@ Miscellaneous
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    -n
-      Alias of --no-prompt.
-    --width
+    --by-category
       
-	    The line width to format the help for.
-	    Defaults to the terminal width, or 80 when
-	    no terminal is available.
-	
-    --noprompt
-      Alias of --no-prompt.
+		Activate by-category form of the help.
+	    
+    --full
+      
+		Activate full form of the help.
+	    
     --json
       
 		Activate json form of the help.
 	    
-    --short
-      
-		Activate short form of the help.
-	    
-    --non-interactive
-      Alias of --no-prompt.
-    -w
-      Alias of --width.
     --list
       
 		Activate list form of the help.
@@ -9421,14 +9411,24 @@ Miscellaneous
       
 	    Disable interactive queries.
 	
-    --full
+    --non-interactive
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
+    --short
       
-		Activate full form of the help.
+		Activate short form of the help.
 	    
-    --by-category
+    --width
       
-		Activate by-category form of the help.
-	    
+	    The line width to format the help for.
+	    Defaults to the terminal width, or 80 when
+	    no terminal is available.
+	
+    -n
+      Alias of --no-prompt.
+    -w
+      Alias of --width.
     
 .. _command-stackato guid:
   
@@ -9441,19 +9441,19 @@ Miscellaneous
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    -n
-      Alias of --no-prompt.
-    --noprompt
-      Alias of --no-prompt.
     --json
       
 	    Print raw json as output, not human-formatted data.
 	
+    --no-prompt
+      
+	    Disable interactive queries.
+	
     --non-interactive
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
+    -n
       Alias of --no-prompt.
     
 .. _command-stackato help:
@@ -9467,28 +9467,18 @@ Miscellaneous
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    -n
-      Alias of --no-prompt.
-    --width
+    --by-category
       
-	    The line width to format the help for.
-	    Defaults to the terminal width, or 80 when
-	    no terminal is available.
-	
-    --noprompt
-      Alias of --no-prompt.
+		Activate by-category form of the help.
+	    
+    --full
+      
+		Activate full form of the help.
+	    
     --json
       
 		Activate json form of the help.
 	    
-    --short
-      
-		Activate short form of the help.
-	    
-    --non-interactive
-      Alias of --no-prompt.
-    -w
-      Alias of --width.
     --list
       
 		Activate list form of the help.
@@ -9497,14 +9487,24 @@ Miscellaneous
       
 	    Disable interactive queries.
 	
-    --full
+    --non-interactive
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
+    --short
       
-		Activate full form of the help.
+		Activate short form of the help.
 	    
-    --by-category
+    --width
       
-		Activate by-category form of the help.
-	    
+	    The line width to format the help for.
+	    Defaults to the terminal width, or 80 when
+	    no terminal is available.
+	
+    -n
+      Alias of --no-prompt.
+    -w
+      Alias of --width.
     
 .. _command-stackato named-entities:
   
@@ -9517,19 +9517,19 @@ Miscellaneous
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    --no-prompt
-      
-	    Disable interactive queries.
-	
-    -n
-      Alias of --no-prompt.
-    --noprompt
-      Alias of --no-prompt.
     --json
       
 	    Print raw json as output, not human-formatted data.
 	
+    --no-prompt
+      
+	    Disable interactive queries.
+	
     --non-interactive
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
+    -n
       Alias of --no-prompt.
     
 .. _command-stackato quota exit:
@@ -9547,11 +9547,11 @@ Miscellaneous
       
 	    Disable interactive queries.
 	
-    -n
+    --non-interactive
       Alias of --no-prompt.
     --noprompt
       Alias of --no-prompt.
-    --non-interactive
+    -n
       Alias of --no-prompt.
     
 .. _command-stackato quota help:
@@ -9565,28 +9565,18 @@ Miscellaneous
       <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
       <div class="inner" style="display:none;">
 
-    -n
-      Alias of --no-prompt.
-    --width
+    --by-category
       
-	    The line width to format the help for.
-	    Defaults to the terminal width, or 80 when
-	    no terminal is available.
-	
-    --noprompt
-      Alias of --no-prompt.
+		Activate by-category form of the help.
+	    
+    --full
+      
+		Activate full form of the help.
+	    
     --json
       
 		Activate json form of the help.
 	    
-    --short
-      
-		Activate short form of the help.
-	    
-    --non-interactive
-      Alias of --no-prompt.
-    -w
-      Alias of --width.
     --list
       
 		Activate list form of the help.
@@ -9595,14 +9585,24 @@ Miscellaneous
       
 	    Disable interactive queries.
 	
-    --full
+    --non-interactive
+      Alias of --no-prompt.
+    --noprompt
+      Alias of --no-prompt.
+    --short
       
-		Activate full form of the help.
+		Activate short form of the help.
 	    
-    --by-category
+    --width
       
-		Activate by-category form of the help.
-	    
+	    The line width to format the help for.
+	    Defaults to the terminal width, or 80 when
+	    no terminal is available.
+	
+    -n
+      Alias of --no-prompt.
+    -w
+      Alias of --width.
     
 .. _command-stackato trace:
   
@@ -9619,11 +9619,11 @@ Miscellaneous
       
 	    Disable interactive queries.
 	
-    -n
+    --non-interactive
       Alias of --no-prompt.
     --noprompt
       Alias of --no-prompt.
-    --non-interactive
+    -n
       Alias of --no-prompt.
 
       </div></div>
