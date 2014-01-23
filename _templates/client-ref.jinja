@@ -28,7 +28,7 @@ In some cases the  ``--json`` option reveals additional details.
 
   {% for command in section['commands'] %}
     
-.. _command-{{command}}:
+.. _command-{{command|replace('stackato ','')}}:
   
   {{ command }} {% for argument in commands[command]['arguments'] %} *<{{ argument }}>* {% endfor %}
 
@@ -55,7 +55,7 @@ In some cases the  ``--json`` option reveals additional details.
   **{{ subsection['name'] }}**
       
     {% for command in subsection['commands'] %}
-.. _command-{{command}}:
+.. _command-{{command|replace('stackato ','')}}:
 
       {{ command }} {% for argument in commands[command]['arguments'] %} *<{{ argument }}>* {% endfor %}
       

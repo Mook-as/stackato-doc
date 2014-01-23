@@ -23,7 +23,7 @@ Getting Started
 ^^^^^^^^^^^^^^^^^^^^^
 
     
-.. _command-stackato login:
+.. _command-login:
   
   stackato login  *<email>* 
     Log in to the current or specified target with the named user.
@@ -109,7 +109,7 @@ Getting Started
     -t
       Alias of --trace.
     
-.. _command-stackato logout:
+.. _command-logout:
   
   stackato logout  *<target>* 
     Log out of the current, specified, or all targets.
@@ -151,7 +151,7 @@ Getting Started
     -t
       Alias of --trace.
     
-.. _command-stackato target:
+.. _command-target:
   
   stackato target  *<url>* 
     Set the target API endpoint for the client, or report the current target.
@@ -204,7 +204,7 @@ Applications
 ^^^^^^^^^^^^^^^^^^^^^
 
     
-.. _command-stackato apps:
+.. _command-apps:
   
   stackato apps 
     List the applications deployed to the target.
@@ -283,7 +283,7 @@ Applications
     -t
       Alias of --trace.
     
-.. _command-stackato app:
+.. _command-app:
   
   stackato app  *<application>* 
     Show the information of the specified application.
@@ -367,7 +367,7 @@ Applications
     -t
       Alias of --trace.
     
-.. _command-stackato list:
+.. _command-list:
   
   stackato list 
     List the applications deployed to the target.
@@ -453,7 +453,7 @@ Applications
     
   **Information**
       
-.. _command-stackato crashes:
+.. _command-crashes:
 
       stackato crashes  *<application>*       
         List recent application crashes.
@@ -544,7 +544,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato crashlogs:
+.. _command-crashlogs:
 
       stackato crashlogs  *<application>*       
         Display log information for the application. An alias of 'logs'.
@@ -677,7 +677,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato disk:
+.. _command-disk:
 
       stackato disk  *<application>*       
         Show the disk reservation for a deployed application.
@@ -764,7 +764,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato drain list:
+.. _command-drain list:
 
       stackato drain list  *<application>*       
         Show the list of drains attached to the application.
@@ -855,7 +855,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato drains:
+.. _command-drains:
 
       stackato drains  *<application>*       
         Show the list of drains attached to the application.
@@ -946,7 +946,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato env:
+.. _command-env:
 
       stackato env  *<application>*       
         List the application's environment variables.
@@ -1037,7 +1037,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato events:
+.. _command-events:
 
       stackato events  *<application>*       
         Show recorded application events, for application or space. Without an application given the current or specified space is used, otherwise that application. This is a Stackato 3 specific command.
@@ -1128,7 +1128,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato files:
+.. _command-files:
 
       stackato files  *<application>*  *<apath>*       
         Display directory listing or file.
@@ -1236,7 +1236,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato file:
+.. _command-file:
 
       stackato file  *<application>*  *<apath>*       
         Display directory listing or file.
@@ -1344,7 +1344,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato health:
+.. _command-health:
 
       stackato health  *<application>*       
         Report the health of the specified application(s).
@@ -1392,7 +1392,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato instances:
+.. _command-instances:
 
       stackato instances  *<application>*       
         List application instances for a deployed application.
@@ -1483,7 +1483,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato logs:
+.. _command-logs:
 
       stackato logs  *<application>*       
         Display the application log stream.
@@ -1616,7 +1616,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato mem:
+.. _command-mem:
 
       stackato mem  *<application>*       
         Show the memory reservation for a deployed application.
@@ -1703,7 +1703,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato stats:
+.. _command-stats:
 
       stackato stats  *<application>*       
         Display the resource usage for a deployed application.
@@ -1794,7 +1794,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato tail:
+.. _command-tail:
 
       stackato tail  *<application>*  *<apath>*       
         Monitor file for changes and stream them.
@@ -1892,7 +1892,7 @@ Applications
     
   **Management**
       
-.. _command-stackato create-app:
+.. _command-create-app:
 
       stackato create-app  *<application>*       
         Create an empty application with the specified configuration.
@@ -2071,7 +2071,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato dbshell:
+.. _command-dbshell:
 
       stackato dbshell  *<application>*  *<service>*       
         Invoke interactive db shell for a bound service.
@@ -2165,7 +2165,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato delete:
+.. _command-delete:
 
       stackato delete  *<application>*       
         Delete the specified application(s).
@@ -2261,7 +2261,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato drain add:
+.. _command-drain add:
 
       stackato drain add  *<application>*  *<drain>*  *<uri>*       
         Attach a new named drain to the application.
@@ -2352,7 +2352,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato drain delete:
+.. _command-drain delete:
 
       stackato drain delete  *<application>*  *<drain>*       
         Remove the named drain from the application.
@@ -2439,7 +2439,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato env-add:
+.. _command-env-add:
 
       stackato env-add  *<application>*  *<varname>*  *<value>*       
         Add the specified environment variable to the named application.
@@ -2540,7 +2540,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato env-del:
+.. _command-env-del:
 
       stackato env-del  *<application>*  *<varname>*       
         Remove the specified environment variable from the named application.
@@ -2641,7 +2641,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato map:
+.. _command-map:
 
       stackato map  *<application>*  *<url>*       
         Make the application accessible through the specified URL (a route consisting of host and domain)
@@ -2728,7 +2728,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato open:
+.. _command-open:
 
       stackato open  *<application>*       
         Open the url of the specified application in the default web browser. If 'api' is specified as the app name, the Management Console is opened. With no arguments, the 'name' value from the stackato.yml/manifest.yml in the current directory is used (if present).
@@ -2809,7 +2809,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato push:
+.. _command-push:
 
       stackato push  *<application>*       
         Configure, create, push, map, and start a new application.
@@ -3024,7 +3024,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato rename:
+.. _command-rename:
 
       stackato rename  *<application>*  *<name>*       
         Rename the specified application. This is a Stackato 3 specific command.
@@ -3111,7 +3111,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato restart:
+.. _command-restart:
 
       stackato restart  *<application>*       
         Stop and restart a deployed application.
@@ -3212,7 +3212,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato run:
+.. _command-run:
 
       stackato run  *<command>*       
         Run an arbitrary command on a running instance.
@@ -3331,7 +3331,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato scale:
+.. _command-scale:
 
       stackato scale  *<application>*       
         Update the number of instances, memory and/or disk reservation for a deployed application.
@@ -3451,7 +3451,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato scp:
+.. _command-scp:
 
       stackato scp  *<paths>*       
         Copy source files and directories to the destination.
@@ -3549,7 +3549,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato set-env:
+.. _command-set-env:
 
       stackato set-env  *<application>*  *<varname>*  *<value>*       
         Add the specified environment variable to the named application.
@@ -3650,7 +3650,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato ssh:
+.. _command-ssh:
 
       stackato ssh  *<command>*       
         SSH to a running instance (or target), or run an arbitrary command.
@@ -3770,7 +3770,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato start:
+.. _command-start:
 
       stackato start  *<application>*       
         Start a deployed application.
@@ -3871,7 +3871,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato stop:
+.. _command-stop:
 
       stackato stop  *<application>*       
         Stop a deployed application.
@@ -3958,7 +3958,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato unmap:
+.. _command-unmap:
 
       stackato unmap  *<application>*  *<url>*       
         Unregister the application from a URL.
@@ -4045,7 +4045,7 @@ Applications
           Alias of --trace.
 
 
-.. _command-stackato unset-env:
+.. _command-unset-env:
 
       stackato unset-env  *<application>*  *<varname>*       
         Remove the specified environment variable from the named application.
@@ -4151,7 +4151,7 @@ Services
 ^^^^^^^^^^^^^^^^^^^^^
 
     
-.. _command-stackato service-plans:
+.. _command-service-plans:
   
   stackato service-plans 
     List all available plans of the supported services. This is a Stackato 3 specific command.
@@ -4197,7 +4197,7 @@ Services
     -t
       Alias of --trace.
     
-.. _command-stackato services:
+.. _command-services:
   
   stackato services 
     List the supported and provisioned services of the target.
@@ -4271,7 +4271,7 @@ Services
     -t
       Alias of --trace.
     
-.. _command-stackato service:
+.. _command-service:
   
   stackato service  *<name>* 
     Show the information about the named service.
@@ -4352,7 +4352,7 @@ Services
     
   **Authentication Tokens**
       
-.. _command-stackato create-service-auth-token:
+.. _command-create-service-auth-token:
 
       stackato create-service-auth-token  *<label>*  *<provider>*       
         Create a new service authentication token. This is a Stackato 3 specific command.
@@ -4427,7 +4427,7 @@ Services
           Alias of --trace.
 
 
-.. _command-stackato delete-service-auth-token:
+.. _command-delete-service-auth-token:
 
       stackato delete-service-auth-token  *<label>*       
         Delete the specified service authentication token. This is a Stackato 3 specific command.
@@ -4498,7 +4498,7 @@ Services
           Alias of --trace.
 
 
-.. _command-stackato service-auth-tokens:
+.. _command-service-auth-tokens:
 
       stackato service-auth-tokens       
         Show all service authentication tokens knowns to the target. This is a Stackato 3 specific command.
@@ -4573,7 +4573,7 @@ Services
           Alias of --trace.
 
 
-.. _command-stackato update-service-auth-token:
+.. _command-update-service-auth-token:
 
       stackato update-service-auth-token  *<label>*       
         Update the specified service authentication token. This is a Stackato 3 specific command.
@@ -4653,7 +4653,7 @@ Services
     
   **Brokers**
       
-.. _command-stackato add-service-broker:
+.. _command-add-service-broker:
 
       stackato add-service-broker  *<name>*       
         Make the named service broker known. This is a Stackato 3 specific command.
@@ -4732,7 +4732,78 @@ Services
           Alias of --trace.
 
 
-.. _command-stackato remove-service-broker:
+.. _command-delete-service-broker:
+
+      stackato delete-service-broker  *<name>*       
+        Remove the named service broker from the target. This is a Stackato 3 specific command.
+
+        .. raw:: html
+
+          <div class="spoiler">
+          <a style="font-size: x-small" onclick="showSpoiler(this);"/>+ options</a>
+          <div class="inner" style="display:none;">
+
+        --group
+          
+	    The once-off group to use for the current operation.
+	    This is a Stackato 2 option.
+	
+        --no-prompt
+          
+	    Disable interactive queries.
+	
+        --no-trace
+          Complementary alias of --trace.
+        --non-interactive
+          Alias of --no-prompt.
+        --noprompt
+          Alias of --no-prompt.
+        --organization
+          
+	    The once-off organization to use for the current operation.
+	    This is a Stackato 3 option.
+	
+        --space
+          
+	    The once-off space to use for the current operation, specified
+	    by name. This is a Stackato 3 option.
+	    Cannot be used together with --space-guid.
+	
+        --space-guid
+          
+	    The once-off space to use for the current operation, specified
+	    by guid. This is a Stackato 3 option.
+	    Cannot be used together with --space.
+	
+        --target
+          
+	    The once-off target to use for the current operation.
+	
+        --token
+          
+	    The once-off authentication token to use for the
+	    current operation.
+	
+        --token-file
+          
+	    Path to an existing and readable file containing
+	    the targets and authorization tokens.
+	
+        --trace
+          
+	    Activate tracing of the issued REST requests and responses.
+	    This option is a no-op now. Tracing is always active. See
+	    the 'trace' command to print the saved trace to stdout.
+	
+        -n
+          Alias of --no-prompt.
+        -o
+          Alias of --organization.
+        -t
+          Alias of --trace.
+
+
+.. _command-remove-service-broker:
 
       stackato remove-service-broker  *<name>*       
         Remove the named service broker from the target. This is a Stackato 3 specific command.
@@ -4803,7 +4874,7 @@ Services
           Alias of --trace.
 
 
-.. _command-stackato service-brokers:
+.. _command-service-brokers:
 
       stackato service-brokers       
         Show the list of known service brokers. This is a Stackato 3 specific command.
@@ -4878,7 +4949,7 @@ Services
           Alias of --trace.
 
 
-.. _command-stackato update-service-broker:
+.. _command-update-service-broker:
 
       stackato update-service-broker  *<name>*  *<newname>*       
         Update the target's knowledge of the named service broker. This is a Stackato 3 specific command.
@@ -4962,7 +5033,7 @@ Services
     
   **Management**
       
-.. _command-stackato bind-service:
+.. _command-bind-service:
 
       stackato bind-service  *<service>*  *<application>*       
         Bind the named service to the specified application.
@@ -5063,7 +5134,7 @@ Services
           Alias of --trace.
 
 
-.. _command-stackato clone-services:
+.. _command-clone-services:
 
       stackato clone-services  *<source>*  *<application>*       
         Copy the service bindings of the source application to the destination application.
@@ -5154,7 +5225,7 @@ Services
           Alias of --trace.
 
 
-.. _command-stackato create-service:
+.. _command-create-service:
 
       stackato create-service  *<vendor>*  *<name>*  *<application>*       
         Create a new provisioned service, and optionally bind it to an application.
@@ -5270,7 +5341,7 @@ Services
           Alias of --trace.
 
 
-.. _command-stackato delete-service:
+.. _command-delete-service:
 
       stackato delete-service  *<service>*       
         Delete the named provisioned service.
@@ -5352,7 +5423,7 @@ Services
           Alias of --trace.
 
 
-.. _command-stackato rename-service:
+.. _command-rename-service:
 
       stackato rename-service  *<service>*  *<name>*       
         Rename the specified service instance. This is a Stackato 3 specific command.
@@ -5423,7 +5494,7 @@ Services
           Alias of --trace.
 
 
-.. _command-stackato tunnel:
+.. _command-tunnel:
 
       stackato tunnel  *<service>*  *<tunnelclient>*       
         Create a local tunnel to a service, optionally start a local client as well.
@@ -5514,7 +5585,7 @@ Services
           Alias of --trace.
 
 
-.. _command-stackato unbind-service:
+.. _command-unbind-service:
 
       stackato unbind-service  *<service>*  *<application>*       
         Disconnect the named service from the specified application.
@@ -5620,7 +5691,7 @@ Organizations
 ^^^^^^^^^^^^^^^^^^^^^
 
     
-.. _command-stackato create-org:
+.. _command-create-org:
   
   stackato create-org  *<name>* 
     Create a new organization. This is a Stackato 3 specific command.
@@ -5685,7 +5756,7 @@ Organizations
     -t
       Alias of --trace.
     
-.. _command-stackato delete-org:
+.. _command-delete-org:
   
   stackato delete-org  *<name>* 
     Delete the named organization. This is a Stackato 3 specific command.
@@ -5737,7 +5808,7 @@ Organizations
     -t
       Alias of --trace.
     
-.. _command-stackato link-user-org:
+.. _command-link-user-org:
   
   stackato link-user-org  *<user>*  *<org>* 
     Add the specified user to the named organization, in various roles. This is a Stackato 3 specific command.
@@ -5789,7 +5860,7 @@ Organizations
     -t
       Alias of --trace.
     
-.. _command-stackato orgs:
+.. _command-orgs:
   
   stackato orgs 
     List the available organizations. This is a Stackato 3 specific command.
@@ -5843,7 +5914,7 @@ Organizations
     -t
       Alias of --trace.
     
-.. _command-stackato org:
+.. _command-org:
   
   stackato org  *<name>* 
     Show the named organization's information. This is a Stackato 3 specific command.
@@ -5897,7 +5968,7 @@ Organizations
     -t
       Alias of --trace.
     
-.. _command-stackato quota-org:
+.. _command-quota-org:
   
   stackato quota-org  *<name>*  *<quota>* 
     Set the quotas for the current or named organization. This is a Stackato 3 specific command.
@@ -5943,7 +6014,7 @@ Organizations
     -t
       Alias of --trace.
     
-.. _command-stackato rename-org:
+.. _command-rename-org:
   
   stackato rename-org  *<name>*  *<newname>* 
     Rename the named organization. This is a Stackato 3 specific command.
@@ -5989,7 +6060,7 @@ Organizations
     -t
       Alias of --trace.
     
-.. _command-stackato switch-org:
+.. _command-switch-org:
   
   stackato switch-org  *<name>* 
     Switch the current organization to the named organization. This invalidates the current space. This is a Stackato 3 specific command.
@@ -6035,7 +6106,7 @@ Organizations
     -t
       Alias of --trace.
     
-.. _command-stackato unlink-user-org:
+.. _command-unlink-user-org:
   
   stackato unlink-user-org  *<user>*  *<org>* 
     Remove the specified user from the named organization, in various roles. This is a Stackato 3 specific command.
@@ -6094,7 +6165,7 @@ Spaces
 ^^^^^^^^^^^^^^^^^^^^^
 
     
-.. _command-stackato create-space:
+.. _command-create-space:
   
   stackato create-space  *<name>* 
     Create a new space. This is a Stackato 3 specific command.
@@ -6180,7 +6251,7 @@ Spaces
     -t
       Alias of --trace.
     
-.. _command-stackato delete-space:
+.. _command-delete-space:
   
   stackato delete-space  *<name>* 
     Delete the named space. This is a Stackato 3 specific command.
@@ -6244,7 +6315,7 @@ Spaces
     -t
       Alias of --trace.
     
-.. _command-stackato link-user-space:
+.. _command-link-user-space:
   
   stackato link-user-space  *<user>*  *<space>* 
     Add the specified user to the named space, in various roles. This is a Stackato 3 specific command.
@@ -6308,7 +6379,7 @@ Spaces
     -t
       Alias of --trace.
     
-.. _command-stackato rename-space:
+.. _command-rename-space:
   
   stackato rename-space  *<name>*  *<newname>* 
     Rename the named space. This is a Stackato 3 specific command.
@@ -6366,7 +6437,7 @@ Spaces
     -t
       Alias of --trace.
     
-.. _command-stackato spaces:
+.. _command-spaces:
   
   stackato spaces 
     List the available spaces in the specified organization. See --organization for details This is a Stackato 3 specific command.
@@ -6432,7 +6503,7 @@ Spaces
     -t
       Alias of --trace.
     
-.. _command-stackato space:
+.. _command-space:
   
   stackato space  *<name>* 
     Show the named space's information. This is a Stackato 3 specific command.
@@ -6498,7 +6569,7 @@ Spaces
     -t
       Alias of --trace.
     
-.. _command-stackato switch-space:
+.. _command-switch-space:
   
   stackato switch-space  *<name>* 
     Switch from the current space to the named space. This may switch the organization as well. This is a Stackato 3 specific command.
@@ -6556,7 +6627,7 @@ Spaces
     -t
       Alias of --trace.
     
-.. _command-stackato unlink-user-space:
+.. _command-unlink-user-space:
   
   stackato unlink-user-space  *<user>*  *<space>* 
     Remove the specified user from the named space, in various roles. This is a Stackato 3 specific command.
@@ -6627,7 +6698,7 @@ Routes
 ^^^^^^^^^^^^^^^^^^^^^
 
     
-.. _command-stackato delete-route:
+.. _command-delete-route:
   
   stackato delete-route  *<name>* 
     Delete the named route. This is a Stackato 3 specific command.
@@ -6695,7 +6766,7 @@ Routes
     -t
       Alias of --trace.
     
-.. _command-stackato routes:
+.. _command-routes:
   
   stackato routes 
     List all available routes. This is a Stackato 3 specific command.
@@ -6752,7 +6823,7 @@ Domains
 ^^^^^^^^^^^^^^^^^^^^^
 
     
-.. _command-stackato domains:
+.. _command-domains:
   
   stackato domains 
     List the available domains in the specified space, or all. This is a Stackato 3 specific command.
@@ -6827,7 +6898,7 @@ Domains
     -t
       Alias of --trace.
     
-.. _command-stackato map-domain:
+.. _command-map-domain:
   
   stackato map-domain  *<name>* 
     Add the named domain to an organization or space. This is a Stackato 3 specific command.
@@ -6895,7 +6966,7 @@ Domains
     -t
       Alias of --trace.
     
-.. _command-stackato unmap-domain:
+.. _command-unmap-domain:
   
   stackato unmap-domain  *<name>* 
     Remove the named domain from an organization or space. This is a Stackato 3 specific command.
@@ -6970,7 +7041,7 @@ Administration
 ^^^^^^^^^^^^^^^^^^^^^
 
     
-.. _command-stackato admin grant:
+.. _command-admin grant:
   
   stackato admin grant  *<email>* 
     Grant the named user administrator privileges for the current or specified target.
@@ -7002,7 +7073,7 @@ Administration
     -t
       Alias of --trace.
     
-.. _command-stackato admin list:
+.. _command-admin list:
   
   stackato admin list 
     Show a list of the administrators for the current or specified target.
@@ -7052,7 +7123,7 @@ Administration
     -t
       Alias of --trace.
     
-.. _command-stackato admin patch:
+.. _command-admin patch:
   
   stackato admin patch  *<patch>* 
     Apply a patch to the current or specified target.
@@ -7105,7 +7176,7 @@ Administration
     -t
       Alias of --trace.
     
-.. _command-stackato admin report:
+.. _command-admin report:
   
   stackato admin report  *<destination>* 
     Retrieve a report containing the logs of the current or specified target.
@@ -7151,7 +7222,7 @@ Administration
     -t
       Alias of --trace.
     
-.. _command-stackato admin revoke:
+.. _command-admin revoke:
   
   stackato admin revoke  *<email>* 
     Revoke administrator privileges for the named user at the current or specified target.
@@ -7183,7 +7254,7 @@ Administration
     -t
       Alias of --trace.
     
-.. _command-stackato frameworks:
+.. _command-frameworks:
   
   stackato frameworks 
     List the supported frameworks of the target. This is a Stackato 2 specific command.
@@ -7233,7 +7304,7 @@ Administration
     -t
       Alias of --trace.
     
-.. _command-stackato groups add-user:
+.. _command-groups add-user:
   
   stackato groups add-user  *<group>*  *<user>* 
     Add the named user to the specified group. This is a Stackato 2 specific command.
@@ -7279,7 +7350,7 @@ Administration
     -t
       Alias of --trace.
     
-.. _command-stackato groups create:
+.. _command-groups create:
   
   stackato groups create  *<name>* 
     Create a new group with the specified name. This is a Stackato 2 specific command.
@@ -7325,7 +7396,7 @@ Administration
     -t
       Alias of --trace.
     
-.. _command-stackato groups delete-user:
+.. _command-groups delete-user:
   
   stackato groups delete-user  *<group>*  *<user>* 
     Remove the named user from the specified group. This is a Stackato 2 specific command.
@@ -7371,7 +7442,7 @@ Administration
     -t
       Alias of --trace.
     
-.. _command-stackato groups delete:
+.. _command-groups delete:
   
   stackato groups delete  *<name>* 
     Delete the named group. This is a Stackato 2 specific command.
@@ -7417,7 +7488,7 @@ Administration
     -t
       Alias of --trace.
     
-.. _command-stackato groups limits:
+.. _command-groups limits:
   
   stackato groups limits  *<group>* 
     Show and/or modify the limits applying to applications in the named group. This is a Stackato 2 specific command.
@@ -7493,7 +7564,7 @@ Administration
     -t
       Alias of --trace.
     
-.. _command-stackato groups show:
+.. _command-groups show:
   
   stackato groups show 
     Show the list of groups known to the target. This is a Stackato 2 specific command.
@@ -7543,7 +7614,7 @@ Administration
     -t
       Alias of --trace.
     
-.. _command-stackato groups users:
+.. _command-groups users:
   
   stackato groups users  *<group>* 
     Show the list of users in the named group. This is a Stackato 2 specific command.
@@ -7593,7 +7664,7 @@ Administration
     -t
       Alias of --trace.
     
-.. _command-stackato group:
+.. _command-group:
   
   stackato group  *<name>* 
     Report the current group, or (un)set it. This is a Stackato 2 specific command.
@@ -7648,7 +7719,7 @@ Administration
     -t
       Alias of --trace.
     
-.. _command-stackato info:
+.. _command-info:
   
   stackato info 
     Show the basic system and account information.
@@ -7722,7 +7793,7 @@ Administration
     -t
       Alias of --trace.
     
-.. _command-stackato limits:
+.. _command-limits:
   
   stackato limits  *<group>* 
     Show and/or modify the limits applying to applications in the named group. This is a Stackato 2 specific command.
@@ -7798,7 +7869,7 @@ Administration
     -t
       Alias of --trace.
     
-.. _command-stackato quota configure:
+.. _command-quota configure:
   
   stackato quota configure  *<name>* 
     Reconfigure the named quota definition. This is a Stackato 3 specific command.
@@ -7870,7 +7941,7 @@ Administration
     -t
       Alias of --trace.
     
-.. _command-stackato quota create:
+.. _command-quota create:
   
   stackato quota create  *<name>* 
     Create a new quota definition. This is a Stackato 3 specific command.
@@ -7942,7 +8013,7 @@ Administration
     -t
       Alias of --trace.
     
-.. _command-stackato quota delete:
+.. _command-quota delete:
   
   stackato quota delete  *<name>* 
     Delete the named quota definition. This is a Stackato 3 specific command.
@@ -7988,7 +8059,7 @@ Administration
     -t
       Alias of --trace.
     
-.. _command-stackato quota list:
+.. _command-quota list:
   
   stackato quota list 
     List the available quota definitions. This is a Stackato 3 specific command.
@@ -8038,7 +8109,7 @@ Administration
     -t
       Alias of --trace.
     
-.. _command-stackato quota rename:
+.. _command-quota rename:
   
   stackato quota rename  *<name>*  *<newname>* 
     Rename the named quota definition. This is a Stackato 3 specific command.
@@ -8084,7 +8155,7 @@ Administration
     -t
       Alias of --trace.
     
-.. _command-stackato quota show:
+.. _command-quota show:
   
   stackato quota show  *<name>* 
     Show the details of the named quota definition. If not specified it will be asked for interactively (menu). This is a Stackato 3 specific command.
@@ -8134,7 +8205,7 @@ Administration
     -t
       Alias of --trace.
     
-.. _command-stackato quotas:
+.. _command-quotas:
   
   stackato quotas 
     List the available quota definitions. This is a Stackato 3 specific command.
@@ -8184,7 +8255,7 @@ Administration
     -t
       Alias of --trace.
     
-.. _command-stackato runtimes:
+.. _command-runtimes:
   
   stackato runtimes 
     List the supported runtimes of the target. This is a Stackato 2 specific command.
@@ -8234,7 +8305,7 @@ Administration
     -t
       Alias of --trace.
     
-.. _command-stackato stacks:
+.. _command-stacks:
   
   stackato stacks 
     List the supported stacks of the target. This is a Stackato 3 specific command.
@@ -8284,7 +8355,7 @@ Administration
     -t
       Alias of --trace.
     
-.. _command-stackato targets:
+.. _command-targets:
   
   stackato targets 
     List the available targets, and their authorization tokens, if any.
@@ -8315,7 +8386,7 @@ Administration
     -n
       Alias of --no-prompt.
     
-.. _command-stackato tokens:
+.. _command-tokens:
   
   stackato tokens 
     List the available targets, and their authorization tokens, if any.
@@ -8346,7 +8417,7 @@ Administration
     -n
       Alias of --no-prompt.
     
-.. _command-stackato usage:
+.. _command-usage:
   
   stackato usage  *<userOrGroup>* 
     Show the current memory allocation and usage of the active or specified user/group (Stackato 2), or the specified or current space (Stackato 3).
@@ -8425,7 +8496,7 @@ Administration
     -t
       Alias of --trace.
     
-.. _command-stackato user-info:
+.. _command-user-info:
   
   stackato user-info  *<name>* 
     Shows the information of a user in the current or specified target. Defaults to the current user. Naming a specific user requires a Stackato 3 target.
@@ -8475,7 +8546,7 @@ Administration
     -t
       Alias of --trace.
     
-.. _command-stackato user:
+.. _command-user:
   
   stackato user 
     Show the name of the current user in the current or specified target.
@@ -8525,7 +8596,7 @@ Administration
     -t
       Alias of --trace.
     
-.. _command-stackato version:
+.. _command-version:
   
   stackato version 
     Print the version number of the client.
@@ -8554,7 +8625,7 @@ Administration
     
   **User Management**
       
-.. _command-stackato add-user:
+.. _command-add-user:
 
       stackato add-user  *<name>*       
         Register a new user in the current or specified target. This operation requires administrator privileges, except if "allow_registration" is set server-side.
@@ -8655,7 +8726,7 @@ Administration
           Alias of --trace.
 
 
-.. _command-stackato delete-user:
+.. _command-delete-user:
 
       stackato delete-user  *<email>*       
         Delete the named user, and the user's applications and services from the current or specified target. This operation requires administrator privileges.
@@ -8702,7 +8773,7 @@ Administration
           Alias of --trace.
 
 
-.. _command-stackato login-fields:
+.. _command-login-fields:
 
       stackato login-fields       
         Show the names of the credential fields needed for a login. This is a Stackato 3 specific command.
@@ -8753,7 +8824,7 @@ Administration
           Alias of --trace.
 
 
-.. _command-stackato passwd:
+.. _command-passwd:
 
       stackato passwd       
         Change the password of the current user in the current or specified target.
@@ -8807,7 +8878,7 @@ Administration
           Alias of --trace.
 
 
-.. _command-stackato register:
+.. _command-register:
 
       stackato register  *<name>*       
         Register a new user in the current or specified target. This operation requires administrator privileges, except if "allow_registration" is set server-side.
@@ -8908,7 +8979,7 @@ Administration
           Alias of --trace.
 
 
-.. _command-stackato token:
+.. _command-token:
 
       stackato token       
         Interactively set authentication token.
@@ -8940,7 +9011,7 @@ Administration
           Alias of --no-prompt.
 
 
-.. _command-stackato unregister:
+.. _command-unregister:
 
       stackato unregister  *<email>*       
         Delete the named user, and the user's applications and services from the current or specified target. This operation requires administrator privileges.
@@ -8987,7 +9058,7 @@ Administration
           Alias of --trace.
 
 
-.. _command-stackato users:
+.. _command-users:
 
       stackato users       
         Show the list of users known to the current or specified target.
@@ -9043,7 +9114,7 @@ Convenience
 ^^^^^^^^^^^^^^^^^^^^^
 
     
-.. _command-stackato aliases:
+.. _command-aliases:
   
   stackato aliases 
     List the known aliases (shortcuts).
@@ -9069,7 +9140,7 @@ Convenience
     -n
       Alias of --no-prompt.
     
-.. _command-stackato alias:
+.. _command-alias:
   
   stackato alias  *<name>*  *<command>* 
     Create a shortcut for a command (prefix).
@@ -9091,7 +9162,7 @@ Convenience
     -n
       Alias of --no-prompt.
     
-.. _command-stackato unalias:
+.. _command-unalias:
   
   stackato unalias  *<name>* 
     Remove a shortcut by name.
@@ -9120,7 +9191,7 @@ Miscellaneous
 ^^^^^^^^^^^^^^^^^^^^^
 
     
-.. _command-stackato admin exit:
+.. _command-admin exit:
   
   stackato admin exit 
     Exit the shell. No-op if not in a shell.
@@ -9142,7 +9213,7 @@ Miscellaneous
     -n
       Alias of --no-prompt.
     
-.. _command-stackato admin help:
+.. _command-admin help:
   
   stackato admin help  *<cmdname>* 
     Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
@@ -9192,7 +9263,7 @@ Miscellaneous
     -w
       Alias of --width.
     
-.. _command-stackato curl:
+.. _command-curl:
   
   stackato curl  *<operation>*  *<path>*  *<header>* 
     Run a raw rest request against the chosen target
@@ -9238,7 +9309,7 @@ Miscellaneous
     -t
       Alias of --trace.
     
-.. _command-stackato debug-packages:
+.. _command-debug-packages:
   
   stackato debug-packages 
     Show the packages used the client, and their versions.
@@ -9264,7 +9335,7 @@ Miscellaneous
     -n
       Alias of --no-prompt.
     
-.. _command-stackato drain exit:
+.. _command-drain exit:
   
   stackato drain exit 
     Exit the shell. No-op if not in a shell.
@@ -9286,7 +9357,7 @@ Miscellaneous
     -n
       Alias of --no-prompt.
     
-.. _command-stackato drain help:
+.. _command-drain help:
   
   stackato drain help  *<cmdname>* 
     Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
@@ -9336,7 +9407,7 @@ Miscellaneous
     -w
       Alias of --width.
     
-.. _command-stackato exit:
+.. _command-exit:
   
   stackato exit 
     Exit the shell. No-op if not in a shell.
@@ -9358,7 +9429,7 @@ Miscellaneous
     -n
       Alias of --no-prompt.
     
-.. _command-stackato groups exit:
+.. _command-groups exit:
   
   stackato groups exit 
     Exit the shell. No-op if not in a shell.
@@ -9380,7 +9451,7 @@ Miscellaneous
     -n
       Alias of --no-prompt.
     
-.. _command-stackato groups help:
+.. _command-groups help:
   
   stackato groups help  *<cmdname>* 
     Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
@@ -9430,7 +9501,7 @@ Miscellaneous
     -w
       Alias of --width.
     
-.. _command-stackato guid:
+.. _command-guid:
   
   stackato guid  *<type>*  *<name>* 
     Map the specified name into a uuid, given the type. This is a Stackato 3 specific command.
@@ -9456,7 +9527,7 @@ Miscellaneous
     -n
       Alias of --no-prompt.
     
-.. _command-stackato help:
+.. _command-help:
   
   stackato help  *<cmdname>* 
     Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
@@ -9506,7 +9577,7 @@ Miscellaneous
     -w
       Alias of --width.
     
-.. _command-stackato named-entities:
+.. _command-named-entities:
   
   stackato named-entities 
     List the entity types usable for 'guid'. I.e. the types of the named entities known to the client.
@@ -9532,7 +9603,7 @@ Miscellaneous
     -n
       Alias of --no-prompt.
     
-.. _command-stackato quota exit:
+.. _command-quota exit:
   
   stackato quota exit 
     Exit the shell. No-op if not in a shell.
@@ -9554,7 +9625,7 @@ Miscellaneous
     -n
       Alias of --no-prompt.
     
-.. _command-stackato quota help:
+.. _command-quota help:
   
   stackato quota help  *<cmdname>* 
     Retrieve help for a command or command set. Without arguments help for all commands is given. The default format is --full.
@@ -9604,7 +9675,7 @@ Miscellaneous
     -w
       Alias of --width.
     
-.. _command-stackato trace:
+.. _command-trace:
   
   stackato trace 
     Print the saved REST trace for the last client command to stdout.
