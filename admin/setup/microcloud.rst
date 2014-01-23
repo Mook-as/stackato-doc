@@ -135,7 +135,7 @@ Adding Users
 
 The easiest way to add additional users is in the :ref:`Users section
 <console-users>` of the Management Console (or the :ref:`stackato
-add-user <command-add_user>` command):
+add-user <command-add-user>` command):
 
 .. parsed-literal::
   
