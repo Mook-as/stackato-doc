@@ -22,19 +22,6 @@ In order to use New Relic, you need a `New Relic account <http://newrelic.com>`_
 .. note::
 	For security reasons, avoid committing your license key to source control.
 
-.. index:: Server Monitoring
-
-.. _newrelic-server-monitoring:
-
-New Relic Server Monitoring
----------------------------
-
-To use New Relic for server monitoring, you'll need a `New Relic account <http://newrelic.com>`_
-and a License Key.  Then, run the following two commands on the Stackato Server::
-
-	$ sudo nrsysmond-config --set license_key=<license key>
-	
-	$ sudo /etc/init.d/newrelic-sysmond start
 
 .. _newrelic-ruby:
 

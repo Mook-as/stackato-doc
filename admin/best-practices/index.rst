@@ -249,6 +249,20 @@ The ``kato node upgrade`` command was added in Stackato 3.0 to allow
 upgrading Stackato systems in place. See :ref:`Upgrading Stackato
 <upgrade>` for full instructions.
 
+.. index:: nrsysmond
+
+.. _bestpractices-nrsysmond
+
+Server Monitoring with New Relic
+--------------------------------
+
+To use New Relic for server monitoring, you'll need a `New Relic account
+<http://newrelic.com>`_ and a License Key. Install the
+``newrelic-sysmond`` package and start the monitoring daemon on each
+Stackato VM as per the `New Relic Server Monitor installation (Ubuntu)
+<http://docs.newrelic.com/docs/server/server-monitor-installation-ubuntu-and-debian>`_
+instructions.
+
 .. _bestpractices-nagios:
 
 System Monitoring with Nagios
