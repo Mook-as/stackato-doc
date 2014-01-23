@@ -114,7 +114,7 @@ services, and restart or stop services as necessary.
 New Relic
 ^^^^^^^^^
 
-Please see :ref:`New Relic Server Monitoring <newrelic-server-monitoring>`.
+Please see :ref:`New Relic Server Monitoring <bestpractices-nrsysmond>`.
 New Relic can also be used to :ref:`monitor apps <newrelic>`.
 
 Creating an Admin User
