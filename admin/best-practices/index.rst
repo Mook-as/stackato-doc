@@ -251,7 +251,7 @@ upgrading Stackato systems in place. See :ref:`Upgrading Stackato
 
 .. index:: nrsysmond
 
-.. _bestpractices-nrsysmond
+.. _bestpractices-nrsysmond:
 
 Server Monitoring with New Relic
 --------------------------------
