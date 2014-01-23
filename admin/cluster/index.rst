@@ -517,9 +517,6 @@ Router nodes. For example::
 
  $ kato node setup load_balancer 10.5.31.140 10.5.31.145
 
-.. note::
-  If you are using the AOK authentication service, see also :ref:`AOK
-  with a Load Balancer <aok-ssl-load-balancer>`
 
 
 Load Balancer SSL Certificates
