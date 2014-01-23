@@ -57,10 +57,9 @@ role**:
      be used to copy files into the image.
      
 
-4. Build the image, setting the maintainer's name, an image name, and a
-   version number (optional, but recommended)::
+4. Build the image, setting the maintainer's name, and an image name::
 
-    $ sudo docker build -rm -t exampleco/newimg:1.0.0 .
+    $ sudo docker build -rm -t exampleco/newimg .
 
 5. Configure Stackato to use the new image:
 
@@ -69,9 +68,9 @@ role**:
   This step only needs to be done once, as the configuration change is
   shared with all nodes::
 
-    $ kato config set fence docker/image exampleco/newimg:1.0.0
+    $ kato config set fence docker/image exampleco/newimg
     WARNING: Assumed type string
-    exampleco/newimg:1.0.0
+    exampleco/newimg
 
 
 .. index:: Admin Hooks
@@ -139,26 +138,27 @@ central repository for your container tempates.
    <https://index.docker.io/u/samalba/docker-registry/>` image from
    the Docker index::
 
-    $ sudo docker pull samalba/docker-registry
+    $ sudo docker pull stackato/docker-registry
     
 2. Start the server::
 
-    $ sudo docker run -d samalba/docker-registry
-    dbcd0cd9e218
+    $ sudo docker run -d -p 5000 stackato/docker-registry
+    f39d1b3f6fedc50e77875526352bd5a0f650a998dc1d7ca4e39c4a1eb8349e42
    
-   This will return the ID of the running registry server image (also
-   available via ``docker ps``).
+   This returns the ID of the running registry server image. A shorter
+   container ID is also available via ``docker ps``. You can use either
+   for the subsequent commands.
 
 3. Use the ID to get the public facing port for the running image. For example::
 
-    $ sudo docker port dbcd0cd9e218 5000
-    49153
+    $ sudo docker port f39d1b3f6fed 5000
+    0.0.0.0:49156
 
    Your registry location is a combination of the API endpoint of your
    cluster (i.e. ``kato config get cluster endpoint``) combined with the
    port number returned by the command above. For example::
     
-    api.paas.example.com:49153
+    api.paas.example.com:49156
     
    This registry location will be used to pull the images you create
    to your DEA nodes.
@@ -168,24 +168,27 @@ central repository for your container tempates.
    registry location for the organization name used in step 4. For
    example::
    
-    $ sudo docker build -rm -t api.paas.example.com:49153/newimg:1.0.0 .
+    $ sudo docker build -rm -t api.paas.example.com:49156/exampleco/newimg .
    
 5. Push the newly built Docker image to the registry::
-
-    $ sudo docker push api.paas.example.com:49153/newimg:1.0.0
     
+    $ sudo docker push api.paas.example.com:49156/exampleco/newimg
+
+  .. note::
+      The stackato/stack/alsek and stackato/base images (approximately
+      1.9GB) are pushed to the registry in addition to the new image.
+      Make sure you have sufficient disk space available on the VM.
+
+
 6. **On all DEA nodes**, pull the new image from the registry::
 
-    $ sudo docker pull api.paas.example.com:49153/newimg:1.0.0
+    $ sudo docker pull api.paas.example.com:49156/exampleco/newimg
 
-7. Configure Stackato to use the new image:
+7. Configure Stackato to use the new image::
 
-.. note::
-
-  This step only needs to be done once, as the configuration change is
-  shared with all nodes::
-
-    $ kato config set fence docker/image api.paas.example.com:49153/newimg:1.0.0
+    $ kato config set fence docker/image api.paas.example.com:49156/exampleco/newimg
     WARNING: Assumed type string
-    api.paas.example.com:49153/newimg:1.0.0
+    api.paas.example.com:49156/exampleco/newimg
 
+   This step only needs to be done once, as the configuration change is
+   shared with all nodes
