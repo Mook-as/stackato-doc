@@ -103,8 +103,8 @@ For example, a pre-running admin hook might look like this::
     export NEW_RELIC_LICENSE_KEY="bdb9b44e8n4411d8bf39870f1919927d79cr0f1r"
   fi
   export STACKATO_HOOK_ENV=PRE_RUN_DATE,EXAMPLECO_KEY
-  /usr/sbin/nrsysmond-config --set license_key=$NEW_RELIC_LICENSE_KEY
-  /etc/init.d/newrelic-sysmond start
+  sudo /usr/sbin/nrsysmond-config --set license_key=$NEW_RELIC_LICENSE_KEY
+  sudo /etc/init.d/newrelic-sysmond start
 
 .. note::
   The ``STACKATO_HOOK_ENV`` environment variable is needed to expose the
@@ -118,6 +118,22 @@ directive to put a local *hooks* directory in the Docker image's
 */etc/stackato/* directory::
 
   FROM stackato/stack/alsek
+  ADD hooks /etc/stackato/hooks
+
+The pre-running hook example above would require the addition of
+``newrelic-sysmond`` to the Docker image. A Dockerfile enabling that
+might look like this::
+
+  FROM stackato/stack/alsek
+  
+  RUN echo deb http://apt.newrelic.com/debian/ newrelic non-free >> /etc/apt/sources.list.d/newrelic.list
+  RUN wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -
+  RUN apt-get update
+  RUN apt-get install newrelic-sysmond
+  # The nrsysmond scripts are run with sudo
+  RUN echo "stackato ALL= NOPASSWD: /etc/init.d/newrelic-sysmond" >> /etc/sudoers
+  RUN echo "stackato ALL= NOPASSWD: /usr/sbin/nrsysmond-config" >> /etc/sudoers
+  
   ADD hooks /etc/stackato/hooks
 
 
