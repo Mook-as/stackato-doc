@@ -97,8 +97,6 @@ Additional PHP ini files will be loaded from the ``$STACKATO_APP_ROOT/apache/php
 directory. Refer to the example below for more information.
 
 
-.. index:: htaccess
-
 .. index:: document-root
 
 Document Root Access
@@ -130,6 +128,25 @@ will generate an "HTTP 404 Not Found" error instead.
 
 These techniques can be use to hide other files in your application
 source tree which you do not want exposed to end users.
+
+.. index:: SERVER_PORT
+.. index:: SERVER_NAME
+
+SERVER_NAME & SERVER_PORT
+-------------------------
+
+Stackato serves web applications port 80 and/or 443 at the router, but
+within the application container Apache will be running on a different
+port. PHP will report this internal IP address and port in the
+SERVER_ADDR and SERVER_PORT Apache environment variables respectively. 
+
+If your application makes use of these variables, you may need to adjust
+them by using an
+`.htaccess file <http://httpd.apache.org/docs/current/howto/htaccess.html>`__
+to set one or more
+`RewriteRule <http://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule>`__
+directives to correct the server name or port in URLs.
+
 
 .. index:: PHP Sessions
 
