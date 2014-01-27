@@ -520,8 +520,8 @@ in ``/var/log/polipo/polipo.log``.
 
 .. index:: HTTP Proxy Cache
 
-HTTP Proxy & Staging Cache
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+Staging Cache & App HTTP Proxy
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Stackato caches all application dependencies that are downloaded by
 module managers that support the :term:`HTTP_PROXY` environment variable
@@ -538,13 +538,14 @@ To remove the proxy setting::
 
 	$ kato op upstream_proxy delete <proxy_addr>
 	
-To set an HTTP proxy exclusively for apps, add an ``app_http_proxy``
-entry to the ``/lxc/template/rootfs/etc/environment`` file on the DEA
-nodes. For example::
+To set an HTTP proxy exclusively for apps, add an
+``environment/app_http_proxy`` setting in the dea_ng config using
+:ref:`kato config set <kato-command-ref-config>`. For example::
 
-	app_http_proxy=http://192.168.0.99:3128
+  $ kato config set dea_ng environment/app_http_proxy 10.0.0.47:3000
 
-
+Adding this configuration sets the 'http_proxy' environment variable
+within all subsequently created application containers.
 
 .. _server-config-filesystem:
 
