@@ -76,8 +76,15 @@ Allows the app to specify a framework and runtime to be used. Specifying
 a value for the ``framework`` key triggers the use of the :ref:`Legacy
 Buildpack <buildpacks-legacy>`.
 
-type (DEPRECATED):
-~~~~~~~~~~~~~~~~~~
+.. note::
+  The keys in the ``framework`` section are used with the :ref:`Legacy
+  Buildpack <buildpacks-legacy>` only. Applications using language or
+  framework-specific buildpacks do not require these values, and should
+  instead specify the :ref:`buildpack <stackato_yml-buildpack>` or rely
+  on the detection scripts of the :ref:`built-in buildpacks <buildpacks-built-in>`.
+  
+type:
+~~~~~
 
 The framework to use.  Check ``stackato frameworks`` for a complete list of 
 available frameworks. If not specified, user may be prompted during 
@@ -86,8 +93,8 @@ available frameworks. If not specified, user may be prompted during
 
 .. _stackato_yml-runtime:
 
-runtime: (DEPRECATED)
-~~~~~~~~~~~~~~~~~~~~~
+runtime:
+~~~~~~~~
 
 The runtime to use.  Check ``stackato runtimes`` for a complete list of available 
 runtimes. If not specified, server will select the best option based on available 
@@ -102,8 +109,8 @@ Example::
 
 .. _stackato_yml-document-root:
 
-document-root: (DEPRECATED)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+document-root:
+~~~~~~~~~~~~~~
 
 Overrides the default document-root setting ($HOME) for the web server.
 
@@ -124,8 +131,8 @@ The document-root must always be specified relative to $HOME (/home/stackato/app
 
 .. _stackato_yml-start-file:
 
-start-file: (DEPRECATED)
-~~~~~~~~~~~~~~~~~~~~~~~~
+start-file:
+~~~~~~~~~~~
 
 Set the main application filename.
 
