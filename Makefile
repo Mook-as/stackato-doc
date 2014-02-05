@@ -219,9 +219,9 @@ publicdocs:
 	@echo "================================================"
 	@echo "Checkout a release branch if this is going live"
 	@echo "================================================"
-	cp _templates/searchbox.html _theme/cloud/
+	cp _templates/search* _theme/cloud/
 	$(SPHINXBUILD) -b html -t public $(ALLSPHINXOPTS) _build/public-docs
-	rm _theme/cloud/searchbox.html
+	rm _theme/cloud/search*
 
 publicdocs-production:
 	$(SPHINXBUILD) -b html -t public $(ALLSPHINXOPTS) ../$(PUBLICDIR)
