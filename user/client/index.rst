@@ -21,6 +21,10 @@ Stackato Client Setup
 
 .. include:: ../common/client-setup.inc
 
+.. note::
+  Using the Windows ``stackato`` client with `Cygwin
+  <http://www.cygwin.com/>`__ is not supported.
+
 Getting Help
 ------------
 
