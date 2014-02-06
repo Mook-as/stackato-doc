@@ -54,6 +54,7 @@ The ``enabled_plugins`` key must be set to one of the following:
 * HPCS
 * OpenStack
 * vSphere
+* CloudStack
 
 .. note::
 
