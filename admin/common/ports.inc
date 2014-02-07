@@ -39,8 +39,8 @@ communication, **Destination** nodes need to listen on the specified port.
   =============  ====  ==============  ================  ===================
   22             tcp   all nodes       all nodes         ssh/scp/sshfs
   4222           tcp   all nodes       controller        :term:`NATS`
-  3306           tcp   dea,controler   mysql nodes       MySQL
-  5432           tcp   dea,controler   postgresql nodes  PostgreSQL
+  3306           tcp   dea,controller   mysql nodes       MySQL
+  5432           tcp   dea,controller   postgresql nodes  PostgreSQL
   5454           tcp   all nodes       controller        redis
   6464           tcp   all nodes       all nodes         applog (redis)
   7000 - 7999    tcp   all nodes       all nodes         ``kato log tail``
