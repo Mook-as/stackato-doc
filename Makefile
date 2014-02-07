@@ -53,7 +53,7 @@ LOCALSERVER = node ./web-server/server.js
 # The targets "all", "install", and "uninstall", as well as the variables
 # DESTDIR, prefix and PKG_GITDESCRIBE, are used by packaging systems.
 
-all:		publicdocs-production
+all:		publicdocs
 
 install:
 	mkdir -p $(INSTDIR)
@@ -215,15 +215,20 @@ reupdate:
 	  ruby -e 'require "katoref/sphinx"; render_kato_ref(ARGV.shift)' admin/reference/kato-ref.rst.erb > admin/reference/kato-ref.rst ; \
 	)
 
-publicdocs:
+publicdocs-live:
 	@echo "================================================"
-	@echo "Checkout a release branch if this is going live"
+	@echo "Inserts Google Search and Analytics"
+	@echo "(files in docs.stackato.com branch of stackato-doc-internal)"
 	@echo "================================================"
 	cp _templates/search* _theme/cloud/
+	cp _templates/layout.html _theme/cloud/layout.html
+	cp _templates/cloud.css_t _theme/cloud/static/cloud.css_t
 	$(SPHINXBUILD) -b html -t public $(ALLSPHINXOPTS) _build/public-docs
 	rm _theme/cloud/search*
+	git checkout _theme/cloud/layout.html
+	git checkout _theme/cloud/static/cloud.css_t
 
-publicdocs-production:
+publicdocs:
 	$(SPHINXBUILD) -b html -t public $(ALLSPHINXOPTS) ../$(PUBLICDIR)
 
 localserver: html
