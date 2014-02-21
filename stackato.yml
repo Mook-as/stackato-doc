@@ -1,0 +1,6 @@
+name: stackato-docs
+
+hooks:
+    post-staging:
+        - make html
+        - cd web-server && npm install
